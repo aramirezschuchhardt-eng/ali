@@ -1,0 +1,1793 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Exitosas – Escuela de Brokers Inmobiliarias | Alison Ramírez</title>
+  <meta name="description" content="Aprende a ser broker inmobiliaria desde cero con Alison Ramírez. Formación, comunidad y herramientas reales para mujeres que quieren generar sus propios ingresos en el mundo inmobiliario." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    /* ── Reset & Base ─────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Inter', sans-serif;
+      color: #1a1a1a;
+      background: #fff;
+      overflow-x: hidden;
+    }
+
+    /* ── CSS Variables ────────────────────────────────── */
+    :root {
+      --pink: #e91e8c;
+      --pink-light: #f472b6;
+      --pink-pale: #fdf2f8;
+      --pink-pale2: #fce7f3;
+      --fuchsia: #c2185b;
+      --gold: #c9a84c;
+      --gold-light: #f0d080;
+      --black: #1a1a1a;
+      --gray: #6b7280;
+      --gray-light: #f9fafb;
+      --white: #ffffff;
+      --radius: 16px;
+      --radius-sm: 10px;
+      --shadow: 0 4px 24px rgba(233,30,140,0.10);
+      --shadow-lg: 0 8px 40px rgba(233,30,140,0.18);
+    }
+
+    /* ── Typography ───────────────────────────────────── */
+    h1, h2, h3 { font-family: 'Playfair Display', serif; line-height: 1.2; }
+    h1 { font-size: clamp(2rem, 5vw, 3.4rem); font-weight: 700; }
+    h2 { font-size: clamp(1.6rem, 3.5vw, 2.5rem); font-weight: 700; }
+    h3 { font-size: clamp(1.1rem, 2vw, 1.4rem); font-weight: 600; }
+    p { line-height: 1.7; color: var(--gray); }
+
+    /* ── Utility ──────────────────────────────────────── */
+    .container { max-width: 1100px; margin: 0 auto; padding: 0 24px; }
+    .section { padding: 90px 0; }
+    .section-alt { background: var(--pink-pale); }
+    .section-dark { background: linear-gradient(135deg, #1a0a12 0%, #2d0f20 100%); color: #fff; }
+    .section-dark p { color: rgba(255,255,255,0.75); }
+    .text-center { text-align: center; }
+    .accent { color: var(--pink); }
+    .gold { color: var(--gold); }
+
+    .tag {
+      display: inline-block;
+      background: linear-gradient(90deg, var(--pink), var(--fuchsia));
+      color: #fff;
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 6px 16px;
+      border-radius: 50px;
+      margin-bottom: 18px;
+    }
+    .tag-gold {
+      background: linear-gradient(90deg, var(--gold), #a07020);
+    }
+
+    /* ── Buttons ──────────────────────────────────────── */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 15px 30px;
+      border-radius: 50px;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 600;
+      cursor: pointer;
+      text-decoration: none;
+      transition: transform 0.2s, box-shadow 0.2s, background 0.2s;
+      border: none;
+      white-space: nowrap;
+    }
+    .btn:hover { transform: translateY(-2px); }
+    .btn-primary {
+      background: linear-gradient(135deg, var(--pink) 0%, var(--fuchsia) 100%);
+      color: #fff;
+      box-shadow: 0 4px 20px rgba(233,30,140,0.35);
+    }
+    .btn-primary:hover { box-shadow: 0 8px 30px rgba(233,30,140,0.45); }
+    .btn-outline {
+      background: transparent;
+      color: var(--pink);
+      border: 2px solid var(--pink);
+    }
+    .btn-outline:hover { background: var(--pink); color: #fff; }
+    .btn-outline-white {
+      background: transparent;
+      color: #fff;
+      border: 2px solid rgba(255,255,255,0.6);
+    }
+    .btn-outline-white:hover { background: rgba(255,255,255,0.15); }
+    .btn-gold {
+      background: linear-gradient(135deg, var(--gold-light) 0%, var(--gold) 100%);
+      color: #1a1a1a;
+      box-shadow: 0 4px 20px rgba(201,168,76,0.35);
+    }
+    .btn-gold:hover { box-shadow: 0 8px 30px rgba(201,168,76,0.50); }
+    .btn-lg { padding: 18px 40px; font-size: 1.05rem; }
+    .btn-group { display: flex; flex-wrap: wrap; gap: 14px; }
+
+    /* ── Navbar ───────────────────────────────────────── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      background: rgba(255,255,255,0.95);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(233,30,140,0.10);
+      padding: 14px 0;
+      transition: box-shadow 0.3s;
+    }
+    nav.scrolled { box-shadow: 0 2px 20px rgba(233,30,140,0.12); }
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .nav-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--pink);
+      text-decoration: none;
+      letter-spacing: -0.02em;
+    }
+    .nav-logo span { color: var(--gold); }
+    .nav-cta { display: flex; gap: 10px; align-items: center; }
+
+    /* ── Hero ─────────────────────────────────────────── */
+    #hero {
+      min-height: 100vh;
+      background: linear-gradient(135deg, #fff0f7 0%, #fff5eb 50%, #fdf2f8 100%);
+      display: flex;
+      align-items: center;
+      padding-top: 80px;
+      position: relative;
+      overflow: hidden;
+    }
+    #hero::before {
+      content: '';
+      position: absolute;
+      top: -200px; right: -200px;
+      width: 600px; height: 600px;
+      background: radial-gradient(circle, rgba(233,30,140,0.08) 0%, transparent 70%);
+      border-radius: 50%;
+      pointer-events: none;
+    }
+    #hero::after {
+      content: '';
+      position: absolute;
+      bottom: -150px; left: -150px;
+      width: 500px; height: 500px;
+      background: radial-gradient(circle, rgba(201,168,76,0.07) 0%, transparent 70%);
+      border-radius: 50%;
+      pointer-events: none;
+    }
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: center;
+    }
+    .hero-text { position: relative; z-index: 1; }
+    .hero-text h1 { margin-bottom: 20px; }
+    .hero-text h1 em {
+      font-style: italic;
+      color: var(--pink);
+      display: block;
+    }
+    .hero-subtitle {
+      font-size: 1.05rem;
+      margin-bottom: 36px;
+      color: #555;
+      max-width: 520px;
+    }
+    .hero-badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 32px;
+    }
+    .hero-badge {
+      background: #fff;
+      border: 1px solid rgba(233,30,140,0.2);
+      border-radius: 50px;
+      padding: 7px 16px;
+      font-size: 0.82rem;
+      font-weight: 500;
+      color: var(--fuchsia);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .hero-badge::before { content: '✦'; color: var(--gold); font-size: 0.7rem; }
+
+    .hero-image-wrap {
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 1;
+    }
+    .hero-card {
+      background: #fff;
+      border-radius: 24px;
+      padding: 36px 32px;
+      box-shadow: var(--shadow-lg);
+      width: 100%;
+      max-width: 400px;
+      border: 1px solid rgba(233,30,140,0.08);
+    }
+    .hero-card-avatar {
+      width: 90px; height: 90px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--pink), var(--fuchsia));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2.5rem;
+      margin: 0 auto 16px;
+      border: 4px solid var(--gold-light);
+    }
+    .hero-card h3 { text-align: center; margin-bottom: 4px; }
+    .hero-card .subtitle { text-align: center; font-size: 0.85rem; color: var(--gray); margin-bottom: 20px; }
+    .hero-stat-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-top: 16px;
+    }
+    .hero-stat {
+      background: var(--pink-pale);
+      border-radius: var(--radius-sm);
+      padding: 14px 12px;
+      text-align: center;
+    }
+    .hero-stat strong {
+      display: block;
+      font-size: 1.3rem;
+      color: var(--pink);
+      font-family: 'Playfair Display', serif;
+    }
+    .hero-stat span { font-size: 0.75rem; color: var(--gray); }
+    .floating-el {
+      position: absolute;
+      animation: float 3s ease-in-out infinite;
+    }
+    .floating-el.top-right { top: -20px; right: -20px; }
+    .floating-el.bottom-left { bottom: -20px; left: -20px; animation-delay: 1.5s; }
+    .badge-float {
+      background: linear-gradient(135deg, var(--gold-light), var(--gold));
+      border-radius: 50px;
+      padding: 8px 16px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: #1a1a1a;
+      white-space: nowrap;
+      box-shadow: 0 4px 12px rgba(201,168,76,0.3);
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-8px); }
+    }
+
+    /* ── Trust Bar ────────────────────────────────────── */
+    #trust {
+      background: linear-gradient(135deg, var(--pink) 0%, var(--fuchsia) 100%);
+      padding: 60px 0;
+    }
+    .trust-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 24px;
+    }
+    .trust-item {
+      text-align: center;
+      color: #fff;
+    }
+    .trust-icon {
+      width: 56px; height: 56px;
+      background: rgba(255,255,255,0.18);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 12px;
+      font-size: 1.4rem;
+      border: 2px solid rgba(255,255,255,0.3);
+    }
+    .trust-item strong {
+      display: block;
+      font-size: 1.3rem;
+      font-family: 'Playfair Display', serif;
+      margin-bottom: 4px;
+    }
+    .trust-item p { font-size: 0.82rem; color: rgba(255,255,255,0.85); }
+
+    /* ── About Alison ─────────────────────────────────── */
+    #alison {
+      padding: 90px 0;
+    }
+    .alison-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.2fr;
+      gap: 60px;
+      align-items: center;
+    }
+    .alison-visual {
+      position: relative;
+    }
+    .alison-card-big {
+      background: linear-gradient(135deg, var(--pink-pale) 0%, #fff 100%);
+      border-radius: 24px;
+      padding: 40px;
+      border: 1px solid rgba(233,30,140,0.12);
+      text-align: center;
+    }
+    .alison-avatar-big {
+      width: 120px; height: 120px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--pink), var(--fuchsia));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 3.5rem;
+      margin: 0 auto 20px;
+      border: 5px solid var(--gold-light);
+      box-shadow: 0 8px 30px rgba(233,30,140,0.25);
+    }
+    .alison-creds {
+      margin-top: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .cred-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: #fff;
+      border-radius: var(--radius-sm);
+      padding: 10px 14px;
+      font-size: 0.88rem;
+      font-weight: 500;
+      text-align: left;
+      border: 1px solid rgba(233,30,140,0.10);
+    }
+    .cred-item .ci { color: var(--gold); font-size: 1rem; }
+    .alison-content h2 { margin-bottom: 16px; }
+    .alison-content p { margin-bottom: 16px; }
+    .alison-highlights {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin: 24px 0;
+    }
+    .hl-item {
+      background: var(--pink-pale);
+      border-radius: var(--radius-sm);
+      padding: 14px 16px;
+      border-left: 3px solid var(--pink);
+    }
+    .hl-item strong { font-size: 0.9rem; color: var(--fuchsia); display: block; }
+    .hl-item span { font-size: 0.8rem; color: var(--gray); }
+
+    /* ── Exitosas Section ─────────────────────────────── */
+    #exitosas {
+      padding: 90px 0;
+      background: var(--pink-pale);
+    }
+    .exitosas-inner {
+      display: grid;
+      grid-template-columns: 1.1fr 1fr;
+      gap: 60px;
+      align-items: center;
+    }
+    .exitosas-content h2 { margin-bottom: 20px; }
+    .exitosas-content p { margin-bottom: 16px; }
+    .exitosas-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 24px;
+    }
+    .pill {
+      background: linear-gradient(135deg, var(--pink), var(--fuchsia));
+      color: #fff;
+      border-radius: 50px;
+      padding: 8px 18px;
+      font-size: 0.84rem;
+      font-weight: 500;
+    }
+    .exitosas-visual {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .feature-card {
+      background: #fff;
+      border-radius: var(--radius);
+      padding: 22px 24px;
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      box-shadow: 0 2px 12px rgba(233,30,140,0.07);
+      border: 1px solid rgba(233,30,140,0.08);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .feature-card:hover { transform: translateY(-3px); box-shadow: var(--shadow); }
+    .feat-icon {
+      width: 44px; height: 44px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, var(--pink), var(--fuchsia));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      flex-shrink: 0;
+    }
+    .feat-icon.gold-icon { background: linear-gradient(135deg, var(--gold-light), var(--gold)); }
+    .feature-card h4 { font-family: 'Inter', sans-serif; font-size: 0.95rem; font-weight: 600; margin-bottom: 4px; }
+    .feature-card p { font-size: 0.83rem; margin: 0; }
+
+    /* ── Learn Section ────────────────────────────────── */
+    #learn {
+      padding: 90px 0;
+    }
+    .section-header { text-align: center; margin-bottom: 56px; }
+    .section-header h2 { margin-bottom: 12px; }
+    .section-header p { max-width: 560px; margin: 0 auto; }
+    .learn-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+    .learn-card {
+      background: #fff;
+      border-radius: var(--radius);
+      padding: 32px 28px;
+      border: 1px solid rgba(233,30,140,0.10);
+      transition: transform 0.2s, box-shadow 0.2s;
+      position: relative;
+      overflow: hidden;
+    }
+    .learn-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, var(--pink), var(--gold));
+    }
+    .learn-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); }
+    .learn-num {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: rgba(233,30,140,0.10);
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+    .learn-icon {
+      font-size: 2rem;
+      margin-bottom: 12px;
+      display: block;
+    }
+    .learn-card h3 { font-size: 1rem; font-family: 'Inter', sans-serif; font-weight: 700; margin-bottom: 8px; color: var(--black); }
+    .learn-card p { font-size: 0.84rem; }
+
+    /* ── Community ────────────────────────────────────── */
+    #community {
+      padding: 90px 0;
+      background: linear-gradient(135deg, #1a0a12 0%, #2d1020 100%);
+      position: relative;
+      overflow: hidden;
+    }
+    #community::before {
+      content: '';
+      position: absolute;
+      top: -200px; right: -200px;
+      width: 500px; height: 500px;
+      background: radial-gradient(circle, rgba(233,30,140,0.15) 0%, transparent 70%);
+      border-radius: 50%;
+    }
+    .community-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: center;
+      position: relative;
+      z-index: 1;
+    }
+    .community-content h2 { color: #fff; margin-bottom: 20px; }
+    .community-content p { color: rgba(255,255,255,0.75); margin-bottom: 16px; }
+    .community-list { list-style: none; margin: 24px 0; }
+    .community-list li {
+      color: rgba(255,255,255,0.85);
+      padding: 10px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 0.95rem;
+    }
+    .community-list li::before {
+      content: '✦';
+      color: var(--gold);
+      font-size: 0.7rem;
+      flex-shrink: 0;
+    }
+    .community-visual {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+    .comm-card {
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: var(--radius);
+      padding: 24px 20px;
+      text-align: center;
+      backdrop-filter: blur(10px);
+    }
+    .comm-card .icon { font-size: 2rem; margin-bottom: 10px; display: block; }
+    .comm-card strong { display: block; color: #fff; font-size: 0.95rem; margin-bottom: 4px; }
+    .comm-card span { color: rgba(255,255,255,0.6); font-size: 0.8rem; }
+    .comm-card.span2 { grid-column: span 2; }
+
+    /* ── Offer ────────────────────────────────────────── */
+    #offer {
+      padding: 90px 0;
+      background: var(--pink-pale);
+    }
+    .offer-box {
+      background: #fff;
+      border-radius: 28px;
+      overflow: hidden;
+      box-shadow: var(--shadow-lg);
+      max-width: 880px;
+      margin: 0 auto;
+      border: 1px solid rgba(233,30,140,0.12);
+    }
+    .offer-header {
+      background: linear-gradient(135deg, var(--pink) 0%, var(--fuchsia) 100%);
+      padding: 48px 40px;
+      text-align: center;
+      color: #fff;
+    }
+    .offer-header .tag-offer {
+      background: rgba(255,255,255,0.2);
+      border: 1px solid rgba(255,255,255,0.4);
+      color: #fff;
+      border-radius: 50px;
+      padding: 6px 18px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      display: inline-block;
+      margin-bottom: 16px;
+    }
+    .offer-header h2 { color: #fff; margin-bottom: 12px; }
+    .offer-header p { color: rgba(255,255,255,0.85); max-width: 500px; margin: 0 auto; }
+    .offer-body {
+      padding: 48px 40px;
+    }
+    .offer-price-box {
+      text-align: center;
+      margin-bottom: 36px;
+      padding: 24px;
+      background: var(--pink-pale);
+      border-radius: var(--radius);
+      border: 2px solid rgba(233,30,140,0.15);
+    }
+    .offer-label { font-size: 0.9rem; color: var(--gray); margin-bottom: 8px; }
+    .offer-price {
+      font-family: 'Playfair Display', serif;
+      font-size: 3rem;
+      font-weight: 700;
+      color: var(--pink);
+      line-height: 1;
+    }
+    .offer-price-sub { font-size: 0.85rem; color: var(--gray); margin-top: 6px; }
+    .offer-includes {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      margin-bottom: 36px;
+    }
+    .inc-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: 0.88rem;
+    }
+    .inc-check {
+      width: 22px; height: 22px;
+      background: linear-gradient(135deg, var(--pink), var(--fuchsia));
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-size: 0.65rem;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+    .offer-cta { text-align: center; }
+    .offer-cta .btn { font-size: 1.1rem; padding: 20px 50px; }
+    .offer-note { text-align: center; font-size: 0.82rem; color: var(--gray); margin-top: 14px; }
+
+    /* ── Asesoria ─────────────────────────────────────── */
+    #asesoria {
+      padding: 90px 0;
+    }
+    .asesoria-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: center;
+    }
+    .asesoria-content h2 { margin-bottom: 20px; }
+    .asesoria-content p { margin-bottom: 16px; }
+    .asesoria-steps {
+      margin: 24px 0;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .step-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+    }
+    .step-num {
+      width: 36px; height: 36px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--pink), var(--fuchsia));
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 0.9rem;
+      flex-shrink: 0;
+    }
+    .step-item h4 { font-size: 0.95rem; font-weight: 600; margin-bottom: 2px; }
+    .step-item p { font-size: 0.83rem; margin: 0; }
+    .asesoria-card {
+      background: linear-gradient(135deg, var(--pink-pale) 0%, #fff5eb 100%);
+      border-radius: 24px;
+      padding: 40px;
+      text-align: center;
+      border: 1px solid rgba(233,30,140,0.12);
+    }
+    .asesoria-avatar {
+      width: 100px; height: 100px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--pink), var(--fuchsia));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 3rem;
+      margin: 0 auto 20px;
+      border: 4px solid var(--gold-light);
+    }
+    .asesoria-card h3 { margin-bottom: 8px; font-size: 1.2rem; }
+    .asesoria-card p { font-size: 0.9rem; margin-bottom: 24px; }
+    .asesoria-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      justify-content: center;
+      margin-bottom: 24px;
+    }
+    .ase-tag {
+      background: #fff;
+      border: 1px solid rgba(233,30,140,0.2);
+      color: var(--fuchsia);
+      border-radius: 50px;
+      padding: 5px 14px;
+      font-size: 0.8rem;
+      font-weight: 500;
+    }
+
+    /* ── Testimonials ─────────────────────────────────── */
+    #testimonials {
+      padding: 90px 0;
+      background: var(--pink-pale);
+    }
+    .testi-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+    .testi-card {
+      background: #fff;
+      border-radius: var(--radius);
+      padding: 32px 28px;
+      box-shadow: 0 2px 16px rgba(233,30,140,0.08);
+      border: 1px solid rgba(233,30,140,0.08);
+      position: relative;
+    }
+    .testi-quote {
+      font-size: 3rem;
+      color: rgba(233,30,140,0.12);
+      font-family: 'Playfair Display', serif;
+      line-height: 1;
+      margin-bottom: -10px;
+    }
+    .testi-stars { color: var(--gold); font-size: 0.9rem; margin: 10px 0; letter-spacing: 2px; }
+    .testi-card p {
+      font-size: 0.9rem;
+      line-height: 1.7;
+      font-style: italic;
+      margin-bottom: 20px;
+      color: #444;
+    }
+    .testi-author {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .testi-avatar {
+      width: 44px; height: 44px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.3rem;
+      flex-shrink: 0;
+    }
+    .testi-author strong { display: block; font-size: 0.9rem; }
+    .testi-author span { font-size: 0.78rem; color: var(--gray); }
+    .testi-card.featured {
+      background: linear-gradient(135deg, var(--pink) 0%, var(--fuchsia) 100%);
+    }
+    .testi-card.featured p { color: rgba(255,255,255,0.9); }
+    .testi-card.featured .testi-quote { color: rgba(255,255,255,0.15); }
+    .testi-card.featured .testi-stars { color: var(--gold-light); }
+    .testi-card.featured .testi-author strong { color: #fff; }
+    .testi-card.featured .testi-author span { color: rgba(255,255,255,0.7); }
+
+    /* ── FAQ ──────────────────────────────────────────── */
+    #faq {
+      padding: 90px 0;
+    }
+    .faq-list {
+      max-width: 760px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .faq-item {
+      background: #fff;
+      border-radius: var(--radius);
+      border: 1px solid rgba(233,30,140,0.10);
+      overflow: hidden;
+    }
+    .faq-question {
+      width: 100%;
+      background: none;
+      border: none;
+      padding: 22px 24px;
+      text-align: left;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--black);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      transition: background 0.2s;
+    }
+    .faq-question:hover { background: var(--pink-pale); }
+    .faq-icon {
+      width: 28px; height: 28px;
+      border-radius: 50%;
+      background: var(--pink-pale);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--pink);
+      font-size: 1.1rem;
+      flex-shrink: 0;
+      transition: transform 0.3s, background 0.3s;
+      font-weight: 400;
+    }
+    .faq-item.open .faq-icon {
+      transform: rotate(45deg);
+      background: var(--pink);
+      color: #fff;
+    }
+    .faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.35s ease, padding 0.35s ease;
+      padding: 0 24px;
+    }
+    .faq-item.open .faq-answer {
+      max-height: 200px;
+      padding: 0 24px 22px;
+    }
+    .faq-answer p { font-size: 0.9rem; }
+
+    /* ── Final CTA ────────────────────────────────────── */
+    #final-cta {
+      padding: 90px 0;
+      background: linear-gradient(135deg, #1a0a12 0%, #2d1020 100%);
+      position: relative;
+      overflow: hidden;
+    }
+    #final-cta::before {
+      content: '';
+      position: absolute;
+      top: -150px; right: -150px;
+      width: 450px; height: 450px;
+      background: radial-gradient(circle, rgba(233,30,140,0.18) 0%, transparent 70%);
+      border-radius: 50%;
+    }
+    #final-cta::after {
+      content: '';
+      position: absolute;
+      bottom: -150px; left: -150px;
+      width: 400px; height: 400px;
+      background: radial-gradient(circle, rgba(201,168,76,0.12) 0%, transparent 70%);
+      border-radius: 50%;
+    }
+    .final-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: center;
+      position: relative;
+      z-index: 1;
+    }
+    .final-content h2 { color: #fff; margin-bottom: 20px; }
+    .final-content p { color: rgba(255,255,255,0.75); margin-bottom: 16px; }
+    .final-form {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 24px;
+      padding: 40px;
+      backdrop-filter: blur(10px);
+    }
+    .final-form h3 { color: #fff; font-size: 1.2rem; margin-bottom: 6px; font-family: 'Inter', sans-serif; font-weight: 700; }
+    .final-form .form-subtitle { color: rgba(255,255,255,0.6); font-size: 0.85rem; margin-bottom: 24px; }
+    .form-group { margin-bottom: 16px; }
+    .form-group label {
+      display: block;
+      font-size: 0.82rem;
+      font-weight: 500;
+      color: rgba(255,255,255,0.7);
+      margin-bottom: 6px;
+    }
+    .form-group input,
+    .form-group textarea {
+      width: 100%;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: var(--radius-sm);
+      padding: 12px 16px;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.9rem;
+      color: #fff;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    .form-group input::placeholder,
+    .form-group textarea::placeholder { color: rgba(255,255,255,0.3); }
+    .form-group input:focus,
+    .form-group textarea:focus { border-color: var(--pink); }
+    .form-group textarea { resize: vertical; min-height: 90px; }
+    .form-submit { width: 100%; }
+    .form-submit .btn { width: 100%; justify-content: center; }
+
+    /* ── Footer ───────────────────────────────────────── */
+    footer {
+      background: #0f0509;
+      padding: 40px 0;
+      text-align: center;
+    }
+    .footer-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: var(--pink);
+      margin-bottom: 12px;
+    }
+    .footer-logo span { color: var(--gold); }
+    footer p { font-size: 0.85rem; color: rgba(255,255,255,0.4); }
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 24px;
+      margin: 16px 0;
+    }
+    .footer-links a {
+      color: rgba(255,255,255,0.5);
+      text-decoration: none;
+      font-size: 0.85rem;
+      transition: color 0.2s;
+    }
+    .footer-links a:hover { color: var(--pink); }
+
+    /* ── Sticky CTA Bar ───────────────────────────────── */
+    .sticky-bar {
+      position: fixed;
+      bottom: 0; left: 0; right: 0;
+      background: rgba(255,255,255,0.97);
+      backdrop-filter: blur(12px);
+      border-top: 1px solid rgba(233,30,140,0.12);
+      padding: 14px 24px;
+      display: none;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      z-index: 90;
+      box-shadow: 0 -4px 20px rgba(0,0,0,0.08);
+    }
+    .sticky-bar.show { display: flex; }
+    .sticky-bar-text { font-size: 0.9rem; font-weight: 600; color: var(--black); }
+    .sticky-bar-text span { color: var(--pink); }
+    .sticky-bar-btns { display: flex; gap: 10px; }
+
+    /* ── WhatsApp Float ───────────────────────────────── */
+    .wa-float {
+      position: fixed;
+      bottom: 28px;
+      right: 24px;
+      z-index: 200;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 10px;
+    }
+    .wa-bubble {
+      background: #fff;
+      border-radius: 50px;
+      padding: 10px 18px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: #1a1a1a;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+      white-space: nowrap;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      animation: popIn 0.4s cubic-bezier(0.34,1.56,0.64,1) both;
+    }
+    .wa-bubble::before {
+      content: '';
+      width: 8px; height: 8px;
+      background: #25D366;
+      border-radius: 50%;
+      animation: pulse-dot 1.5s infinite;
+    }
+    .wa-btn {
+      width: 62px; height: 62px;
+      border-radius: 50%;
+      background: #25D366;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 24px rgba(37,211,102,0.45);
+      text-decoration: none;
+      transition: transform 0.2s, box-shadow 0.2s;
+      animation: popIn 0.4s 0.2s cubic-bezier(0.34,1.56,0.64,1) both;
+    }
+    .wa-btn:hover { transform: scale(1.1); box-shadow: 0 8px 32px rgba(37,211,102,0.55); }
+    .wa-btn svg { width: 32px; height: 32px; fill: #fff; }
+    @keyframes popIn {
+      from { opacity: 0; transform: scale(0.6); }
+      to { opacity: 1; transform: scale(1); }
+    }
+    @keyframes pulse-dot {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.4; }
+    }
+
+    /* ── Animations ───────────────────────────────────── */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .fade-in.visible { opacity: 1; transform: translateY(0); }
+    .fade-in-delay-1 { transition-delay: 0.1s; }
+    .fade-in-delay-2 { transition-delay: 0.2s; }
+    .fade-in-delay-3 { transition-delay: 0.3s; }
+
+    /* ── Responsive ───────────────────────────────────── */
+    @media (max-width: 900px) {
+      .hero-grid,
+      .alison-grid,
+      .exitosas-inner,
+      .community-inner,
+      .asesoria-inner,
+      .final-inner { grid-template-columns: 1fr; gap: 40px; }
+      .trust-grid { grid-template-columns: repeat(3, 1fr); }
+      .trust-grid .trust-item:nth-child(4),
+      .trust-grid .trust-item:nth-child(5) { grid-column: auto; }
+      .learn-grid { grid-template-columns: repeat(2, 1fr); }
+      .testi-grid { grid-template-columns: 1fr; }
+      .offer-includes { grid-template-columns: 1fr; }
+      .alison-highlights { grid-template-columns: 1fr; }
+      .community-visual { grid-template-columns: 1fr 1fr; }
+      .hero-image-wrap { order: -1; }
+      .sticky-bar-text { display: none; }
+      .wa-float { bottom: 80px; }
+    }
+    @media (max-width: 600px) {
+      .section { padding: 64px 0; }
+      .trust-grid { grid-template-columns: 1fr 1fr; }
+      .learn-grid { grid-template-columns: 1fr; }
+      .btn-group { flex-direction: column; }
+      .btn-group .btn { text-align: center; justify-content: center; }
+      .offer-body { padding: 32px 24px; }
+      .offer-header { padding: 36px 24px; }
+      .final-form { padding: 28px 20px; }
+      nav .btn { display: none; }
+      .sticky-bar { display: flex !important; }
+      .sticky-bar-btns { flex: 1; }
+      .sticky-bar-btns .btn { flex: 1; justify-content: center; padding: 12px 16px; font-size: 0.82rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ══════════════════════════════════════════ NAV -->
+<nav id="navbar">
+  <div class="container nav-inner">
+    <a href="#" class="nav-logo">Exitosas<span>✦</span></a>
+    <div class="nav-cta">
+      <a href="#asesoria" class="btn btn-outline" style="padding:10px 20px;font-size:0.85rem;">Agendar asesoría</a>
+      <a href="#offer" class="btn btn-primary" style="padding:10px 20px;font-size:0.85rem;">Inscribirme ahora</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ══════════════════════════════════════════ HERO -->
+<section id="hero">
+  <div class="container">
+    <div class="hero-grid">
+      <div class="hero-text">
+        <div class="tag">✦ Escuela de Brokers Inmobiliarias</div>
+        <h1>
+          Conviértete en broker inmobiliaria
+          <em>y empieza a generar tus propios ingresos</em>
+        </h1>
+        <p class="hero-subtitle">
+          Soy Alison Ramírez, fundadora de Exitosas. Te enseño desde cero cómo entrar al mundo inmobiliario, vender proyectos y construir una nueva fuente de ingresos con herramientas reales, comunidad y acompañamiento.
+        </p>
+        <div class="btn-group">
+          <a href="#offer" class="btn btn-primary btn-lg">
+            <span>💎</span> Quiero ser broker inmobiliaria
+          </a>
+          <a href="#asesoria" class="btn btn-outline btn-lg">
+            <span>📅</span> Agendar asesoría con Alison
+          </a>
+        </div>
+        <div class="hero-badges">
+          <span class="hero-badge">8+ años de experiencia</span>
+          <span class="hero-badge">Ingeniera Comercial & MBA</span>
+          <span class="hero-badge">Comunidad femenina</span>
+          <span class="hero-badge">Formación real</span>
+        </div>
+      </div>
+      <div class="hero-image-wrap">
+        <div class="floating-el top-right">
+          <div class="badge-float">✦ Precio único $39.990</div>
+        </div>
+        <div class="hero-card">
+          <div class="hero-card-avatar">👩‍💼</div>
+          <h3>Alison Ramírez</h3>
+          <p class="subtitle">Ing. Comercial · MBA · Fundadora de Exitosas</p>
+          <div style="border-top:1px solid rgba(233,30,140,0.1);padding-top:16px;">
+            <div style="font-size:0.82rem;color:var(--gray);text-align:center;margin-bottom:12px;">Fundadora también de Avance Inmobiliario</div>
+          </div>
+          <div class="hero-stat-row">
+            <div class="hero-stat">
+              <strong>8+</strong>
+              <span>años en el rubro</span>
+            </div>
+            <div class="hero-stat">
+              <strong>100%</strong>
+              <span>para mujeres</span>
+            </div>
+            <div class="hero-stat">
+              <strong>Desde</strong>
+              <span>cero nivel</span>
+            </div>
+            <div class="hero-stat">
+              <strong>Real</strong>
+              <span>acompañamiento</span>
+            </div>
+          </div>
+        </div>
+        <div class="floating-el bottom-left">
+          <div class="badge-float" style="background:linear-gradient(135deg,var(--pink),var(--fuchsia));color:#fff;">🏡 Comunidad activa</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════ TRUST -->
+<section id="trust">
+  <div class="container">
+    <div class="trust-grid">
+      <div class="trust-item fade-in">
+        <div class="trust-icon">⭐</div>
+        <strong>8+ años</strong>
+        <p>de experiencia en el mercado inmobiliario</p>
+      </div>
+      <div class="trust-item fade-in fade-in-delay-1">
+        <div class="trust-icon">🏢</div>
+        <strong>Fundadora</strong>
+        <p>de Exitosas y Avance Inmobiliario</p>
+      </div>
+      <div class="trust-item fade-in fade-in-delay-2">
+        <div class="trust-icon">👥</div>
+        <strong>Liderazgo</strong>
+        <p>de equipos comerciales exitosos</p>
+      </div>
+      <div class="trust-item fade-in fade-in-delay-3">
+        <div class="trust-icon">📈</div>
+        <strong>Inversionistas</strong>
+        <p>asesorados en proyectos inmobiliarios</p>
+      </div>
+      <div class="trust-item fade-in fade-in-delay-3">
+        <div class="trust-icon">💼</div>
+        <strong>Formación</strong>
+        <p>de mujeres en ventas inmobiliarias</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════ ALISON -->
+<section id="alison" class="section">
+  <div class="container">
+    <div class="alison-grid">
+      <div class="alison-visual fade-in">
+        <div class="alison-card-big">
+          <div class="alison-avatar-big">👩‍💼</div>
+          <h3 style="font-size:1.3rem;">Alison Ramírez</h3>
+          <p style="font-size:0.88rem;color:var(--gray);margin-top:4px;">Ingeniera Comercial · MBA</p>
+          <p style="font-size:0.83rem;color:var(--pink);font-weight:600;margin-top:4px;">Fundadora de Exitosas & Avance Inmobiliario</p>
+          <div class="alison-creds">
+            <div class="cred-item"><span class="ci">🎓</span> Ingeniera Comercial con MBA</div>
+            <div class="cred-item"><span class="ci">✦</span> +8 años en el mercado inmobiliario</div>
+            <div class="cred-item"><span class="ci">🏢</span> Fundadora de Exitosas</div>
+            <div class="cred-item"><span class="ci">🏗️</span> Fundadora de Avance Inmobiliario</div>
+            <div class="cred-item"><span class="ci">👥</span> Liderazgo de equipos comerciales</div>
+            <div class="cred-item"><span class="ci">📊</span> Asesora de inversionistas</div>
+            <div class="cred-item"><span class="ci">💪</span> Formadora de mujeres en el rubro</div>
+          </div>
+        </div>
+      </div>
+      <div class="alison-content fade-in fade-in-delay-1">
+        <div class="tag">✦ Conoce a tu mentora</div>
+        <h2>Una experta que ya recorrió el camino que tú quieres tomar</h2>
+        <p>Soy Alison Ramírez, Ingeniera Comercial con MBA y más de 8 años de experiencia en el mercado inmobiliario chileno. He liderado equipos comerciales, vendido proyectos inmobiliarios de alto valor y asesorado a inversionistas a tomar decisiones estratégicas en el rubro.</p>
+        <p>Hace años decidí crear <strong style="color:var(--pink);">Exitosas</strong> porque quería que más mujeres pudieran entrar al mundo inmobiliario con las herramientas correctas, confianza real y el acompañamiento que yo hubiera necesitado al comenzar.</p>
+        <p>Hoy, con Exitosas y Avance Inmobiliario, formo y acompaño a mujeres para que generen sus propios ingresos en el rubro inmobiliario con estrategia, comunidad y resultados concretos.</p>
+        <div class="alison-highlights">
+          <div class="hl-item">
+            <strong>Ingeniera Comercial</strong>
+            <span>con formación MBA</span>
+          </div>
+          <div class="hl-item">
+            <strong>Más de 8 años</strong>
+            <span>en el mercado inmobiliario</span>
+          </div>
+          <div class="hl-item">
+            <strong>Avance Inmobiliario</strong>
+            <span>empresa fundada por Alison</span>
+          </div>
+          <div class="hl-item">
+            <strong>Exitosas</strong>
+            <span>comunidad y escuela femenina</span>
+          </div>
+        </div>
+        <a href="#asesoria" class="btn btn-primary">
+          <span>📅</span> Agendar asesoría con Alison
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════ EXITOSAS -->
+<section id="exitosas" class="section section-alt">
+  <div class="container">
+    <div class="exitosas-inner">
+      <div class="exitosas-content fade-in">
+        <div class="tag">✦ La comunidad</div>
+        <h2>¿Qué es <span class="accent">Exitosas</span>?</h2>
+        <p>Exitosas es una <strong>escuela de broker femenino</strong> y una <strong>comunidad de mujeres</strong> creada para que todas puedan aprender el negocio inmobiliario, vender propiedades, captar clientes, generar cierres y crear ingresos propios con el apoyo de otras mujeres que están en el mismo camino.</p>
+        <p>En Exitosas no estudias sola. Formas parte de una red de mujeres que comparten herramientas, se ayudan a generar más cierres, celebran los logros juntas y construyen una nueva fuente de ingresos con propósito.</p>
+        <p>Nuestro propósito es claro: que <strong style="color:var(--pink);">más mujeres sean exitosas</strong> a través del negocio inmobiliario.</p>
+        <div class="exitosas-pills">
+          <span class="pill">📚 Escuela femenina</span>
+          <span class="pill">🤝 Comunidad real</span>
+          <span class="pill">🏡 Negocio inmobiliario</span>
+          <span class="pill">💰 Ingresos propios</span>
+          <span class="pill">🎯 Estrategia</span>
+        </div>
+        <div style="margin-top:28px;">
+          <a href="#offer" class="btn btn-primary">
+            <span>💎</span> Quiero unirme a Exitosas
+          </a>
+        </div>
+      </div>
+      <div class="exitosas-visual fade-in fade-in-delay-1">
+        <div class="feature-card">
+          <div class="feat-icon">📖</div>
+          <div>
+            <h4>Formación completa</h4>
+            <p>Aprende el rubro inmobiliario desde cero con contenido práctico y actualizado.</p>
+          </div>
+        </div>
+        <div class="feature-card">
+          <div class="feat-icon gold-icon">🛠️</div>
+          <div>
+            <h4>Herramientas reales</h4>
+            <p>Accede a recursos, plantillas y estrategias que usamos en el mercado real.</p>
+          </div>
+        </div>
+        <div class="feature-card">
+          <div class="feat-icon">👭</div>
+          <div>
+            <h4>Comunidad femenina</h4>
+            <p>Únete a una red de mujeres que se apoyan, comparten y crecen juntas.</p>
+          </div>
+        </div>
+        <div class="feature-card">
+          <div class="feat-icon gold-icon">🎯</div>
+          <div>
+            <h4>Acompañamiento real</h4>
+            <p>No estás sola. Tendrás guía y apoyo durante todo tu proceso de aprendizaje.</p>
+          </div>
+        </div>
+        <div class="feature-card">
+          <div class="feat-icon">💰</div>
+          <div>
+            <h4>Generar ingresos propios</h4>
+            <p>Aprende a vender, captar clientes y cerrar negocios para crear tu propia fuente de ingresos.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════ LEARN -->
+<section id="learn" class="section">
+  <div class="container">
+    <div class="section-header fade-in">
+      <div class="tag">✦ Contenido del curso</div>
+      <h2>¿Qué aprenderás en <span class="accent">Exitosas</span>?</h2>
+      <p>Todo lo que necesitas saber para entrar al mundo inmobiliario, captar clientes, vender proyectos y construir tu marca como broker profesional.</p>
+    </div>
+    <div class="learn-grid">
+      <div class="learn-card fade-in">
+        <div class="learn-num">01</div>
+        <span class="learn-icon">🏘️</span>
+        <h3>Cómo funciona el mercado inmobiliario</h3>
+        <p>Entiende las bases del mercado: tipos de propiedades, proyectos, actores clave y cómo se mueven los negocios en Chile.</p>
+      </div>
+      <div class="learn-card fade-in fade-in-delay-1">
+        <div class="learn-num">02</div>
+        <span class="learn-icon">🏗️</span>
+        <h3>Cómo vender proyectos nuevos</h3>
+        <p>Aprende a presentar, argumentar y cerrar ventas de proyectos inmobiliarios en verde y en blanco con confianza.</p>
+      </div>
+      <div class="learn-card fade-in fade-in-delay-2">
+        <div class="learn-num">03</div>
+        <span class="learn-icon">🎯</span>
+        <h3>Cómo captar clientes</h3>
+        <p>Estrategias para encontrar, atraer y fidelizar a los clientes correctos en el mundo inmobiliario desde el primer día.</p>
+      </div>
+      <div class="learn-card fade-in fade-in-delay-1">
+        <div class="learn-num">04</div>
+        <span class="learn-icon">📊</span>
+        <h3>Cómo acompañar a un inversionista</h3>
+        <p>Entiende el perfil del inversionista, sus objetivos y cómo asesorarlos para tomar decisiones estratégicas.</p>
+      </div>
+      <div class="learn-card fade-in fade-in-delay-2">
+        <div class="learn-num">05</div>
+        <span class="learn-icon">🤝</span>
+        <h3>Cómo generar cierres</h3>
+        <p>Técnicas de cierre efectivas para que las conversaciones se conviertan en ventas reales y comisiones.</p>
+      </div>
+      <div class="learn-card fade-in fade-in-delay-3">
+        <div class="learn-num">06</div>
+        <span class="learn-icon">✨</span>
+        <h3>Cómo construir tu marca como broker</h3>
+        <p>Posicionate como referente inmobiliaria, crea tu marca personal y atrae clientes con tu reputación y presencia.</p>
+      </div>
+    </div>
+    <div style="text-align:center;margin-top:48px;" class="fade-in">
+      <a href="#offer" class="btn btn-primary btn-lg">
+        <span>💎</span> Quiero aprender todo esto
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════ COMMUNITY -->
+<section id="community">
+  <div class="container">
+    <div class="community-inner">
+      <div class="community-content fade-in">
+        <div class="tag" style="background:rgba(255,255,255,0.15);border:1px solid rgba(255,255,255,0.3);">✦ Comunidad Exitosas</div>
+        <h2>En Exitosas no aprendes sola</h2>
+        <p>Una de las cosas más poderosas de Exitosas no es solo el conocimiento que vas a adquirir, sino la comunidad de mujeres que te van a acompañar en este camino.</p>
+        <p>Dentro de Exitosas encontrarás un espacio seguro y activo donde las mujeres se apoyan entre sí, comparten herramientas, resuelven dudas en tiempo real y se celebran mutuamente en cada logro.</p>
+        <ul class="community-list">
+          <li>Comparte tus avances y recibe feedback real</li>
+          <li>Resuelve dudas con compañeras que entienden el rubro</li>
+          <li>Accede a estrategias y herramientas compartidas</li>
+          <li>Genera cierres en equipo y comparte oportunidades</li>
+          <li>Construye relaciones profesionales que duran</li>
+          <li>Celebra cada logro con mujeres que te entienden</li>
+        </ul>
+        <a href="#offer" class="btn btn-outline-white">
+          <span>👭</span> Quiero ser parte de la comunidad
+        </a>
+      </div>
+      <div class="community-visual fade-in fade-in-delay-1">
+        <div class="comm-card">
+          <span class="icon">💬</span>
+          <strong>Comunidad activa</strong>
+          <span>Canal exclusivo de mujeres Exitosas</span>
+        </div>
+        <div class="comm-card">
+          <span class="icon">🛠️</span>
+          <strong>Herramientas</strong>
+          <span>Recursos compartidos entre todas</span>
+        </div>
+        <div class="comm-card">
+          <span class="icon">🎯</span>
+          <strong>Cierres en equipo</strong>
+          <span>Se ayudan a generar más ventas</span>
+        </div>
+        <div class="comm-card">
+          <span class="icon">🌟</span>
+          <strong>Celebración</strong>
+          <span>Cada logro se celebra juntas</span>
+        </div>
+        <div class="comm-card span2">
+          <span class="icon">🤝</span>
+          <strong>Red de mujeres inmobiliarias</strong>
+          <span>Una comunidad creada para que más mujeres sean exitosas en el rubro</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════ OFFER -->
+<section id="offer" class="section section-alt">
+  <div class="container">
+    <div class="section-header fade-in" style="margin-bottom:40px;">
+      <div class="tag tag-gold">✦ Oferta especial</div>
+      <h2>Tu inversión en <span class="accent">Exitosas</span></h2>
+    </div>
+    <div class="offer-box fade-in">
+      <div class="offer-header">
+        <span class="tag-offer">Curso Exitosas Broker Inmobiliaria</span>
+        <h2>Formación completa para convertirte en broker inmobiliaria</h2>
+        <p>Recibirás herramientas, formación, acompañamiento y acceso a una comunidad femenina creada para ayudarte a tener éxito en el rubro inmobiliario.</p>
+      </div>
+      <div class="offer-body">
+        <div class="offer-price-box">
+          <div class="offer-label">Precio único y exclusivo</div>
+          <div class="offer-price">$39.990</div>
+          <div class="offer-price-sub">Acceso completo · Pago único · Sin mensualidades</div>
+        </div>
+        <div class="offer-includes">
+          <div class="inc-item">
+            <div class="inc-check">✓</div>
+            <span>Formación completa desde cero en el rubro inmobiliario</span>
+          </div>
+          <div class="inc-item">
+            <div class="inc-check">✓</div>
+            <span>Herramientas reales para captar clientes y cerrar negocios</span>
+          </div>
+          <div class="inc-item">
+            <div class="inc-check">✓</div>
+            <span>Acceso a la comunidad exclusiva de mujeres Exitosas</span>
+          </div>
+          <div class="inc-item">
+            <div class="inc-check">✓</div>
+            <span>Estrategias para vender proyectos nuevos</span>
+          </div>
+          <div class="inc-item">
+            <div class="inc-check">✓</div>
+            <span>Técnicas de cierre y captación de clientes</span>
+          </div>
+          <div class="inc-item">
+            <div class="inc-check">✓</div>
+            <span>Módulo de construcción de tu marca como broker</span>
+          </div>
+          <div class="inc-item">
+            <div class="inc-check">✓</div>
+            <span>Cómo acompañar a inversionistas inmobiliarios</span>
+          </div>
+          <div class="inc-item">
+            <div class="inc-check">✓</div>
+            <span>Acompañamiento y soporte durante tu proceso</span>
+          </div>
+        </div>
+        <div class="offer-cta">
+          <a href="https://wa.me/56959178358?text=Hola%20Alison!%20Quiero%20inscribirme%20en%20el%20curso%20Exitosas%20Broker%20Inmobiliaria" class="btn btn-primary btn-lg" target="_blank" rel="noopener">
+            <span>💎</span> Inscribirme ahora
+          </a>
+          <p class="offer-note">¿Tienes dudas? <a href="https://wa.me/56959178358" target="_blank" rel="noopener" style="color:var(--pink);">Escríbele a Alison por WhatsApp</a></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════ ASESORIA -->
+<section id="asesoria" class="section">
+  <div class="container">
+    <div class="asesoria-inner">
+      <div class="asesoria-content fade-in">
+        <div class="tag">✦ Asesoría personalizada</div>
+        <h2>¿No estás segura si este camino es para ti? <span class="accent">Habla con Alison</span></h2>
+        <p>Si tienes dudas sobre si el mundo inmobiliario es para ti, si puedes hacerlo desde cero o cómo funciona el proceso, Alison está disponible para acompañarte en una asesoría personalizada.</p>
+        <p>En una sesión directa con Alison podrás resolver tus preguntas, entender si Exitosas es lo que necesitas y recibir orientación real basada en más de 8 años de experiencia en el rubro.</p>
+        <div class="asesoria-steps">
+          <div class="step-item">
+            <div class="step-num">1</div>
+            <div>
+              <h4>Agenda tu asesoría</h4>
+              <p>Escríbele a Alison por WhatsApp o completa el formulario para coordinar una hora.</p>
+            </div>
+          </div>
+          <div class="step-item">
+            <div class="step-num">2</div>
+            <div>
+              <h4>Cuéntale tu situación</h4>
+              <p>Comparte tus dudas, intereses y en qué punto te encuentras hoy.</p>
+            </div>
+          </div>
+          <div class="step-item">
+            <div class="step-num">3</div>
+            <div>
+              <h4>Recibe orientación real</h4>
+              <p>Alison te da respuestas concretas y te orienta con honestidad.</p>
+            </div>
+          </div>
+        </div>
+        <a href="https://wa.me/56959178358?text=Hola%20Alison!%20Quiero%20agendar%20una%20asesoria%20personalizada" class="btn btn-primary btn-lg" target="_blank" rel="noopener">
+          <span>📅</span> Agendar asesoría con Alison
+        </a>
+      </div>
+      <div class="asesoria-card fade-in fade-in-delay-1">
+        <div class="asesoria-avatar">👩‍💼</div>
+        <h3>Alison Ramírez</h3>
+        <p>Fundadora de Exitosas · Ing. Comercial · MBA · +8 años en el rubro inmobiliario. Lista para orientarte con experiencia real.</p>
+        <div class="asesoria-tags">
+          <span class="ase-tag">💬 Asesoría directa</span>
+          <span class="ase-tag">🎯 Orientación real</span>
+          <span class="ase-tag">🏡 Inmobiliario</span>
+          <span class="ase-tag">📊 Estrategia</span>
+          <span class="ase-tag">💪 Sin juicio</span>
+        </div>
+        <a href="https://wa.me/56959178358?text=Hola%20Alison!%20Quiero%20agendar%20una%20asesoria" class="btn btn-primary" style="width:100%;justify-content:center;" target="_blank" rel="noopener">
+          <span>💬</span> Hablar con Alison por WhatsApp
+        </a>
+        <p style="font-size:0.8rem;color:var(--gray);margin-top:12px;">+56 9 5917 8358</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════ TESTIMONIALS -->
+<section id="testimonials" class="section section-alt">
+  <div class="container">
+    <div class="section-header fade-in">
+      <div class="tag">✦ Lo que dicen ellas</div>
+      <h2>Mujeres que ya dieron el <span class="accent">primer paso</span></h2>
+      <p>Estas son las historias de mujeres que confiaron en Exitosas y hoy están generando sus propios ingresos en el mundo inmobiliario.</p>
+    </div>
+    <div class="testi-grid">
+      <div class="testi-card fade-in">
+        <div class="testi-quote">"</div>
+        <div class="testi-stars">★★★★★</div>
+        <p>Nunca pensé que podría vender propiedades, ¡y meses después de tomar el curso Exitosas cerré mi primera venta! Alison lo explica todo de forma tan clara que te da la confianza que necesitas para dar el paso.</p>
+        <div class="testi-author">
+          <div class="testi-avatar" style="background:linear-gradient(135deg,#f9a8d4,#ec4899);">🙋‍♀️</div>
+          <div>
+            <strong>Valentina M.</strong>
+            <span>Broker inmobiliaria · Santiago</span>
+          </div>
+        </div>
+      </div>
+      <div class="testi-card featured fade-in fade-in-delay-1">
+        <div class="testi-quote">"</div>
+        <div class="testi-stars">★★★★★</div>
+        <p>Lo que más valoro de Exitosas es la comunidad. No solo aprendes con Alison, sino con todas las mujeres del grupo. Nos pasamos tips, nos ayudamos a cerrar y nos celebramos. Es increíble sentir ese apoyo.</p>
+        <div class="testi-author">
+          <div class="testi-avatar" style="background:rgba(255,255,255,0.2);">🙋‍♀️</div>
+          <div>
+            <strong>Francisca R.</strong>
+            <span>Broker inmobiliaria · Viña del Mar</span>
+          </div>
+        </div>
+      </div>
+      <div class="testi-card fade-in fade-in-delay-2">
+        <div class="testi-quote">"</div>
+        <div class="testi-stars">★★★★★</div>
+        <p>Empecé Exitosas sin saber absolutamente nada del rubro. Hoy en día tengo clientes propios, he cerrado dos ventas y estoy construyendo mi marca. Alison te acompaña de verdad, no es solo un curso más.</p>
+        <div class="testi-author">
+          <div class="testi-avatar" style="background:linear-gradient(135deg,#fde68a,#f59e0b);">🙋‍♀️</div>
+          <div>
+            <strong>Camila T.</strong>
+            <span>Broker inmobiliaria · Concepción</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════ FAQ -->
+<section id="faq" class="section">
+  <div class="container">
+    <div class="section-header fade-in">
+      <div class="tag">✦ Preguntas frecuentes</div>
+      <h2>Todo lo que necesitas <span class="accent">saber</span></h2>
+      <p>Respondemos las dudas más comunes antes de que te inscribas en Exitosas.</p>
+    </div>
+    <div class="faq-list">
+      <div class="faq-item fade-in">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          ¿Necesito experiencia previa para inscribirme?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">
+          <p>No, no necesitas ninguna experiencia previa. Exitosas está diseñado para mujeres que parten desde cero. Alison te enseña desde las bases del mercado inmobiliario hasta estrategias avanzadas de cierre, de manera progresiva y clara.</p>
+        </div>
+      </div>
+      <div class="faq-item fade-in fade-in-delay-1">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          ¿Puedo tomar el curso si nunca he vendido propiedades?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">
+          <p>¡Por supuesto! De hecho, muchas de las mujeres que han pasado por Exitosas nunca habían vendido ni una propiedad antes. El curso está pensado exactamente para ti: para que aprendas desde cero con las herramientas correctas y el acompañamiento que necesitas.</p>
+        </div>
+      </div>
+      <div class="faq-item fade-in fade-in-delay-1">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          ¿Qué incluye el curso Exitosas?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">
+          <p>El curso incluye formación completa sobre el mercado inmobiliario, estrategias de captación de clientes, cómo vender proyectos nuevos, cómo acompañar a inversionistas, técnicas de cierre, construcción de tu marca como broker y acceso a la comunidad exclusiva de mujeres Exitosas.</p>
+        </div>
+      </div>
+      <div class="faq-item fade-in fade-in-delay-2">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          ¿Tendré acompañamiento durante el proceso?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">
+          <p>Sí. En Exitosas no estudias sola. Tendrás acceso a la comunidad de mujeres donde puedes resolver dudas, y también el soporte de Alison durante el proceso. La idea es que tengas el acompañamiento real que necesitas para avanzar con confianza.</p>
+        </div>
+      </div>
+      <div class="faq-item fade-in fade-in-delay-2">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          ¿Cuánto cuesta el curso?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">
+          <p>El precio del curso Exitosas Broker Inmobiliaria es de $39.990 (pesos chilenos). Es un pago único, sin mensualidades ni costos adicionales, con acceso completo a toda la formación y la comunidad.</p>
+        </div>
+      </div>
+      <div class="faq-item fade-in fade-in-delay-3">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          ¿Cómo me inscribo en el curso?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">
+          <p>Puedes inscribirte haciendo clic en el botón "Inscribirme ahora", escribiéndole directamente a Alison por WhatsApp al +56 9 5917 8358, o completando el formulario de contacto al final de esta página. Alison te guiará en los siguientes pasos para completar tu inscripción.</p>
+        </div>
+      </div>
+    </div>
+    <div style="text-align:center;margin-top:40px;" class="fade-in">
+      <p style="margin-bottom:16px;font-size:0.95rem;">¿Tienes más preguntas? Escríbele directamente a Alison</p>
+      <a href="https://wa.me/56959178358?text=Hola%20Alison!%20Tengo%20algunas%20preguntas%20sobre%20Exitosas" class="btn btn-outline" target="_blank" rel="noopener">
+        <span>💬</span> Preguntarle a Alison por WhatsApp
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════ FINAL CTA -->
+<section id="final-cta">
+  <div class="container">
+    <div class="final-inner">
+      <div class="final-content fade-in">
+        <div class="tag" style="background:rgba(255,255,255,0.15);border:1px solid rgba(255,255,255,0.3);">✦ Empieza hoy</div>
+        <h2>Tu camino para convertirte en broker inmobiliaria puede empezar hoy</h2>
+        <p>En Exitosas queremos que más mujeres se atrevan a entrar al mundo inmobiliario, aprender, vender y generar sus propios ingresos con apoyo, comunidad y herramientas reales.</p>
+        <p>No necesitas experiencia. No necesitas haber vendido antes. Solo necesitas las ganas de aprender y dar ese primer paso. Alison y toda la comunidad Exitosas estarán contigo.</p>
+        <div class="btn-group" style="margin-top:28px;">
+          <a href="https://wa.me/56959178358?text=Hola%20Alison!%20Quiero%20empezar%20en%20Exitosas" class="btn btn-gold btn-lg" target="_blank" rel="noopener">
+            <span>💎</span> Quiero empezar en Exitosas
+          </a>
+          <a href="https://wa.me/56959178358?text=Hola%20Alison!%20Quiero%20agendar%20una%20asesoria" class="btn btn-outline-white" target="_blank" rel="noopener">
+            <span>📅</span> Agendar asesoría
+          </a>
+        </div>
+      </div>
+      <div class="final-form fade-in fade-in-delay-1">
+        <h3>Escríbenos y comenzamos</h3>
+        <p class="form-subtitle">Te contactaremos a la brevedad para orientarte.</p>
+        <form onsubmit="handleForm(event)">
+          <div class="form-group">
+            <label>Nombre completo</label>
+            <input type="text" placeholder="Tu nombre" required />
+          </div>
+          <div class="form-group">
+            <label>Correo electrónico</label>
+            <input type="email" placeholder="tucorreo@email.com" required />
+          </div>
+          <div class="form-group">
+            <label>Teléfono / WhatsApp</label>
+            <input type="tel" placeholder="+56 9 XXXX XXXX" />
+          </div>
+          <div class="form-group">
+            <label>¿En qué puedo ayudarte?</label>
+            <textarea placeholder="Cuéntame brevemente tu situación, dudas o intereses…"></textarea>
+          </div>
+          <div class="form-submit">
+            <button type="submit" class="btn btn-primary btn-lg" style="width:100%;justify-content:center;">
+              <span>💎</span> Quiero empezar en Exitosas
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════ FOOTER -->
+<footer>
+  <div class="container">
+    <div class="footer-logo">Exitosas<span>✦</span></div>
+    <div class="footer-links">
+      <a href="#hero">Inicio</a>
+      <a href="#exitosas">¿Qué es Exitosas?</a>
+      <a href="#learn">¿Qué aprenderás?</a>
+      <a href="#offer">Curso</a>
+      <a href="#asesoria">Asesoría</a>
+      <a href="#faq">FAQ</a>
+    </div>
+    <p>© 2025 Exitosas · Escuela de Brokers Inmobiliarias · Fundada por Alison Ramírez</p>
+    <p style="margin-top:8px;">Contacto: <a href="https://wa.me/56959178358" style="color:var(--pink);text-decoration:none;">+56 9 5917 8358</a></p>
+  </div>
+</footer>
+
+<!-- ══════════════════════════════════════════ STICKY BAR -->
+<div class="sticky-bar" id="stickyBar">
+  <div class="sticky-bar-text">
+    ¿Lista para ser <span>broker inmobiliaria</span>?
+  </div>
+  <div class="sticky-bar-btns">
+    <a href="#offer" class="btn btn-primary" onclick="document.getElementById('stickyBar').style.display='none'">
+      💎 Inscribirme
+    </a>
+    <a href="https://wa.me/56959178358" class="btn btn-outline" target="_blank" rel="noopener">
+      💬 WhatsApp
+    </a>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════ WHATSAPP -->
+<div class="wa-float" id="waFloat">
+  <div class="wa-bubble" id="waBubble">Escríbeme por WhatsApp</div>
+  <a class="wa-btn" href="https://wa.me/56959178358?text=Hola%20Alison!%20Me%20interesa%20saber%20m%C3%A1s%20sobre%20Exitosas" target="_blank" rel="noopener" aria-label="Hablar con Alison por WhatsApp" title="Hablar con Alison">
+    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+    </svg>
+  </a>
+</div>
+
+<!-- ══════════════════════════════════════════ JS -->
+<script>
+  /* Navbar scroll effect */
+  const navbar = document.getElementById('navbar');
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 50) navbar.classList.add('scrolled');
+    else navbar.classList.remove('scrolled');
+  });
+
+  /* Sticky bar */
+  const stickyBar = document.getElementById('stickyBar');
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 500 && window.innerWidth > 600) {
+      stickyBar.classList.add('show');
+    } else {
+      stickyBar.classList.remove('show');
+    }
+  });
+
+  /* WhatsApp bubble auto-hide */
+  const waBubble = document.getElementById('waBubble');
+  setTimeout(() => {
+    if (waBubble) {
+      waBubble.style.transition = 'opacity 0.5s';
+      waBubble.style.opacity = '0';
+      setTimeout(() => { waBubble.style.display = 'none'; }, 500);
+    }
+  }, 6000);
+  document.querySelector('.wa-btn').addEventListener('click', () => {
+    if (waBubble) waBubble.style.display = 'none';
+  });
+
+  /* FAQ toggle */
+  function toggleFaq(btn) {
+    const item = btn.closest('.faq-item');
+    const isOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+    if (!isOpen) item.classList.add('open');
+  }
+
+  /* Intersection observer for fade-in */
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        obs.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.fade-in').forEach(el => obs.observe(el));
+
+  /* Form handler */
+  function handleForm(e) {
+    e.preventDefault();
+    const name = e.target.querySelector('input[type="text"]').value;
+    const phone = e.target.querySelector('input[type="tel"]').value;
+    const msg = e.target.querySelector('textarea').value;
+    const waMsg = encodeURIComponent(
+      `Hola Alison! Me llamo ${name}. ${msg ? 'Mensaje: ' + msg : ''}${phone ? '. Mi teléfono es: ' + phone : ''}`
+    );
+    window.open('https://wa.me/56959178358?text=' + waMsg, '_blank');
+  }
+
+  /* Smooth scroll for anchors */
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', function(e) {
+      const target = document.querySelector(this.getAttribute('href'));
+      if (target) {
+        e.preventDefault();
+        const offset = 80;
+        const top = target.getBoundingClientRect().top + window.scrollY - offset;
+        window.scrollTo({ top, behavior: 'smooth' });
+      }
+    });
+  });
+</script>
+</body>
+</html>
