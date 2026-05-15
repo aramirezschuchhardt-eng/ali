@@ -24,9 +24,11 @@
       --teal-light: #5AABAB;
       --teal-pale: #F0F8F8;
       --teal-pale2: #E0F2F2;
-      --pink: #F472B6;
+      --pink: #EC4899;
+      --pink-dark: #BE185D;
       --pink-light: #F9A8D4;
       --pink-pale: #FDF2F8;
+      --pink-pale2: #FCE7F3;
       --lavender: #B8A8D8;
       --lavender-light: #D8CCF0;
       --lavender-pale: #F5F3FF;
@@ -36,8 +38,8 @@
       --white: #ffffff;
       --radius: 16px;
       --radius-sm: 10px;
-      --shadow: 0 4px 24px rgba(61,140,140,0.12);
-      --shadow-lg: 0 8px 40px rgba(61,140,140,0.20);
+      --shadow: 0 4px 24px rgba(236,72,153,0.12);
+      --shadow-lg: 0 8px 40px rgba(236,72,153,0.18);
     }
 
     h1, h2, h3 { font-family: 'Playfair Display', serif; line-height: 1.2; }
@@ -48,7 +50,7 @@
 
     .container { max-width: 1100px; margin: 0 auto; padding: 0 24px; }
     .section { padding: 90px 0; }
-    .section-alt { background: var(--teal-pale); }
+    .section-alt { background: var(--pink-pale); }
     .section-dark { background: linear-gradient(135deg, #0a1f1f 0%, #0f2d2d 100%); color: #fff; }
     .section-dark p { color: rgba(255,255,255,0.75); }
     .text-center { text-align: center; }
@@ -149,7 +151,7 @@
     /* ── Hero */
     #hero {
       min-height: 100vh;
-      background: linear-gradient(135deg, #F0F8F8 0%, #FDF2F8 50%, #F5F3FF 100%);
+      background: linear-gradient(135deg, #FDF2F8 0%, #F5F3FF 50%, #F0F8F8 100%);
       display: flex;
       align-items: center;
       padding-top: 80px;
@@ -161,7 +163,7 @@
       position: absolute;
       top: -200px; right: -200px;
       width: 600px; height: 600px;
-      background: radial-gradient(circle, rgba(61,140,140,0.08) 0%, transparent 70%);
+      background: radial-gradient(circle, rgba(236,72,153,0.10) 0%, transparent 70%);
       border-radius: 50%;
       pointer-events: none;
     }
@@ -170,7 +172,7 @@
       position: absolute;
       bottom: -150px; left: -150px;
       width: 500px; height: 500px;
-      background: radial-gradient(circle, rgba(244,114,182,0.07) 0%, transparent 70%);
+      background: radial-gradient(circle, rgba(61,140,140,0.08) 0%, transparent 70%);
       border-radius: 50%;
       pointer-events: none;
     }
@@ -201,12 +203,12 @@
     }
     .hero-badge {
       background: #fff;
-      border: 1px solid rgba(61,140,140,0.2);
+      border: 1px solid rgba(236,72,153,0.25);
       border-radius: 50px;
       padding: 7px 16px;
       font-size: 0.82rem;
       font-weight: 500;
-      color: var(--teal-dark);
+      color: var(--pink-dark);
       display: flex;
       align-items: center;
       gap: 6px;
@@ -227,7 +229,7 @@
       box-shadow: var(--shadow-lg);
       width: 100%;
       max-width: 380px;
-      border: 1px solid rgba(61,140,140,0.10);
+      border: 1px solid rgba(236,72,153,0.18);
       position: relative;
     }
     .hero-photo-card img {
@@ -251,8 +253,8 @@
       align-items: center;
       gap: 10px;
       white-space: nowrap;
-      box-shadow: 0 4px 16px rgba(0,0,0,0.12);
-      border: 1px solid rgba(61,140,140,0.15);
+      box-shadow: 0 4px 16px rgba(236,72,153,0.15);
+      border: 1px solid rgba(236,72,153,0.20);
     }
     .hero-photo-overlay strong { font-size: 0.88rem; color: var(--black); }
     .hero-photo-overlay span { font-size: 0.78rem; color: var(--gray); }
@@ -285,7 +287,7 @@
 
     /* ── Trust Bar */
     #trust {
-      background: linear-gradient(135deg, var(--teal) 0%, var(--teal-dark) 100%);
+      background: linear-gradient(135deg, var(--pink) 0%, var(--pink-dark) 100%);
       padding: 60px 0;
     }
     .trust-grid {
@@ -366,16 +368,16 @@
       margin: 24px 0;
     }
     .hl-item {
-      background: var(--teal-pale);
+      background: var(--pink-pale);
       border-radius: var(--radius-sm);
       padding: 14px 16px;
-      border-left: 3px solid var(--teal);
+      border-left: 3px solid var(--pink);
     }
-    .hl-item strong { font-size: 0.9rem; color: var(--teal-dark); display: block; }
+    .hl-item strong { font-size: 0.9rem; color: var(--pink-dark); display: block; }
     .hl-item span { font-size: 0.8rem; color: var(--gray); }
 
     /* ── Exitosas Section */
-    #exitosas { padding: 90px 0; background: var(--teal-pale); }
+    #exitosas { padding: 90px 0; background: var(--pink-pale2); }
     .exitosas-inner {
       display: grid;
       grid-template-columns: 1.1fr 1fr;
@@ -410,8 +412,8 @@
       display: flex;
       align-items: flex-start;
       gap: 16px;
-      box-shadow: 0 2px 12px rgba(61,140,140,0.07);
-      border: 1px solid rgba(61,140,140,0.08);
+      box-shadow: 0 2px 12px rgba(236,72,153,0.07);
+      border: 1px solid rgba(236,72,153,0.10);
       transition: transform 0.2s, box-shadow 0.2s;
     }
     .feature-card:hover { transform: translateY(-3px); box-shadow: var(--shadow); }
@@ -444,7 +446,7 @@
       background: #fff;
       border-radius: var(--radius);
       padding: 32px 28px;
-      border: 1px solid rgba(61,140,140,0.10);
+      border: 1px solid rgba(236,72,153,0.10);
       transition: transform 0.2s, box-shadow 0.2s;
       position: relative;
       overflow: hidden;
@@ -461,7 +463,7 @@
       font-family: 'Playfair Display', serif;
       font-size: 2.5rem;
       font-weight: 700;
-      color: rgba(61,140,140,0.10);
+      color: rgba(236,72,153,0.12);
       line-height: 1;
       margin-bottom: 8px;
     }
@@ -529,7 +531,7 @@
     .comm-card.span2 { grid-column: span 2; }
 
     /* ── Offer */
-    #offer { padding: 90px 0; background: var(--teal-pale); }
+    #offer { padding: 90px 0; background: var(--pink-pale2); }
     .offer-box {
       background: #fff;
       border-radius: 28px;
@@ -540,7 +542,7 @@
       border: 1px solid rgba(61,140,140,0.12);
     }
     .offer-header {
-      background: linear-gradient(135deg, var(--teal) 0%, var(--teal-dark) 100%);
+      background: linear-gradient(135deg, var(--pink) 0%, var(--pink-dark) 100%);
       padding: 48px 40px;
       text-align: center;
       color: #fff;
@@ -565,9 +567,38 @@
       text-align: center;
       margin-bottom: 36px;
       padding: 24px;
-      background: var(--teal-pale);
+      background: var(--pink-pale);
       border-radius: var(--radius);
-      border: 2px solid rgba(61,140,140,0.15);
+      border: 2px solid rgba(236,72,153,0.18);
+    }
+    .offer-price-original {
+      font-size: 1.1rem;
+      color: var(--gray);
+      text-decoration: line-through;
+      margin-bottom: 4px;
+    }
+    .offer-badge-launch {
+      display: inline-block;
+      background: linear-gradient(135deg, var(--pink), var(--pink-dark));
+      color: #fff;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 5px 14px;
+      border-radius: 50px;
+      margin-bottom: 10px;
+    }
+    .offer-savings {
+      display: inline-block;
+      background: #fff;
+      border: 1.5px solid rgba(236,72,153,0.25);
+      color: var(--pink-dark);
+      font-size: 0.82rem;
+      font-weight: 600;
+      padding: 5px 14px;
+      border-radius: 50px;
+      margin-top: 8px;
     }
     .offer-label { font-size: 0.9rem; color: var(--gray); margin-bottom: 8px; }
     .offer-price {
@@ -638,11 +669,11 @@
     .step-item h4 { font-size: 0.95rem; font-weight: 600; margin-bottom: 2px; }
     .step-item p { font-size: 0.83rem; margin: 0; }
     .asesoria-card {
-      background: linear-gradient(135deg, var(--teal-pale) 0%, var(--lavender-pale) 100%);
+      background: linear-gradient(135deg, var(--pink-pale) 0%, var(--lavender-pale) 100%);
       border-radius: 24px;
       padding: 40px;
       text-align: center;
-      border: 1px solid rgba(61,140,140,0.12);
+      border: 1px solid rgba(236,72,153,0.12);
     }
     .asesoria-photo {
       width: 120px; height: 120px;
@@ -669,8 +700,8 @@
     }
     .ase-tag {
       background: #fff;
-      border: 1px solid rgba(61,140,140,0.2);
-      color: var(--teal-dark);
+      border: 1px solid rgba(236,72,153,0.22);
+      color: var(--pink-dark);
       border-radius: 50px;
       padding: 5px 14px;
       font-size: 0.8rem;
@@ -678,7 +709,7 @@
     }
 
     /* ── Testimonials */
-    #testimonials { padding: 90px 0; background: var(--teal-pale); }
+    #testimonials { padding: 90px 0; background: var(--pink-pale); }
     .testi-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
@@ -720,7 +751,7 @@
     .testi-author strong { display: block; font-size: 0.9rem; }
     .testi-author span { font-size: 0.78rem; color: var(--gray); }
     .testi-card.featured {
-      background: linear-gradient(135deg, var(--teal) 0%, var(--teal-dark) 100%);
+      background: linear-gradient(135deg, var(--pink) 0%, var(--pink-dark) 100%);
     }
     .testi-card.featured p { color: rgba(255,255,255,0.9); }
     .testi-card.featured .testi-quote { color: rgba(255,255,255,0.15); }
@@ -740,7 +771,7 @@
     .faq-item {
       background: #fff;
       border-radius: var(--radius);
-      border: 1px solid rgba(61,140,140,0.10);
+      border: 1px solid rgba(236,72,153,0.12);
       overflow: hidden;
     }
     .faq-question {
@@ -760,15 +791,15 @@
       gap: 12px;
       transition: background 0.2s;
     }
-    .faq-question:hover { background: var(--teal-pale); }
+    .faq-question:hover { background: var(--pink-pale); }
     .faq-icon {
       width: 28px; height: 28px;
       border-radius: 50%;
-      background: var(--teal-pale);
+      background: var(--pink-pale);
       display: flex;
       align-items: center;
       justify-content: center;
-      color: var(--teal);
+      color: var(--pink);
       font-size: 1.1rem;
       flex-shrink: 0;
       transition: transform 0.3s, background 0.3s;
@@ -776,7 +807,7 @@
     }
     .faq-item.open .faq-icon {
       transform: rotate(45deg);
-      background: var(--teal);
+      background: var(--pink);
       color: #fff;
     }
     .faq-answer {
@@ -907,7 +938,7 @@
     }
     .sticky-bar.show { display: flex; }
     .sticky-bar-text { font-size: 0.9rem; font-weight: 600; color: var(--black); }
-    .sticky-bar-text span { color: var(--teal); }
+    .sticky-bar-text span { color: var(--pink); }
     .sticky-bar-btns { display: flex; gap: 10px; }
 
     /* ── WhatsApp Float */
@@ -1056,7 +1087,7 @@
       </div>
       <div class="hero-image-wrap">
         <div class="floating-el top-right">
-          <div class="badge-float">✦ Precio único $39.990</div>
+          <div class="badge-float">🔥 Lanzamiento $39.990</div>
         </div>
         <div class="hero-photo-card">
           <img src="images/alison-hero.jpg" alt="Alison Ramírez" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';" />
@@ -1344,9 +1375,11 @@
       </div>
       <div class="offer-body">
         <div class="offer-price-box">
-          <div class="offer-label">Precio único y exclusivo</div>
+          <span class="offer-badge-launch">🔥 Precio de lanzamiento</span>
+          <div class="offer-price-original">Precio normal: $99.990</div>
           <div class="offer-price">$39.990</div>
           <div class="offer-price-sub">Acceso completo · Pago único · Sin mensualidades</div>
+          <span class="offer-savings">Ahorras $60.000 en el lanzamiento</span>
         </div>
         <div class="offer-includes">
           <div class="inc-item"><div class="inc-check">✓</div><span>Formación completa desde cero en el rubro inmobiliario</span></div>
@@ -1527,7 +1560,7 @@
           <span class="faq-icon">+</span>
         </button>
         <div class="faq-answer">
-          <p>El precio del curso Exitosas Broker Inmobiliaria es de $39.990 (pesos chilenos). Es un pago único, sin mensualidades ni costos adicionales, con acceso completo a toda la formación y la comunidad.</p>
+          <p>El precio normal del curso es $99.990 (pesos chilenos). Por lanzamiento está disponible a solo <strong>$39.990</strong> — pago único, sin mensualidades ni costos adicionales, con acceso completo a toda la formación y la comunidad.</p>
         </div>
       </div>
       <div class="faq-item fade-in fade-in-delay-3">
