@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Calculadora de Honorarios Profesionales</title>
+  <style>
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Segoe UI', Arial, sans-serif;
+      background: #f0f4f8;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+
+    .card {
+      background: #ffffff;
+      border-radius: 12px;
+      box-shadow: 0 4px 24px rgba(10, 30, 80, 0.12);
+      width: 100%;
+      max-width: 480px;
+      overflow: hidden;
+    }
+
+    .card-header {
+      background: #0d2b6e;
+      padding: 28px 32px;
+    }
+
+    .card-header h1 {
+      color: #ffffff;
+      font-size: 1.35rem;
+      font-weight: 700;
+      letter-spacing: 0.3px;
+    }
+
+    .card-header p {
+      color: #a8bde8;
+      font-size: 0.85rem;
+      margin-top: 4px;
+    }
+
+    .card-body {
+      padding: 32px;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    label {
+      display: block;
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: #0d2b6e;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 7px;
+    }
+
+    .input-wrapper {
+      position: relative;
+      display: flex;
+      align-items: center;
+    }
+
+    .input-prefix,
+    .input-suffix {
+      position: absolute;
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: #5a7abf;
+      pointer-events: none;
+    }
+
+    .input-prefix { left: 13px; }
+    .input-suffix { right: 13px; }
+
+    input[type="number"] {
+      width: 100%;
+      padding: 11px 14px;
+      border: 1.8px solid #c5d3ee;
+      border-radius: 8px;
+      font-size: 1rem;
+      color: #1a1a2e;
+      background: #f7f9fd;
+      transition: border-color 0.2s, box-shadow 0.2s;
+      -moz-appearance: textfield;
+    }
+
+    input[type="number"]::-webkit-inner-spin-button,
+    input[type="number"]::-webkit-outer-spin-button {
+      -webkit-appearance: none;
+    }
+
+    input[type="number"]:focus {
+      outline: none;
+      border-color: #1a4bc4;
+      box-shadow: 0 0 0 3px rgba(26, 75, 196, 0.15);
+      background: #fff;
+    }
+
+    .has-prefix input { padding-left: 30px; }
+    .has-suffix input { padding-right: 34px; }
+
+    .divider {
+      border: none;
+      border-top: 1.5px solid #e8edf6;
+      margin: 8px 0 24px;
+    }
+
+    .btn-calcular {
+      width: 100%;
+      padding: 13px;
+      background: #1a4bc4;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      font-size: 1rem;
+      font-weight: 700;
+      letter-spacing: 0.4px;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.1s, box-shadow 0.2s;
+      box-shadow: 0 3px 10px rgba(26, 75, 196, 0.3);
+    }
+
+    .btn-calcular:hover {
+      background: #163da8;
+      box-shadow: 0 5px 16px rgba(26, 75, 196, 0.4);
+    }
+
+    .btn-calcular:active {
+      transform: scale(0.98);
+    }
+
+    /* Results */
+    .results {
+      margin-top: 28px;
+      background: #f0f4fb;
+      border: 1.8px solid #c5d3ee;
+      border-radius: 10px;
+      padding: 22px 24px;
+      display: none;
+    }
+
+    .results.visible {
+      display: block;
+      animation: fadeIn 0.3s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(6px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .results h2 {
+      font-size: 0.78rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.6px;
+      color: #5a7abf;
+      margin-bottom: 16px;
+    }
+
+    .result-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 9px 0;
+      border-bottom: 1px solid #dce6f5;
+      font-size: 0.95rem;
+      color: #2c3e70;
+    }
+
+    .result-row:last-child {
+      border-bottom: none;
+    }
+
+    .result-row .label {
+      font-weight: 500;
+    }
+
+    .result-row .value {
+      font-weight: 600;
+      color: #0d2b6e;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .result-row.total {
+      margin-top: 10px;
+      padding-top: 14px;
+      border-top: 2px solid #1a4bc4;
+      border-bottom: none;
+    }
+
+    .result-row.total .label {
+      font-size: 1rem;
+      font-weight: 700;
+      color: #0d2b6e;
+    }
+
+    .result-row.total .value {
+      font-size: 1.2rem;
+      font-weight: 800;
+      color: #1a4bc4;
+    }
+
+    .error-msg {
+      margin-top: 12px;
+      font-size: 0.85rem;
+      color: #c0392b;
+      background: #fdf0ee;
+      border: 1px solid #f5c6c0;
+      border-radius: 6px;
+      padding: 9px 13px;
+      display: none;
+    }
+
+    .error-msg.visible {
+      display: block;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="card">
+    <div class="card-header">
+      <h1>Calculadora de Honorarios</h1>
+      <p>Calcula tu factura profesional con IVA incluido</p>
+    </div>
+
+    <div class="card-body">
+      <div class="form-group">
+        <label for="tarifa">Tarifa por hora</label>
+        <div class="input-wrapper has-prefix">
+          <span class="input-prefix">$</span>
+          <input type="number" id="tarifa" placeholder="0.00" min="0" step="0.01" />
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="horas">Número de horas trabajadas</label>
+        <div class="input-wrapper">
+          <input type="number" id="horas" placeholder="0" min="0" step="0.5" />
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="iva">Porcentaje de IVA</label>
+        <div class="input-wrapper has-suffix">
+          <input type="number" id="iva" value="16" min="0" max="100" step="0.01" />
+          <span class="input-suffix">%</span>
+        </div>
+      </div>
+
+      <hr class="divider" />
+
+      <button class="btn-calcular" onclick="calcular()">Calcular</button>
+
+      <div class="error-msg" id="errorMsg"></div>
+
+      <div class="results" id="results">
+        <h2>Desglose del cobro</h2>
+        <div class="result-row">
+          <span class="label">Subtotal</span>
+          <span class="value" id="resSubtotal"></span>
+        </div>
+        <div class="result-row">
+          <span class="label" id="resIvaLabel">IVA (16%)</span>
+          <span class="value" id="resIva"></span>
+        </div>
+        <div class="result-row total">
+          <span class="label">Total a cobrar</span>
+          <span class="value" id="resTotal"></span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function formatMXN(amount) {
+      return amount.toLocaleString('es-MX', {
+        style: 'currency',
+        currency: 'MXN',
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2
+      });
+    }
+
+    function showError(msg) {
+      const el = document.getElementById('errorMsg');
+      el.textContent = msg;
+      el.classList.add('visible');
+      document.getElementById('results').classList.remove('visible');
+    }
+
+    function clearError() {
+      document.getElementById('errorMsg').classList.remove('visible');
+    }
+
+    function calcular() {
+      clearError();
+
+      const tarifaVal = document.getElementById('tarifa').value.trim();
+      const horasVal  = document.getElementById('horas').value.trim();
+      const ivaVal    = document.getElementById('iva').value.trim();
+
+      if (tarifaVal === '' || horasVal === '' || ivaVal === '') {
+        showError('Por favor, completa todos los campos antes de calcular.');
+        return;
+      }
+
+      const tarifa = parseFloat(tarifaVal);
+      const horas  = parseFloat(horasVal);
+      const iva    = parseFloat(ivaVal);
+
+      if (isNaN(tarifa) || tarifa < 0) {
+        showError('La tarifa por hora debe ser un número positivo.');
+        return;
+      }
+      if (isNaN(horas) || horas <= 0) {
+        showError('El número de horas debe ser mayor a cero.');
+        return;
+      }
+      if (isNaN(iva) || iva < 0 || iva > 100) {
+        showError('El porcentaje de IVA debe estar entre 0 y 100.');
+        return;
+      }
+
+      const subtotal  = tarifa * horas;
+      const montoIva  = subtotal * (iva / 100);
+      const total     = subtotal + montoIva;
+
+      document.getElementById('resSubtotal').textContent = formatMXN(subtotal);
+      document.getElementById('resIvaLabel').textContent = `IVA (${iva % 1 === 0 ? iva.toFixed(0) : iva}%)`;
+      document.getElementById('resIva').textContent      = formatMXN(montoIva);
+      document.getElementById('resTotal').textContent    = formatMXN(total);
+
+      document.getElementById('results').classList.add('visible');
+    }
+
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Enter') calcular();
+    });
+  </script>
+
+</body>
+</html>
