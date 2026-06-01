@@ -1,0 +1,1053 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Plan de Horizonte de Ventas — Avance Inmobiliario</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy: #0d2b6e;
+      --navy-dark: #091d4e;
+      --gold: #c9a84c;
+      --gold-light: #f0d080;
+      --green: #1a7a4a;
+      --green-light: #e8f7ef;
+      --red: #c0392b;
+      --bg: #f4f6fb;
+      --white: #ffffff;
+      --text: #1a2540;
+      --muted: #6b7a99;
+      --border: #dde3f0;
+    }
+
+    body {
+      font-family: 'Segoe UI', Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      padding: 0;
+    }
+
+    /* ── HERO ── */
+    .hero {
+      background: linear-gradient(135deg, var(--navy-dark) 0%, var(--navy) 60%, #1a3a8a 100%);
+      padding: 48px 32px 40px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -60px; right: -60px;
+      width: 260px; height: 260px;
+      border-radius: 50%;
+      background: rgba(201,168,76,0.12);
+    }
+    .hero::after {
+      content: '';
+      position: absolute;
+      bottom: -80px; left: -40px;
+      width: 200px; height: 200px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.04);
+    }
+    .hero-logo {
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 3px;
+      color: var(--gold);
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+    .hero h1 {
+      font-size: 2rem;
+      font-weight: 800;
+      color: var(--white);
+      line-height: 1.2;
+      margin-bottom: 10px;
+      position: relative;
+      z-index: 1;
+    }
+    .hero h1 span { color: var(--gold-light); }
+    .hero p {
+      color: #a8bde8;
+      font-size: 0.95rem;
+      max-width: 520px;
+      margin: 0 auto 24px;
+      line-height: 1.6;
+      position: relative;
+      z-index: 1;
+    }
+    .hero-badges {
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+      flex-wrap: wrap;
+      position: relative;
+      z-index: 1;
+    }
+    .badge {
+      background: rgba(255,255,255,0.12);
+      border: 1px solid rgba(255,255,255,0.2);
+      color: var(--white);
+      font-size: 0.78rem;
+      font-weight: 600;
+      padding: 5px 14px;
+      border-radius: 20px;
+      letter-spacing: 0.3px;
+    }
+
+    /* ── LAYOUT ── */
+    .container {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 32px 20px 60px;
+    }
+
+    /* ── SECTION TITLE ── */
+    .section-title {
+      font-size: 1.1rem;
+      font-weight: 800;
+      color: var(--navy);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .section-title::after {
+      content: '';
+      flex: 1;
+      height: 2px;
+      background: linear-gradient(90deg, var(--gold), transparent);
+    }
+
+    /* ── TEAM CARDS ── */
+    .team-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-bottom: 32px;
+    }
+    @media (max-width: 600px) { .team-grid { grid-template-columns: 1fr; } }
+    .team-card {
+      background: var(--white);
+      border-radius: 12px;
+      padding: 24px;
+      border: 2px solid var(--border);
+      position: relative;
+      overflow: hidden;
+    }
+    .team-card.front {
+      border-color: var(--gold);
+      background: linear-gradient(135deg, #fffdf4 0%, #fff8e6 100%);
+    }
+    .team-card.back {
+      border-color: var(--navy);
+      background: linear-gradient(135deg, #f4f6fb 0%, #e8edf8 100%);
+    }
+    .team-role {
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+    .team-card.front .team-role { color: var(--gold); }
+    .team-card.back .team-role { color: var(--navy); }
+    .team-name {
+      font-size: 1.3rem;
+      font-weight: 800;
+      margin-bottom: 8px;
+    }
+    .team-card.front .team-name { color: #7a5a00; }
+    .team-card.back .team-name { color: var(--navy); }
+    .team-desc {
+      font-size: 0.85rem;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+    .team-tag {
+      display: inline-block;
+      margin-top: 10px;
+      font-size: 0.72rem;
+      font-weight: 700;
+      padding: 3px 10px;
+      border-radius: 12px;
+    }
+    .team-card.front .team-tag { background: #ffe9a0; color: #7a5a00; }
+    .team-card.back .team-tag { background: #d8e3ff; color: var(--navy); }
+
+    /* ── COMISIONES BOX ── */
+    .commission-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-bottom: 32px;
+    }
+    @media (max-width: 600px) { .commission-grid { grid-template-columns: 1fr; } }
+    .comm-card {
+      background: var(--white);
+      border-radius: 12px;
+      padding: 20px 16px;
+      text-align: center;
+      border-top: 4px solid var(--border);
+      box-shadow: 0 2px 12px rgba(10,30,80,0.07);
+    }
+    .comm-card.seller { border-color: #27ae60; }
+    .comm-card.ads    { border-color: #e67e22; }
+    .comm-card.company{ border-color: var(--navy); }
+    .comm-pct {
+      font-size: 2.2rem;
+      font-weight: 900;
+      line-height: 1;
+      margin-bottom: 4px;
+    }
+    .comm-card.seller  .comm-pct { color: #27ae60; }
+    .comm-card.ads     .comm-pct { color: #e67e22; }
+    .comm-card.company .comm-pct { color: var(--navy); }
+    .comm-label { font-size: 0.8rem; font-weight: 700; color: var(--text); }
+    .comm-sub   { font-size: 0.73rem; color: var(--muted); margin-top: 4px; line-height: 1.4; }
+
+    /* ── TIMELINE TABS ── */
+    .tabs {
+      display: flex;
+      gap: 6px;
+      margin-bottom: 24px;
+      flex-wrap: wrap;
+    }
+    .tab-btn {
+      padding: 9px 18px;
+      border-radius: 8px;
+      border: 2px solid var(--border);
+      background: var(--white);
+      color: var(--muted);
+      font-size: 0.82rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.2s;
+      letter-spacing: 0.3px;
+    }
+    .tab-btn:hover { border-color: var(--navy); color: var(--navy); }
+    .tab-btn.active {
+      background: var(--navy);
+      border-color: var(--navy);
+      color: var(--white);
+    }
+    .tab-content { display: none; }
+    .tab-content.active { display: block; }
+
+    /* ── PHASE PANEL ── */
+    .phase-panel {
+      background: var(--white);
+      border-radius: 14px;
+      overflow: hidden;
+      box-shadow: 0 4px 20px rgba(10,30,80,0.09);
+      margin-bottom: 8px;
+    }
+    .phase-header {
+      padding: 22px 28px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+    .phase-0 .phase-header  { background: linear-gradient(90deg, #2c3e50, #34495e); }
+    .phase-1 .phase-header  { background: linear-gradient(90deg, #1a5276, #2980b9); }
+    .phase-3 .phase-header  { background: linear-gradient(90deg, #0d6b35, #1a7a4a); }
+    .phase-6 .phase-header  { background: linear-gradient(90deg, var(--navy), #2244aa); }
+    .phase-12 .phase-header { background: linear-gradient(90deg, #5d0000, #922b21); }
+    .phase-label {
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.7);
+    }
+    .phase-title {
+      font-size: 1.25rem;
+      font-weight: 800;
+      color: var(--white);
+    }
+    .phase-kpis {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+    .phase-kpi {
+      text-align: center;
+    }
+    .phase-kpi-val {
+      font-size: 1.4rem;
+      font-weight: 900;
+      color: var(--gold-light);
+      line-height: 1;
+    }
+    .phase-kpi-desc {
+      font-size: 0.68rem;
+      color: rgba(255,255,255,0.65);
+      margin-top: 2px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .phase-body {
+      padding: 24px 28px;
+    }
+
+    /* ── COLUMNS ── */
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+    @media (max-width: 640px) { .two-col { grid-template-columns: 1fr; } }
+
+    /* ── CHECKLIST ── */
+    .checklist-title {
+      font-size: 0.72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--muted);
+      margin-bottom: 10px;
+    }
+    .checklist {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+    }
+    .checklist li {
+      font-size: 0.85rem;
+      color: var(--text);
+      padding-left: 22px;
+      position: relative;
+      line-height: 1.5;
+    }
+    .checklist li::before {
+      content: '→';
+      position: absolute;
+      left: 0;
+      color: var(--navy);
+      font-weight: 700;
+    }
+    .checklist li.highlight::before { content: '★'; color: var(--gold); }
+    .checklist li.warn::before      { content: '!'; color: #e67e22; }
+
+    /* ── METRIC PILLS ── */
+    .metric-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 14px;
+    }
+    .metric-pill {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 8px 14px;
+      font-size: 0.78rem;
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+    .metric-pill strong {
+      font-size: 1.05rem;
+      font-weight: 800;
+      color: var(--navy);
+    }
+    .metric-pill span { color: var(--muted); }
+
+    /* ── REVENUE TABLE ── */
+    .rev-table-wrap {
+      overflow-x: auto;
+      margin-bottom: 32px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background: var(--white);
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 2px 12px rgba(10,30,80,0.08);
+      font-size: 0.85rem;
+    }
+    thead tr { background: var(--navy); }
+    thead th {
+      color: var(--white);
+      padding: 13px 14px;
+      text-align: left;
+      font-weight: 700;
+      font-size: 0.78rem;
+      letter-spacing: 0.3px;
+    }
+    tbody tr:nth-child(even) { background: #f8faff; }
+    tbody tr:last-child { background: #e8f7ef; font-weight: 700; }
+    tbody td {
+      padding: 11px 14px;
+      color: var(--text);
+      border-bottom: 1px solid var(--border);
+    }
+    tbody td.green { color: var(--green); font-weight: 700; }
+    tbody td.gold  { color: #8a6800; font-weight: 700; }
+
+    /* ── ADS STRATEGY ── */
+    .ads-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 14px;
+      margin-bottom: 32px;
+    }
+    .ads-card {
+      background: var(--white);
+      border-radius: 12px;
+      padding: 18px 16px;
+      border-left: 4px solid var(--navy);
+      box-shadow: 0 2px 10px rgba(10,30,80,0.07);
+    }
+    .ads-card h4 {
+      font-size: 0.82rem;
+      font-weight: 800;
+      color: var(--navy);
+      margin-bottom: 8px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .ads-card p {
+      font-size: 0.8rem;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    /* ── FREELANCER CARD ── */
+    .freelancer-box {
+      background: linear-gradient(135deg, #f0f4ff, #e4ecff);
+      border: 2px solid var(--navy);
+      border-radius: 14px;
+      padding: 24px;
+      margin-bottom: 32px;
+    }
+    .freelancer-box h3 {
+      font-size: 1rem;
+      font-weight: 800;
+      color: var(--navy);
+      margin-bottom: 16px;
+    }
+    .freelancer-steps {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      gap: 12px;
+    }
+    .fstep {
+      background: var(--white);
+      border-radius: 10px;
+      padding: 14px;
+    }
+    .fstep-num {
+      font-size: 1.4rem;
+      font-weight: 900;
+      color: var(--navy);
+      opacity: 0.15;
+      line-height: 1;
+    }
+    .fstep-title {
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: var(--navy);
+      margin-bottom: 4px;
+    }
+    .fstep-desc {
+      font-size: 0.77rem;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+
+    /* ── PROGRESS BAR ── */
+    .progress-section {
+      margin-bottom: 32px;
+    }
+    .progress-item {
+      background: var(--white);
+      border-radius: 10px;
+      padding: 16px 20px;
+      margin-bottom: 10px;
+      box-shadow: 0 1px 8px rgba(10,30,80,0.06);
+    }
+    .progress-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 8px;
+    }
+    .progress-top span:first-child { font-size: 0.85rem; font-weight: 700; color: var(--text); }
+    .progress-top span:last-child  { font-size: 0.8rem; color: var(--muted); }
+    .bar-bg {
+      height: 8px;
+      background: var(--bg);
+      border-radius: 4px;
+      overflow: hidden;
+    }
+    .bar-fill {
+      height: 100%;
+      border-radius: 4px;
+      background: linear-gradient(90deg, var(--navy), #3a6dd8);
+    }
+
+    /* ── FOOTER ── */
+    .footer {
+      background: var(--navy);
+      color: rgba(255,255,255,0.5);
+      text-align: center;
+      padding: 20px;
+      font-size: 0.75rem;
+    }
+    .footer strong { color: var(--gold); }
+
+    /* ── DIVIDER ── */
+    .divider { height: 1px; background: var(--border); margin: 28px 0; }
+
+    /* ── NOTE BOX ── */
+    .note-box {
+      background: #fff8e6;
+      border-left: 4px solid var(--gold);
+      border-radius: 0 8px 8px 0;
+      padding: 14px 18px;
+      font-size: 0.83rem;
+      color: #6b4f00;
+      line-height: 1.6;
+      margin-top: 16px;
+    }
+
+  </style>
+</head>
+<body>
+
+<!-- ── HERO ── -->
+<div class="hero">
+  <div class="hero-logo">Avance Inmobiliario</div>
+  <h1>Plan de <span>Horizonte de Ventas</span></h1>
+  <p>Estrategia completa 0 → 12 meses para escalar el equipo de vendedores freelance con campaña de marketing liderada por Diego Byrts.</p>
+  <div class="hero-badges">
+    <span class="badge">Vendedores Freelance</span>
+    <span class="badge">Meta Ads 10%</span>
+    <span class="badge">Diego Byrts — Cara Visible</span>
+    <span class="badge">Back Office Estratégico</span>
+  </div>
+</div>
+
+<div class="container">
+
+  <!-- ══════════════════════ EQUIPO ══════════════════════ -->
+  <div class="section-title">Estructura del Equipo</div>
+
+  <div class="team-grid">
+    <div class="team-card front">
+      <div class="team-role">Cara Visible / Broker</div>
+      <div class="team-name">Diego Byrts</div>
+      <div class="team-desc">
+        Rostro de la marca. Aparece en todos los contenidos de video, reels, campañas de Meta Ads y material de ventas.
+        Genera confianza, autoridad y conexión con el mercado. Capta y acompaña clientes desde el primer contacto.
+      </div>
+      <span class="team-tag">FRENTE — Marca Personal + Ventas</span>
+    </div>
+    <div class="team-card back">
+      <div class="team-role">Dirección / Back Office</div>
+      <div class="team-name">Dirección General</div>
+      <div class="team-desc">
+        Gestión operativa, control de comisiones, calificación de leads, coordinación de vendedores freelance, administración de Meta Ads, contratos y seguimiento de pipeline.
+      </div>
+      <span class="team-tag">BACK OFFICE — Operaciones + Estrategia</span>
+    </div>
+  </div>
+
+  <!-- ══════════════════════ COMISIONES ══════════════════════ -->
+  <div class="section-title">Modelo de Comisiones</div>
+
+  <div class="commission-grid">
+    <div class="comm-card seller">
+      <div class="comm-pct">40%</div>
+      <div class="comm-label">Vendedor Freelance</div>
+      <div class="comm-sub">Comisión estándar por cada operación cerrada. Puede llegar al 50% en operaciones de alto volumen o vendedores top performers.</div>
+    </div>
+    <div class="comm-card ads">
+      <div class="comm-pct">10%</div>
+      <div class="comm-label">Inversión Meta Ads</div>
+      <div class="comm-sub">Reinversión automática en campañas de Facebook e Instagram. Retroalimenta el flujo de leads que beneficia a todos los vendedores.</div>
+    </div>
+    <div class="comm-card company">
+      <div class="comm-pct">50%</div>
+      <div class="comm-label">Back Office / Empresa</div>
+      <div class="comm-sub">Cubre operaciones, sistema CRM, soporte legal, coordinación de marca y margen de crecimiento del negocio.</div>
+    </div>
+  </div>
+
+  <div class="note-box">
+    <strong>Ejemplo real:</strong> Propiedad de USD 80.000 — Comisión total cobrada: 3% = USD 2.400 · Vendedor recibe USD 960 · Meta Ads USD 240 · Back office USD 1.200 netos.
+    Con 10 operaciones/mes: <strong>USD 12.000 back office + USD 2.400 en ads reinvertidos</strong>.
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- ══════════════════════ RECLUTAMIENTO ══════════════════════ -->
+  <div class="section-title">Sistema de Reclutamiento Freelance</div>
+
+  <div class="freelancer-box">
+    <h3>Pipeline para captar vendedores freelance de alto rendimiento</h3>
+    <div class="freelancer-steps">
+      <div class="fstep">
+        <div class="fstep-num">01</div>
+        <div class="fstep-title">Publicar Oportunidad</div>
+        <div class="fstep-desc">LinkedIn, grupos de Facebook inmobiliarios, OLX, Zonajobs. Anuncio con modelo de comisiones claro.</div>
+      </div>
+      <div class="fstep">
+        <div class="fstep-num">02</div>
+        <div class="fstep-title">Entrevista de Calificación</div>
+        <div class="fstep-desc">Videollamada 20 min. Evaluar cartera de contactos, experiencia previa, zona de trabajo.</div>
+      </div>
+      <div class="fstep">
+        <div class="fstep-num">03</div>
+        <div class="fstep-title">Onboarding & Kit</div>
+        <div class="fstep-desc">Manual de ventas, acceso al CRM, materiales de marca, guión de WhatsApp, capacitación en 2 sesiones.</div>
+      </div>
+      <div class="fstep">
+        <div class="fstep-num">04</div>
+        <div class="fstep-title">Período de Prueba</div>
+        <div class="fstep-desc">Primeros 30 días con soporte directo. Meta mínima: 1 operación o 5 consultas calificadas.</div>
+      </div>
+      <div class="fstep">
+        <div class="fstep-num">05</div>
+        <div class="fstep-title">Incentivo por Volumen</div>
+        <div class="fstep-desc">Comisión escala al 45% desde la 3ra operación/mes y al 50% desde la 5ta operación/mes.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════ MARKETING ══════════════════════ -->
+  <div class="section-title">Estrategia de Marketing — Diego Byrts + Meta Ads</div>
+
+  <div class="ads-grid">
+    <div class="ads-card">
+      <h4>Contenido Orgánico</h4>
+      <p>Diego publica 4-5 reels/semana mostrando propiedades, tips de inversión y casos de éxito. Storytelling de marca personal.</p>
+    </div>
+    <div class="ads-card">
+      <h4>Campañas Pagadas</h4>
+      <p>Meta Ads con objetivo de generación de leads. Segmentación por zona, rango de precio y perfil de comprador/inversor.</p>
+    </div>
+    <div class="ads-card">
+      <h4>Lead Magnet</h4>
+      <p>Guía gratuita "Cómo comprar tu primera propiedad en [Ciudad]" o "Las 5 zonas con mayor plusvalía en 2025".</p>
+    </div>
+    <div class="ads-card">
+      <h4>Retargeting</h4>
+      <p>Audiencias personalizadas de quienes vieron los videos de Diego o visitaron el perfil. Reimpactar con oferta concreta.</p>
+    </div>
+    <div class="ads-card">
+      <h4>WhatsApp Funnel</h4>
+      <p>Todos los leads van a WhatsApp Business. Respuesta automática + seguimiento personalizado del freelancer asignado.</p>
+    </div>
+    <div class="ads-card">
+      <h4>Testimonios & Social Proof</h4>
+      <p>Video testimonial de cada cliente cerrado. Diego los publica. Genera confianza y reactivación de leads fríos.</p>
+    </div>
+  </div>
+
+  <!-- ══════════════════════ LÍNEA DE TIEMPO ══════════════════════ -->
+  <div class="section-title">Plan por Fases</div>
+
+  <div class="tabs">
+    <button class="tab-btn active" onclick="showTab('t0')">Mes 0 — Lanzamiento</button>
+    <button class="tab-btn" onclick="showTab('t1')">Mes 1</button>
+    <button class="tab-btn" onclick="showTab('t3')">Mes 3</button>
+    <button class="tab-btn" onclick="showTab('t6')">Mes 6</button>
+    <button class="tab-btn" onclick="showTab('t12')">Mes 12</button>
+  </div>
+
+  <!-- MES 0 -->
+  <div id="t0" class="tab-content active">
+    <div class="phase-panel phase-0">
+      <div class="phase-header">
+        <div>
+          <div class="phase-label">Semana 1 a 4</div>
+          <div class="phase-title">Mes 0 — Fundación & Setup</div>
+        </div>
+        <div class="phase-kpis">
+          <div class="phase-kpi"><div class="phase-kpi-val">0</div><div class="phase-kpi-desc">Ventas</div></div>
+          <div class="phase-kpi"><div class="phase-kpi-val">3-5</div><div class="phase-kpi-desc">Freelancers</div></div>
+          <div class="phase-kpi"><div class="phase-kpi-val">$0</div><div class="phase-kpi-desc">Revenue</div></div>
+        </div>
+      </div>
+      <div class="phase-body">
+        <div class="two-col">
+          <div>
+            <div class="checklist-title">Infraestructura & Marca</div>
+            <ul class="checklist">
+              <li class="highlight">Crear identidad visual Avance Inmobiliario (logo, paleta, tipografía)</li>
+              <li>Configurar Instagram Business y Facebook Page</li>
+              <li>Crear cuenta WhatsApp Business con catálogo básico</li>
+              <li>Registrar dominio y armar landing page simple</li>
+              <li>Configurar CRM (HubSpot free / Trello / Notion)</li>
+              <li class="highlight">Grabar video de presentación con Diego Byrts para el perfil</li>
+              <li>Preparar media kit para atraer freelancers</li>
+            </ul>
+          </div>
+          <div>
+            <div class="checklist-title">Meta Ads & Contenido</div>
+            <ul class="checklist">
+              <li>Crear Business Manager y Pixel de Meta</li>
+              <li class="highlight">Grabar primeros 5 reels con Diego (intro, propiedades, zona)</li>
+              <li>Configurar primera campaña de reconocimiento (presupuesto bajo, USD 5/día)</li>
+              <li>Armar plantillas de WhatsApp para respuesta rápida</li>
+              <li>Definir zonas geográficas objetivo para segmentación</li>
+              <li class="warn">Iniciar reclutamiento activo de 3-5 vendedores freelance</li>
+              <li>Capacitación inicial del equipo (2 sesiones Zoom)</li>
+            </ul>
+          </div>
+        </div>
+        <div class="note-box">
+          <strong>Inversión inicial estimada:</strong> Diseño/Branding USD 300-500 · Landing Page USD 200-400 · Ads lanzamiento USD 150 · Total: ~USD 650-1.050 de puesta en marcha.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MES 1 -->
+  <div id="t1" class="tab-content">
+    <div class="phase-panel phase-1">
+      <div class="phase-header">
+        <div>
+          <div class="phase-label">Primer mes de operación</div>
+          <div class="phase-title">Mes 1 — Primeros Resultados</div>
+        </div>
+        <div class="phase-kpis">
+          <div class="phase-kpi"><div class="phase-kpi-val">1-2</div><div class="phase-kpi-desc">Ventas/mes</div></div>
+          <div class="phase-kpi"><div class="phase-kpi-val">3-5</div><div class="phase-kpi-desc">Freelancers activos</div></div>
+          <div class="phase-kpi"><div class="phase-kpi-val">$1.200</div><div class="phase-kpi-desc">Rev. back office</div></div>
+        </div>
+      </div>
+      <div class="phase-body">
+        <div class="two-col">
+          <div>
+            <div class="checklist-title">Acciones de Ventas</div>
+            <ul class="checklist">
+              <li class="highlight">Cada freelancer trabaja su red de contactos + leads de Meta Ads</li>
+              <li>Reunión semanal de equipo (30 min, pipeline review)</li>
+              <li>Primer tracking de KPIs en CRM</li>
+              <li>Calificar todos los leads entrantes en menos de 30 min</li>
+              <li class="warn">Meta mínima: 1 operación cerrada en el mes</li>
+              <li>Ajustar el perfil de los freelancers que no estén avanzando</li>
+            </ul>
+          </div>
+          <div>
+            <div class="checklist-title">Marketing / Diego Byrts</div>
+            <ul class="checklist">
+              <li class="highlight">4-5 reels/semana en Instagram y Facebook</li>
+              <li>Iniciar campaña de generación de leads (formulario Meta)</li>
+              <li>Primer testimonio de cliente (aunque sea de red personal)</li>
+              <li>Escalar presupuesto ads a USD 10-15/día según resultados</li>
+              <li>A/B test de creatividades: video de Diego vs. foto de propiedad</li>
+              <li>Publicar al menos 3 propiedades en perfil con precio y zona</li>
+            </ul>
+          </div>
+        </div>
+        <div class="metric-row">
+          <div class="metric-pill"><strong>USD 2.400</strong><span>comisión bruta por op.</span></div>
+          <div class="metric-pill"><strong>USD 960</strong><span>al vendedor (40%)</span></div>
+          <div class="metric-pill"><strong>USD 240</strong><span>reinvertido en ads</span></div>
+          <div class="metric-pill"><strong>USD 1.200</strong><span>neto back office</span></div>
+          <div class="metric-pill"><strong>20-40</strong><span>leads mínimos/mes</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MES 3 -->
+  <div id="t3" class="tab-content">
+    <div class="phase-panel phase-3">
+      <div class="phase-header">
+        <div>
+          <div class="phase-label">Primer trimestre completado</div>
+          <div class="phase-title">Mes 3 — Tracción Real</div>
+        </div>
+        <div class="phase-kpis">
+          <div class="phase-kpi"><div class="phase-kpi-val">4-6</div><div class="phase-kpi-desc">Ventas/mes</div></div>
+          <div class="phase-kpi"><div class="phase-kpi-val">6-8</div><div class="phase-kpi-desc">Freelancers activos</div></div>
+          <div class="phase-kpi"><div class="phase-kpi-val">$6.000</div><div class="phase-kpi-desc">Rev. back office</div></div>
+        </div>
+      </div>
+      <div class="phase-body">
+        <div class="two-col">
+          <div>
+            <div class="checklist-title">Equipo & Procesos</div>
+            <ul class="checklist">
+              <li class="highlight">Ampliar a 6-8 vendedores freelance (2-3 nuevos)</li>
+              <li>Definir top performers y darles comisión 45%</li>
+              <li>Crear sistema de ranking interno mensual con incentivo</li>
+              <li>SOP documentado: cómo manejar un lead desde ingreso a cierre</li>
+              <li>Contratos freelance formales con acuerdo de confidencialidad</li>
+              <li>Reunión quincenal de capacitación y técnicas de cierre</li>
+            </ul>
+          </div>
+          <div>
+            <div class="checklist-title">Marketing Escala</div>
+            <ul class="checklist">
+              <li class="highlight">Presupuesto ads: USD 20-30/día (financiado con comisiones)</li>
+              <li>Lanzar campaña de retargeting a visitas de perfil</li>
+              <li>Diego publica 1 video de "caso de éxito" real por semana</li>
+              <li class="highlight">Colaboración con arquitecto/diseñador para contenido de valor</li>
+              <li>Iniciar estrategia de email marketing (leads fríos)</li>
+              <li>Evaluar campañas de TikTok como canal complementario</li>
+            </ul>
+          </div>
+        </div>
+        <div class="metric-row">
+          <div class="metric-pill"><strong>USD 9.600</strong><span>comisión bruta/mes</span></div>
+          <div class="metric-pill"><strong>USD 3.840</strong><span>a vendedores (40%)</span></div>
+          <div class="metric-pill"><strong>USD 960</strong><span>reinvertido en ads</span></div>
+          <div class="metric-pill"><strong>USD 4.800</strong><span>neto back office/mes</span></div>
+          <div class="metric-pill"><strong>80-120</strong><span>leads/mes</span></div>
+          <div class="metric-pill"><strong>&lt;5%</strong><span>costo por lead objetivo</span></div>
+        </div>
+        <div class="note-box">
+          Al mes 3 el negocio ya debería ser <strong>autosustentable</strong>: los ads se pagan con las propias comisiones y el back office genera un flujo positivo mensual constante.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MES 6 -->
+  <div id="t6" class="tab-content">
+    <div class="phase-panel phase-6">
+      <div class="phase-header">
+        <div>
+          <div class="phase-label">Primer semestre completado</div>
+          <div class="phase-title">Mes 6 — Consolidación</div>
+        </div>
+        <div class="phase-kpis">
+          <div class="phase-kpi"><div class="phase-kpi-val">8-12</div><div class="phase-kpi-desc">Ventas/mes</div></div>
+          <div class="phase-kpi"><div class="phase-kpi-val">10-15</div><div class="phase-kpi-desc">Freelancers activos</div></div>
+          <div class="phase-kpi"><div class="phase-kpi-val">$12.000</div><div class="phase-kpi-desc">Rev. back office</div></div>
+        </div>
+      </div>
+      <div class="phase-body">
+        <div class="two-col">
+          <div>
+            <div class="checklist-title">Equipo & Expansión</div>
+            <ul class="checklist">
+              <li class="highlight">10-15 freelancers en red activa</li>
+              <li>2 coordinadores de equipo (freelancers que crecieron a líderes)</li>
+              <li>Sistema de referidos: freelancer que recomienda otro cobra 2% extra</li>
+              <li class="warn">Evaluar expansión a segunda zona geográfica</li>
+              <li>CRM avanzado con pipeline segmentado por zona y tipo de propiedad</li>
+              <li>Onboarding grabado en video (ahorra tiempo back office)</li>
+            </ul>
+          </div>
+          <div>
+            <div class="checklist-title">Marketing Premium</div>
+            <ul class="checklist">
+              <li class="highlight">Diego Byrts con 10K+ seguidores en Instagram</li>
+              <li>Inversión ads: USD 50-80/día con ROAS positivo</li>
+              <li>Lanzar podcast/lives mensuales sobre mercado inmobiliario</li>
+              <li>Alianzas con estudios de arquitectura, bancos y financiadoras</li>
+              <li class="highlight">Primer evento presencial: "Noche de Propiedades Avance"</li>
+              <li>Base de datos de 500+ leads calificados en CRM</li>
+            </ul>
+          </div>
+        </div>
+        <div class="metric-row">
+          <div class="metric-pill"><strong>USD 24.000</strong><span>comisión bruta/mes</span></div>
+          <div class="metric-pill"><strong>USD 9.600</strong><span>a vendedores (40%)</span></div>
+          <div class="metric-pill"><strong>USD 2.400</strong><span>reinvertido en ads</span></div>
+          <div class="metric-pill"><strong>USD 12.000</strong><span>neto back office/mes</span></div>
+          <div class="metric-pill"><strong>200+</strong><span>leads/mes</span></div>
+          <div class="metric-pill"><strong>5-6%</strong><span>tasa de conversión</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MES 12 -->
+  <div id="t12" class="tab-content">
+    <div class="phase-panel phase-12">
+      <div class="phase-header">
+        <div>
+          <div class="phase-label">Primer año completado</div>
+          <div class="phase-title">Mes 12 — Escala Total</div>
+        </div>
+        <div class="phase-kpis">
+          <div class="phase-kpi"><div class="phase-kpi-val">15-25</div><div class="phase-kpi-desc">Ventas/mes</div></div>
+          <div class="phase-kpi"><div class="phase-kpi-val">20-30</div><div class="phase-kpi-desc">Freelancers activos</div></div>
+          <div class="phase-kpi"><div class="phase-kpi-val">$24.000</div><div class="phase-kpi-desc">Rev. back office</div></div>
+        </div>
+      </div>
+      <div class="phase-body">
+        <div class="two-col">
+          <div>
+            <div class="checklist-title">Red & Estructura</div>
+            <ul class="checklist">
+              <li class="highlight">20-30 vendedores freelance activos en múltiples zonas</li>
+              <li>3-4 coordinadores zonales (vendedores senior promovidos)</li>
+              <li>Sistema de franquicia interna: coordinador retiene 5% del equipo</li>
+              <li class="warn">Explorar expansión a otra ciudad o provincia</li>
+              <li>Procesos totalmente documentados y replicables</li>
+              <li class="highlight">Negociar acuerdos exclusivos con desarrolladores</li>
+            </ul>
+          </div>
+          <div>
+            <div class="checklist-title">Marketing & Marca</div>
+            <ul class="checklist">
+              <li class="highlight">Diego Byrts: 25K-50K seguidores, referente del mercado local</li>
+              <li>Inversión ads: USD 100-150/día con automatización y lookalikes</li>
+              <li>Lanzar app o portal propio de propiedades (opcional)</li>
+              <li>Sponsorships: eventos locales, radio, digital OOH</li>
+              <li>Programa de fidelización para clientes que compran segunda vez</li>
+              <li class="highlight">Primer video con +100K reproducciones orgánicas</li>
+            </ul>
+          </div>
+        </div>
+        <div class="metric-row">
+          <div class="metric-pill"><strong>USD 48.000+</strong><span>comisión bruta/mes</span></div>
+          <div class="metric-pill"><strong>USD 19.200</strong><span>a vendedores (40%)</span></div>
+          <div class="metric-pill"><strong>USD 4.800</strong><span>reinvertido en ads</span></div>
+          <div class="metric-pill"><strong>USD 24.000</strong><span>neto back office/mes</span></div>
+          <div class="metric-pill"><strong>USD 288K+</strong><span>revenue anual back office</span></div>
+          <div class="metric-pill"><strong>500+</strong><span>leads/mes</span></div>
+        </div>
+        <div class="note-box">
+          A 12 meses, Avance Inmobiliario opera como una <strong>red escalable</strong>: Diego Byrts es referente de mercado, el back office administra 20-30 freelancers autónomos y el sistema de ads genera leads 24/7 de forma predecible.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- ══════════════════════ PROYECCIÓN ══════════════════════ -->
+  <div class="section-title">Proyección de Ingresos</div>
+
+  <div class="rev-table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Horizonte</th>
+          <th>Ventas/mes</th>
+          <th>Comisión bruta</th>
+          <th>Vendedores (40%)</th>
+          <th>Meta Ads (10%)</th>
+          <th>Back Office (50%)</th>
+          <th>Freelancers activos</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Mes 0</strong></td>
+          <td>0</td>
+          <td>—</td>
+          <td>—</td>
+          <td>USD 150 (inversión)</td>
+          <td class="gold">–USD 1.000 (setup)</td>
+          <td>3-5</td>
+        </tr>
+        <tr>
+          <td><strong>Mes 1</strong></td>
+          <td>1-2</td>
+          <td>USD 2.400 – 4.800</td>
+          <td>USD 960 – 1.920</td>
+          <td>USD 240 – 480</td>
+          <td class="green">USD 1.200 – 2.400</td>
+          <td>3-5</td>
+        </tr>
+        <tr>
+          <td><strong>Mes 3</strong></td>
+          <td>4-6</td>
+          <td>USD 9.600 – 14.400</td>
+          <td>USD 3.840 – 5.760</td>
+          <td>USD 960 – 1.440</td>
+          <td class="green">USD 4.800 – 7.200</td>
+          <td>6-8</td>
+        </tr>
+        <tr>
+          <td><strong>Mes 6</strong></td>
+          <td>8-12</td>
+          <td>USD 19.200 – 28.800</td>
+          <td>USD 7.680 – 11.520</td>
+          <td>USD 1.920 – 2.880</td>
+          <td class="green">USD 9.600 – 14.400</td>
+          <td>10-15</td>
+        </tr>
+        <tr>
+          <td><strong>Mes 12</strong></td>
+          <td>15-25</td>
+          <td>USD 36.000 – 60.000</td>
+          <td>USD 14.400 – 24.000</td>
+          <td>USD 3.600 – 6.000</td>
+          <td class="green">USD 18.000 – 30.000</td>
+          <td>20-30</td>
+        </tr>
+        <tr>
+          <td><strong>Total año 1</strong></td>
+          <td>~120 ops</td>
+          <td>~USD 288.000</td>
+          <td>~USD 115.200</td>
+          <td>~USD 28.800</td>
+          <td class="green"><strong>~USD 144.000</strong></td>
+          <td>—</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p style="font-size:0.76rem;color:var(--muted);margin-top:-20px;margin-bottom:32px;">* Proyección basada en propiedad promedio USD 80.000 con comisión 3%. Los valores son estimados y dependen del mercado local.</p>
+
+  <!-- ══════════════════════ KPIs ══════════════════════ -->
+  <div class="section-title">KPIs Clave a Monitorear</div>
+
+  <div class="progress-section">
+    <div class="progress-item">
+      <div class="progress-top"><span>Leads generados por Meta Ads / mes</span><span>Meta: 500/mes al año 1</span></div>
+      <div class="bar-bg"><div class="bar-fill" style="width:75%"></div></div>
+    </div>
+    <div class="progress-item">
+      <div class="progress-top"><span>Tasa de conversión lead → venta</span><span>Objetivo: 5-8%</span></div>
+      <div class="bar-bg"><div class="bar-fill" style="width:60%;background:linear-gradient(90deg,#27ae60,#1abc9c)"></div></div>
+    </div>
+    <div class="progress-item">
+      <div class="progress-top"><span>Tiempo promedio de cierre</span><span>Objetivo: 21-30 días</span></div>
+      <div class="bar-bg"><div class="bar-fill" style="width:50%;background:linear-gradient(90deg,#e67e22,#f39c12)"></div></div>
+    </div>
+    <div class="progress-item">
+      <div class="progress-top"><span>Seguidores de Diego Byrts en Instagram</span><span>Meta: 25K al mes 12</span></div>
+      <div class="bar-bg"><div class="bar-fill" style="width:85%;background:linear-gradient(90deg,#8e44ad,#9b59b6)"></div></div>
+    </div>
+    <div class="progress-item">
+      <div class="progress-top"><span>Freelancers activos (con al menos 1 op/mes)</span><span>Meta: 20 al mes 12</span></div>
+      <div class="bar-bg"><div class="bar-fill" style="width:70%;background:linear-gradient(90deg,#c0392b,#e74c3c)"></div></div>
+    </div>
+    <div class="progress-item">
+      <div class="progress-top"><span>Costo por lead en Meta Ads</span><span>Objetivo: USD 3-8 por lead</span></div>
+      <div class="bar-bg"><div class="bar-fill" style="width:65%;background:linear-gradient(90deg,#16a085,#1abc9c)"></div></div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ── FOOTER ── -->
+<div class="footer">
+  <strong>Avance Inmobiliario</strong> — Plan de Horizonte de Ventas · Confidencial · Junio 2025
+</div>
+
+<script>
+  function showTab(id) {
+    document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+    document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+    event.target.classList.add('active');
+  }
+</script>
+</body>
+</html>
