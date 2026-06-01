@@ -3,82 +3,85 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Plan Integral — Escuela de Broker Exitosas</title>
+  <title>Plan Integral — Exitosas · Escuela de Brokers Inmobiliarias</title>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --navy:    #0d2b6e;
-      --blue:    #1a4bc4;
-      --mid:     #2e62d9;
-      --light:   #a8bde8;
-      --pale:    #f0f4fb;
-      --border:  #c5d3ee;
-      --text:    #1a1a2e;
-      --muted:   #5a7abf;
-      --white:   #ffffff;
-      --gold:    #e8a020;
-      --green:   #1a8a4a;
-      --orange:  #d45f10;
+      --black:    #0D0D0D;
+      --dark:     #1a1a1a;
+      --dark2:    #242424;
+      --dark3:    #2e2e2e;
+      --gold:     #C9A84C;
+      --gold-lt:  #E8C97A;
+      --gold-dk:  #9C7A2A;
+      --white:    #FFFFFF;
+      --gray:     #888888;
+      --gray-lt:  #CCCCCC;
+      --border:   #333333;
+      --green:    #4CAF6A;
+      --orange:   #E07A30;
+      --text:     #EEEEEE;
     }
 
     body {
-      font-family: 'Segoe UI', Arial, sans-serif;
-      background: #f0f4f8;
+      font-family: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+      background: var(--black);
       color: var(--text);
       line-height: 1.65;
     }
 
     /* ─── HEADER ─── */
     .site-header {
-      background: var(--navy);
-      padding: 40px 48px 32px;
+      background: linear-gradient(135deg, #0D0D0D 0%, #1a1505 100%);
+      padding: 48px;
+      border-bottom: 1px solid var(--gold-dk);
       position: relative;
       overflow: hidden;
     }
-    .site-header::after {
+    .site-header::before {
       content: '';
       position: absolute;
-      right: -60px; top: -60px;
-      width: 340px; height: 340px;
+      right: -80px; top: -80px;
+      width: 400px; height: 400px;
       border-radius: 50%;
-      background: rgba(255,255,255,0.04);
+      background: radial-gradient(circle, rgba(201,168,76,0.08) 0%, transparent 70%);
     }
     .header-label {
-      font-size: 0.72rem;
+      font-size: 0.7rem;
       font-weight: 700;
-      letter-spacing: 1.8px;
+      letter-spacing: 2.5px;
       text-transform: uppercase;
-      color: var(--light);
-      margin-bottom: 8px;
+      color: var(--gold);
+      margin-bottom: 10px;
     }
     .site-header h1 {
-      font-size: 2rem;
+      font-size: 2.2rem;
       font-weight: 800;
       color: var(--white);
-      letter-spacing: -0.3px;
-      line-height: 1.2;
+      letter-spacing: -0.5px;
+      line-height: 1.15;
     }
     .site-header h1 span { color: var(--gold); }
     .site-header p {
-      margin-top: 10px;
-      color: var(--light);
+      margin-top: 12px;
+      color: var(--gray-lt);
       font-size: 1rem;
-      max-width: 640px;
+      max-width: 680px;
     }
     .meta-row {
       display: flex;
-      gap: 24px;
-      margin-top: 20px;
+      gap: 12px;
+      margin-top: 22px;
       flex-wrap: wrap;
     }
     .meta-pill {
-      background: rgba(255,255,255,0.1);
-      border: 1px solid rgba(255,255,255,0.2);
+      background: rgba(201,168,76,0.1);
+      border: 1px solid rgba(201,168,76,0.3);
       border-radius: 20px;
       padding: 5px 16px;
       font-size: 0.78rem;
-      color: var(--light);
+      color: var(--gold-lt);
       font-weight: 600;
     }
 
@@ -91,24 +94,24 @@
 
     /* ─── TOC ─── */
     .toc {
-      background: var(--white);
-      border: 1.5px solid var(--border);
-      border-radius: 12px;
+      background: var(--dark);
+      border: 1px solid var(--border);
+      border-radius: 14px;
       padding: 28px 32px;
-      margin-bottom: 48px;
+      margin-bottom: 52px;
     }
     .toc h2 {
-      font-size: 0.72rem;
+      font-size: 0.68rem;
       font-weight: 700;
-      letter-spacing: 1.5px;
+      letter-spacing: 2px;
       text-transform: uppercase;
-      color: var(--muted);
-      margin-bottom: 16px;
+      color: var(--gold);
+      margin-bottom: 18px;
     }
     .toc-grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-      gap: 8px;
+      gap: 6px;
     }
     .toc-item {
       display: flex;
@@ -117,78 +120,69 @@
       padding: 8px 12px;
       border-radius: 8px;
       text-decoration: none;
-      color: var(--navy);
-      font-size: 0.9rem;
+      color: var(--gray-lt);
+      font-size: 0.88rem;
       font-weight: 500;
-      transition: background 0.15s;
+      transition: background 0.15s, color 0.15s;
     }
-    .toc-item:hover { background: var(--pale); }
+    .toc-item:hover { background: var(--dark2); color: var(--gold-lt); }
     .toc-num {
-      width: 24px; height: 24px;
+      width: 22px; height: 22px;
       border-radius: 50%;
-      background: var(--blue);
-      color: #fff;
-      font-size: 0.7rem;
-      font-weight: 700;
+      background: var(--gold-dk);
+      color: var(--black);
+      font-size: 0.68rem;
+      font-weight: 800;
       display: flex; align-items: center; justify-content: center;
       flex-shrink: 0;
     }
 
     /* ─── SECTION ─── */
-    .section {
-      margin-bottom: 52px;
-    }
+    .section { margin-bottom: 56px; }
     .section-header {
       display: flex;
       align-items: flex-start;
       gap: 16px;
-      margin-bottom: 24px;
+      margin-bottom: 26px;
     }
     .section-icon {
-      width: 48px; height: 48px;
+      width: 50px; height: 50px;
       border-radius: 12px;
       display: flex; align-items: center; justify-content: center;
-      font-size: 1.4rem;
+      font-size: 1.5rem;
       flex-shrink: 0;
+      background: rgba(201,168,76,0.1);
+      border: 1px solid rgba(201,168,76,0.2);
     }
-    .icon-brand   { background: #e8f0fe; }
-    .icon-model   { background: #fef3e2; }
-    .icon-edu     { background: #e6f4ea; }
-    .icon-mkt     { background: #fce8ec; }
-    .icon-sales   { background: #e8f0fe; }
-    .icon-tech    { background: #f3e8ff; }
-    .icon-comm    { background: #fff8e1; }
-    .icon-road    { background: #e6f4ea; }
-
     .section-title-block h2 {
-      font-size: 1.3rem;
+      font-size: 1.35rem;
       font-weight: 800;
-      color: var(--navy);
+      color: var(--white);
     }
     .section-title-block p {
-      font-size: 0.88rem;
-      color: var(--muted);
-      margin-top: 2px;
+      font-size: 0.87rem;
+      color: var(--gray);
+      margin-top: 3px;
     }
 
     /* ─── CARD ─── */
     .card {
-      background: var(--white);
-      border: 1.5px solid var(--border);
+      background: var(--dark);
+      border: 1px solid var(--border);
       border-radius: 12px;
       padding: 24px 28px;
       margin-bottom: 16px;
     }
     .card-title {
-      font-size: 0.75rem;
+      font-size: 0.7rem;
       font-weight: 700;
       text-transform: uppercase;
-      letter-spacing: 1px;
-      color: var(--blue);
-      margin-bottom: 12px;
+      letter-spacing: 1.5px;
+      color: var(--gold);
+      margin-bottom: 14px;
     }
 
-    /* ─── GRID CARDS ─── */
+    /* ─── GRIDS ─── */
     .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
     .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; }
     @media (max-width: 760px) {
@@ -204,41 +198,37 @@
       padding: 5px 0 5px 24px;
       position: relative;
       font-size: 0.93rem;
-      color: var(--text);
+      color: var(--gray-lt);
     }
     ul.check li::before { content: '✓'; position: absolute; left: 0; color: var(--green); font-weight: 700; }
-    ul.arrow li::before { content: '→'; position: absolute; left: 0; color: var(--blue); font-weight: 700; }
-    ul.dot   li::before { content: '•'; position: absolute; left: 4px; color: var(--muted); }
+    ul.arrow li::before { content: '→'; position: absolute; left: 0; color: var(--gold); font-weight: 700; }
+    ul.dot   li::before { content: '•'; position: absolute; left: 4px; color: var(--gray); }
+    li strong { color: var(--white); }
 
-    /* ─── HIGHLIGHT BOX ─── */
+    /* ─── HIGHLIGHTS ─── */
     .highlight {
-      background: var(--pale);
-      border-left: 4px solid var(--blue);
+      background: rgba(201,168,76,0.07);
+      border-left: 3px solid var(--gold);
       border-radius: 0 8px 8px 0;
       padding: 14px 18px;
       margin: 12px 0;
       font-size: 0.92rem;
+      color: var(--gray-lt);
     }
-    .highlight strong { color: var(--navy); }
-
-    .highlight-gold {
-      background: #fffbf0;
-      border-left: 4px solid var(--gold);
-    }
+    .highlight strong { color: var(--gold-lt); }
     .highlight-green {
-      background: #f0faf4;
-      border-left: 4px solid var(--green);
+      background: rgba(76,175,106,0.07);
+      border-left-color: var(--green);
     }
+    .highlight-green strong { color: #7de39a; }
     .highlight-orange {
-      background: #fff5ef;
-      border-left: 4px solid var(--orange);
+      background: rgba(224,122,48,0.07);
+      border-left-color: var(--orange);
     }
+    .highlight-orange strong { color: #f0a060; }
 
-    /* ─── PHASE TIMELINE ─── */
-    .timeline {
-      position: relative;
-      padding-left: 28px;
-    }
+    /* ─── TIMELINE ─── */
+    .timeline { position: relative; padding-left: 28px; }
     .timeline::before {
       content: '';
       position: absolute;
@@ -246,67 +236,61 @@
       width: 2px;
       background: var(--border);
     }
-    .phase {
-      position: relative;
-      margin-bottom: 28px;
-    }
+    .phase { position: relative; margin-bottom: 30px; }
     .phase::before {
       content: '';
       position: absolute;
       left: -24px; top: 6px;
-      width: 12px; height: 12px;
+      width: 14px; height: 14px;
       border-radius: 50%;
-      background: var(--blue);
-      border: 3px solid #fff;
-      box-shadow: 0 0 0 2px var(--blue);
+      background: var(--gold);
+      border: 3px solid var(--black);
+      box-shadow: 0 0 0 2px var(--gold-dk);
     }
     .phase-tag {
       display: inline-block;
-      background: var(--blue);
-      color: #fff;
-      font-size: 0.7rem;
-      font-weight: 700;
+      background: var(--gold-dk);
+      color: var(--black);
+      font-size: 0.68rem;
+      font-weight: 800;
       letter-spacing: 1px;
       text-transform: uppercase;
       padding: 3px 10px;
       border-radius: 4px;
       margin-bottom: 8px;
     }
-    .phase-tag.orange { background: var(--orange); }
-    .phase-tag.green  { background: var(--green);  }
-    .phase-tag.gold   { background: var(--gold); color: #333; }
+    .phase-tag.green  { background: var(--green); }
+    .phase-tag.orange { background: var(--orange); color: var(--white); }
+    .phase-tag.white  { background: var(--gray-lt); }
     .phase h3 {
       font-size: 1rem;
-      font-weight: 700;
-      color: var(--navy);
+      font-weight: 800;
+      color: var(--white);
       margin-bottom: 8px;
     }
 
-    /* ─── KPI TABLE ─── */
-    .kpi-table { width: 100%; border-collapse: collapse; margin-top: 8px; }
-    .kpi-table th {
-      background: var(--navy);
-      color: #fff;
-      font-size: 0.75rem;
-      font-weight: 600;
-      letter-spacing: 0.5px;
+    /* ─── TABLES ─── */
+    .data-table { width: 100%; border-collapse: collapse; margin-top: 8px; }
+    .data-table th {
+      background: var(--dark2);
+      color: var(--gold);
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
       text-align: left;
       padding: 10px 14px;
+      border-bottom: 1px solid var(--gold-dk);
     }
-    .kpi-table th:first-child { border-radius: 8px 0 0 0; }
-    .kpi-table th:last-child  { border-radius: 0 8px 0 0; }
-    .kpi-table td {
+    .data-table td {
       padding: 10px 14px;
       font-size: 0.88rem;
       border-bottom: 1px solid var(--border);
-      color: var(--text);
+      color: var(--gray-lt);
     }
-    .kpi-table tr:last-child td { border-bottom: none; }
-    .kpi-table tr:nth-child(even) td { background: var(--pale); }
-    .kpi-val {
-      font-weight: 700;
-      color: var(--blue);
-    }
+    .data-table tr:last-child td { border-bottom: none; }
+    .data-table tr:hover td { background: rgba(255,255,255,0.02); }
+    .val { font-weight: 700; color: var(--gold-lt); }
 
     /* ─── FUNNEL ─── */
     .funnel {
@@ -320,107 +304,127 @@
       border-radius: 8px;
       padding: 12px 20px;
       text-align: center;
-      font-size: 0.9rem;
+      font-size: 0.88rem;
       font-weight: 600;
-      color: #fff;
     }
 
     /* ─── PRICING ─── */
     .pricing-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
       gap: 16px;
     }
     .price-card {
-      background: var(--white);
-      border: 1.5px solid var(--border);
+      background: var(--dark2);
+      border: 1px solid var(--border);
       border-radius: 12px;
-      padding: 20px;
+      padding: 22px;
       text-align: center;
     }
     .price-card.featured {
-      border-color: var(--blue);
-      box-shadow: 0 0 0 3px rgba(26,75,196,0.12);
+      border-color: var(--gold);
+      box-shadow: 0 0 0 1px rgba(201,168,76,0.2), 0 8px 32px rgba(201,168,76,0.08);
     }
     .price-badge {
-      font-size: 0.68rem;
+      font-size: 0.66rem;
       font-weight: 700;
-      letter-spacing: 1px;
+      letter-spacing: 1.5px;
       text-transform: uppercase;
-      color: var(--muted);
-      margin-bottom: 8px;
+      color: var(--gray);
+      margin-bottom: 10px;
     }
-    .price-card.featured .price-badge { color: var(--blue); }
+    .price-card.featured .price-badge { color: var(--gold); }
     .price-amount {
       font-size: 1.6rem;
       font-weight: 800;
-      color: var(--navy);
-      margin-bottom: 4px;
+      color: var(--white);
+      margin-bottom: 2px;
     }
+    .price-card.featured .price-amount { color: var(--gold-lt); }
     .price-period {
-      font-size: 0.78rem;
-      color: var(--muted);
-      margin-bottom: 12px;
+      font-size: 0.76rem;
+      color: var(--gray);
+      margin-bottom: 14px;
     }
-
-    /* ─── DIVIDER ─── */
-    .divider {
-      border: none;
-      border-top: 1.5px solid var(--border);
-      margin: 40px 0;
-    }
+    .price-card ul { text-align: left; }
 
     /* ─── BADGE ─── */
     .badge {
       display: inline-block;
       padding: 3px 10px;
       border-radius: 12px;
-      font-size: 0.72rem;
+      font-size: 0.7rem;
       font-weight: 700;
     }
-    .badge-blue   { background: #e8f0fe; color: var(--blue); }
-    .badge-green  { background: #e6f4ea; color: var(--green); }
-    .badge-orange { background: #fff5ef; color: var(--orange); }
-    .badge-gold   { background: #fffbf0; color: #b07a00; }
+    .badge-gold   { background: rgba(201,168,76,0.15); color: var(--gold-lt); border: 1px solid rgba(201,168,76,0.2); }
+    .badge-green  { background: rgba(76,175,106,0.12); color: #7de39a; }
+    .badge-orange { background: rgba(224,122,48,0.12); color: #f0a060; }
+
+    /* ─── DIVIDER ─── */
+    .divider {
+      border: none;
+      border-top: 1px solid var(--border);
+      margin: 48px 0;
+    }
+
+    /* ─── PROFILE ─── */
+    .founder-card {
+      display: flex;
+      gap: 24px;
+      align-items: flex-start;
+    }
+    .founder-avatar {
+      width: 80px; height: 80px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--gold-dk), var(--gold));
+      display: flex; align-items: center; justify-content: center;
+      font-size: 2rem;
+      flex-shrink: 0;
+      border: 3px solid var(--gold-dk);
+    }
+    @media (max-width: 520px) {
+      .founder-card { flex-direction: column; }
+    }
   </style>
 </head>
 <body>
 
-<!-- ═══════════════════════════════════════════ HEADER ══ -->
+<!-- ══════════════════════════════════ HEADER ══ -->
 <header class="site-header">
-  <div class="header-label">Plan Estratégico Integral · Versión 1.0 · Junio 2026</div>
-  <h1>Escuela de <span>Broker Exitosas</span></h1>
-  <p>Plan completo desde cero — identidad, modelo educativo, marketing, ventas, tecnología, comunidad y hoja de ruta para los próximos 12 meses.</p>
+  <div class="header-label">Plan Estratégico Integral · v1.0 · Junio 2026</div>
+  <h1><span>Exitosas</span> — Escuela de Brokers Inmobiliarias</h1>
+  <p>Plan completo desde cero: identidad, modelo educativo, marketing, ventas, tecnología, comunidad y hoja de ruta para los próximos 12 meses. Diseñado para el mercado chileno de venta de departamentos nuevos (inversión y vivienda).</p>
   <div class="meta-row">
-    <span class="meta-pill">🇨🇱 Mercado Chile</span>
-    <span class="meta-pill">🏢 Venta de Dptos. de Inversión y Vivienda</span>
-    <span class="meta-pill">🎯 Formación de Brokers Profesionales</span>
+    <span class="meta-pill">🇨🇱 Chile</span>
+    <span class="meta-pill">🏢 Dptos. Nuevos · Inversión y Vivienda</span>
+    <span class="meta-pill">👩‍💼 Fundadora: Alison Ramírez</span>
     <span class="meta-pill">📅 Horizonte 12 meses</span>
+    <span class="meta-pill">escuelaexitosas.cl</span>
   </div>
 </header>
 
 <div class="container">
 
-  <!-- ═══ TOC ═══ -->
+  <!-- ══ TOC ══ -->
   <nav class="toc">
     <h2>Contenido del Plan</h2>
     <div class="toc-grid">
-      <a href="#s1" class="toc-item"><span class="toc-num">1</span>Identidad y Propuesta de Valor</a>
-      <a href="#s2" class="toc-item"><span class="toc-num">2</span>Modelo de Negocio</a>
-      <a href="#s3" class="toc-item"><span class="toc-num">3</span>Oferta Educativa</a>
-      <a href="#s4" class="toc-item"><span class="toc-num">4</span>Marketing y Contenidos</a>
-      <a href="#s5" class="toc-item"><span class="toc-num">5</span>Estrategia de Ventas</a>
-      <a href="#s6" class="toc-item"><span class="toc-num">6</span>Tecnología y Herramientas</a>
-      <a href="#s7" class="toc-item"><span class="toc-num">7</span>Comunidad y Retención</a>
-      <a href="#s8" class="toc-item"><span class="toc-num">8</span>Hoja de Ruta y KPIs</a>
+      <a href="#s1" class="toc-item"><span class="toc-num">1</span> Identidad y Propuesta de Valor</a>
+      <a href="#s2" class="toc-item"><span class="toc-num">2</span> Modelo de Negocio</a>
+      <a href="#s3" class="toc-item"><span class="toc-num">3</span> Oferta Educativa</a>
+      <a href="#s4" class="toc-item"><span class="toc-num">4</span> Marketing y Contenidos</a>
+      <a href="#s5" class="toc-item"><span class="toc-num">5</span> Estrategia de Ventas</a>
+      <a href="#s6" class="toc-item"><span class="toc-num">6</span> Tecnología y Herramientas</a>
+      <a href="#s7" class="toc-item"><span class="toc-num">7</span> Comunidad y Retención</a>
+      <a href="#s8" class="toc-item"><span class="toc-num">8</span> Hoja de Ruta y KPIs</a>
     </div>
   </nav>
 
 
-  <!-- ═══════════════ SECCIÓN 1 — IDENTIDAD ═══════════════ -->
+  <!-- ══════════════ S1 — IDENTIDAD ══════════════ -->
   <section class="section" id="s1">
     <div class="section-header">
-      <div class="section-icon icon-brand">🎯</div>
+      <div class="section-icon">🎯</div>
       <div class="section-title-block">
         <h2>1. Identidad y Propuesta de Valor</h2>
         <p>Quiénes somos, a quién servimos y qué nos diferencia</p>
@@ -428,35 +432,47 @@
     </div>
 
     <div class="card">
+      <div class="card-title">La Fundadora</div>
+      <div class="founder-card">
+        <div class="founder-avatar">👩‍💼</div>
+        <div>
+          <p style="font-size:1.05rem;font-weight:700;color:var(--white);margin-bottom:4px">Alison Ramírez</p>
+          <p style="font-size:0.85rem;color:var(--gold);margin-bottom:10px">Ingeniera Comercial · MBA · 8+ años en el sector inmobiliario</p>
+          <p style="font-size:0.9rem;color:var(--gray-lt)">La credibilidad de Exitosas descansa en la experiencia real de su fundadora. Alison ha vivido el negocio desde adentro y ahora transforma ese conocimiento en un programa práctico para que otras mujeres logren independencia económica a través de la venta de departamentos.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
       <div class="card-title">Misión</div>
-      <p>Formar brokers profesionales que dominen la venta de departamentos de inversión y vivienda en Chile, con metodologías concretas, mentalidad ganadora y las herramientas del mercado actual, para construir una carrera rentable y sostenible.</p>
+      <p style="color:var(--gray-lt)">Empoderar a mujeres para convertirse en brokers inmobiliarias profesionales, capaces de vender departamentos de inversión y vivienda en Chile con metodología real, generando ingresos propios y libertad financiera.</p>
     </div>
 
     <div class="card">
       <div class="card-title">Visión</div>
-      <p>Ser la escuela de referencia en Chile para brokers de proyectos inmobiliarios nuevos, reconocida por producir los vendedores más capacitados, éticos y exitosos del sector.</p>
+      <p style="color:var(--gray-lt)">Ser la escuela referente en Chile para la formación de mujeres brokers en proyectos inmobiliarios nuevos, reconocida por producir las vendedoras más preparadas, éticas y exitosas del sector.</p>
     </div>
 
     <div class="grid-2">
       <div class="card">
-        <div class="card-title">Perfil del Estudiante Ideal</div>
+        <div class="card-title">Perfil de la Alumna Ideal</div>
         <ul class="check">
-          <li>Persona que quiere entrar al sector inmobiliario desde cero</li>
-          <li>Broker activo que quiere profesionalizarse y vender más</li>
-          <li>Profesional de otra industria que busca reconversión laboral</li>
-          <li>Alguien que quiere ingresos por comisión, sin techo salarial</li>
-          <li>Emprendedor que quiere entender el activo departamento antes de invertir</li>
+          <li>Mujer que quiere entrar al sector inmobiliario desde cero</li>
+          <li>Broker activa que quiere profesionalizarse y vender más</li>
+          <li>Profesional en reconversión laboral que busca ingresos por comisión</li>
+          <li>Emprendedora que quiere construir una carrera sin techo salarial</li>
+          <li>Mamá o persona que necesita flexibilidad horaria para trabajar</li>
         </ul>
       </div>
       <div class="card">
-        <div class="card-title">Dolor que Resolvemos</div>
+        <div class="card-title">Dolores que Resuelve Exitosas</div>
         <ul class="arrow">
-          <li>No sé por dónde empezar a vender departamentos</li>
-          <li>No entiendo cómo funciona una inmobiliaria ni cómo me pagan</li>
-          <li>Tengo clientes pero no sé cómo cerrar la venta</li>
-          <li>No sé explicar un departamento de inversión vs. vivienda</li>
-          <li>Siento que dejo comisiones sobre la mesa</li>
-          <li>No tengo cartera de clientes ni sé cómo construirla</li>
+          <li>"No sé cómo empezar a vender departamentos"</li>
+          <li>"No entiendo cómo funciona una inmobiliaria ni cómo me pagan"</li>
+          <li>"Tengo clientes pero no logro cerrar"</li>
+          <li>"No sé explicar la diferencia entre dpto. inversión y vivienda"</li>
+          <li>"Siento que dejo comisiones sobre la mesa"</li>
+          <li>"No tengo cartera y no sé cómo construirla"</li>
         </ul>
       </div>
     </div>
@@ -464,48 +480,28 @@
     <div class="card">
       <div class="card-title">Propuesta de Valor Única (UVP)</div>
       <div class="highlight">
-        <strong>"La única escuela en Chile donde aprendes a vender departamentos de inversión y vivienda con metodología real, casos chilenos y acompañamiento hasta tu primera venta."</strong>
+        <strong>"La única escuela en Chile donde una mujer con experiencia real te enseña a vender departamentos de inversión y vivienda, con metodología práctica, comunidad de apoyo y acompañamiento hasta tu primera venta."</strong>
       </div>
       <div class="grid-2" style="margin-top:16px">
         <div>
-          <p style="font-size:0.85rem;color:var(--muted);font-weight:700;margin-bottom:8px;">QUÉ NOS DIFERENCIA</p>
+          <p style="font-size:0.78rem;color:var(--gold);font-weight:700;letter-spacing:1px;text-transform:uppercase;margin-bottom:8px">QUÉ NOS DIFERENCIA</p>
           <ul class="check">
-            <li>Casos reales del mercado chileno (no latinoamérica genérica)</li>
+            <li>Fundadora con 8+ años de experiencia real en Chile</li>
             <li>Foco exclusivo en dptos. nuevos (en verde, en blanco, entregados)</li>
-            <li>Metodología de venta consultiva adaptada al comprador local</li>
-            <li>Red de inmobiliarias para prácticas y primeras ventas</li>
-            <li>Comunidad activa de brokers con mentorías continuas</li>
+            <li>Metodología adaptada al comprador chileno</li>
+            <li>Comunidad activa de brokers mujeres</li>
+            <li>Precio accesible para democratizar el acceso</li>
           </ul>
         </div>
         <div>
-          <p style="font-size:0.85rem;color:var(--muted);font-weight:700;margin-bottom:8px;">GARANTÍAS</p>
-          <ul class="check">
-            <li>Acceso de por vida al material del curso</li>
-            <li>Actualización gratuita del contenido cada 6 meses</li>
-            <li>Soporte directo durante 90 días post-curso</li>
-            <li>Certificado descargable como broker formado</li>
+          <p style="font-size:0.78rem;color:var(--gold);font-weight:700;letter-spacing:1px;text-transform:uppercase;margin-bottom:8px">IDENTIDAD DE MARCA</p>
+          <ul class="dot">
+            <li><strong>Colores:</strong> Negro profundo + Dorado premium (#C9A84C)</li>
+            <li><strong>Tono:</strong> Empoderador, práctico, cercano, profesional</li>
+            <li><strong>Promesa:</strong> "Genera tus propios ingresos"</li>
+            <li><strong>Plataforma de pago:</strong> Mercado Pago</li>
+            <li><strong>Canal clave:</strong> WhatsApp +56959178358</li>
           </ul>
-        </div>
-      </div>
-    </div>
-
-    <div class="card">
-      <div class="card-title">Valores de Marca</div>
-      <div class="grid-3">
-        <div style="text-align:center;padding:12px">
-          <div style="font-size:1.8rem;margin-bottom:6px">💎</div>
-          <strong style="color:var(--navy)">Excelencia</strong>
-          <p style="font-size:0.82rem;color:var(--muted);margin-top:4px">Formación de calidad que no da atajos</p>
-        </div>
-        <div style="text-align:center;padding:12px">
-          <div style="font-size:1.8rem;margin-bottom:6px">🤝</div>
-          <strong style="color:var(--navy)">Comunidad</strong>
-          <p style="font-size:0.82rem;color:var(--muted);margin-top:4px">Se crece en red, no en solitario</p>
-        </div>
-        <div style="text-align:center;padding:12px">
-          <div style="font-size:1.8rem;margin-bottom:6px">🚀</div>
-          <strong style="color:var(--navy)">Acción</strong>
-          <p style="font-size:0.82rem;color:var(--muted);margin-top:4px">Conocimiento que se aplica desde el día 1</p>
         </div>
       </div>
     </div>
@@ -513,86 +509,99 @@
 
   <hr class="divider">
 
-  <!-- ═══════════════ SECCIÓN 2 — MODELO DE NEGOCIO ═══════════════ -->
+  <!-- ══════════════ S2 — MODELO DE NEGOCIO ══════════════ -->
   <section class="section" id="s2">
     <div class="section-header">
-      <div class="section-icon icon-model">💼</div>
+      <div class="section-icon">💼</div>
       <div class="section-title-block">
         <h2>2. Modelo de Negocio</h2>
-        <p>Fuentes de ingreso, estructura de precios y proyección</p>
+        <p>Fuentes de ingreso, estructura de precios y proyección financiera</p>
       </div>
     </div>
 
     <div class="card">
-      <div class="card-title">Fuentes de Ingreso</div>
+      <div class="card-title">Estado Actual vs. Oportunidad</div>
       <div class="grid-2">
         <div>
-          <p style="font-size:0.85rem;font-weight:700;color:var(--navy);margin-bottom:10px">FUENTE PRINCIPAL</p>
+          <p style="font-size:0.78rem;color:var(--gold);font-weight:700;letter-spacing:1px;text-transform:uppercase;margin-bottom:8px">HOY (LANZAMIENTO)</p>
           <ul class="check">
-            <li><strong>Curso Base:</strong> programa completo de formación broker</li>
-            <li><strong>Programa Avanzado:</strong> cierre de ventas y captación de inversionistas</li>
-            <li><strong>Mentorías 1:1:</strong> sesiones privadas con experto</li>
+            <li>Precio de lanzamiento: <strong>$39.990 CLP</strong></li>
+            <li>3 módulos definidos</li>
+            <li>Pago vía Mercado Pago</li>
+            <li>Asesoría 1:1 disponible</li>
+            <li>WhatsApp como canal de conversión</li>
           </ul>
         </div>
         <div>
-          <p style="font-size:0.85rem;font-weight:700;color:var(--navy);margin-bottom:10px">FUENTES COMPLEMENTARIAS</p>
-          <ul class="check">
-            <li><strong>Membresía mensual:</strong> comunidad + material actualizado</li>
-            <li><strong>Talleres en vivo:</strong> temas específicos (objeciones, cierre, inversión)</li>
-            <li><strong>Afiliados y referidos:</strong> brokers que refieren futuros alumnos</li>
-            <li><strong>B2B Inmobiliarias:</strong> capacitación de equipos comerciales</li>
+          <p style="font-size:0.78rem;color:var(--gold);font-weight:700;letter-spacing:1px;text-transform:uppercase;margin-bottom:8px">OPORTUNIDAD A 12 MESES</p>
+          <ul class="arrow">
+            <li>Precio regular post-lanzamiento: $79.990–$99.990</li>
+            <li>Programa Avanzado / Mentorías</li>
+            <li>Membresía mensual de comunidad</li>
+            <li>Talleres en vivo temáticos</li>
+            <li>Capacitación B2B a equipos de inmobiliarias</li>
           </ul>
         </div>
       </div>
     </div>
 
     <div class="card">
-      <div class="card-title">Estructura de Precios Propuesta</div>
+      <div class="card-title">Estructura de Productos — Escalera de Valor</div>
       <div class="pricing-grid">
         <div class="price-card">
-          <div class="price-badge">STARTER</div>
-          <div class="price-amount">$97.000</div>
-          <div class="price-period">CLP · pago único</div>
+          <div class="price-badge">ENTRADA</div>
+          <div class="price-amount">Gratis</div>
+          <div class="price-period">Lead Magnet</div>
           <ul class="dot" style="text-align:left;font-size:0.82rem">
-            <li>Módulos 1–4</li>
-            <li>Material descargable</li>
-            <li>Acceso comunidad básico</li>
-            <li>Certificado</li>
+            <li>Mini-clase gratuita</li>
+            <li>Guía PDF descargable</li>
+            <li>Calculadora de honorarios</li>
+            <li>Webinar mensual</li>
           </ul>
         </div>
         <div class="price-card featured">
-          <div class="price-badge">COMPLETO ⭐ MÁS ELEGIDO</div>
-          <div class="price-amount">$197.000</div>
-          <div class="price-period">CLP · pago único</div>
+          <div class="price-badge">⭐ CURSO PRINCIPAL</div>
+          <div class="price-amount">$39.990</div>
+          <div class="price-period">CLP · precio lanzamiento</div>
           <ul class="dot" style="text-align:left;font-size:0.82rem">
-            <li>Todos los módulos (1–8)</li>
-            <li>Calculadora de comisiones</li>
-            <li>Scripts de venta editables</li>
+            <li>3 módulos completos</li>
+            <li>Material descargable</li>
+            <li>Comunidad de brokers</li>
+            <li>Certificado Exitosas</li>
+            <li>Acceso de por vida</li>
+          </ul>
+        </div>
+        <div class="price-card">
+          <div class="price-badge">PRECIO REGULAR</div>
+          <div class="price-amount">$79.990</div>
+          <div class="price-period">CLP · post-lanzamiento</div>
+          <ul class="dot" style="text-align:left;font-size:0.82rem">
+            <li>Todo lo del lanzamiento</li>
+            <li>Módulos adicionales</li>
             <li>2 sesiones grupales en vivo</li>
-            <li>Comunidad completa</li>
             <li>Soporte 90 días</li>
           </ul>
         </div>
         <div class="price-card">
-          <div class="price-badge">ÉLITE</div>
-          <div class="price-amount">$390.000</div>
-          <div class="price-period">CLP · pago único</div>
+          <div class="price-badge">PREMIUM / ASESORÍA</div>
+          <div class="price-amount">$149.990</div>
+          <div class="price-period">CLP · plan élite</div>
           <ul class="dot" style="text-align:left;font-size:0.82rem">
-            <li>Todo lo del Completo</li>
-            <li>3 mentorías 1:1</li>
-            <li>Plan de negocios personalizado</li>
-            <li>Acceso a red de inmobiliarias</li>
+            <li>Curso completo</li>
+            <li>3 asesorías 1:1 con Alison</li>
+            <li>Plan personalizado</li>
+            <li>Red de inmobiliarias</li>
             <li>Soporte 6 meses</li>
           </ul>
         </div>
         <div class="price-card">
-          <div class="price-badge">MEMBRESÍA</div>
-          <div class="price-amount">$29.000</div>
+          <div class="price-badge">MEMBRESÍA COMUNIDAD</div>
+          <div class="price-amount">$19.990</div>
           <div class="price-period">CLP · mensual</div>
           <ul class="dot" style="text-align:left;font-size:0.82rem">
             <li>Comunidad activa</li>
-            <li>Talleres mensuales en vivo</li>
-            <li>Análisis de mercado mensual</li>
+            <li>Taller en vivo mensual</li>
+            <li>Análisis de mercado</li>
             <li>Material actualizado</li>
           </ul>
         </div>
@@ -602,148 +611,147 @@
     <div class="card">
       <div class="card-title">Proyección de Ingresos — Año 1</div>
       <div class="highlight highlight-green">
-        Escenario conservador: 10 alumnos/mes promedio en el Curso Completo + 30 membresías activas al mes 6 = aprox. <strong>$2.900.000–$4.500.000 CLP mensuales</strong> al alcanzar velocidad de crucero.
+        Escenario conservador al mes 6: 30 alumnas/mes en curso base + 40 membresías activas = aprox. <strong>$2.000.000–$3.500.000 CLP/mes</strong>
       </div>
-      <table class="kpi-table" style="margin-top:14px">
+      <table class="data-table" style="margin-top:14px">
         <thead>
-          <tr>
-            <th>Producto</th>
-            <th>Precio</th>
-            <th>Ventas/mes (mes 6)</th>
-            <th>Ingreso mensual est.</th>
-          </tr>
+          <tr><th>Producto</th><th>Precio</th><th>Unidades/mes (m6)</th><th>Ingreso mensual est.</th></tr>
         </thead>
         <tbody>
-          <tr><td>Curso Completo</td><td class="kpi-val">$197.000</td><td>10</td><td class="kpi-val">$1.970.000</td></tr>
-          <tr><td>Curso Élite</td><td class="kpi-val">$390.000</td><td>3</td><td class="kpi-val">$1.170.000</td></tr>
-          <tr><td>Membresía</td><td class="kpi-val">$29.000</td><td>40</td><td class="kpi-val">$1.160.000</td></tr>
-          <tr><td>Talleres en vivo</td><td class="kpi-val">$25.000</td><td>20</td><td class="kpi-val">$500.000</td></tr>
-          <tr><td><strong>TOTAL</strong></td><td></td><td></td><td class="kpi-val"><strong>$4.800.000</strong></td></tr>
+          <tr><td>Curso Base (regular)</td><td class="val">$79.990</td><td>20</td><td class="val">$1.599.800</td></tr>
+          <tr><td>Plan Élite</td><td class="val">$149.990</td><td>5</td><td class="val">$749.950</td></tr>
+          <tr><td>Membresía</td><td class="val">$19.990</td><td>40</td><td class="val">$799.600</td></tr>
+          <tr><td>Talleres en vivo</td><td class="val">$15.000</td><td>20</td><td class="val">$300.000</td></tr>
+          <tr><td><strong>TOTAL ESTIMADO</strong></td><td></td><td></td><td class="val"><strong>$3.449.350</strong></td></tr>
         </tbody>
       </table>
+      <div class="highlight highlight-orange" style="margin-top:12px">
+        <strong>Nota:</strong> Durante el período de lanzamiento (precio $39.990) el ingreso por unidad es menor, pero el volumen de alumnas iniciales genera prueba social, testimoniales y referidos que aceleran el crecimiento.
+      </div>
     </div>
   </section>
 
   <hr class="divider">
 
-  <!-- ═══════════════ SECCIÓN 3 — OFERTA EDUCATIVA ═══════════════ -->
+  <!-- ══════════════ S3 — OFERTA EDUCATIVA ══════════════ -->
   <section class="section" id="s3">
     <div class="section-header">
-      <div class="section-icon icon-edu">📚</div>
+      <div class="section-icon">📚</div>
       <div class="section-title-block">
         <h2>3. Oferta Educativa</h2>
-        <p>Programa, módulos, metodología y resultados de aprendizaje</p>
+        <p>Estructura del programa, módulos completos y herramientas de apoyo</p>
       </div>
     </div>
 
     <div class="card">
-      <div class="card-title">Programa Base — "Broker Exitoso: De Cero a Primera Venta"</div>
+      <div class="card-title">Programa Principal — "Conviértete en Broker Inmobiliaria"</div>
       <div class="highlight">
-        8 módulos · Acceso asincrónico + 2 sesiones en vivo · Duración estimada: 6–8 semanas a tu ritmo
+        Formato asincrónico (a tu ritmo) + sesiones en vivo mensuales · Acceso inmediato al inscribirse · Certificado descargable al completar
       </div>
     </div>
 
-    <div class="grid-2">
-      <div class="card">
-        <div class="card-title">Módulo 1 — El Mercado Inmobiliario Chileno</div>
+    <div class="card">
+      <div class="card-title">Módulo 1 — El Mundo del Broker Inmobiliario (Base existente)</div>
+      <div class="grid-2">
         <ul class="arrow">
           <li>Cómo funciona el ecosistema: inmobiliaria, broker, comprador</li>
-          <li>Tipos de proyectos: en verde, en blanco, entregados</li>
-          <li>Cómo se genera la comisión y quién la paga</li>
-          <li>Regulación, contratos y aspectos legales básicos</li>
+          <li>Tipos de proyectos: en verde, en blanco y entregados</li>
+          <li>Cómo y cuándo se paga la comisión — quién la paga</li>
+          <li>Qué es un dpto. de inversión vs. dpto. de vivienda</li>
+        </ul>
+        <ul class="arrow">
+          <li>Regulación básica en Chile (no se requiere licencia)</li>
+          <li>Cómo leer una ficha técnica de proyecto inmobiliario</li>
+          <li>Vocabulario clave: promesa, escritura, subsidio, pie, dividendo</li>
+          <li>Ejercicio práctico: analizar un proyecto real</li>
         </ul>
       </div>
-      <div class="card">
-        <div class="card-title">Módulo 2 — El Producto: Departamento de Inversión vs. Vivienda</div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Módulo 2 — El Cliente y el Proceso de Venta (Base existente)</div>
+      <div class="grid-2">
         <ul class="arrow">
-          <li>Diferencias entre comprar para vivir y comprar para invertir</li>
-          <li>Cómo calcular rentabilidad: cap rate, flujo de caja, plusvalía</li>
-          <li>Qué busca el inversionista vs. qué busca el comprador de vivienda</li>
-          <li>Cómo leer una ficha técnica de proyecto</li>
+          <li>Los 4 perfiles del comprador chileno de dptos.</li>
+          <li>Diferencias clave: qué busca el inversionista vs. el que compra para vivir</li>
+          <li>Cómo explicar rentabilidad de inversión de forma simple</li>
+          <li>Guión de primera llamada y primera reunión</li>
         </ul>
-      </div>
-      <div class="card">
-        <div class="card-title">Módulo 3 — El Cliente: Perfiles y Psicología de Compra</div>
         <ul class="arrow">
-          <li>Los 4 perfiles del comprador inmobiliario</li>
-          <li>Mapa de objeciones comunes y cómo resolverlas</li>
-          <li>Proceso de decisión y tiempos de cierre</li>
-          <li>Cómo calificar un lead antes de invertir tiempo</li>
-        </ul>
-      </div>
-      <div class="card">
-        <div class="card-title">Módulo 4 — Proceso de Venta Consultiva</div>
-        <ul class="arrow">
-          <li>Método SPIN adaptado al mercado inmobiliario</li>
-          <li>Presentación del proyecto: guión estructurado</li>
-          <li>La visita o tour virtual: cómo mostrar para vender</li>
-          <li>Seguimiento sin ser invasivo</li>
-        </ul>
-      </div>
-      <div class="card">
-        <div class="card-title">Módulo 5 — Cierre de Ventas</div>
-        <ul class="arrow">
+          <li>Cómo hacer el tour o presentación del proyecto</li>
+          <li>El mapa de objeciones y cómo resolverlas</li>
+          <li>Seguimiento efectivo sin ser invasiva</li>
           <li>Señales de compra: cuándo y cómo cerrar</li>
-          <li>Técnicas de cierre para el contexto chileno</li>
-          <li>Manejo de la negociación: precio, condiciones, plazos</li>
-          <li>La promesa de compraventa: qué es y qué revisar</li>
         </ul>
       </div>
-      <div class="card">
-        <div class="card-title">Módulo 6 — Captación de Clientes</div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Módulo 3 — Captación y Negocio del Broker (Base existente)</div>
+      <div class="grid-2">
         <ul class="arrow">
-          <li>Estrategias digitales: redes sociales, portales, WhatsApp</li>
-          <li>Red de referidos: cómo construirla desde cero</li>
-          <li>Cómo trabajar leads fríos, tibios y calientes</li>
-          <li>CRM básico para brokers independientes</li>
+          <li>Cómo construir tu cartera de clientes desde cero</li>
+          <li>Estrategias digitales: Instagram, WhatsApp, portales</li>
+          <li>Red de referidos: la fuente más rentable de clientes</li>
+          <li>CRM básico en Google Sheets para gestionar leads</li>
         </ul>
-      </div>
-      <div class="card">
-        <div class="card-title">Módulo 7 — Marca Personal del Broker</div>
         <ul class="arrow">
-          <li>Por qué la marca personal cierra ventas</li>
-          <li>Perfil profesional en LinkedIn, Instagram y WhatsApp Business</li>
-          <li>Contenido que genera confianza sin ser molesto</li>
-          <li>Cómo diferenciarte de otros brokers en tu zona</li>
-        </ul>
-      </div>
-      <div class="card">
-        <div class="card-title">Módulo 8 — Negocio del Broker: Gestión y Escalabilidad</div>
-        <ul class="arrow">
-          <li>Cómo manejar tus comisiones e impuestos (honorarios en Chile)</li>
-          <li>Cuándo y cómo asociarte con otras inmobiliarias</li>
-          <li>Construcción de cartera y activos de largo plazo</li>
+          <li>Marca personal: cómo posicionarte como experta</li>
+          <li>Cómo manejar tus honorarios e impuestos en Chile</li>
+          <li>Cuándo y cómo aliarte con otras inmobiliarias</li>
           <li>Plan de 90 días para tu primera venta</li>
         </ul>
       </div>
     </div>
 
     <div class="card">
-      <div class="card-title">Herramientas incluidas en el Curso</div>
+      <div class="card-title">Módulos Futuros — Expansión del Programa (Fase 2)</div>
+      <div class="grid-2">
+        <div>
+          <span class="badge badge-gold">MÓDULO 4</span>
+          <p style="font-size:0.88rem;color:var(--gray-lt);margin-top:6px"><strong>Cierre Avanzado y Negociación:</strong> técnicas de cierre para el mercado chileno, manejo de la promesa de compraventa, negociación de condiciones y plazos.</p>
+        </div>
+        <div>
+          <span class="badge badge-gold">MÓDULO 5</span>
+          <p style="font-size:0.88rem;color:var(--gray-lt);margin-top:6px"><strong>Captación de Inversionistas:</strong> cómo hablar el lenguaje del inversionista, calcular cap rate y flujo de caja, presentar un portafolio de proyectos.</p>
+        </div>
+        <div>
+          <span class="badge badge-green">MÓDULO 6</span>
+          <p style="font-size:0.88rem;color:var(--gray-lt);margin-top:6px"><strong>Marketing Personal del Broker:</strong> contenido en redes para generar confianza, estrategia de Instagram para brokers, posicionamiento como experta en tu zona.</p>
+        </div>
+        <div>
+          <span class="badge badge-green">MÓDULO 7</span>
+          <p style="font-size:0.88rem;color:var(--gray-lt);margin-top:6px"><strong>Escala tu Negocio:</strong> cuándo contratar apoyo, cómo aliarte con otras brokers, construir un equipo de ventas pequeño y productivo.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Herramientas Incluidas en el Curso</div>
       <div class="grid-3">
         <div>
-          <span class="badge badge-blue">PLANTILLA</span>
-          <p style="font-size:0.88rem;margin-top:6px">Calculadora de comisiones e IVA (ya existente en el sitio)</p>
+          <span class="badge badge-gold">YA EXISTE</span>
+          <p style="font-size:0.87rem;color:var(--gray-lt);margin-top:6px">Calculadora de honorarios con IVA — integrar como recurso del curso</p>
         </div>
         <div>
-          <span class="badge badge-green">PLANTILLA</span>
-          <p style="font-size:0.88rem;margin-top:6px">Script de primera llamada con cliente inmobiliario</p>
+          <span class="badge badge-orange">POR CREAR</span>
+          <p style="font-size:0.87rem;color:var(--gray-lt);margin-top:6px">Calculadora de rentabilidad de inversión (cap rate, flujo, plusvalía)</p>
         </div>
         <div>
-          <span class="badge badge-gold">PLANTILLA</span>
-          <p style="font-size:0.88rem;margin-top:6px">Calculadora de rentabilidad de inversión (cap rate)</p>
+          <span class="badge badge-orange">POR CREAR</span>
+          <p style="font-size:0.87rem;color:var(--gray-lt);margin-top:6px">Script de primera llamada con cliente inmobiliario (editable)</p>
         </div>
         <div>
-          <span class="badge badge-orange">PLANTILLA</span>
-          <p style="font-size:0.88rem;margin-top:6px">Checklist de visita / tour de proyecto</p>
+          <span class="badge badge-orange">POR CREAR</span>
+          <p style="font-size:0.87rem;color:var(--gray-lt);margin-top:6px">Checklist de visita / tour de proyecto</p>
         </div>
         <div>
-          <span class="badge badge-blue">PLANTILLA</span>
-          <p style="font-size:0.88rem;margin-top:6px">Plan de 90 días editable para el nuevo broker</p>
+          <span class="badge badge-orange">POR CREAR</span>
+          <p style="font-size:0.87rem;color:var(--gray-lt);margin-top:6px">CRM en Google Sheets para gestión de leads</p>
         </div>
         <div>
-          <span class="badge badge-green">PLANTILLA</span>
-          <p style="font-size:0.88rem;margin-top:6px">Plantilla CRM en Google Sheets para gestión de leads</p>
+          <span class="badge badge-orange">POR CREAR</span>
+          <p style="font-size:0.87rem;color:var(--gray-lt);margin-top:6px">Plan de 90 días editable para la nueva broker</p>
         </div>
       </div>
     </div>
@@ -751,48 +759,48 @@
 
   <hr class="divider">
 
-  <!-- ═══════════════ SECCIÓN 4 — MARKETING ═══════════════ -->
+  <!-- ══════════════ S4 — MARKETING ══════════════ -->
   <section class="section" id="s4">
     <div class="section-header">
-      <div class="section-icon icon-mkt">📣</div>
+      <div class="section-icon">📣</div>
       <div class="section-title-block">
         <h2>4. Marketing y Estrategia de Contenidos</h2>
-        <p>Canales, mensajes, calendario y producción de contenido</p>
+        <p>Canales, mensajes, producción de contenido y SEO</p>
       </div>
     </div>
 
     <div class="card">
-      <div class="card-title">Canales Prioritarios</div>
+      <div class="card-title">Canales Prioritarios (ordenados por ROI esperado)</div>
       <div class="grid-3">
-        <div style="text-align:center;padding:10px">
+        <div style="text-align:center;padding:12px">
           <div style="font-size:2rem;margin-bottom:6px">📸</div>
-          <strong style="color:var(--navy)">Instagram</strong>
-          <p style="font-size:0.82rem;color:var(--muted);margin-top:4px">Canal principal. Reels educativos, tips, casos reales. Meta: 10K seguidores mes 6.</p>
+          <strong style="color:var(--white)">Instagram</strong>
+          <p style="font-size:0.82rem;color:var(--gray);margin-top:4px">Canal principal. Reels educativos, carruseles, stories diarias. Meta mes 6: 8K–12K seguidoras.</p>
         </div>
-        <div style="text-align:center;padding:10px">
+        <div style="text-align:center;padding:12px">
           <div style="font-size:2rem;margin-bottom:6px">💬</div>
-          <strong style="color:var(--navy)">WhatsApp Business</strong>
-          <p style="font-size:0.82rem;color:var(--muted);margin-top:4px">Canal de conversión y seguimiento. Lista de difusión + estados diarios.</p>
+          <strong style="color:var(--white)">WhatsApp Business</strong>
+          <p style="font-size:0.82rem;color:var(--gray);margin-top:4px">Canal de conversión directo. Lista de difusión + estados. Ya está activo (+56959178358).</p>
         </div>
-        <div style="text-align:center;padding:10px">
-          <div style="font-size:2rem;margin-bottom:6px">▶️</div>
-          <strong style="color:var(--navy)">YouTube / TikTok</strong>
-          <p style="font-size:0.82rem;color:var(--muted);margin-top:4px">Videos largos y cortos. SEO orgánico. Casos de éxito de alumnos.</p>
+        <div style="font-size:2rem;margin-bottom:6px;text-align:center;padding:12px">
+          <div>▶️</div>
+          <strong style="color:var(--white)">TikTok / YouTube Shorts</strong>
+          <p style="font-size:0.82rem;color:var(--gray);margin-top:4px">Alcance orgánico masivo. Videos cortos (30–60 seg) sobre tips de broker.</p>
         </div>
-        <div style="text-align:center;padding:10px">
+        <div style="text-align:center;padding:12px">
           <div style="font-size:2rem;margin-bottom:6px">✉️</div>
-          <strong style="color:var(--navy)">Email Marketing</strong>
-          <p style="font-size:0.82rem;color:var(--muted);margin-top:4px">Secuencias de bienvenida, nurturing y lanzamientos. Lista propia = activo.</p>
+          <strong style="color:var(--white)">Email Marketing</strong>
+          <p style="font-size:0.82rem;color:var(--gray);margin-top:4px">Activo más valioso a largo plazo. Lista propia. Secuencias automáticas de nurturing y lanzamiento.</p>
         </div>
-        <div style="text-align:center;padding:10px">
-          <div style="font-size:2rem;margin-bottom:6px">💼</div>
-          <strong style="color:var(--navy)">LinkedIn</strong>
-          <p style="font-size:0.82rem;color:var(--muted);margin-top:4px">Posicionamiento B2B. Atrae inmobiliarias para alianzas y capacitaciones.</p>
-        </div>
-        <div style="text-align:center;padding:10px">
+        <div style="text-align:center;padding:12px">
           <div style="font-size:2rem;margin-bottom:6px">🌐</div>
-          <strong style="color:var(--navy)">Sitio Web (escuelaexitosas.cl)</strong>
-          <p style="font-size:0.82rem;color:var(--muted);margin-top:4px">Hub central. SEO, landing pages, blog y herramientas gratuitas como lead magnets.</p>
+          <strong style="color:var(--white)">escuelaexitosas.cl</strong>
+          <p style="font-size:0.82rem;color:var(--gray);margin-top:4px">Hub central. SEO, landing pages, herramientas gratuitas como lead magnets.</p>
+        </div>
+        <div style="text-align:center;padding:12px">
+          <div style="font-size:2rem;margin-bottom:6px">💼</div>
+          <strong style="color:var(--white)">LinkedIn</strong>
+          <p style="font-size:0.82rem;color:var(--gray);margin-top:4px">Posicionamiento profesional de Alison. Atrae inmobiliarias para alianzas B2B.</p>
         </div>
       </div>
     </div>
@@ -800,62 +808,57 @@
     <div class="card">
       <div class="card-title">Pilares de Contenido — Regla 4-1-1</div>
       <div class="highlight">
-        Por cada 6 piezas de contenido: <strong>4 educativos / de valor · 1 testimonial / caso de éxito · 1 de venta directa</strong>
+        Por cada 6 piezas: <strong>4 educativas</strong> · <strong>1 testimonial / caso de éxito</strong> · <strong>1 de venta directa</strong>
       </div>
-      <div class="grid-2" style="margin-top:16px">
+      <div class="grid-2" style="margin-top:14px">
         <div>
-          <p style="font-size:0.85rem;color:var(--muted);font-weight:700;margin-bottom:8px">CONTENIDO EDUCATIVO (4)</p>
+          <p style="font-size:0.78rem;color:var(--gold);font-weight:700;letter-spacing:1px;text-transform:uppercase;margin-bottom:8px">IDEAS DE CONTENIDO EDUCATIVO</p>
           <ul class="dot">
-            <li>"¿Cuánto gana un broker de dptos. en Chile?"</li>
-            <li>"Diferencia entre comprar en verde vs. entregado"</li>
-            <li>"Cómo calcular la rentabilidad de un dpto. de inversión"</li>
-            <li>"Los 3 errores que cometen los brokers novatos"</li>
-            <li>"Cómo responder la objeción 'está muy caro'"</li>
-            <li>"¿Necesito título para ser broker inmobiliario?"</li>
+            <li>"¿Cuánto gana una broker de dptos. en Chile?"</li>
+            <li>"Dpto. en verde vs. entregado: diferencias clave"</li>
+            <li>"Cómo calcular si un dpto. es buena inversión"</li>
+            <li>"3 errores que cometen las brokers novatas"</li>
+            <li>"Cómo responder: 'está muy caro' o 'lo voy a pensar'"</li>
+            <li>"¿Necesito título para ser broker inmobiliaria en Chile?"</li>
+            <li>"Un día en la vida de una broker exitosa"</li>
           </ul>
         </div>
         <div>
-          <p style="font-size:0.85rem;color:var(--muted);font-weight:700;margin-bottom:8px">TESTIMONIOS / VENTA (2)</p>
+          <p style="font-size:0.78rem;color:var(--gold);font-weight:700;letter-spacing:1px;text-transform:uppercase;margin-bottom:8px">TESTIMONIOS Y VENTA DIRECTA</p>
           <ul class="dot">
-            <li>Caso de éxito: "Cómo [alumna] logró su primera venta en 30 días"</li>
-            <li>Behind the scenes: día a día de un broker exitoso</li>
-            <li>Resultados reales: capturas (con permiso) de comisiones</li>
-            <li>CTA directo: inscripción al curso o webinar gratuito</li>
+            <li>"Así logré mi primera venta en 30 días" (historia alumna)</li>
+            <li>Captura de comisión recibida (con permiso de la alumna)</li>
+            <li>Behind the scenes de Alison en una asesoría</li>
+            <li>CTA directo a inscripción con urgencia (cupos, precio)</li>
+            <li>Comparativa: sueldo fijo vs. ingresos de broker</li>
           </ul>
         </div>
       </div>
     </div>
 
     <div class="card">
-      <div class="card-title">Lead Magnets — Captación Gratuita</div>
-      <div class="grid-2">
-        <div>
-          <ul class="check">
-            <li><strong>Mini-clase gratuita:</strong> "Cómo empezar a vender dptos. en Chile sin experiencia"</li>
-            <li><strong>Calculadora online:</strong> "¿Cuánto puedes ganar como broker?" (ya existe base en el repo)</li>
-            <li><strong>PDF descargable:</strong> "Guía rápida: 10 preguntas que todo broker debe saber responder"</li>
-            <li><strong>Webinar mensual en vivo:</strong> tema del mes + sesión de Q&A gratuita</li>
-          </ul>
-        </div>
-        <div class="highlight highlight-gold">
-          <strong>La calculadora de honorarios ya construida</strong> es un excelente lead magnet. Se puede expandir para incluir simulación de comisiones por proyecto y rentabilidad del inversionista. Esto atrae brokers y compradores al mismo tiempo.
-        </div>
-      </div>
+      <div class="card-title">Lead Magnets — Captación Gratuita de Contactos</div>
+      <ul class="check">
+        <li><strong>Mini-clase gratuita:</strong> "Cómo empezar a vender dptos. en Chile sin experiencia" (video 20–30 min)</li>
+        <li><strong>Calculadora de honorarios:</strong> ya existe en el sitio — agregar formulario de captura de email antes de mostrar resultado</li>
+        <li><strong>Guía PDF:</strong> "10 preguntas que toda broker exitosa debe saber responder"</li>
+        <li><strong>Webinar mensual gratuito:</strong> tema del mes + Q&A en vivo con Alison</li>
+        <li><strong>Quiz:</strong> "¿Estás lista para ser broker inmobiliaria?" → resultado por email</li>
+      </ul>
     </div>
 
     <div class="card">
       <div class="card-title">Frecuencia de Publicación Sugerida</div>
-      <table class="kpi-table">
-        <thead>
-          <tr><th>Canal</th><th>Frecuencia</th><th>Formato principal</th></tr>
-        </thead>
+      <table class="data-table">
+        <thead><tr><th>Canal</th><th>Frecuencia</th><th>Formato</th></tr></thead>
         <tbody>
-          <tr><td>Instagram Feed</td><td>3x semana</td><td>Carrusel educativo, reels</td></tr>
-          <tr><td>Instagram Stories</td><td>Diario</td><td>Tips rápidos, encuestas, CTA</td></tr>
+          <tr><td>Instagram Reels</td><td>3x semana</td><td>Video educativo 30–60 seg</td></tr>
+          <tr><td>Instagram Carrusel</td><td>2x semana</td><td>Tips paso a paso, infografías</td></tr>
+          <tr><td>Instagram Stories</td><td>Diario</td><td>Poll, tip rápido, CTA, behind the scenes</td></tr>
+          <tr><td>TikTok / YouTube Shorts</td><td>3x semana</td><td>Mismo contenido adaptado o nativo</td></tr>
           <tr><td>WhatsApp Business</td><td>2–3x semana</td><td>Estado + mensaje directo a lista</td></tr>
-          <tr><td>YouTube / TikTok</td><td>1x semana</td><td>Video educativo 3–8 min</td></tr>
-          <tr><td>Email</td><td>1–2x semana</td><td>Newsletter + secuencia automática</td></tr>
-          <tr><td>LinkedIn</td><td>2x semana</td><td>Artículo o post reflexivo</td></tr>
+          <tr><td>Email</td><td>1x semana</td><td>Newsletter + secuencia automática para leads nuevos</td></tr>
+          <tr><td>LinkedIn (Alison)</td><td>2x semana</td><td>Post reflexivo, artículo de opinión</td></tr>
         </tbody>
       </table>
     </div>
@@ -863,36 +866,36 @@
 
   <hr class="divider">
 
-  <!-- ═══════════════ SECCIÓN 5 — VENTAS ═══════════════ -->
+  <!-- ══════════════ S5 — VENTAS ══════════════ -->
   <section class="section" id="s5">
     <div class="section-header">
-      <div class="section-icon icon-sales">💰</div>
+      <div class="section-icon">💰</div>
       <div class="section-title-block">
         <h2>5. Estrategia de Ventas</h2>
-        <p>Embudo, conversión, objeciones y cierre de alumnos</p>
+        <p>Embudo completo, conversión, objeciones y cierre de alumnas</p>
       </div>
     </div>
 
     <div class="card">
-      <div class="card-title">Embudo de Conversión</div>
+      <div class="card-title">Embudo de Conversión — De Desconocida a Alumna</div>
       <div class="funnel">
-        <div class="funnel-step" style="background:var(--muted);width:100%">
-          🌐 ATRACCIÓN — Contenido orgánico + publicidad pagada → Desconocido llega al perfil/web
+        <div class="funnel-step" style="background:#2a2a2a;border:1px solid var(--border);color:var(--gray-lt);width:100%">
+          🌐 ATRACCIÓN — Instagram · TikTok · WhatsApp · Referencias → Mujer descubre Exitosas
         </div>
-        <div class="funnel-step" style="background:var(--mid);width:88%">
-          🎁 CAPTACIÓN — Descarga lead magnet / se anota al webinar → entra a lista
+        <div class="funnel-step" style="background:#2a2010;border:1px solid var(--gold-dk);color:var(--gray-lt);width:88%">
+          🎁 CAPTACIÓN — Descarga lead magnet o se anota al webinar → entra a lista de WhatsApp o email
         </div>
-        <div class="funnel-step" style="background:var(--blue);width:72%">
-          🔥 NURTURING — Secuencia de emails + contenido de valor → construye confianza
+        <div class="funnel-step" style="background:#201a05;border:1px solid var(--gold-dk);color:var(--gray-lt);width:74%">
+          🔥 NURTURING — Secuencia de contenido de valor → construye confianza en Alison y en Exitosas
         </div>
-        <div class="funnel-step" style="background:var(--navy);width:56%">
-          🎯 ACTIVACIÓN — Webinar / mini-clase / llamada → presenta oferta
+        <div class="funnel-step" style="background:var(--gold-dk);color:var(--black);width:58%">
+          🎯 ACTIVACIÓN — Webinar / mini-clase → presenta la oferta del curso con urgencia
         </div>
-        <div class="funnel-step" style="background:var(--green);width:40%">
-          ✅ CONVERSIÓN — Compra del curso · Seguimiento post-venta
+        <div class="funnel-step" style="background:var(--gold);color:var(--black);width:42%">
+          ✅ COMPRA — Pago en Mercado Pago · Acceso inmediato · Bienvenida personalizada
         </div>
-        <div class="funnel-step" style="background:#b07a00;width:28%">
-          ♻️ RETENCIÓN / UPSELL — Membresía · Programa avanzado · Referidos
+        <div class="funnel-step" style="background:var(--green);color:var(--black);width:28%">
+          ♻️ RETENCIÓN / UPSELL — Membresía · Plan Élite · Referidos
         </div>
       </div>
     </div>
@@ -901,53 +904,59 @@
       <div class="card">
         <div class="card-title">Objeciones Frecuentes y Respuestas</div>
         <ul class="arrow">
-          <li><strong>"Es muy caro"</strong> → ¿Cuánto vale tu primera comisión? Un dpto. de $80M genera $1,6M en comisión. El curso se paga en el primer cierre.</li>
-          <li><strong>"No tengo tiempo"</strong> → El programa es 100% a tu ritmo. Con 1 hora/día en 6 semanas tienes las bases.</li>
-          <li><strong>"No tengo experiencia"</strong> → El curso está diseñado exactamente para eso. Partimos de cero.</li>
-          <li><strong>"Lo puedo aprender en YouTube"</strong> → Sí, información hay. Lo que no hay es método chileno, herramientas y comunidad real.</li>
+          <li><strong>"Es caro"</strong> → ¿Cuánto vale tu primera comisión? Un dpto. de $80M genera ~$1,6M. El curso se paga en el primer cierre.</li>
+          <li><strong>"No tengo tiempo"</strong> → El programa es 100% a tu ritmo. Con 30–45 min/día en semanas tienes las bases.</li>
+          <li><strong>"No tengo experiencia"</strong> → Diseñado exactamente para eso. Alison partió de cero.</li>
+          <li><strong>"¿Y si no funciona?"</strong> → Alison tiene 8 años de resultados reales. Tú misma verás el testimonio de las alumnas.</li>
+          <li><strong>"Lo veo en YouTube"</strong> → Información genérica hay de sobra. Lo que no hay es método chileno, casos locales y comunidad de apoyo.</li>
         </ul>
       </div>
       <div class="card">
-        <div class="card-title">Estrategia de Lanzamiento (mes 1–2)</div>
+        <div class="card-title">Estrategia de Lanzamiento</div>
         <ul class="check">
-          <li>Semana 1–2: Preventa con descuento de lanzamiento (–30%)</li>
-          <li>Webinar gratuito de presentación del método</li>
-          <li>Bonos limitados para los primeros 20 inscritos</li>
-          <li>Testimoniales de "early adopters" para prueba social</li>
-          <li>Urgencia real: precio sube al finalizar la preventa</li>
+          <li>Precio especial de lanzamiento: $39.990 (ya activo)</li>
+          <li>Comunicar la fecha en que sube el precio</li>
+          <li>Webinar gratuito 1–2 días antes del cierre de lanzamiento</li>
+          <li>Bonos exclusivos para las primeras 20 inscritas</li>
+          <li>Testimoniales en tiempo real de las primeras alumnas</li>
+          <li>Countdown en Instagram Stories</li>
         </ul>
+        <div class="highlight" style="margin-top:12px">
+          <strong>Urgencia genuina:</strong> comunicar que el precio sube al terminar el período de lanzamiento genera acción sin manipular.
+        </div>
       </div>
     </div>
 
     <div class="card">
-      <div class="card-title">Publicidad Pagada — Meta Ads (Instagram/Facebook)</div>
-      <div class="highlight">
-        Presupuesto inicial sugerido: <strong>$200.000–$400.000 CLP/mes</strong> para validar audiencias y mensajes. Escalar solo lo que convierte.
-      </div>
-      <div class="grid-2" style="margin-top:12px">
-        <ul class="arrow">
-          <li>Campaña de captación: anuncio → lead magnet → email</li>
-          <li>Campaña de conversión: retargeting a quienes vieron el webinar</li>
-          <li>Lookalike: audiencias similares a tus primeros compradores</li>
-        </ul>
-        <ul class="check">
-          <li>Pixel de Meta instalado en escuelaexitosas.cl</li>
-          <li>Seguimiento de conversiones (lead + compra)</li>
-          <li>A/B test de creativos cada 2 semanas</li>
-        </ul>
+      <div class="card-title">Publicidad Pagada — Meta Ads (Instagram + Facebook)</div>
+      <div class="grid-2">
+        <div>
+          <p style="font-size:0.78rem;color:var(--gold);font-weight:700;letter-spacing:1px;text-transform:uppercase;margin-bottom:8px">CAMPAÑAS RECOMENDADAS</p>
+          <ul class="arrow">
+            <li><strong>Captación:</strong> anuncio → lead magnet gratuito → email/WhatsApp</li>
+            <li><strong>Retargeting:</strong> a quienes vieron el webinar pero no compraron</li>
+            <li><strong>Lookalike:</strong> similares a tus primeras alumnas</li>
+          </ul>
+        </div>
+        <div>
+          <p style="font-size:0.78rem;color:var(--gold);font-weight:700;letter-spacing:1px;text-transform:uppercase;margin-bottom:8px">PRESUPUESTO INICIAL</p>
+          <div class="highlight">
+            <strong>$150.000–$250.000 CLP/mes</strong> para validar audiencias y mensajes. Escalar solo lo que convierte.
+          </div>
+        </div>
       </div>
     </div>
   </section>
 
   <hr class="divider">
 
-  <!-- ═══════════════ SECCIÓN 6 — TECNOLOGÍA ═══════════════ -->
+  <!-- ══════════════ S6 — TECNOLOGÍA ══════════════ -->
   <section class="section" id="s6">
     <div class="section-header">
-      <div class="section-icon icon-tech">⚙️</div>
+      <div class="section-icon">⚙️</div>
       <div class="section-title-block">
         <h2>6. Tecnología y Herramientas</h2>
-        <p>Stack recomendado para operar la escuela desde el día 1</p>
+        <p>Stack recomendado, compatible con lo ya existente</p>
       </div>
     </div>
 
@@ -955,72 +964,71 @@
       <div class="card">
         <div class="card-title">Plataforma Educativa</div>
         <ul class="check">
-          <li><strong>Hotmart</strong> (recomendado para Chile, soporta CLP, pagos locales, comunidad integrada)</li>
-          <li>Alternativas: Teachable, Kajabi, o Systeme.io (todo-en-uno más económico)</li>
-          <li>Subir videos a Vimeo/YouTube privado, alojar en la plataforma</li>
+          <li><strong>Hotmart</strong> — recomendada para Chile, soporta Mercado Pago nativo, comunidad integrada, affiliate marketing y analítica</li>
+          <li>Alternativa económica: <strong>Systeme.io</strong> (todo-en-uno: cursos + email + funnels)</li>
+          <li>Si ya se usa Mercado Pago directamente, conectar con Teachable o plataforma similar</li>
         </ul>
       </div>
       <div class="card">
-        <div class="card-title">Email y Automatización</div>
+        <div class="card-title">Email Marketing y Automatización</div>
         <ul class="check">
-          <li><strong>Mailchimp</strong> o <strong>ActiveCampaign</strong> para secuencias automáticas</li>
-          <li>Secuencia de bienvenida (5 emails) al descargar lead magnet</li>
-          <li>Secuencia de recuperación de carrito abandonado</li>
+          <li><strong>Mailchimp</strong> (gratis hasta 500 contactos) para empezar</li>
+          <li>Secuencia automática al descargar lead magnet: 5 emails en 7 días</li>
           <li>Newsletter semanal a toda la lista</li>
-        </ul>
-      </div>
-      <div class="card">
-        <div class="card-title">CRM y Gestión de Leads</div>
-        <ul class="check">
-          <li><strong>HubSpot Free</strong> para los primeros 500 contactos</li>
-          <li>Google Sheets como CRM básico mientras escala (plantilla incluida en el curso)</li>
-          <li>Integración con formularios del sitio web</li>
-          <li>Etiquetado por fuente: Instagram, web, referido, webinar</li>
-        </ul>
-      </div>
-      <div class="card">
-        <div class="card-title">Herramientas del Sitio Web</div>
-        <ul class="check">
-          <li>Landing page de cada producto (optimizada para conversión)</li>
-          <li><strong>Calculadora de honorarios</strong> → ya creada, integrar con registro</li>
-          <li><strong>Calculadora de rentabilidad de inversión</strong> → pendiente de crear</li>
-          <li>Chat de WhatsApp flotante en todas las páginas</li>
-          <li>Pixel de Meta + Google Analytics 4</li>
+          <li>Secuencia de recuperación para quien no compró en el webinar</li>
         </ul>
       </div>
       <div class="card">
         <div class="card-title">Pagos</div>
         <ul class="check">
-          <li><strong>Webpay / Transbank</strong> para pagos nacionales en CLP</li>
-          <li><strong>Hotmart</strong> maneja esto automáticamente si se usa esa plataforma</li>
-          <li>Cuotas: ofrecer opción 3–6 cuotas con tarjeta para el Élite</li>
-          <li>Boleta de honorarios electrónica para cada venta (SII)</li>
+          <li><strong>Mercado Pago</strong> — ya activo, continuar</li>
+          <li>Agregar opción de cuotas (3x, 6x) para el Plan Élite</li>
+          <li>Boleta de honorarios electrónica (SII) por cada venta</li>
+          <li>Evaluar Webpay/Transbank para usuarios que prefieren tarjeta sin MP</li>
+        </ul>
+      </div>
+      <div class="card">
+        <div class="card-title">Herramientas del Sitio Web</div>
+        <ul class="check">
+          <li>Calculadora de honorarios ya creada — agregar captura de email</li>
+          <li><strong>Crear:</strong> calculadora de rentabilidad de inversión</li>
+          <li>Pixel de Meta + Google Analytics 4 instalados</li>
+          <li>Chat de WhatsApp flotante (ya tiene el número activo)</li>
+          <li>Landing pages individuales por producto</li>
         </ul>
       </div>
       <div class="card">
         <div class="card-title">Producción de Contenido</div>
         <ul class="check">
-          <li><strong>Canva Pro</strong> para diseño de posts, carruseles y materiales</li>
-          <li><strong>CapCut / DaVinci Resolve</strong> para edición de videos</li>
-          <li>Loom para grabar pantalla en módulos explicativos</li>
-          <li>Micrófono de calidad (inversión ~$30.000 CLP) + buena luz natural</li>
+          <li><strong>Canva Pro</strong> (~$13.000 CLP/mes) — posts, carruseles, materiales del curso</li>
+          <li><strong>CapCut</strong> (gratuito) — edición de Reels y TikToks</li>
+          <li>Micrófono de solapa (~$15.000–$30.000 CLP) — mejora enorme en video</li>
+          <li>Luz de anillo o aprovechar luz natural cerca de ventana</li>
+        </ul>
+      </div>
+      <div class="card">
+        <div class="card-title">CRM y Seguimiento de Leads</div>
+        <ul class="check">
+          <li><strong>Google Sheets</strong> como CRM básico (plantilla incluida en el curso)</li>
+          <li><strong>HubSpot Free</strong> para escalar la gestión de contactos</li>
+          <li>Etiquetar cada lead por fuente: Instagram, web, referido, webinar</li>
+          <li>Registro de etapa: nuevo → interesado → asistió webinar → compró</li>
         </ul>
       </div>
     </div>
 
     <div class="card">
-      <div class="card-title">Inversión Tecnológica Estimada — Mes 1</div>
-      <table class="kpi-table">
-        <thead>
-          <tr><th>Herramienta</th><th>Plan</th><th>Costo aprox./mes</th></tr>
-        </thead>
+      <div class="card-title">Inversión en Tecnología — Mes 1</div>
+      <table class="data-table">
+        <thead><tr><th>Herramienta</th><th>Estado</th><th>Costo estimado/mes</th></tr></thead>
         <tbody>
-          <tr><td>Hotmart</td><td>Free (comisión por venta)</td><td class="kpi-val">$0 + 9,9%</td></tr>
-          <tr><td>Mailchimp</td><td>Free hasta 500 contactos</td><td class="kpi-val">$0</td></tr>
-          <tr><td>Canva Pro</td><td>Anual (~$13.000/mes)</td><td class="kpi-val">$13.000</td></tr>
-          <tr><td>Dominio + hosting</td><td>Ya existe en escuelaexitosas.cl</td><td class="kpi-val">$0 adicional</td></tr>
-          <tr><td>Meta Ads</td><td>Presupuesto inicial</td><td class="kpi-val">$200.000–$400.000</td></tr>
-          <tr><td><strong>TOTAL OPERACIONAL</strong></td><td></td><td class="kpi-val"><strong>~$215.000–$415.000</strong></td></tr>
+          <tr><td>escuelaexitosas.cl (dominio + hosting)</td><td><span class="badge badge-green">Ya existe</span></td><td class="val">$0 adicional</td></tr>
+          <tr><td>Mercado Pago</td><td><span class="badge badge-green">Ya existe</span></td><td class="val">$0 + comisión por venta</td></tr>
+          <tr><td>WhatsApp Business</td><td><span class="badge badge-green">Ya existe</span></td><td class="val">$0</td></tr>
+          <tr><td>Mailchimp (hasta 500 contactos)</td><td><span class="badge badge-orange">Por activar</span></td><td class="val">$0</td></tr>
+          <tr><td>Canva Pro</td><td><span class="badge badge-orange">Por activar</span></td><td class="val">~$13.000</td></tr>
+          <tr><td>Meta Ads (pauta)</td><td><span class="badge badge-orange">Por activar</span></td><td class="val">$150.000–$250.000</td></tr>
+          <tr><td><strong>TOTAL OPERACIONAL</strong></td><td></td><td class="val"><strong>~$163.000–$263.000</strong></td></tr>
         </tbody>
       </table>
     </div>
@@ -1028,37 +1036,40 @@
 
   <hr class="divider">
 
-  <!-- ═══════════════ SECCIÓN 7 — COMUNIDAD ═══════════════ -->
+  <!-- ══════════════ S7 — COMUNIDAD ══════════════ -->
   <section class="section" id="s7">
     <div class="section-header">
-      <div class="section-icon icon-comm">🤝</div>
+      <div class="section-icon">🤝</div>
       <div class="section-title-block">
         <h2>7. Comunidad y Retención</h2>
-        <p>Cómo convertir alumnos en embajadores y generar ingresos recurrentes</p>
+        <p>Cómo convertir alumnas en embajadoras y generar ingresos recurrentes</p>
       </div>
     </div>
 
     <div class="grid-2">
       <div class="card">
-        <div class="card-title">Comunidad de Alumnos</div>
+        <div class="card-title">Comunidad de Alumnas</div>
         <ul class="check">
-          <li>Grupo privado de WhatsApp o Telegram para alumnos activos</li>
-          <li>Canal de Hotmart Comunidad (incluido en la plataforma)</li>
-          <li>Reunión grupal en Zoom: 1 vez al mes para todos los planes</li>
-          <li>Espacio de "victorias": alumnos comparten sus primeras ventas</li>
-          <li>Directorio de brokers formados por la escuela</li>
+          <li>Grupo privado de WhatsApp o Telegram para alumnas activas</li>
+          <li>Comunidad en Hotmart (si se usa esa plataforma)</li>
+          <li>Sesión grupal en vivo mensual: Q&A con Alison</li>
+          <li>Canal de "victorias": alumnas comparten su primera venta</li>
+          <li>Directorio de brokers formadas por Exitosas</li>
         </ul>
+        <div class="highlight" style="margin-top:12px">
+          La comunidad es el <strong>diferenciador más poderoso</strong> frente a la competencia. Una alumna que siente que pertenece a algo mayor renueva la membresía y refiere a otras.
+        </div>
       </div>
       <div class="card">
         <div class="card-title">Programa de Referidos</div>
         <ul class="check">
-          <li>Comisión del 10–15% por cada alumno referido que se inscriba</li>
-          <li>Link de afiliado único para cada alumno</li>
-          <li>Tracking automático (Hotmart lo maneja)</li>
-          <li>Reconocimiento público al top 3 referidores del mes</li>
+          <li>Comisión del 10–15% por cada alumna referida</li>
+          <li>Link de afiliado único (Hotmart lo gestiona automáticamente)</li>
+          <li>Reconocimiento público mensual: top 3 referidoras</li>
+          <li>Acceso a material extra como incentivo</li>
         </ul>
         <div class="highlight highlight-green" style="margin-top:12px">
-          Un alumno que refiere 2 personas recupera el costo del curso. Esto genera un ciclo virtuoso de crecimiento orgánico.
+          Una alumna que refiere 3 personas a $39.990 recupera el costo del curso y comienza a generar ingreso. Esto crea un ciclo de crecimiento orgánico y sostenible.
         </div>
       </div>
     </div>
@@ -1067,14 +1078,14 @@
       <div class="card-title">Alianzas Estratégicas</div>
       <div class="grid-2">
         <ul class="arrow">
-          <li><strong>Inmobiliarias:</strong> acuerdos para que sus brokers se formen en la escuela (B2B)</li>
-          <li><strong>Portales inmobiliarios:</strong> Portal Inmobiliario, Toctoc — co-marketing</li>
-          <li><strong>Bancos y financieras:</strong> contenido sobre crédito hipotecario para alumnos</li>
+          <li><strong>Inmobiliarias:</strong> capacitación de sus equipos comerciales (B2B) — fuente de ingresos adicional y prácticas para alumnas</li>
+          <li><strong>Portal Inmobiliario / Toctoc:</strong> co-marketing con portales líderes del sector</li>
+          <li><strong>Bancos / financieras:</strong> módulo invitado sobre crédito hipotecario</li>
         </ul>
         <ul class="arrow">
-          <li><strong>Notarías y estudios jurídicos:</strong> módulo invitado sobre aspectos legales</li>
-          <li><strong>Influencers de finanzas personales:</strong> menciones a la escuela a cambio de comisión</li>
-          <li><strong>Colegios inmobiliarios:</strong> reconocimiento cruzado de certificaciones</li>
+          <li><strong>Influencers de finanzas personales:</strong> mujeres con audiencia que buscan independencia económica</li>
+          <li><strong>Notarías y abogados inmobiliarios:</strong> contenido sobre aspectos legales de la compraventa</li>
+          <li><strong>Medios de comunicación:</strong> posicionar a Alison como experta del sector</li>
         </ul>
       </div>
     </div>
@@ -1082,125 +1093,126 @@
 
   <hr class="divider">
 
-  <!-- ═══════════════ SECCIÓN 8 — ROADMAP ═══════════════ -->
+  <!-- ══════════════ S8 — ROADMAP + KPIs ══════════════ -->
   <section class="section" id="s8">
     <div class="section-header">
-      <div class="section-icon icon-road">🗺️</div>
+      <div class="section-icon">🗺️</div>
       <div class="section-title-block">
         <h2>8. Hoja de Ruta y KPIs</h2>
-        <p>Fases de implementación mes a mes y métricas de seguimiento</p>
+        <p>Fases de implementación y métricas clave de seguimiento</p>
       </div>
     </div>
 
     <div class="card">
-      <div class="card-title">Fases de Implementación — 12 Meses</div>
+      <div class="card-title">Fases — 12 Meses</div>
       <div class="timeline">
 
         <div class="phase">
           <span class="phase-tag">Mes 1–2 · Fundamentos</span>
-          <h3>CONSTRUIR LA BASE</h3>
+          <h3>COMPLETAR LA BASE Y LANZAR</h3>
           <ul class="arrow">
-            <li>Definir y documentar identidad de marca (colores, tono, logo si no existe)</li>
-            <li>Grabar y montar los primeros 4 módulos del curso</li>
-            <li>Subir curso a Hotmart y configurar pagos</li>
-            <li>Crear lead magnet #1: mini-clase gratuita o guía PDF</li>
-            <li>Configurar página de captura + secuencia de email de bienvenida (5 emails)</li>
-            <li>Integrar calculadora de honorarios al sitio con formulario de captura</li>
-            <li>Crear perfiles en Instagram y LinkedIn + primeras 10 publicaciones</li>
-            <li>Lanzar preventa a red cercana con descuento de fundador</li>
+            <li>Grabar o completar los 3 módulos con calidad de audio/video aceptable</li>
+            <li>Subir el curso a Hotmart o plataforma elegida, conectar Mercado Pago</li>
+            <li>Crear lead magnet #1: mini-clase o guía PDF descargable</li>
+            <li>Configurar página de captura + secuencia de 5 emails de bienvenida</li>
+            <li>Integrar captura de email en la calculadora de honorarios del sitio</li>
+            <li>Activar publicación diaria en Instagram (stories) + 3x semana reels/carruseles</li>
+            <li>Lanzar preventa a precio de fundadoras ($39.990) a red personal + WhatsApp</li>
+            <li>Primer webinar gratuito de presentación del programa</li>
           </ul>
-          <div class="highlight highlight-orange" style="margin-top:10px"><strong>Meta:</strong> 10–20 alumnos en preventa · Validar el producto · Primeros testimonios</div>
+          <div class="highlight highlight-orange" style="margin-top:10px"><strong>Meta:</strong> 15–30 alumnas en preventa · Primeros 3–5 testimoniales reales</div>
         </div>
 
         <div class="phase">
           <span class="phase-tag orange">Mes 3–4 · Tracción</span>
-          <h3>CRECER LA AUDIENCIA</h3>
+          <h3>CRECER LA AUDIENCIA Y VALIDAR</h3>
           <ul class="arrow">
-            <li>Completar grabación de los módulos 5–8</li>
-            <li>Primer webinar gratuito en vivo con apertura de inscripciones</li>
-            <li>Activar Meta Ads con presupuesto de $200.000 CLP/mes</li>
-            <li>Publicar casos de éxito de los primeros alumnos</li>
+            <li>Activar Meta Ads con $150.000–$200.000 CLP/mes</li>
+            <li>Publicar los primeros testimoniales de alumnas en redes</li>
             <li>Crear calculadora de rentabilidad de inversión (herramienta #2)</li>
-            <li>Lanzar la membresía mensual ($29.000 CLP)</li>
-            <li>Contactar 5 inmobiliarias para alianza o capacitación de equipo</li>
+            <li>Lanzar la membresía mensual ($19.990 CLP)</li>
+            <li>Realizar webinar temático mensual (gratuito → funnel a curso)</li>
+            <li>Contactar 3–5 inmobiliarias para alianza o capacitación de equipo</li>
+            <li>Ajustar el precio al regular ($79.990) tras cerrar el período de lanzamiento</li>
           </ul>
-          <div class="highlight highlight-orange" style="margin-top:10px"><strong>Meta:</strong> 50 alumnos totales · 20 membresías · 2.000 seguidores Instagram · Lista email 500+</div>
+          <div class="highlight highlight-orange" style="margin-top:10px"><strong>Meta:</strong> 60 alumnas totales · 20 membresías · 2.500 seguidoras Instagram · Lista email 400+</div>
         </div>
 
         <div class="phase">
           <span class="phase-tag green">Mes 5–8 · Escalada</span>
           <h3>OPTIMIZAR Y ESCALAR</h3>
           <ul class="arrow">
-            <li>Analizar qué contenido y canal trae más conversiones → doblar ahí</li>
-            <li>Lanzar Programa Avanzado (Módulos +, cierre e inversionistas)</li>
-            <li>Contratar apoyo de edición de video y community manager (part-time)</li>
-            <li>Webinar mensual como evento recurrente</li>
+            <li>Analizar qué canal y contenido convierte más → doblar ahí</li>
+            <li>Lanzar módulos 4 y 5 (cierre avanzado + captación de inversionistas)</li>
+            <li>Lanzar Plan Élite con asesorías 1:1 ($149.990)</li>
+            <li>Contratar apoyo part-time para edición de video y community</li>
             <li>Primer taller presencial o semi-presencial en Santiago</li>
-            <li>Sistematizar el programa de referidos con tracking</li>
-            <li>Lanzar primera capacitación B2B a equipo de inmobiliaria</li>
+            <li>Sistematizar el programa de referidos con tracking en Hotmart</li>
+            <li>Cerrar primera capacitación B2B con inmobiliaria</li>
           </ul>
-          <div class="highlight highlight-green" style="margin-top:10px"><strong>Meta:</strong> 150 alumnos totales · 50 membresías · $3.000.000 CLP/mes · 6.000 seguidores</div>
+          <div class="highlight highlight-green" style="margin-top:10px"><strong>Meta:</strong> 150 alumnas totales · 50 membresías · $2.500.000+ CLP/mes · 7.000 seguidoras</div>
         </div>
 
         <div class="phase">
-          <span class="phase-tag gold">Mes 9–12 · Consolidación</span>
-          <h3>CONSOLIDAR EL LIDERAZGO</h3>
+          <span class="phase-tag white">Mes 9–12 · Consolidación</span>
+          <h3>CONSOLIDAR EL LIDERAZGO DE MARCA</h3>
           <ul class="arrow">
-            <li>Revisión y actualización completa del curso (versión 2.0)</li>
-            <li>Crear certificación oficial de la escuela reconocida por inmobiliarias</li>
-            <li>Lanzar programa de mentores: ex-alumnos exitosos que enseñan</li>
-            <li>Explorar presencia en regiones fuera de Santiago</li>
-            <li>Evaluar expansión a otros países (Colombia, Perú) con contenido adaptado</li>
-            <li>Postular a medios especializados y podcasts de real estate</li>
+            <li>Actualizar y mejorar el curso (versión 2.0 con feedback de alumnas)</li>
+            <li>Crear certificación oficial reconocida por inmobiliarias socias</li>
+            <li>Lanzar programa de mentoras: ex-alumnas exitosas que co-enseñan</li>
+            <li>Explorar presencia en otras regiones de Chile (Antofagasta, Concepción)</li>
+            <li>Posicionar a Alison en medios especializados y podcasts de real estate</li>
+            <li>Evaluar expansión de contenido a Colombia o Perú</li>
           </ul>
-          <div class="highlight highlight-gold" style="margin-top:10px"><strong>Meta:</strong> 300+ alumnos totales · $5.000.000+ CLP/mes · Marca referente del sector</div>
+          <div class="highlight" style="margin-top:10px"><strong>Meta:</strong> 300+ alumnas totales · $4.000.000+ CLP/mes · Marca referente del sector</div>
         </div>
 
       </div>
     </div>
 
     <div class="card">
-      <div class="card-title">KPIs de Seguimiento — Dashboard Mensual</div>
-      <table class="kpi-table">
+      <div class="card-title">Acciones Inmediatas — Próximas 4 Semanas</div>
+      <div class="highlight highlight-orange">
+        <strong>Semana 1:</strong> Verificar que el curso está completo y accesible · Configurar secuencia de bienvenida por email · Añadir captura de email a la calculadora de honorarios
+      </div>
+      <div class="highlight" style="margin-top:8px">
+        <strong>Semana 2:</strong> Crear y publicar lead magnet gratuito (PDF o mini-clase) · Grabar 5 reels de contenido educativo · Preparar el webinar de lanzamiento
+      </div>
+      <div class="highlight highlight-green" style="margin-top:8px">
+        <strong>Semana 3:</strong> Lanzar webinar gratuito → CTA a inscripción con precio de lanzamiento · Activar WhatsApp lista de difusión · Comenzar a documentar testimoniales de alumnas
+      </div>
+      <div class="highlight" style="margin-top:8px">
+        <strong>Semana 4:</strong> Analizar resultados del lanzamiento · Configurar Meta Ads con primer presupuesto · Definir fecha de subida de precio al valor regular
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Dashboard de KPIs — Revisión Mensual</div>
+      <table class="data-table">
         <thead>
-          <tr><th>Área</th><th>Métrica</th><th>Meta Mes 3</th><th>Meta Mes 6</th><th>Meta Mes 12</th></tr>
+          <tr><th>Área</th><th>Métrica</th><th>Mes 3</th><th>Mes 6</th><th>Mes 12</th></tr>
         </thead>
         <tbody>
-          <tr><td>Audiencia</td><td>Seguidores Instagram</td><td class="kpi-val">1.000</td><td class="kpi-val">5.000</td><td class="kpi-val">15.000</td></tr>
-          <tr><td>Audiencia</td><td>Lista de email</td><td class="kpi-val">200</td><td class="kpi-val">800</td><td class="kpi-val">3.000</td></tr>
-          <tr><td>Negocio</td><td>Alumnos nuevos/mes</td><td class="kpi-val">10</td><td class="kpi-val">20</td><td class="kpi-val">40</td></tr>
-          <tr><td>Negocio</td><td>Membresías activas</td><td class="kpi-val">10</td><td class="kpi-val">50</td><td class="kpi-val">150</td></tr>
-          <tr><td>Negocio</td><td>Ingreso mensual CLP</td><td class="kpi-val">$1.000.000</td><td class="kpi-val">$3.000.000</td><td class="kpi-val">$6.000.000</td></tr>
-          <tr><td>Conversión</td><td>Tasa lead → alumno</td><td class="kpi-val">3%</td><td class="kpi-val">5%</td><td class="kpi-val">7%</td></tr>
-          <tr><td>Retención</td><td>Alumnos que completan el curso</td><td class="kpi-val">60%</td><td class="kpi-val">70%</td><td class="kpi-val">75%</td></tr>
-          <tr><td>Retención</td><td>NPS (satisfacción)</td><td class="kpi-val">50+</td><td class="kpi-val">60+</td><td class="kpi-val">70+</td></tr>
-          <tr><td>Referidos</td><td>% alumnos que refieren</td><td class="kpi-val">5%</td><td class="kpi-val">15%</td><td class="kpi-val">25%</td></tr>
+          <tr><td>Audiencia</td><td>Seguidoras Instagram</td><td class="val">1.500</td><td class="val">6.000</td><td class="val">18.000</td></tr>
+          <tr><td>Audiencia</td><td>Lista de email/WhatsApp</td><td class="val">300</td><td class="val">1.000</td><td class="val">4.000</td></tr>
+          <tr><td>Negocio</td><td>Alumnas nuevas/mes</td><td class="val">15</td><td class="val">25</td><td class="val">50</td></tr>
+          <tr><td>Negocio</td><td>Membresías activas</td><td class="val">15</td><td class="val">50</td><td class="val">200</td></tr>
+          <tr><td>Negocio</td><td>Ingreso mensual CLP</td><td class="val">$800.000</td><td class="val">$2.500.000</td><td class="val">$5.000.000</td></tr>
+          <tr><td>Conversión</td><td>Tasa lead → alumna</td><td class="val">2%</td><td class="val">4%</td><td class="val">6%</td></tr>
+          <tr><td>Retención</td><td>% que completa el curso</td><td class="val">60%</td><td class="val">70%</td><td class="val">78%</td></tr>
+          <tr><td>Referidos</td><td>% alumnas que refieren</td><td class="val">8%</td><td class="val">18%</td><td class="val">30%</td></tr>
+          <tr><td>Satisfacción</td><td>NPS (encuesta mensual)</td><td class="val">55+</td><td class="val">65+</td><td class="val">72+</td></tr>
         </tbody>
       </table>
     </div>
 
-    <div class="card">
-      <div class="card-title">Próximos 30 Días — Acciones Inmediatas</div>
-      <div class="highlight highlight-orange">
-        <strong>Semana 1:</strong> Definir identidad visual final · Configurar Hotmart · Crear formulario de captura en el sitio
-      </div>
-      <div class="highlight" style="margin-top:8px">
-        <strong>Semana 2:</strong> Grabar Módulos 1 y 2 · Crear lead magnet (guía PDF o mini-clase) · Publicar primeros 3 contenidos en Instagram
-      </div>
-      <div class="highlight highlight-green" style="margin-top:8px">
-        <strong>Semana 3:</strong> Montar módulos en Hotmart · Configurar secuencia de email · Activar calculadora de honorarios como lead magnet
-      </div>
-      <div class="highlight highlight-gold" style="margin-top:8px">
-        <strong>Semana 4:</strong> Lanzar preventa a red personal + WhatsApp · Primer webinar gratuito de presentación · Recoger primeros testimonios
-      </div>
-    </div>
-
   </section>
 
-  <!-- ═══ FOOTER ═══ -->
-  <div style="text-align:center;margin-top:60px;padding-top:32px;border-top:1.5px solid var(--border)">
-    <p style="font-size:0.78rem;color:var(--muted)">Escuela de Broker Exitosas · escuelaexitosas.cl · Plan Estratégico v1.0 · Junio 2026</p>
-    <p style="font-size:0.75rem;color:var(--border);margin-top:6px">Este documento es confidencial y de uso interno.</p>
+  <!-- FOOTER -->
+  <div style="text-align:center;margin-top:60px;padding-top:32px;border-top:1px solid var(--border)">
+    <p style="font-size:1.1rem;font-weight:800;color:var(--gold);letter-spacing:1px">EXITOSAS</p>
+    <p style="font-size:0.78rem;color:var(--gray);margin-top:4px">Escuela de Brokers Inmobiliarias · escuelaexitosas.cl · Fundadora: Alison Ramírez</p>
+    <p style="font-size:0.72rem;color:var(--border);margin-top:6px">Plan Estratégico v1.0 · Junio 2026 · Documento de uso interno y confidencial</p>
   </div>
 
 </div>
