@@ -15,6 +15,7 @@
       --green: #1a7a4a;
       --green-light: #e8f7ef;
       --red: #c0392b;
+      --orange-l: #fef0e0;
       --bg: #f4f6fb;
       --white: #ffffff;
       --text: #1a2540;
@@ -396,7 +397,90 @@
     tbody td.green { color: var(--green); font-weight: 700; }
     tbody td.gold  { color: #8a6800; font-weight: 700; }
 
-    /* ── ADS STRATEGY ── */
+    /* ── MARKETING TABS ── */
+    .mktabs {
+      display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 20px;
+    }
+    .mktab {
+      padding: 8px 16px; border-radius: 8px; border: 2px solid var(--border);
+      background: var(--white); color: var(--muted); font-size: 0.8rem;
+      font-weight: 700; cursor: pointer; transition: all 0.18s;
+    }
+    .mktab:hover  { border-color: var(--navy); color: var(--navy); }
+    .mktab.active { background: var(--navy); border-color: var(--navy); color: var(--white); }
+    .mk-panel { display: none; margin-bottom: 32px; }
+    .mk-panel.active { display: block; }
+
+    /* ── CHANNEL CARDS ── */
+    .mk-channel-grid {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(320px,1fr)); gap: 16px;
+    }
+    .mk-channel {
+      background: var(--white); border-radius: 12px; padding: 20px;
+      border-left: 5px solid var(--navy);
+      box-shadow: 0 2px 12px rgba(10,30,80,0.08);
+    }
+    .mk-channel.meta    { border-color: #1877f2; }
+    .mk-channel.tiktok  { border-color: #010101; }
+    .mk-channel.ig      { border-color: #e1306c; }
+    .mk-channel.yt      { border-color: #ff0000; }
+    .mk-channel.linkedin{ border-color: #0a66c2; }
+    .mk-ch-header {
+      display: flex; align-items: center; gap: 12px; margin-bottom: 4px;
+    }
+    .mk-ch-icon { font-size: 1.6rem; line-height: 1; }
+    .mk-ch-name { font-size: 1rem; font-weight: 800; color: var(--text); }
+    .mk-ch-sub  { font-size: 0.75rem; color: var(--muted); }
+    .mk-ch-budget {
+      margin-left: auto; background: var(--bg); border-radius: 8px;
+      padding: 4px 10px; font-size: 0.72rem; font-weight: 700; color: var(--navy);
+    }
+    .mk-kpi-row { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
+    .mk-kpi-pill {
+      background: var(--bg); border-radius: 8px; padding: 7px 12px;
+      font-size: 0.75rem; display: flex; flex-direction: column; gap: 1px;
+    }
+    .mk-kpi-pill strong { font-size: 0.95rem; font-weight: 800; color: var(--navy); }
+    .mk-kpi-pill span   { color: var(--muted); font-size: 0.7rem; }
+
+    /* ── CALENDAR ── */
+    .cal-table-wrap { overflow-x: auto; margin-bottom: 16px; }
+    .cal-pill {
+      display: inline-block; padding: 3px 8px; border-radius: 6px;
+      font-size: 0.7rem; font-weight: 600; white-space: nowrap;
+    }
+    .cal-pill.ig    { background: #fce4ec; color: #c2185b; }
+    .cal-pill.tt    { background: #f3e5f5; color: #6a1b9a; }
+    .cal-pill.story { background: #e3f2fd; color: #1565c0; }
+    .cal-pill.wa    { background: #e8f5e9; color: #2e7d32; }
+    .cal-pill.li    { background: #e1f0fb; color: #0a66c2; }
+    .cal-pill.em    { background: #fff3e0; color: #e65100; }
+
+    /* ── FUNNEL ── */
+    .funnel-wrap {
+      display: flex; flex-direction: column; align-items: center;
+      gap: 0; margin-bottom: 32px;
+    }
+    .funnel-step {
+      display: flex; align-items: center; gap: 16px;
+      padding: 16px 24px; border-radius: 12px; width: 100%; max-width: 700px;
+      border-left: 5px solid var(--border);
+    }
+    .funnel-step.f1 { border-color: #3498db; background: #eaf4fd; }
+    .funnel-step.f2 { border-color: #9b59b6; background: #f5eefb; }
+    .funnel-step.f3 { border-color: var(--orange); background: var(--orange-l, #fef0e0); }
+    .funnel-step.f4 { border-color: var(--green); background: var(--green-light); }
+    .funnel-step.f5 { border-color: var(--gold); background: #fffdf4; }
+    .funnel-num {
+      font-size: 1.6rem; font-weight: 900; opacity: 0.2; line-height: 1; flex-shrink: 0;
+    }
+    .funnel-content { flex: 1; }
+    .funnel-title { font-size: 0.72rem; font-weight: 800; letter-spacing: 1.5px; color: var(--muted); margin-bottom: 3px; text-transform: uppercase; }
+    .funnel-desc  { font-size: 0.85rem; font-weight: 600; color: var(--text); }
+    .funnel-vol   { font-size: 0.75rem; color: var(--muted); margin-top: 4px; }
+    .funnel-arrow { font-size: 1.2rem; color: var(--muted); margin: 2px 0; }
+
+    /* ── ADS STRATEGY (legacy, kept for compat) ── */
     .ads-grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
@@ -628,32 +712,413 @@
   </div>
 
   <!-- ══════════════════════ MARKETING ══════════════════════ -->
-  <div class="section-title">Estrategia de Marketing — Diego Byrts + Meta Ads</div>
+  <div class="section-title">Plan de Marketing Multicanal — Diego Byrts</div>
 
-  <div class="ads-grid">
-    <div class="ads-card">
-      <h4>Contenido Orgánico</h4>
-      <p>Diego publica 4-5 reels/semana mostrando propiedades, tips de inversión y casos de éxito. Storytelling de marca personal.</p>
+  <!-- Canal tabs -->
+  <div class="mktabs" id="mktabs">
+    <button class="mktab active" onclick="showMk('mk-paid')">Paid Media</button>
+    <button class="mktab" onclick="showMk('mk-organic')">Orgánico</button>
+    <button class="mktab" onclick="showMk('mk-whatsapp')">WhatsApp</button>
+    <button class="mktab" onclick="showMk('mk-email')">Email & Referidos</button>
+    <button class="mktab" onclick="showMk('mk-alianzas')">Alianzas</button>
+    <button class="mktab" onclick="showMk('mk-calendar')">Calendario</button>
+  </div>
+
+  <!-- PAID MEDIA -->
+  <div id="mk-paid" class="mk-panel active">
+    <div class="mk-channel-grid">
+      <div class="mk-channel meta">
+        <div class="mk-ch-header">
+          <div class="mk-ch-icon">📘</div>
+          <div>
+            <div class="mk-ch-name">Meta Ads</div>
+            <div class="mk-ch-sub">Facebook + Instagram</div>
+          </div>
+          <div class="mk-ch-budget">10% comisión</div>
+        </div>
+        <ul class="checklist" style="margin-top:12px;">
+          <li class="highlight">Campaña de generación de leads con formulario nativo</li>
+          <li>Segmentación: zona, rango etario 28-55, intereses inversión/propiedad</li>
+          <li>Retargeting a visitas de perfil y reproducciones de video</li>
+          <li>Lookalike audiences de clientes cerrados</li>
+          <li class="highlight">A/B test: video de Diego vs. foto de propiedad vs. carrusel</li>
+          <li>Presupuesto escala automáticamente con las comisiones (10%)</li>
+        </ul>
+        <div class="mk-kpi-row">
+          <div class="mk-kpi-pill"><strong>USD 5-15</strong><span>Costo por lead objetivo</span></div>
+          <div class="mk-kpi-pill"><strong>5-8%</strong><span>Conversión lead→cita</span></div>
+        </div>
+      </div>
+
+      <div class="mk-channel tiktok">
+        <div class="mk-ch-header">
+          <div class="mk-ch-icon">🎵</div>
+          <div>
+            <div class="mk-ch-name">TikTok Ads</div>
+            <div class="mk-ch-sub">Paid + Orgánico</div>
+          </div>
+          <div class="mk-ch-budget">Mes 3+</div>
+        </div>
+        <ul class="checklist" style="margin-top:12px;">
+          <li class="highlight">Crear cuenta TikTok Business para Diego Byrts</li>
+          <li>Formato TopView o In-Feed Ads para mayor alcance</li>
+          <li>Contenido: tours de propiedades, "¿Cuánto vale este depto?" (gancho)</li>
+          <li>Tendencias: duetos con compradores, antes/después de reformas</li>
+          <li class="highlight">TikTok Lead Generation Form — más barato que Meta en nicho joven</li>
+          <li>Publicar mínimo 5 videos/semana para el algoritmo</li>
+        </ul>
+        <div class="mk-kpi-row">
+          <div class="mk-kpi-pill"><strong>18-35</strong><span>Público objetivo</span></div>
+          <div class="mk-kpi-pill"><strong>USD 2-8</strong><span>CPL estimado TikTok</span></div>
+        </div>
+      </div>
     </div>
-    <div class="ads-card">
-      <h4>Campañas Pagadas</h4>
-      <p>Meta Ads con objetivo de generación de leads. Segmentación por zona, rango de precio y perfil de comprador/inversor.</p>
+    <div class="note-box" style="margin-top:16px;">
+      <strong>Regla de distribución paid:</strong> Meta Ads recibe el 10% de comisiones automáticamente. TikTok Ads se activa desde el Mes 3 con un presupuesto fijo de USD 300-500/mes para testear el canal antes de escalarlo.
     </div>
-    <div class="ads-card">
-      <h4>Lead Magnet</h4>
-      <p>Guía gratuita "Cómo comprar tu primera propiedad en [Ciudad]" o "Las 5 zonas con mayor plusvalía en 2025".</p>
+  </div>
+
+  <!-- ORGÁNICO -->
+  <div id="mk-organic" class="mk-panel">
+    <div class="mk-channel-grid">
+
+      <div class="mk-channel ig">
+        <div class="mk-ch-header">
+          <div class="mk-ch-icon">📸</div>
+          <div><div class="mk-ch-name">Instagram</div><div class="mk-ch-sub">Marca personal Diego</div></div>
+          <div class="mk-ch-budget">Diario</div>
+        </div>
+        <ul class="checklist" style="margin-top:12px;">
+          <li class="highlight">4-5 Reels/semana — tours, tips de inversión, comparativas</li>
+          <li>Stories diarias: polls, preguntas frecuentes, behind the scenes</li>
+          <li>Highlights organizados: Proyectos, Clientes, Tips, Equipo</li>
+          <li class="highlight">Formato "¿Vale la pena?" — análisis rápido de una propiedad en 60 seg</li>
+          <li>1 post de testimonio de cliente por semana</li>
+          <li>Colaboraciones con cuentas de arquitectura y diseño</li>
+        </ul>
+        <div class="mk-kpi-row">
+          <div class="mk-kpi-pill"><strong>10K</strong><span>Seguidores al mes 6</span></div>
+          <div class="mk-kpi-pill"><strong>25K</strong><span>Meta al mes 12</span></div>
+        </div>
+      </div>
+
+      <div class="mk-channel tiktok">
+        <div class="mk-ch-header">
+          <div class="mk-ch-icon">🎵</div>
+          <div><div class="mk-ch-name">TikTok Orgánico</div><div class="mk-ch-sub">Volumen + viralidad</div></div>
+          <div class="mk-ch-budget">5 videos/sem</div>
+        </div>
+        <ul class="checklist" style="margin-top:12px;">
+          <li class="highlight">5+ videos/semana — el algoritmo recompensa volumen</li>
+          <li>Formato "POV: eres broker inmobiliario en Chile" — muy viral</li>
+          <li>Tours rápidos 30-60 seg de propiedades con precio al final</li>
+          <li class="highlight">"Mitos del mercado inmobiliario" — series educativas</li>
+          <li>Comentar en cuentas grandes del rubro para ganar visibilidad</li>
+          <li>Reutilizar el mismo video en Reels e Instagram para maximizar alcance</li>
+        </ul>
+        <div class="mk-kpi-row">
+          <div class="mk-kpi-pill"><strong>1 viral</strong><span>Objetivo cada 2 meses</span></div>
+          <div class="mk-kpi-pill"><strong>50K</strong><span>Views/mes al mes 3</span></div>
+        </div>
+      </div>
+
+      <div class="mk-channel yt">
+        <div class="mk-ch-header">
+          <div class="mk-ch-icon">▶️</div>
+          <div><div class="mk-ch-name">YouTube Shorts</div><div class="mk-ch-sub">Autoridad + SEO</div></div>
+          <div class="mk-ch-budget">Mes 3+</div>
+        </div>
+        <ul class="checklist" style="margin-top:12px;">
+          <li>Reutilizar los mejores TikToks como YouTube Shorts (0 esfuerzo extra)</li>
+          <li class="highlight">1 video largo/mes: "Guía para comprar tu primera propiedad en Chile"</li>
+          <li>Posicionamiento SEO: "departamentos en [ciudad]", "invertir en propiedades Chile"</li>
+          <li>Canal de YouTube construye autoridad a largo plazo vs. redes sociales</li>
+        </ul>
+        <div class="mk-kpi-row">
+          <div class="mk-kpi-pill"><strong>SEO</strong><span>Canal de largo plazo</span></div>
+          <div class="mk-kpi-pill"><strong>Mes 3</strong><span>Fecha de inicio</span></div>
+        </div>
+      </div>
+
+      <div class="mk-channel linkedin">
+        <div class="mk-ch-header">
+          <div class="mk-ch-icon">💼</div>
+          <div><div class="mk-ch-name">LinkedIn</div><div class="mk-ch-sub">Inversores + B2B</div></div>
+          <div class="mk-ch-budget">2 posts/sem</div>
+        </div>
+        <ul class="checklist" style="margin-top:12px;">
+          <li class="highlight">Perfil de Diego como "broker + experto en inversión inmobiliaria"</li>
+          <li>Publicar análisis del mercado, rentabilidad por zona, tendencias</li>
+          <li>Conectar con gerentes, ejecutivos, altos ingresos = comprador premium</li>
+          <li>Captación de inversores para proyectos en desarrollo (Lo Curro, etc.)</li>
+        </ul>
+        <div class="mk-kpi-row">
+          <div class="mk-kpi-pill"><strong>Inversores</strong><span>Perfil target</span></div>
+          <div class="mk-kpi-pill"><strong>2-3x</strong><span>Ticket promedio más alto</span></div>
+        </div>
+      </div>
+
     </div>
-    <div class="ads-card">
-      <h4>Retargeting</h4>
-      <p>Audiencias personalizadas de quienes vieron los videos de Diego o visitaron el perfil. Reimpactar con oferta concreta.</p>
+  </div>
+
+  <!-- WHATSAPP -->
+  <div id="mk-whatsapp" class="mk-panel">
+    <div class="mk-channel-grid">
+      <div class="mk-channel meta" style="border-color:#25d366">
+        <div class="mk-ch-header">
+          <div class="mk-ch-icon">💬</div>
+          <div><div class="mk-ch-name">WhatsApp Business</div><div class="mk-ch-sub">Funnel principal de conversión</div></div>
+          <div class="mk-ch-budget">Inmediato</div>
+        </div>
+        <ul class="checklist" style="margin-top:12px;">
+          <li class="highlight">Todos los leads de Meta Ads y TikTok llegan a WhatsApp</li>
+          <li>Respuesta automática en menos de 5 minutos (mensaje de bienvenida)</li>
+          <li>Catálogo de propiedades activas en WhatsApp Business</li>
+          <li class="highlight">Guión de conversación estándar para todos los freelancers</li>
+          <li>Etiquetas: Nuevo / Calificado / En proceso / Cerrado / Frío</li>
+          <li>Broadcast semanal a base de leads fríos con nueva propiedad o noticia</li>
+          <li class="highlight">Link directo wa.me/ en todos los posts y bio de Instagram</li>
+        </ul>
+        <div class="mk-kpi-row">
+          <div class="mk-kpi-pill"><strong>&lt;5 min</strong><span>Tiempo de respuesta</span></div>
+          <div class="mk-kpi-pill"><strong>Broadcast</strong><span>1 mensaje/semana a leads fríos</span></div>
+          <div class="mk-kpi-pill"><strong>Guión</strong><span>Estándar para freelancers</span></div>
+        </div>
+      </div>
+
+      <div class="mk-channel ig" style="border-color:#128c7e">
+        <div class="mk-ch-header">
+          <div class="mk-ch-icon">📋</div>
+          <div><div class="mk-ch-name">Script de WhatsApp</div><div class="mk-ch-sub">Guión para el equipo</div></div>
+        </div>
+        <div style="margin-top:12px;font-size:0.82rem;line-height:1.7;color:var(--text);">
+          <p><strong>Mensaje 1 (bienvenida automática):</strong></p>
+          <div style="background:#e8f7ef;border-radius:8px;padding:10px;margin:8px 0;font-size:0.8rem;color:#1a4a2a;">
+            Hola [nombre] 👋 Soy Diego de Avance Inmobiliario. Vi que te interesó [propiedad/zona]. ¿Tenés 10 minutos esta semana para mostrarte opciones que se ajusten a lo que buscás?
+          </div>
+          <p><strong>Mensaje 2 (si no responde en 48hs):</strong></p>
+          <div style="background:#fff8e6;border-radius:8px;padding:10px;margin:8px 0;font-size:0.8rem;color:#6b4f00;">
+            Hola [nombre], te escribo porque acaba de entrar una propiedad en [zona] que creo que te puede interesar. ¿Te mando los detalles?
+          </div>
+          <p><strong>Mensaje 3 — Reactivación leads fríos (semanal):</strong></p>
+          <div style="background:#e8edf8;border-radius:8px;padding:10px;margin:8px 0;font-size:0.8rem;color:#0d2b6e;">
+            📍 Nueva propiedad disponible en [zona] — [X] dorm, UF [precio]. Ideal para inversión/primera vivienda. ¿Te interesa verla?
+          </div>
+        </div>
+      </div>
     </div>
-    <div class="ads-card">
-      <h4>WhatsApp Funnel</h4>
-      <p>Todos los leads van a WhatsApp Business. Respuesta automática + seguimiento personalizado del freelancer asignado.</p>
+  </div>
+
+  <!-- EMAIL & REFERIDOS -->
+  <div id="mk-email" class="mk-panel">
+    <div class="mk-channel-grid">
+      <div class="mk-channel ig">
+        <div class="mk-ch-header">
+          <div class="mk-ch-icon">📧</div>
+          <div><div class="mk-ch-name">Email Marketing</div><div class="mk-ch-sub">Nurturing de leads</div></div>
+          <div class="mk-ch-budget">Mes 2+</div>
+        </div>
+        <ul class="checklist" style="margin-top:12px;">
+          <li class="highlight">Newsletter mensual: "El Mercado Inmobiliario con Diego Byrts"</li>
+          <li>Contenido: tendencias, nueva propiedad destacada, consejo de inversión</li>
+          <li>Secuencia automática para leads nuevos (5 emails en 10 días)</li>
+          <li>Email 1: bienvenida + guía PDF gratuita</li>
+          <li>Email 2-3: casos de éxito + video de propiedad</li>
+          <li class="highlight">Email 4-5: oferta concreta + llamado a la acción WhatsApp</li>
+          <li>Herramienta recomendada: Mailchimp (gratis hasta 500 subs) o Brevo</li>
+        </ul>
+        <div class="mk-kpi-row">
+          <div class="mk-kpi-pill"><strong>30%</strong><span>Open rate objetivo</span></div>
+          <div class="mk-kpi-pill"><strong>500+</strong><span>Suscriptores al mes 6</span></div>
+        </div>
+      </div>
+
+      <div class="mk-channel tiktok" style="border-color:#e74c3c">
+        <div class="mk-ch-header">
+          <div class="mk-ch-icon">🎁</div>
+          <div><div class="mk-ch-name">Programa de Referidos</div><div class="mk-ch-sub">Boca a boca sistematizado</div></div>
+          <div class="mk-ch-budget">Mes 1+</div>
+        </div>
+        <ul class="checklist" style="margin-top:12px;">
+          <li class="highlight">Cliente que cierra + refiere a otro comprador → recibe beneficio</li>
+          <li>Beneficio sugerido: descuento en segunda compra, gift card, bono en efectivo</li>
+          <li>Freelancer que trae a otro freelancer → 2% extra en sus primeras 3 ops</li>
+          <li class="highlight">Crear landing page simple: "Recomienda y gana con Avance"</li>
+          <li>Cada cliente que cierra recibe automáticamente el kit de referidos por WhatsApp</li>
+          <li>Aliados referidores: abogados, contadores, asesores financieros</li>
+        </ul>
+        <div class="mk-kpi-row">
+          <div class="mk-kpi-pill"><strong>20%</strong><span>Ops por referidos al año 1</span></div>
+          <div class="mk-kpi-pill"><strong>$0</strong><span>Costo de adquisición</span></div>
+        </div>
+      </div>
     </div>
-    <div class="ads-card">
-      <h4>Testimonios & Social Proof</h4>
-      <p>Video testimonial de cada cliente cerrado. Diego los publica. Genera confianza y reactivación de leads fríos.</p>
+  </div>
+
+  <!-- ALIANZAS -->
+  <div id="mk-alianzas" class="mk-panel">
+    <div class="mk-channel-grid">
+      <div class="mk-channel meta" style="border-color:#8e44ad">
+        <div class="mk-ch-header">
+          <div class="mk-ch-icon">🤝</div>
+          <div><div class="mk-ch-name">Alianzas Estratégicas</div><div class="mk-ch-sub">Canales sin costo publicitario</div></div>
+          <div class="mk-ch-budget">Mes 1+</div>
+        </div>
+        <ul class="checklist" style="margin-top:12px;">
+          <li class="highlight">Bancos e hipotecarias — acuerdo de referidos mutuos</li>
+          <li>Arquitectos y estudios de diseño — clientes que remodelan = compran</li>
+          <li>Constructoras pequeñas — vender sus proyectos a cambio de exclusividad</li>
+          <li class="highlight">Contadores y asesores financieros — recomiendan inversión inmobiliaria</li>
+          <li>Abogados de familia — divorcios, herencias = venta forzada de propiedades</li>
+          <li>Empresas de RRHH — ejecutivos en traslado necesitan vivienda urgente</li>
+          <li class="highlight">Colegios/universidades — familias que se mudan por educación</li>
+        </ul>
+      </div>
+
+      <div class="mk-channel ig" style="border-color:#f39c12">
+        <div class="mk-ch-header">
+          <div class="mk-ch-icon">🎪</div>
+          <div><div class="mk-ch-name">Eventos & Presencia</div><div class="mk-ch-sub">Autoridad de marca</div></div>
+          <div class="mk-ch-budget">Mes 6+</div>
+        </div>
+        <ul class="checklist" style="margin-top:12px;">
+          <li class="highlight">Evento presencial "Noche de Propiedades Avance" — 1 por semestre</li>
+          <li>Webinar mensual gratuito: "Cómo invertir en propiedades con poco capital"</li>
+          <li>Diego como speaker en eventos de finanzas personales o emprendimiento</li>
+          <li class="highlight">Sponsorear evento local deportivo/cultural con visibilidad de marca</li>
+          <li>Presencia en ferias inmobiliarias del rubro (Expo Inmobiliaria, etc.)</li>
+          <li>Podcast propio: invitar a expertos en finanzas, urbanismo, arquitectura</li>
+        </ul>
+        <div class="mk-kpi-row">
+          <div class="mk-kpi-pill"><strong>50+</strong><span>Asistentes por evento</span></div>
+          <div class="mk-kpi-pill"><strong>10%</strong><span>Conversión evento→cita</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CALENDARIO DE CONTENIDO -->
+  <div id="mk-calendar" class="mk-panel">
+    <div class="cal-table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Canal</th>
+            <th>Lunes</th>
+            <th>Martes</th>
+            <th>Miércoles</th>
+            <th>Jueves</th>
+            <th>Viernes</th>
+            <th>Sábado</th>
+            <th>Domingo</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Instagram</strong></td>
+            <td><span class="cal-pill ig">Reel propiedad</span></td>
+            <td><span class="cal-pill story">Story Q&A</span></td>
+            <td><span class="cal-pill ig">Reel tip</span></td>
+            <td><span class="cal-pill story">Story encuesta</span></td>
+            <td><span class="cal-pill ig">Reel caso éxito</span></td>
+            <td><span class="cal-pill story">Story detrás cámaras</span></td>
+            <td>—</td>
+          </tr>
+          <tr>
+            <td><strong>TikTok</strong></td>
+            <td><span class="cal-pill tt">Tour rápido</span></td>
+            <td><span class="cal-pill tt">¿Vale la pena?</span></td>
+            <td><span class="cal-pill tt">Mito/verdad</span></td>
+            <td><span class="cal-pill tt">Comparativa</span></td>
+            <td><span class="cal-pill tt">Tendencia</span></td>
+            <td><span class="cal-pill tt">Video viral</span></td>
+            <td><span class="cal-pill tt">Reposta/dueto</span></td>
+          </tr>
+          <tr>
+            <td><strong>WhatsApp</strong></td>
+            <td>—</td>
+            <td>—</td>
+            <td><span class="cal-pill wa">Broadcast leads</span></td>
+            <td>—</td>
+            <td>—</td>
+            <td>—</td>
+            <td>—</td>
+          </tr>
+          <tr>
+            <td><strong>LinkedIn</strong></td>
+            <td><span class="cal-pill li">Post análisis</span></td>
+            <td>—</td>
+            <td>—</td>
+            <td><span class="cal-pill li">Post mercado</span></td>
+            <td>—</td>
+            <td>—</td>
+            <td>—</td>
+          </tr>
+          <tr>
+            <td><strong>Email</strong></td>
+            <td>—</td>
+            <td>—</td>
+            <td>—</td>
+            <td>—</td>
+            <td>—</td>
+            <td>—</td>
+            <td><span class="cal-pill em">Newsletter</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="note-box" style="margin-top:16px;">
+      <strong>Regla de oro del contenido:</strong> Un solo video grabado = 3 formatos. Sube el mismo video a TikTok, Reels e Instagram (feed). Con 2-3 horas de grabación semanal con Diego, cubrís todos los canales.
+    </div>
+  </div>
+
+  <!-- EMBUDO RESUMEN -->
+  <div class="divider"></div>
+  <div class="section-title">Embudo de Captación — Vista General</div>
+  <div class="funnel-wrap">
+    <div class="funnel-step f1">
+      <div class="funnel-num">01</div>
+      <div class="funnel-content">
+        <div class="funnel-title">ATRACCIÓN</div>
+        <div class="funnel-desc">TikTok · Instagram · Meta Ads · LinkedIn · YouTube · Eventos</div>
+        <div class="funnel-vol">~1.000 personas/mes al año 1</div>
+      </div>
+    </div>
+    <div class="funnel-arrow">↓</div>
+    <div class="funnel-step f2">
+      <div class="funnel-num">02</div>
+      <div class="funnel-content">
+        <div class="funnel-title">CAPTACIÓN DE LEADS</div>
+        <div class="funnel-desc">Formulario Meta · Link en bio · WhatsApp directo · Referidos</div>
+        <div class="funnel-vol">~300-500 leads/mes</div>
+      </div>
+    </div>
+    <div class="funnel-arrow">↓</div>
+    <div class="funnel-step f3">
+      <div class="funnel-num">03</div>
+      <div class="funnel-content">
+        <div class="funnel-title">CALIFICACIÓN</div>
+        <div class="funnel-desc">Back office filtra → asigna a freelancer · WhatsApp script · Email secuencia</div>
+        <div class="funnel-vol">~80-120 leads calificados/mes</div>
+      </div>
+    </div>
+    <div class="funnel-arrow">↓</div>
+    <div class="funnel-step f4">
+      <div class="funnel-num">04</div>
+      <div class="funnel-content">
+        <div class="funnel-title">CIERRE</div>
+        <div class="funnel-desc">Freelancer acompaña · Visita · Oferta · Reserva → Promesa → Cierre</div>
+        <div class="funnel-vol">~15-25 operaciones/mes al año 1</div>
+      </div>
+    </div>
+    <div class="funnel-arrow">↓</div>
+    <div class="funnel-step f5">
+      <div class="funnel-num">05</div>
+      <div class="funnel-content">
+        <div class="funnel-title">FIDELIZACIÓN</div>
+        <div class="funnel-desc">Testimonio · Referidos · Newsletter · Reactivación a los 6 meses</div>
+        <div class="funnel-vol">→ 20% de ops por referidos al año 1</div>
+      </div>
     </div>
   </div>
 
@@ -1009,27 +1474,39 @@
 
   <div class="progress-section">
     <div class="progress-item">
-      <div class="progress-top"><span>Leads generados por Meta Ads / mes</span><span>Meta: 500/mes al año 1</span></div>
+      <div class="progress-top"><span>📘 Leads Meta Ads / mes</span><span>Meta año 1: 300-400 leads</span></div>
       <div class="bar-bg"><div class="bar-fill" style="width:75%"></div></div>
     </div>
     <div class="progress-item">
-      <div class="progress-top"><span>Tasa de conversión lead → venta</span><span>Objetivo: 5-8%</span></div>
-      <div class="bar-bg"><div class="bar-fill" style="width:60%;background:linear-gradient(90deg,#27ae60,#1abc9c)"></div></div>
+      <div class="progress-top"><span>🎵 Seguidores TikTok Diego Byrts</span><span>Meta año 1: 20K-50K</span></div>
+      <div class="bar-bg"><div class="bar-fill" style="width:60%;background:linear-gradient(90deg,#010101,#555)"></div></div>
     </div>
     <div class="progress-item">
-      <div class="progress-top"><span>Tiempo promedio de cierre</span><span>Objetivo: 21-30 días</span></div>
+      <div class="progress-top"><span>📸 Seguidores Instagram Diego Byrts</span><span>Meta año 1: 25K</span></div>
+      <div class="bar-bg"><div class="bar-fill" style="width:70%;background:linear-gradient(90deg,#e1306c,#f77737)"></div></div>
+    </div>
+    <div class="progress-item">
+      <div class="progress-top"><span>💬 Leads por WhatsApp + Referidos / mes</span><span>Meta año 1: 100-150 leads orgánicos</span></div>
+      <div class="bar-bg"><div class="bar-fill" style="width:55%;background:linear-gradient(90deg,#25d366,#128c7e)"></div></div>
+    </div>
+    <div class="progress-item">
+      <div class="progress-top"><span>📧 Suscriptores email newsletter</span><span>Meta mes 6: 500+ subs</span></div>
       <div class="bar-bg"><div class="bar-fill" style="width:50%;background:linear-gradient(90deg,#e67e22,#f39c12)"></div></div>
     </div>
     <div class="progress-item">
-      <div class="progress-top"><span>Seguidores de Diego Byrts en Instagram</span><span>Meta: 25K al mes 12</span></div>
-      <div class="bar-bg"><div class="bar-fill" style="width:85%;background:linear-gradient(90deg,#8e44ad,#9b59b6)"></div></div>
+      <div class="progress-top"><span>✅ Tasa de conversión lead → operación cerrada</span><span>Objetivo: 5-8%</span></div>
+      <div class="bar-bg"><div class="bar-fill" style="width:60%;background:linear-gradient(90deg,#27ae60,#1abc9c)"></div></div>
     </div>
     <div class="progress-item">
-      <div class="progress-top"><span>Freelancers activos (con al menos 1 op/mes)</span><span>Meta: 20 al mes 12</span></div>
-      <div class="bar-bg"><div class="bar-fill" style="width:70%;background:linear-gradient(90deg,#c0392b,#e74c3c)"></div></div>
+      <div class="progress-top"><span>⏱ Tiempo promedio de cierre</span><span>Objetivo: 21-30 días</span></div>
+      <div class="bar-bg"><div class="bar-fill" style="width:50%;background:linear-gradient(90deg,#8e44ad,#9b59b6)"></div></div>
     </div>
     <div class="progress-item">
-      <div class="progress-top"><span>Costo por lead en Meta Ads</span><span>Objetivo: USD 3-8 por lead</span></div>
+      <div class="progress-top"><span>🤝 Operaciones por referidos</span><span>Objetivo año 1: 20% del total</span></div>
+      <div class="bar-bg"><div class="bar-fill" style="width:40%;background:linear-gradient(90deg,#c0392b,#e74c3c)"></div></div>
+    </div>
+    <div class="progress-item">
+      <div class="progress-top"><span>💰 Costo por lead (todos los canales)</span><span>Objetivo blended: USD 5-12</span></div>
       <div class="bar-bg"><div class="bar-fill" style="width:65%;background:linear-gradient(90deg,#16a085,#1abc9c)"></div></div>
     </div>
   </div>
@@ -1045,6 +1522,12 @@
   function showTab(id) {
     document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
     document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+    event.target.classList.add('active');
+  }
+  function showMk(id) {
+    document.querySelectorAll('.mk-panel').forEach(el => el.classList.remove('active'));
+    document.querySelectorAll('.mktab').forEach(el => el.classList.remove('active'));
     document.getElementById(id).classList.add('active');
     event.target.classList.add('active');
   }
