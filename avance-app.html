@@ -1,0 +1,743 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Avance Inmobiliario — Panel de Gestión</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --navy: #0d2b6e; --navy2: #1a3a8a; --gold: #c9a84c; --gold-l: #f0d080;
+      --green: #1a7a4a; --green-l: #e8f7ef; --red: #c0392b; --red-l: #fdecea;
+      --orange: #e67e22; --orange-l: #fef0e0;
+      --bg: #f2f5fb; --white: #fff; --text: #1a2540; --muted: #6b7a99; --border: #dde3f0;
+    }
+    body { font-family: 'Segoe UI', Arial, sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; }
+
+    /* ── NAV ── */
+    .topbar {
+      background: linear-gradient(135deg, #091d4e, var(--navy));
+      padding: 0 24px;
+      display: flex; align-items: center; justify-content: space-between;
+      height: 56px; position: sticky; top: 0; z-index: 100;
+      box-shadow: 0 2px 12px rgba(9,29,78,0.3);
+    }
+    .topbar-brand { color: var(--white); font-weight: 800; font-size: 1rem; letter-spacing: 0.3px; }
+    .topbar-brand span { color: var(--gold-l); }
+    .nav-tabs { display: flex; gap: 4px; }
+    .nav-tab {
+      padding: 6px 14px; border-radius: 6px; border: none;
+      background: transparent; color: rgba(255,255,255,0.6);
+      font-size: 0.82rem; font-weight: 600; cursor: pointer; transition: all 0.18s;
+    }
+    .nav-tab:hover { color: var(--white); background: rgba(255,255,255,0.1); }
+    .nav-tab.active { background: rgba(255,255,255,0.18); color: var(--white); }
+
+    /* ── LAYOUT ── */
+    .page { display: none; padding: 24px 20px 60px; max-width: 1080px; margin: 0 auto; }
+    .page.active { display: block; }
+
+    /* ── KPI ROW ── */
+    .kpi-row { display: grid; grid-template-columns: repeat(auto-fill, minmax(190px,1fr)); gap: 14px; margin-bottom: 24px; }
+    .kpi {
+      background: var(--white); border-radius: 12px; padding: 18px 20px;
+      box-shadow: 0 2px 10px rgba(10,30,80,0.07); border-top: 4px solid var(--border);
+    }
+    .kpi.k-total  { border-color: var(--navy); }
+    .kpi.k-broker { border-color: var(--green); }
+    .kpi.k-ads    { border-color: var(--orange); }
+    .kpi.k-net    { border-color: var(--gold); }
+    .kpi.k-ops    { border-color: #8e44ad; }
+    .kpi-label { font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: var(--muted); margin-bottom: 6px; }
+    .kpi-val   { font-size: 1.55rem; font-weight: 900; line-height: 1; }
+    .kpi.k-total  .kpi-val { color: var(--navy); }
+    .kpi.k-broker .kpi-val { color: var(--green); }
+    .kpi.k-ads    .kpi-val { color: var(--orange); }
+    .kpi.k-net    .kpi-val { color: #7a5a00; }
+    .kpi.k-ops    .kpi-val { color: #8e44ad; }
+    .kpi-sub { font-size: 0.73rem; color: var(--muted); margin-top: 4px; }
+
+    /* ── SECTION TITLE ── */
+    .sec { font-size: 0.85rem; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; color: var(--navy); margin-bottom: 14px; display: flex; align-items: center; gap: 8px; }
+    .sec::after { content:''; flex:1; height:2px; background:linear-gradient(90deg,var(--gold),transparent); }
+
+    /* ── CARD ── */
+    .card { background: var(--white); border-radius: 12px; box-shadow: 0 2px 12px rgba(10,30,80,0.08); overflow: hidden; margin-bottom: 24px; }
+
+    /* ── FORM ── */
+    .form-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px,1fr)); gap: 14px; padding: 20px; }
+    .field { display: flex; flex-direction: column; gap: 5px; }
+    .field label { font-size: 0.75rem; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: 0.5px; }
+    .field input, .field select {
+      padding: 9px 12px; border: 1.5px solid var(--border); border-radius: 8px;
+      font-size: 0.88rem; color: var(--text); background: var(--bg);
+      transition: border-color 0.15s; outline: none;
+    }
+    .field input:focus, .field select:focus { border-color: var(--navy); background: var(--white); }
+    .form-footer { padding: 0 20px 20px; display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
+    .preview-box {
+      background: var(--bg); border-radius: 8px; padding: 10px 16px;
+      display: flex; gap: 16px; flex-wrap: wrap; flex: 1;
+    }
+    .preview-item { font-size: 0.8rem; }
+    .preview-item span { font-weight: 800; }
+    .preview-item .pi-broker { color: var(--green); }
+    .preview-item .pi-ads    { color: var(--orange); }
+    .preview-item .pi-net    { color: var(--navy); }
+
+    /* ── BUTTONS ── */
+    .btn {
+      padding: 9px 20px; border-radius: 8px; border: none; cursor: pointer;
+      font-size: 0.83rem; font-weight: 700; transition: all 0.15s;
+    }
+    .btn-primary { background: var(--navy); color: var(--white); }
+    .btn-primary:hover { background: var(--navy2); }
+    .btn-danger  { background: var(--red-l); color: var(--red); }
+    .btn-danger:hover { background: #f5c6c2; }
+    .btn-sm { padding: 5px 10px; font-size: 0.75rem; border-radius: 6px; }
+    .btn-edit { background: #e8edf8; color: var(--navy); }
+    .btn-edit:hover { background: #d0d8f0; }
+
+    /* ── TABLE ── */
+    .table-wrap { overflow-x: auto; }
+    table { width: 100%; border-collapse: collapse; font-size: 0.83rem; }
+    thead tr { background: var(--navy); }
+    thead th { color: var(--white); padding: 11px 14px; text-align: left; font-weight: 700; font-size: 0.76rem; white-space: nowrap; }
+    tbody tr { border-bottom: 1px solid var(--border); transition: background 0.1s; }
+    tbody tr:hover { background: #f8faff; }
+    tbody td { padding: 10px 14px; color: var(--text); }
+    .badge { display: inline-block; padding: 3px 10px; border-radius: 12px; font-size: 0.71rem; font-weight: 700; }
+    .badge-cerrada  { background: var(--green-l);  color: var(--green); }
+    .badge-promesa  { background: #e8edf8;         color: var(--navy); }
+    .badge-reserva  { background: var(--orange-l); color: var(--orange); }
+    .badge-perdida  { background: var(--red-l);    color: var(--red); }
+    td.amt-broker { color: var(--green);  font-weight: 700; }
+    td.amt-ads    { color: var(--orange); font-weight: 700; }
+    td.amt-net    { color: var(--navy);   font-weight: 700; }
+    .empty-row td { text-align: center; color: var(--muted); padding: 40px; font-size: 0.88rem; }
+
+    /* ── BROKER TABLE ── */
+    .broker-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px,1fr)); gap: 14px; padding: 20px; }
+    .broker-card { background: var(--bg); border-radius: 10px; padding: 16px; border-left: 4px solid var(--navy); }
+    .broker-name { font-weight: 800; font-size: 0.95rem; margin-bottom: 10px; color: var(--navy); }
+    .broker-stats { display: flex; flex-direction: column; gap: 6px; }
+    .bstat { display: flex; justify-content: space-between; font-size: 0.8rem; }
+    .bstat-label { color: var(--muted); }
+    .bstat-val   { font-weight: 700; }
+    .bstat-val.green  { color: var(--green); }
+    .bstat-val.orange { color: var(--orange); }
+    .bstat-val.navy   { color: var(--navy); }
+
+    /* ── FILTROS ── */
+    .filters { display: flex; gap: 10px; padding: 14px 20px; flex-wrap: wrap; align-items: center; border-bottom: 1px solid var(--border); }
+    .filters select, .filters input {
+      padding: 7px 12px; border: 1.5px solid var(--border); border-radius: 8px;
+      font-size: 0.82rem; background: var(--bg); color: var(--text); outline: none;
+    }
+    .filters select:focus, .filters input:focus { border-color: var(--navy); }
+    .filter-count { font-size: 0.78rem; color: var(--muted); margin-left: auto; }
+
+    /* ── MONTHLY CHART ── */
+    .chart-container { padding: 20px; }
+    .month-bar-row { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
+    .month-label { width: 70px; font-size: 0.78rem; color: var(--muted); font-weight: 600; flex-shrink: 0; }
+    .month-bars { flex: 1; display: flex; flex-direction: column; gap: 3px; }
+    .bar-track { background: var(--bg); border-radius: 4px; height: 10px; overflow: hidden; }
+    .bar-fill-net    { height: 10px; background: var(--navy);   border-radius: 4px; transition: width 0.5s; }
+    .bar-fill-broker { height: 10px; background: var(--green);  border-radius: 4px; transition: width 0.5s; }
+    .bar-fill-ads    { height: 10px; background: var(--orange); border-radius: 4px; transition: width 0.5s; }
+    .month-amounts { width: 120px; font-size: 0.74rem; text-align: right; flex-shrink: 0; color: var(--text); font-weight: 600; }
+    .chart-legend { display: flex; gap: 16px; margin-bottom: 16px; flex-wrap: wrap; }
+    .legend-item { display: flex; align-items: center; gap: 6px; font-size: 0.75rem; color: var(--muted); }
+    .legend-dot { width: 10px; height: 10px; border-radius: 3px; }
+
+    /* ── MODAL ── */
+    .modal-bg { display: none; position: fixed; inset: 0; background: rgba(9,29,78,0.5); z-index: 200; align-items: center; justify-content: center; }
+    .modal-bg.open { display: flex; }
+    .modal { background: var(--white); border-radius: 14px; padding: 28px; width: 100%; max-width: 480px; box-shadow: 0 8px 40px rgba(0,0,0,0.2); position: relative; }
+    .modal h3 { font-size: 1rem; font-weight: 800; color: var(--navy); margin-bottom: 20px; }
+    .modal-close { position: absolute; top: 16px; right: 16px; background: var(--bg); border: none; border-radius: 6px; padding: 4px 10px; cursor: pointer; font-size: 1rem; color: var(--muted); }
+
+    /* ── FOOTER ── */
+    .footer { background: var(--navy); color: rgba(255,255,255,0.4); text-align: center; padding: 16px; font-size: 0.73rem; position: fixed; bottom: 0; width: 100%; }
+    .footer strong { color: var(--gold); }
+
+    @media(max-width:600px) {
+      .topbar { flex-direction: column; height: auto; padding: 10px 16px; gap: 8px; }
+      .kpi-val { font-size: 1.2rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── TOPBAR ── -->
+<div class="topbar">
+  <div class="topbar-brand">Avance <span>Inmobiliario</span> — Panel de Gestión</div>
+  <div class="nav-tabs">
+    <button class="nav-tab active" onclick="showPage('dashboard')">Dashboard</button>
+    <button class="nav-tab" onclick="showPage('operaciones')">Operaciones</button>
+    <button class="nav-tab" onclick="showPage('brokers')">Brokers</button>
+    <button class="nav-tab" onclick="showPage('nueva')">+ Nueva Op.</button>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════
+     DASHBOARD
+══════════════════════════════════════ -->
+<div id="page-dashboard" class="page active">
+  <div class="kpi-row" id="kpi-row"></div>
+
+  <div class="sec">Ingresos por mes</div>
+  <div class="card">
+    <div class="chart-container">
+      <div class="chart-legend">
+        <div class="legend-item"><div class="legend-dot" style="background:var(--navy)"></div> Utilidad empresa</div>
+        <div class="legend-item"><div class="legend-dot" style="background:var(--green)"></div> Pago brokers</div>
+        <div class="legend-item"><div class="legend-dot" style="background:var(--orange)"></div> Meta Ads</div>
+      </div>
+      <div id="monthly-chart"></div>
+    </div>
+  </div>
+
+  <div class="sec">Últimas 5 operaciones</div>
+  <div class="card">
+    <div class="table-wrap">
+      <table>
+        <thead><tr>
+          <th>Fecha</th><th>Propiedad</th><th>Broker</th><th>Valor</th>
+          <th>Broker (40%)</th><th>Empresa (50%)</th><th>Estado</th>
+        </tr></thead>
+        <tbody id="recent-tbody"></tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════
+     OPERACIONES
+══════════════════════════════════════ -->
+<div id="page-operaciones" class="page">
+  <div class="card">
+    <div class="filters">
+      <select id="f-broker" onchange="renderOpsTable()">
+        <option value="">Todos los brokers</option>
+      </select>
+      <select id="f-estado" onchange="renderOpsTable()">
+        <option value="">Todos los estados</option>
+        <option value="Reserva">Reserva</option>
+        <option value="Promesa">Promesa</option>
+        <option value="Cerrada">Cerrada</option>
+        <option value="Perdida">Perdida</option>
+      </select>
+      <input id="f-search" type="text" placeholder="Buscar propiedad o cliente…" oninput="renderOpsTable()"/>
+      <span class="filter-count" id="ops-count"></span>
+    </div>
+    <div class="table-wrap">
+      <table>
+        <thead><tr>
+          <th>Fecha</th><th>Propiedad</th><th>Cliente</th><th>Broker</th>
+          <th>Comisión total</th><th>Broker (40%)</th><th>Ads (10%)</th><th>Empresa (50%)</th>
+          <th>Estado</th><th></th>
+        </tr></thead>
+        <tbody id="ops-tbody"></tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════
+     BROKERS
+══════════════════════════════════════ -->
+<div id="page-brokers" class="page">
+  <div class="sec">Gestión de Brokers</div>
+  <div class="card" style="padding:20px;margin-bottom:20px;">
+    <div style="display:flex;gap:10px;flex-wrap:wrap;align-items:flex-end;">
+      <div class="field" style="flex:1;min-width:180px;">
+        <label>Nombre del broker</label>
+        <input type="text" id="new-broker-name" placeholder="Ej: Diego Byrts"/>
+      </div>
+      <div class="field" style="width:130px;">
+        <label>% Comisión</label>
+        <select id="new-broker-pct">
+          <option value="40">40%</option>
+          <option value="45">45%</option>
+          <option value="50">50%</option>
+        </select>
+      </div>
+      <button class="btn btn-primary" onclick="addBroker()">Agregar broker</button>
+    </div>
+  </div>
+
+  <div class="sec">Rendimiento por broker</div>
+  <div class="card">
+    <div class="broker-grid" id="broker-grid"></div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════
+     NUEVA OPERACIÓN
+══════════════════════════════════════ -->
+<div id="page-nueva" class="page">
+  <div class="sec">Registrar nueva operación</div>
+  <div class="card">
+    <div class="form-grid">
+      <div class="field">
+        <label>Fecha</label>
+        <input type="date" id="f-fecha"/>
+      </div>
+      <div class="field">
+        <label>Propiedad / Proyecto</label>
+        <input type="text" id="f-propiedad" placeholder="Ej: Depto 802, Novo Yungay"/>
+      </div>
+      <div class="field">
+        <label>Cliente</label>
+        <input type="text" id="f-cliente" placeholder="Nombre del cliente"/>
+      </div>
+      <div class="field">
+        <label>Broker</label>
+        <select id="f-broker-sel"></select>
+      </div>
+      <div class="field">
+        <label>Valor propiedad (UF)</label>
+        <input type="number" id="f-valor-uf" placeholder="Ej: 2500" oninput="calcPreview()"/>
+      </div>
+      <div class="field">
+        <label>% Comisión cobrada</label>
+        <select id="f-pct-com" onchange="calcPreview()">
+          <option value="2">2%</option>
+          <option value="2.5">2.5%</option>
+          <option value="3" selected>3%</option>
+          <option value="3.5">3.5%</option>
+          <option value="4">4%</option>
+        </select>
+      </div>
+      <div class="field">
+        <label>Estado</label>
+        <select id="f-estado-new">
+          <option value="Reserva">Reserva</option>
+          <option value="Promesa">Promesa</option>
+          <option value="Cerrada" selected>Cerrada</option>
+          <option value="Perdida">Perdida</option>
+        </select>
+      </div>
+      <div class="field">
+        <label>Notas (opcional)</label>
+        <input type="text" id="f-notas" placeholder="Ej: cliente pagó al contado"/>
+      </div>
+    </div>
+    <div class="form-footer">
+      <div class="preview-box" id="preview-box">
+        <div class="preview-item">Comisión total: <span id="p-total">—</span></div>
+        <div class="preview-item">Broker: <span class="pi-broker" id="p-broker">—</span></div>
+        <div class="preview-item">Ads: <span class="pi-ads" id="p-ads">—</span></div>
+        <div class="preview-item">Empresa: <span class="pi-net" id="p-net">—</span></div>
+      </div>
+      <button class="btn btn-primary" onclick="saveOp()">Guardar operación</button>
+    </div>
+  </div>
+</div>
+
+<!-- ── MODAL EDICIÓN ── -->
+<div class="modal-bg" id="modal-bg">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal()">✕</button>
+    <h3>Editar operación</h3>
+    <div class="form-grid" style="padding:0;margin-bottom:16px;">
+      <div class="field"><label>Fecha</label><input type="date" id="e-fecha"/></div>
+      <div class="field"><label>Propiedad</label><input type="text" id="e-propiedad"/></div>
+      <div class="field"><label>Cliente</label><input type="text" id="e-cliente"/></div>
+      <div class="field"><label>Broker</label><select id="e-broker-sel"></select></div>
+      <div class="field"><label>Valor UF</label><input type="number" id="e-valor-uf"/></div>
+      <div class="field"><label>% Comisión</label>
+        <select id="e-pct-com">
+          <option value="2">2%</option><option value="2.5">2.5%</option>
+          <option value="3">3%</option><option value="3.5">3.5%</option><option value="4">4%</option>
+        </select>
+      </div>
+      <div class="field"><label>Estado</label>
+        <select id="e-estado">
+          <option value="Reserva">Reserva</option><option value="Promesa">Promesa</option>
+          <option value="Cerrada">Cerrada</option><option value="Perdida">Perdida</option>
+        </select>
+      </div>
+      <div class="field"><label>Notas</label><input type="text" id="e-notas"/></div>
+    </div>
+    <button class="btn btn-primary" onclick="saveEdit()">Guardar cambios</button>
+  </div>
+</div>
+
+<div class="footer"><strong>Avance Inmobiliario</strong> — Panel de Gestión · Datos guardados localmente</div>
+
+<script>
+// ══════════════════════════════
+// STORAGE
+// ══════════════════════════════
+function load(key, def) {
+  try { return JSON.parse(localStorage.getItem(key)) || def; } catch { return def; }
+}
+function save(key, val) { localStorage.setItem(key, JSON.stringify(val)); }
+
+let ops     = load('ai_ops', []);
+let brokers = load('ai_brokers', [
+  { id: 'b1', name: 'Diego Byrts', pct: 40 }
+]);
+let editId  = null;
+
+// ══════════════════════════════
+// HELPERS
+// ══════════════════════════════
+function uf(n)  { return 'UF ' + Number(n).toLocaleString('es-CL', {minimumFractionDigits:1, maximumFractionDigits:1}); }
+function pesos(n){ return '$' + Math.round(n).toLocaleString('es-CL'); }
+function uid()  { return Date.now().toString(36) + Math.random().toString(36).slice(2); }
+
+function calcComissions(valorUF, pctCom, brokerPct) {
+  const comTotal  = valorUF * (pctCom / 100);
+  const toPay     = brokerPct || 40;
+  const broker    = comTotal * (toPay / 100);
+  const ads       = comTotal * 0.10;
+  const empresa   = comTotal * (1 - toPay/100 - 0.10);
+  return { comTotal, broker, ads, empresa };
+}
+
+function badgeClass(estado) {
+  return { Cerrada:'badge-cerrada', Promesa:'badge-promesa', Reserva:'badge-reserva', Perdida:'badge-perdida' }[estado] || 'badge-promesa';
+}
+
+function getBroker(id) { return brokers.find(b => b.id === id) || { name: '—', pct: 40 }; }
+
+// ══════════════════════════════
+// NAV
+// ══════════════════════════════
+function showPage(name) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+  document.getElementById('page-' + name).classList.add('active');
+  event.target.classList.add('active');
+  if (name === 'dashboard')   renderDashboard();
+  if (name === 'operaciones') renderOpsTable();
+  if (name === 'brokers')     renderBrokers();
+  if (name === 'nueva')       initNuevaForm();
+}
+
+// ══════════════════════════════
+// DASHBOARD
+// ══════════════════════════════
+function renderDashboard() {
+  const closed = ops.filter(o => o.estado === 'Cerrada');
+  const totCom    = closed.reduce((s,o) => s + o.comTotal, 0);
+  const totBroker = closed.reduce((s,o) => s + o.broker, 0);
+  const totAds    = closed.reduce((s,o) => s + o.ads, 0);
+  const totNet    = closed.reduce((s,o) => s + o.empresa, 0);
+
+  document.getElementById('kpi-row').innerHTML = `
+    <div class="kpi k-ops">
+      <div class="kpi-label">Operaciones cerradas</div>
+      <div class="kpi-val">${closed.length}</div>
+      <div class="kpi-sub">Total registradas: ${ops.length}</div>
+    </div>
+    <div class="kpi k-total">
+      <div class="kpi-label">Comisión total generada</div>
+      <div class="kpi-val">${uf(totCom)}</div>
+      <div class="kpi-sub">Solo operaciones cerradas</div>
+    </div>
+    <div class="kpi k-broker">
+      <div class="kpi-label">Pagado a brokers</div>
+      <div class="kpi-val">${uf(totBroker)}</div>
+      <div class="kpi-sub">40% promedio</div>
+    </div>
+    <div class="kpi k-ads">
+      <div class="kpi-label">Invertido Meta Ads</div>
+      <div class="kpi-val">${uf(totAds)}</div>
+      <div class="kpi-sub">10% de comisión</div>
+    </div>
+    <div class="kpi k-net">
+      <div class="kpi-label">Utilidad empresa</div>
+      <div class="kpi-val">${uf(totNet)}</div>
+      <div class="kpi-sub">Back office neto</div>
+    </div>
+  `;
+
+  renderMonthlyChart();
+  renderRecentTable();
+}
+
+function renderMonthlyChart() {
+  const closed = ops.filter(o => o.estado === 'Cerrada');
+  const byMonth = {};
+  closed.forEach(o => {
+    const m = (o.fecha || '').slice(0, 7);
+    if (!m) return;
+    if (!byMonth[m]) byMonth[m] = { net: 0, broker: 0, ads: 0 };
+    byMonth[m].net    += o.empresa;
+    byMonth[m].broker += o.broker;
+    byMonth[m].ads    += o.ads;
+  });
+
+  const keys = Object.keys(byMonth).sort();
+  if (!keys.length) {
+    document.getElementById('monthly-chart').innerHTML = '<p style="color:var(--muted);text-align:center;padding:20px;font-size:0.85rem;">Sin datos — registra operaciones para ver el gráfico</p>';
+    return;
+  }
+
+  const maxVal = Math.max(...keys.map(k => byMonth[k].net + byMonth[k].broker + byMonth[k].ads)) || 1;
+
+  const html = keys.map(k => {
+    const d = byMonth[k];
+    const total = d.net + d.broker + d.ads;
+    const pn = (d.net/maxVal*100).toFixed(1);
+    const pb = (d.broker/maxVal*100).toFixed(1);
+    const pa = (d.ads/maxVal*100).toFixed(1);
+    const [y, m] = k.split('-');
+    const mNames = ['Ene','Feb','Mar','Abr','May','Jun','Jul','Ago','Sep','Oct','Nov','Dic'];
+    const label = mNames[parseInt(m)-1] + ' ' + y.slice(2);
+    return `
+      <div class="month-bar-row">
+        <div class="month-label">${label}</div>
+        <div class="month-bars">
+          <div class="bar-track"><div class="bar-fill-net"    style="width:${pn}%"></div></div>
+          <div class="bar-track"><div class="bar-fill-broker" style="width:${pb}%"></div></div>
+          <div class="bar-track"><div class="bar-fill-ads"    style="width:${pa}%"></div></div>
+        </div>
+        <div class="month-amounts">${uf(total)}</div>
+      </div>`;
+  }).join('');
+  document.getElementById('monthly-chart').innerHTML = html;
+}
+
+function renderRecentTable() {
+  const recent = [...ops].sort((a,b) => (b.fecha||'') > (a.fecha||'') ? 1 : -1).slice(0,5);
+  const tbody = document.getElementById('recent-tbody');
+  if (!recent.length) {
+    tbody.innerHTML = '<tr class="empty-row"><td colspan="7">Sin operaciones registradas aún</td></tr>';
+    return;
+  }
+  tbody.innerHTML = recent.map(o => {
+    const b = getBroker(o.brokerId);
+    return `<tr>
+      <td>${o.fecha || '—'}</td>
+      <td><strong>${o.propiedad || '—'}</strong></td>
+      <td>${b.name}</td>
+      <td>${uf(o.valorUF)} <small style="color:var(--muted)">(com. ${uf(o.comTotal)})</small></td>
+      <td class="amt-broker">${uf(o.broker)}</td>
+      <td class="amt-net">${uf(o.empresa)}</td>
+      <td><span class="badge ${badgeClass(o.estado)}">${o.estado}</span></td>
+    </tr>`;
+  }).join('');
+}
+
+// ══════════════════════════════
+// OPERACIONES TABLE
+// ══════════════════════════════
+function renderOpsTable() {
+  populateBrokerFilter('f-broker');
+  const bFilter = document.getElementById('f-broker').value;
+  const eFilter = document.getElementById('f-estado').value;
+  const sFilter = (document.getElementById('f-search').value || '').toLowerCase();
+
+  let filtered = ops.filter(o => {
+    const b = getBroker(o.brokerId);
+    const matchB = !bFilter || o.brokerId === bFilter;
+    const matchE = !eFilter || o.estado === eFilter;
+    const matchS = !sFilter || (o.propiedad||'').toLowerCase().includes(sFilter) || (o.cliente||'').toLowerCase().includes(sFilter);
+    return matchB && matchE && matchS;
+  }).sort((a,b) => (b.fecha||'') > (a.fecha||'') ? 1 : -1);
+
+  document.getElementById('ops-count').textContent = filtered.length + ' operaciones';
+
+  const tbody = document.getElementById('ops-tbody');
+  if (!filtered.length) {
+    tbody.innerHTML = '<tr class="empty-row"><td colspan="10">No hay operaciones con estos filtros</td></tr>';
+    return;
+  }
+  tbody.innerHTML = filtered.map(o => {
+    const b = getBroker(o.brokerId);
+    return `<tr>
+      <td>${o.fecha || '—'}</td>
+      <td><strong>${o.propiedad || '—'}</strong></td>
+      <td>${o.cliente || '—'}</td>
+      <td>${b.name}</td>
+      <td>${uf(o.comTotal)}</td>
+      <td class="amt-broker">${uf(o.broker)}</td>
+      <td class="amt-ads">${uf(o.ads)}</td>
+      <td class="amt-net">${uf(o.empresa)}</td>
+      <td><span class="badge ${badgeClass(o.estado)}">${o.estado}</span></td>
+      <td style="display:flex;gap:6px;">
+        <button class="btn btn-sm btn-edit" onclick="openEdit('${o.id}')">Editar</button>
+        <button class="btn btn-sm btn-danger" onclick="deleteOp('${o.id}')">✕</button>
+      </td>
+    </tr>`;
+  }).join('');
+}
+
+function populateBrokerFilter(selId) {
+  const sel = document.getElementById(selId);
+  const cur = sel.value;
+  sel.innerHTML = '<option value="">Todos los brokers</option>' +
+    brokers.map(b => `<option value="${b.id}" ${b.id===cur?'selected':''}>${b.name}</option>`).join('');
+}
+
+function deleteOp(id) {
+  if (!confirm('¿Eliminar esta operación?')) return;
+  ops = ops.filter(o => o.id !== id);
+  save('ai_ops', ops);
+  renderOpsTable();
+}
+
+// ══════════════════════════════
+// BROKERS
+// ══════════════════════════════
+function addBroker() {
+  const name = document.getElementById('new-broker-name').value.trim();
+  const pct  = parseInt(document.getElementById('new-broker-pct').value);
+  if (!name) return alert('Ingresa el nombre del broker');
+  brokers.push({ id: uid(), name, pct });
+  save('ai_brokers', brokers);
+  document.getElementById('new-broker-name').value = '';
+  renderBrokers();
+}
+
+function renderBrokers() {
+  const grid = document.getElementById('broker-grid');
+  if (!brokers.length) { grid.innerHTML = '<p style="padding:20px;color:var(--muted)">Sin brokers registrados</p>'; return; }
+
+  grid.innerHTML = brokers.map(b => {
+    const bOps    = ops.filter(o => o.brokerId === b.id);
+    const closed  = bOps.filter(o => o.estado === 'Cerrada');
+    const totCom  = closed.reduce((s,o) => s + o.comTotal, 0);
+    const totPago = closed.reduce((s,o) => s + o.broker, 0);
+    return `
+      <div class="broker-card">
+        <div class="broker-name">${b.name} <span style="font-size:0.72rem;background:#e8edf8;padding:2px 8px;border-radius:8px;color:var(--navy)">${b.pct}%</span></div>
+        <div class="broker-stats">
+          <div class="bstat"><span class="bstat-label">Operaciones cerradas</span><span class="bstat-val navy">${closed.length}</span></div>
+          <div class="bstat"><span class="bstat-label">Comisión total generada</span><span class="bstat-val navy">${uf(totCom)}</span></div>
+          <div class="bstat"><span class="bstat-label">Total pagado al broker</span><span class="bstat-val green">${uf(totPago)}</span></div>
+          <div class="bstat"><span class="bstat-label">Ops en proceso</span><span class="bstat-val orange">${bOps.filter(o=>['Reserva','Promesa'].includes(o.estado)).length}</span></div>
+        </div>
+        <div style="margin-top:10px;display:flex;gap:6px;">
+          <select style="flex:1;padding:5px 8px;border:1.5px solid var(--border);border-radius:6px;font-size:0.78rem;background:var(--bg);" id="bp-${b.id}">
+            <option value="40" ${b.pct==40?'selected':''}>40%</option>
+            <option value="45" ${b.pct==45?'selected':''}>45%</option>
+            <option value="50" ${b.pct==50?'selected':''}>50%</option>
+          </select>
+          <button class="btn btn-sm btn-edit" onclick="updateBrokerPct('${b.id}')">Actualizar</button>
+          <button class="btn btn-sm btn-danger" onclick="deleteBroker('${b.id}')">✕</button>
+        </div>
+      </div>`;
+  }).join('');
+}
+
+function updateBrokerPct(id) {
+  const pct = parseInt(document.getElementById('bp-' + id).value);
+  const b = brokers.find(x => x.id === id);
+  if (b) { b.pct = pct; save('ai_brokers', brokers); renderBrokers(); }
+}
+
+function deleteBroker(id) {
+  if (ops.some(o => o.brokerId === id)) return alert('Este broker tiene operaciones registradas. Reasigna las operaciones antes de eliminar.');
+  if (!confirm('¿Eliminar broker?')) return;
+  brokers = brokers.filter(b => b.id !== id);
+  save('ai_brokers', brokers);
+  renderBrokers();
+}
+
+// ══════════════════════════════
+// NUEVA OPERACIÓN
+// ══════════════════════════════
+function initNuevaForm() {
+  const sel = document.getElementById('f-broker-sel');
+  sel.innerHTML = brokers.map(b => `<option value="${b.id}">${b.name} (${b.pct}%)</option>`).join('');
+  if (!document.getElementById('f-fecha').value) {
+    document.getElementById('f-fecha').value = new Date().toISOString().slice(0,10);
+  }
+  calcPreview();
+}
+
+function calcPreview() {
+  const ufVal  = parseFloat(document.getElementById('f-valor-uf').value) || 0;
+  const pctCom = parseFloat(document.getElementById('f-pct-com').value) || 3;
+  const bId    = document.getElementById('f-broker-sel').value;
+  const brok   = getBroker(bId);
+  const c = calcComissions(ufVal, pctCom, brok.pct);
+  document.getElementById('p-total').textContent  = uf(c.comTotal);
+  document.getElementById('p-broker').textContent = uf(c.broker) + ' (' + brok.pct + '%)';
+  document.getElementById('p-ads').textContent    = uf(c.ads) + ' (10%)';
+  document.getElementById('p-net').textContent    = uf(c.empresa) + ' (' + (100 - brok.pct - 10) + '%)';
+}
+
+function saveOp() {
+  const valorUF = parseFloat(document.getElementById('f-valor-uf').value);
+  const pctCom  = parseFloat(document.getElementById('f-pct-com').value);
+  const bId     = document.getElementById('f-broker-sel').value;
+  const fecha   = document.getElementById('f-fecha').value;
+  const prop    = document.getElementById('f-propiedad').value.trim();
+  const cliente = document.getElementById('f-cliente').value.trim();
+  const estado  = document.getElementById('f-estado-new').value;
+  const notas   = document.getElementById('f-notas').value.trim();
+
+  if (!valorUF || !prop) return alert('Completa al menos la propiedad y el valor en UF');
+  const brok = getBroker(bId);
+  const c = calcComissions(valorUF, pctCom, brok.pct);
+
+  ops.push({ id: uid(), fecha, propiedad: prop, cliente, brokerId: bId, valorUF, pctCom,
+    comTotal: c.comTotal, broker: c.broker, ads: c.ads, empresa: c.empresa, estado, notas });
+  save('ai_ops', ops);
+
+  // reset
+  ['f-propiedad','f-cliente','f-notas','f-valor-uf'].forEach(id => document.getElementById(id).value = '');
+  document.getElementById('f-estado-new').value = 'Cerrada';
+  calcPreview();
+  alert('✓ Operación guardada correctamente');
+}
+
+// ══════════════════════════════
+// EDICIÓN
+// ══════════════════════════════
+function openEdit(id) {
+  const o = ops.find(x => x.id === id);
+  if (!o) return;
+  editId = id;
+  const eSel = document.getElementById('e-broker-sel');
+  eSel.innerHTML = brokers.map(b => `<option value="${b.id}" ${b.id===o.brokerId?'selected':''}>${b.name} (${b.pct}%)</option>`).join('');
+  document.getElementById('e-fecha').value      = o.fecha || '';
+  document.getElementById('e-propiedad').value  = o.propiedad || '';
+  document.getElementById('e-cliente').value    = o.cliente || '';
+  document.getElementById('e-valor-uf').value   = o.valorUF || '';
+  document.getElementById('e-pct-com').value    = o.pctCom || 3;
+  document.getElementById('e-estado').value     = o.estado || 'Cerrada';
+  document.getElementById('e-notas').value      = o.notas || '';
+  document.getElementById('modal-bg').classList.add('open');
+}
+
+function closeModal() { document.getElementById('modal-bg').classList.remove('open'); editId = null; }
+
+function saveEdit() {
+  const o = ops.find(x => x.id === editId);
+  if (!o) return;
+  const valorUF = parseFloat(document.getElementById('e-valor-uf').value);
+  const pctCom  = parseFloat(document.getElementById('e-pct-com').value);
+  const bId     = document.getElementById('e-broker-sel').value;
+  const brok    = getBroker(bId);
+  const c       = calcComissions(valorUF, pctCom, brok.pct);
+
+  Object.assign(o, {
+    fecha:     document.getElementById('e-fecha').value,
+    propiedad: document.getElementById('e-propiedad').value.trim(),
+    cliente:   document.getElementById('e-cliente').value.trim(),
+    brokerId:  bId, valorUF, pctCom,
+    comTotal: c.comTotal, broker: c.broker, ads: c.ads, empresa: c.empresa,
+    estado:    document.getElementById('e-estado').value,
+    notas:     document.getElementById('e-notas').value.trim()
+  });
+  save('ai_ops', ops);
+  closeModal();
+  renderOpsTable();
+}
+
+// ══════════════════════════════
+// INIT
+// ══════════════════════════════
+renderDashboard();
+</script>
+</body>
+</html>
