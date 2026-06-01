@@ -299,7 +299,7 @@
       </div>
       <div class="field">
         <label>Valor propiedad (UF)</label>
-        <input type="number" id="f-valor-uf" placeholder="Ej: 2500" oninput="calcPreview()"/>
+        <input type="number" id="f-valor-uf" placeholder="Ej: 3500" value="3500" oninput="calcPreview()"/>
       </div>
       <div class="field">
         <label>% Comisión cobrada</label>
@@ -331,6 +331,9 @@
         <div class="preview-item">Broker: <span class="pi-broker" id="p-broker">—</span></div>
         <div class="preview-item">Ads: <span class="pi-ads" id="p-ads">—</span></div>
         <div class="preview-item">Empresa: <span class="pi-net" id="p-net">—</span></div>
+        <div class="preview-item" style="margin-left:auto;font-size:0.73rem;color:var(--muted);">
+          UF ref: $<input type="number" id="uf-ref-input" style="width:70px;border:1px solid var(--border);border-radius:4px;padding:2px 4px;font-size:0.73rem;" oninput="updateUFRef(this.value)" value="38860"> CLP
+        </div>
       </div>
       <button class="btn btn-primary" onclick="saveOp()">Guardar operación</button>
     </div>
@@ -386,9 +389,12 @@ let editId  = null;
 // ══════════════════════════════
 // HELPERS
 // ══════════════════════════════
-function uf(n)  { return 'UF ' + Number(n).toLocaleString('es-CL', {minimumFractionDigits:1, maximumFractionDigits:1}); }
-function pesos(n){ return '$' + Math.round(n).toLocaleString('es-CL'); }
-function uid()  { return Date.now().toString(36) + Math.random().toString(36).slice(2); }
+let UF_REF = load('ai_uf_ref', 38860); // CLP por UF, actualizable
+
+function uf(n)    { return 'UF ' + Number(n).toLocaleString('es-CL', {minimumFractionDigits:1, maximumFractionDigits:1}); }
+function clp(n)   { return '$' + Math.round(n * UF_REF).toLocaleString('es-CL'); }
+function ufClp(n) { return uf(n) + ' <small style="color:var(--muted)">(' + clp(n) + ')</small>'; }
+function uid()    { return Date.now().toString(36) + Math.random().toString(36).slice(2); }
 
 function calcComissions(valorUF, pctCom, brokerPct) {
   const comTotal  = valorUF * (pctCom / 100);
@@ -438,22 +444,22 @@ function renderDashboard() {
     <div class="kpi k-total">
       <div class="kpi-label">Comisión total generada</div>
       <div class="kpi-val">${uf(totCom)}</div>
-      <div class="kpi-sub">Solo operaciones cerradas</div>
+      <div class="kpi-sub">${clp(totCom)} · Solo cerradas</div>
     </div>
     <div class="kpi k-broker">
       <div class="kpi-label">Pagado a brokers</div>
       <div class="kpi-val">${uf(totBroker)}</div>
-      <div class="kpi-sub">40% promedio</div>
+      <div class="kpi-sub">${clp(totBroker)}</div>
     </div>
     <div class="kpi k-ads">
       <div class="kpi-label">Invertido Meta Ads</div>
       <div class="kpi-val">${uf(totAds)}</div>
-      <div class="kpi-sub">10% de comisión</div>
+      <div class="kpi-sub">${clp(totAds)}</div>
     </div>
     <div class="kpi k-net">
       <div class="kpi-label">Utilidad empresa</div>
       <div class="kpi-val">${uf(totNet)}</div>
-      <div class="kpi-sub">Back office neto</div>
+      <div class="kpi-sub">${clp(totNet)} netos</div>
     </div>
   `;
 
@@ -517,9 +523,9 @@ function renderRecentTable() {
       <td>${o.fecha || '—'}</td>
       <td><strong>${o.propiedad || '—'}</strong></td>
       <td>${b.name}</td>
-      <td>${uf(o.valorUF)} <small style="color:var(--muted)">(com. ${uf(o.comTotal)})</small></td>
-      <td class="amt-broker">${uf(o.broker)}</td>
-      <td class="amt-net">${uf(o.empresa)}</td>
+      <td>${uf(o.valorUF)}<br><small style="color:var(--muted)">Com. ${uf(o.comTotal)} (${clp(o.comTotal)})</small></td>
+      <td class="amt-broker">${uf(o.broker)}<br><small>${clp(o.broker)}</small></td>
+      <td class="amt-net">${uf(o.empresa)}<br><small>${clp(o.empresa)}</small></td>
       <td><span class="badge ${badgeClass(o.estado)}">${o.estado}</span></td>
     </tr>`;
   }).join('');
@@ -556,10 +562,10 @@ function renderOpsTable() {
       <td><strong>${o.propiedad || '—'}</strong></td>
       <td>${o.cliente || '—'}</td>
       <td>${b.name}</td>
-      <td>${uf(o.comTotal)}</td>
-      <td class="amt-broker">${uf(o.broker)}</td>
-      <td class="amt-ads">${uf(o.ads)}</td>
-      <td class="amt-net">${uf(o.empresa)}</td>
+      <td>${uf(o.comTotal)}<br><small style="color:var(--muted)">${clp(o.comTotal)}</small></td>
+      <td class="amt-broker">${uf(o.broker)}<br><small>${clp(o.broker)}</small></td>
+      <td class="amt-ads">${uf(o.ads)}<br><small>${clp(o.ads)}</small></td>
+      <td class="amt-net">${uf(o.empresa)}<br><small>${clp(o.empresa)}</small></td>
       <td><span class="badge ${badgeClass(o.estado)}">${o.estado}</span></td>
       <td style="display:flex;gap:6px;">
         <button class="btn btn-sm btn-edit" onclick="openEdit('${o.id}')">Editar</button>
@@ -659,10 +665,15 @@ function calcPreview() {
   const bId    = document.getElementById('f-broker-sel').value;
   const brok   = getBroker(bId);
   const c = calcComissions(ufVal, pctCom, brok.pct);
-  document.getElementById('p-total').textContent  = uf(c.comTotal);
-  document.getElementById('p-broker').textContent = uf(c.broker) + ' (' + brok.pct + '%)';
-  document.getElementById('p-ads').textContent    = uf(c.ads) + ' (10%)';
-  document.getElementById('p-net').textContent    = uf(c.empresa) + ' (' + (100 - brok.pct - 10) + '%)';
+  document.getElementById('p-total').textContent  = uf(c.comTotal)  + '  (' + clp(c.comTotal) + ')';
+  document.getElementById('p-broker').textContent = uf(c.broker)   + ' (' + brok.pct + '%)  → ' + clp(c.broker);
+  document.getElementById('p-ads').textContent    = uf(c.ads)      + ' (10%)  → ' + clp(c.ads);
+  document.getElementById('p-net').textContent    = uf(c.empresa)  + ' (' + (100 - brok.pct - 10) + '%)  → ' + clp(c.empresa);
+}
+
+function updateUFRef(val) {
+  const v = parseFloat(val);
+  if (v > 0) { window.UF_REF = v; save('ai_uf_ref', v); calcPreview(); renderDashboard(); }
 }
 
 function saveOp() {
