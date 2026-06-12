@@ -1,0 +1,926 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Plan de Captación 2027 — Colegio San Guillermo</title>
+  <style>
+    :root {
+      --azul: #1a3c6e;
+      --azul-medio: #2563a8;
+      --azul-claro: #dbeafe;
+      --verde: #166534;
+      --verde-claro: #dcfce7;
+      --naranja: #c2410c;
+      --naranja-claro: #ffedd5;
+      --amarillo-claro: #fefce8;
+      --gris: #f8fafc;
+      --borde: #e2e8f0;
+      --texto: #1e293b;
+      --texto-suave: #64748b;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      background: #f1f5f9;
+      color: var(--texto);
+      line-height: 1.6;
+    }
+
+    /* HEADER */
+    .header {
+      background: linear-gradient(135deg, var(--azul) 0%, var(--azul-medio) 100%);
+      color: white;
+      padding: 48px 32px 40px;
+      text-align: center;
+    }
+    .header .badge {
+      display: inline-block;
+      background: rgba(255,255,255,0.2);
+      border: 1px solid rgba(255,255,255,0.4);
+      border-radius: 20px;
+      padding: 4px 16px;
+      font-size: 13px;
+      letter-spacing: 0.05em;
+      margin-bottom: 16px;
+    }
+    .header h1 {
+      font-size: clamp(24px, 4vw, 38px);
+      font-weight: 800;
+      margin-bottom: 8px;
+    }
+    .header p {
+      font-size: 16px;
+      opacity: 0.85;
+    }
+    .header .meta {
+      display: flex;
+      justify-content: center;
+      gap: 32px;
+      margin-top: 28px;
+      flex-wrap: wrap;
+    }
+    .header .meta-item {
+      text-align: center;
+    }
+    .header .meta-item .num {
+      font-size: 28px;
+      font-weight: 800;
+    }
+    .header .meta-item .label {
+      font-size: 12px;
+      opacity: 0.75;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    /* LAYOUT */
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 32px 20px;
+    }
+
+    /* SECCIÓN */
+    .section {
+      margin-bottom: 40px;
+    }
+    .section-title {
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--azul);
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 3px solid var(--azul-claro);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .section-title .num {
+      background: var(--azul);
+      color: white;
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+
+    /* CARDS GRID */
+    .grid-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
+    .grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; }
+    .grid-4 { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 16px; }
+
+    .card {
+      background: white;
+      border-radius: 12px;
+      padding: 24px;
+      border: 1px solid var(--borde);
+      box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+    }
+    .card h3 {
+      font-size: 15px;
+      font-weight: 700;
+      margin-bottom: 12px;
+      color: var(--azul);
+    }
+    .card p, .card li {
+      font-size: 14px;
+      color: var(--texto-suave);
+      line-height: 1.65;
+    }
+    .card ul { padding-left: 18px; }
+    .card ul li { margin-bottom: 4px; }
+
+    /* PERFIL */
+    .perfil-table {
+      background: white;
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid var(--borde);
+      box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+    }
+    .perfil-table table { width: 100%; border-collapse: collapse; }
+    .perfil-table th {
+      background: var(--azul);
+      color: white;
+      padding: 12px 20px;
+      text-align: left;
+      font-size: 13px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+    .perfil-table td {
+      padding: 12px 20px;
+      font-size: 14px;
+      border-bottom: 1px solid var(--borde);
+    }
+    .perfil-table tr:last-child td { border-bottom: none; }
+    .perfil-table tr:nth-child(even) td { background: var(--gris); }
+    .tag {
+      display: inline-block;
+      padding: 2px 10px;
+      border-radius: 12px;
+      font-size: 12px;
+      font-weight: 600;
+    }
+    .tag-azul { background: var(--azul-claro); color: var(--azul-medio); }
+    .tag-verde { background: var(--verde-claro); color: var(--verde); }
+    .tag-naranja { background: var(--naranja-claro); color: var(--naranja); }
+
+    /* CANALES */
+    .canal {
+      background: white;
+      border-radius: 12px;
+      border: 1px solid var(--borde);
+      overflow: hidden;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+      margin-bottom: 20px;
+    }
+    .canal-header {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 20px 24px;
+      border-bottom: 1px solid var(--borde);
+    }
+    .canal-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+      flex-shrink: 0;
+    }
+    .canal-icon.wa  { background: #dcfce7; }
+    .canal-icon.fb  { background: #dbeafe; }
+    .canal-icon.tt  { background: #fce7f3; }
+    .canal-icon.gg  { background: #fef9c3; }
+    .canal-icon.org { background: #f0fdf4; }
+    .canal-titulo { font-size: 17px; font-weight: 700; color: var(--azul); }
+    .canal-sub    { font-size: 13px; color: var(--texto-suave); }
+    .canal-body   { padding: 20px 24px; }
+    .canal-body p { font-size: 14px; color: var(--texto-suave); margin-bottom: 12px; }
+
+    .presupuesto-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--naranja-claro);
+      color: var(--naranja);
+      border-radius: 8px;
+      padding: 4px 12px;
+      font-size: 13px;
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+
+    /* TABLA CAMPAÑAS FB */
+    .mini-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+      margin-top: 8px;
+    }
+    .mini-table th {
+      background: var(--azul-claro);
+      color: var(--azul);
+      padding: 8px 12px;
+      text-align: left;
+      font-weight: 600;
+    }
+    .mini-table td {
+      padding: 8px 12px;
+      border-bottom: 1px solid var(--borde);
+      color: var(--texto-suave);
+    }
+    .mini-table tr:last-child td { border-bottom: none; }
+
+    /* TIKTOK VIDEOS */
+    .video-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 12px;
+      margin-top: 12px;
+    }
+    .video-card {
+      background: var(--gris);
+      border-radius: 10px;
+      padding: 14px;
+      border: 1px solid var(--borde);
+    }
+    .video-card .titulo { font-size: 13px; font-weight: 700; color: var(--texto); margin-bottom: 6px; }
+    .video-card .desc   { font-size: 12px; color: var(--texto-suave); line-height: 1.5; }
+
+    /* FLUJO */
+    .flujo {
+      background: white;
+      border-radius: 12px;
+      border: 1px solid var(--borde);
+      padding: 28px;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+    }
+    .flujo-steps {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0;
+      position: relative;
+    }
+    .flujo-step {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      flex: 1;
+      min-width: 120px;
+      position: relative;
+      padding: 0 8px;
+    }
+    .flujo-step .circle {
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      background: var(--azul);
+      color: white;
+      font-size: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 10px;
+      position: relative;
+      z-index: 1;
+    }
+    .flujo-step .step-label {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--azul);
+      margin-bottom: 4px;
+    }
+    .flujo-step .step-desc {
+      font-size: 11px;
+      color: var(--texto-suave);
+      line-height: 1.4;
+    }
+    .flujo-step::after {
+      content: '→';
+      position: absolute;
+      right: -12px;
+      top: 14px;
+      font-size: 20px;
+      color: var(--azul-medio);
+      z-index: 2;
+    }
+    .flujo-step:last-child::after { display: none; }
+
+    /* METAS TABLA */
+    .metas-tabla {
+      background: white;
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid var(--borde);
+      box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+    }
+    .metas-tabla table { width: 100%; border-collapse: collapse; font-size: 13.5px; }
+    .metas-tabla th {
+      background: var(--azul);
+      color: white;
+      padding: 13px 16px;
+      text-align: left;
+      font-size: 12px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+    .metas-tabla td {
+      padding: 12px 16px;
+      border-bottom: 1px solid var(--borde);
+      vertical-align: top;
+    }
+    .metas-tabla tr:last-child td { border-bottom: none; background: var(--azul-claro); font-weight: 700; }
+    .metas-tabla tr:nth-child(even) td { background: var(--gris); }
+    .metas-tabla .mes { font-weight: 700; color: var(--azul); }
+    .pico {
+      background: #fef9c3 !important;
+    }
+    .pico .mes { color: var(--naranja) !important; }
+    .num-meta {
+      font-weight: 700;
+      font-size: 15px;
+    }
+    .num-leads   { color: var(--azul-medio); }
+    .num-visitas { color: var(--verde); }
+    .num-cierres { color: var(--naranja); }
+
+    /* PRESUPUESTO */
+    .presupuesto-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 16px;
+    }
+    .presupuesto-card {
+      background: white;
+      border-radius: 12px;
+      padding: 20px;
+      border: 1px solid var(--borde);
+      text-align: center;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+    }
+    .presupuesto-card .canal-nombre {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--texto-suave);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      margin-bottom: 8px;
+    }
+    .presupuesto-card .monto {
+      font-size: 24px;
+      font-weight: 800;
+      color: var(--azul);
+    }
+    .presupuesto-card .monto-sub {
+      font-size: 11px;
+      color: var(--texto-suave);
+      margin-top: 2px;
+    }
+    .presupuesto-total {
+      background: var(--azul);
+      color: white;
+      border-radius: 12px;
+      padding: 20px;
+      text-align: center;
+      margin-top: 16px;
+    }
+    .presupuesto-total .label { font-size: 13px; opacity: 0.8; }
+    .presupuesto-total .monto { font-size: 30px; font-weight: 800; }
+
+    /* PRIORIDADES */
+    .prioridad-item {
+      display: flex;
+      gap: 16px;
+      background: white;
+      border-radius: 12px;
+      padding: 18px 20px;
+      border: 1px solid var(--borde);
+      margin-bottom: 12px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+      align-items: flex-start;
+    }
+    .prioridad-num {
+      background: var(--azul);
+      color: white;
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      font-weight: 800;
+      font-size: 15px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .prioridad-contenido h4 { font-size: 14px; font-weight: 700; margin-bottom: 4px; color: var(--azul); }
+    .prioridad-contenido p  { font-size: 13px; color: var(--texto-suave); }
+
+    /* ALERTA */
+    .alerta {
+      border-radius: 10px;
+      padding: 16px 20px;
+      margin-bottom: 20px;
+      font-size: 14px;
+      line-height: 1.6;
+    }
+    .alerta-verde { background: var(--verde-claro); border-left: 4px solid #16a34a; color: #14532d; }
+    .alerta-azul  { background: var(--azul-claro);  border-left: 4px solid var(--azul-medio); color: var(--azul); }
+    .alerta b { font-weight: 700; }
+
+    /* FOOTER */
+    footer {
+      text-align: center;
+      padding: 28px;
+      font-size: 13px;
+      color: var(--texto-suave);
+      border-top: 1px solid var(--borde);
+      background: white;
+      margin-top: 20px;
+    }
+
+    @media print {
+      body { background: white; }
+      .container { max-width: 100%; padding: 0; }
+    }
+
+    @media (max-width: 600px) {
+      .flujo-steps { flex-direction: column; align-items: center; }
+      .flujo-step::after { content: '↓'; right: auto; top: auto; bottom: -18px; position: relative; }
+      .flujo-step { margin-bottom: 24px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="header">
+  <div class="badge">PLAN ESTRATÉGICO CONFIDENCIAL</div>
+  <h1>Plan de Captación de Alumnos</h1>
+  <p>Colegio San Guillermo &nbsp;·&nbsp; Matrícula 2027 &nbsp;·&nbsp; Junio – Diciembre 2026</p>
+  <div class="meta">
+    <div class="meta-item"><div class="num">350–470</div><div class="label">Leads proyectados</div></div>
+    <div class="meta-item"><div class="num">48–72</div><div class="label">Matrículas nuevas</div></div>
+    <div class="meta-item"><div class="num">$310–520</div><div class="label">Inversión mensual</div></div>
+    <div class="meta-item"><div class="num">5</div><div class="label">Canales activos</div></div>
+  </div>
+</div>
+
+<div class="container">
+
+  <!-- 1. PERFIL -->
+  <div class="section">
+    <div class="section-title"><span class="num">1</span>Perfil del Padre de Familia Objetivo</div>
+    <div class="alerta alerta-verde">
+      <b>Zona de captación:</b> Sector debajo de Mena del Hierro — incluye La Ecuatoriana, Chillogallo, Guamaní y sectores aledaños. Familias de nivel socioeconómico medio-bajo a medio, con alto uso de celular Android y WhatsApp como canal principal de comunicación.
+    </div>
+    <div class="perfil-table">
+      <table>
+        <thead>
+          <tr>
+            <th>Característica</th>
+            <th>Detalle</th>
+            <th>Relevancia para el plan</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><b>Edad de los padres</b></td>
+            <td>28 – 45 años</td>
+            <td><span class="tag tag-azul">Facebook + TikTok</span></td>
+          </tr>
+          <tr>
+            <td><b>Nivel socioeconómico</b></td>
+            <td>Medio-bajo a medio</td>
+            <td><span class="tag tag-verde">Precio accesible como argumento clave</span></td>
+          </tr>
+          <tr>
+            <td><b>Dispositivo</b></td>
+            <td>Celular Android</td>
+            <td><span class="tag tag-azul">Anuncios mobile-first</span></td>
+          </tr>
+          <tr>
+            <td><b>Red social principal</b></td>
+            <td>Facebook (Ecuador: 9M+ usuarios)</td>
+            <td><span class="tag tag-naranja">Mayor presupuesto publicitario aquí</span></td>
+          </tr>
+          <tr>
+            <td><b>Red social secundaria</b></td>
+            <td>TikTok (padres 28–38 años)</td>
+            <td><span class="tag tag-azul">Contenido orgánico + pauta</span></td>
+          </tr>
+          <tr>
+            <td><b>Comunicación favorita</b></td>
+            <td>WhatsApp</td>
+            <td><span class="tag tag-verde">Canal de cierre — ya tienes el bot</span></td>
+          </tr>
+          <tr>
+            <td><b>Búsquedas activas</b></td>
+            <td>Google cuando ya tiene intención de cambio</td>
+            <td><span class="tag tag-azul">Google Ads para captura de intent</span></td>
+          </tr>
+          <tr>
+            <td><b>Motivación de cambio</b></td>
+            <td>Calidad, seguridad, talleres, cercanía, precio</td>
+            <td><span class="tag tag-verde">Mensajes de valor claros</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- 2. CANALES -->
+  <div class="section">
+    <div class="section-title"><span class="num">2</span>Estrategia de Canales</div>
+
+    <!-- WhatsApp -->
+    <div class="canal">
+      <div class="canal-header">
+        <div class="canal-icon wa">💬</div>
+        <div>
+          <div class="canal-titulo">Canal 1: WhatsApp + Bot <span class="tag tag-verde" style="font-size:11px;vertical-align:middle;">TU MEJOR ARMA AHORA</span></div>
+          <div class="canal-sub">Respuesta inmediata que la mayoría de colegios no tiene</div>
+        </div>
+      </div>
+      <div class="canal-body">
+        <div class="presupuesto-badge">💰 Costo: $0 (ya tienes el bot)</div>
+        <p>Cada lead que entra por cualquier canal debe terminar en WhatsApp. El bot permite responder masivamente las 24 horas. Esto es ventaja competitiva real frente a colegios que contestan al día siguiente.</p>
+        <table class="mini-table">
+          <thead>
+            <tr><th>Acción</th><th>Descripción</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Broadcast inicial</td><td>Mensaje a base de datos existente: ex-alumnos, contactos actuales, comunidad del sector</td></tr>
+            <tr><td>Flujo del bot</td><td>Recibe → responde en &lt;30 seg → entrega info de talleres y horarios → agenda visita</td></tr>
+            <tr><td>Pregunta clave del bot</td><td>"¿Cuántos hijos tienes y en qué año están?" — califica el lead automáticamente</td></tr>
+            <tr><td>Cierre humano</td><td>El equipo toma solo leads calificados que el bot ya informó</td></tr>
+          </tbody>
+        </table>
+        <div class="alerta alerta-azul" style="margin-top:14px;">
+          <b>Mensaje de broadcast sugerido:</b> "¿Tienes hijos en edad escolar? 🏫 El Colegio San Guillermo abre inscripciones 2027. Cupos limitados. Respondemos ahora mismo — escríbenos y te contamos todo."
+        </div>
+      </div>
+    </div>
+
+    <!-- Facebook -->
+    <div class="canal">
+      <div class="canal-header">
+        <div class="canal-icon fb">📘</div>
+        <div>
+          <div class="canal-titulo">Canal 2: Facebook Ads <span class="tag tag-naranja" style="font-size:11px;vertical-align:middle;">MAYOR VOLUMEN</span></div>
+          <div class="canal-sub">El padre de Mena hacia abajo usa Facebook más que Instagram — aquí va el presupuesto más grande</div>
+        </div>
+      </div>
+      <div class="canal-body">
+        <div class="presupuesto-badge">💰 $150–$250/mes</div>
+        <p><b>Segmentación:</b> Radio 4 km del colegio · Edad 25–45 años · Intereses: educación, familia, crianza · Segmento "padres" de Facebook · Excluir personas sin hijos.</p>
+        <table class="mini-table">
+          <thead>
+            <tr><th>Tipo de campaña</th><th>Objetivo</th><th>Presupuesto/día</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Alcance local</td><td>Visibilidad en radio 3–5 km</td><td>$5–8</td></tr>
+            <tr><td>Leads (formulario FB)</td><td>Captar nombre, teléfono, número de hijos</td><td>$8–12</td></tr>
+            <tr><td>Retargeting</td><td>Volver a impactar a quien vio el video o visitó la página</td><td>$3–5</td></tr>
+          </tbody>
+        </table>
+        <p style="margin-top:14px;"><b>Creativos que funcionan en este segmento:</b></p>
+        <ul style="margin-top:8px;padding-left:20px;">
+          <li style="font-size:14px;color:var(--texto-suave);margin-bottom:6px;">Video 30–45 seg: instalaciones + niños en talleres + testimonio de un papá real</li>
+          <li style="font-size:14px;color:var(--texto-suave);margin-bottom:6px;">Foto con texto directo: <em>"Inscripciones abiertas 2027 — Cupos limitados — Sector Mena"</em></li>
+          <li style="font-size:14px;color:var(--texto-suave);">Carrusel: talleres disponibles, horarios, ventajas del colegio</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- TikTok -->
+    <div class="canal">
+      <div class="canal-header">
+        <div class="canal-icon tt">🎵</div>
+        <div>
+          <div class="canal-titulo">Canal 3: TikTok <span class="tag tag-azul" style="font-size:11px;vertical-align:middle;">SÍ, HAZLO</span></div>
+          <div class="canal-sub">Reputación + viralidad orgánica — un buen video llega a miles sin pagar</div>
+        </div>
+      </div>
+      <div class="canal-body">
+        <div class="presupuesto-badge">💰 Orgánico: $0 · Pauta desde mes 2: $50–100/mes</div>
+        <p>TikTok no da leads directos de inmediato, pero genera <b>reputación, confianza y viralidad</b>. Lo ven los padres jóvenes (28–38 años) Y los propios niños, que luego le dicen a sus papás <em>"quiero ir a ese cole"</em>. Empieza orgánico — si un video pega, le pones pauta.</p>
+        <p><b>Regla de oro:</b> Los primeros 2 segundos deben detener el scroll. Empieza siempre con el hook: <em>"¿Vives cerca de Mena y buscas colegio para tu hijo?"</em></p>
+        <p><b>Frecuencia mínima viable:</b> 3 videos por semana. No necesitas producción profesional — el celular graba bien.</p>
+        <div class="video-grid">
+          <div class="video-card">
+            <div class="titulo">🎒 "Un día en San Guillermo"</div>
+            <div class="desc">Rutina del colegio en formato reel, música de fondo, captions con los momentos del día</div>
+          </div>
+          <div class="video-card">
+            <div class="titulo">🎨 Los talleres en acción</div>
+            <div class="desc">15–20 seg de niños en taller de arte, música, deporte o tecnología. Sin palabras, solo música</div>
+          </div>
+          <div class="video-card">
+            <div class="titulo">📋 "3 razones para elegir San Guillermo"</div>
+            <div class="desc">Formato de lista directa, subtítulos grandes, voz en off simple</div>
+          </div>
+          <div class="video-card">
+            <div class="titulo">👨‍👩‍👧 Testimonio de mamá/papá</div>
+            <div class="desc">30 seg a cámara, auténtico, no actuado. Responde: ¿por qué eligieron este colegio?</div>
+          </div>
+          <div class="video-card">
+            <div class="titulo">🚶 Tour de instalaciones</div>
+            <div class="desc">Con texto encima señalando cada área. Aulas, patio, talleres, comedor</div>
+          </div>
+          <div class="video-card">
+            <div class="titulo">👩‍🏫 Profesor presentándose</div>
+            <div class="desc">Humaniza la marca. "Soy la profe de matemáticas y esto es lo que aprenderá tu hijo..."</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Google -->
+    <div class="canal">
+      <div class="canal-header">
+        <div class="canal-icon gg">🔍</div>
+        <div>
+          <div class="canal-titulo">Canal 4: Google Ads</div>
+          <div class="canal-sub">Para padres con intención activa de búsqueda — los más cerca del cierre</div>
+        </div>
+      </div>
+      <div class="canal-body">
+        <div class="presupuesto-badge">💰 $80–$120/mes</div>
+        <p>Cuando un papá ya decidió buscar colegio, va a Google. Ahí tiene que aparecer San Guillermo. El volumen local no es masivo, así que el presupuesto rinde bien.</p>
+        <table class="mini-table">
+          <thead><tr><th>Palabra clave</th><th>Intención</th></tr></thead>
+          <tbody>
+            <tr><td>colegio en Mena Quito</td><td>Búsqueda directa de ubicación</td></tr>
+            <tr><td>colegio privado sur de Quito</td><td>Comparando opciones</td></tr>
+            <tr><td>matrícula 2027 Quito</td><td>Intención de acción inmediata</td></tr>
+            <tr><td>colegios cerca de La Ecuatoriana</td><td>Búsqueda geográfica específica</td></tr>
+            <tr><td>colegio con talleres Quito</td><td>Busca diferenciación por talleres</td></tr>
+          </tbody>
+        </table>
+        <div class="alerta alerta-azul" style="margin-top:14px;">
+          <b>Importante:</b> El clic debe ir a una página simple o directo a WhatsApp — <b>no</b> a la home del colegio. Cada segundo de fricción pierde leads.
+        </div>
+      </div>
+    </div>
+
+    <!-- Orgánico -->
+    <div class="canal">
+      <div class="canal-header">
+        <div class="canal-icon org">🏘️</div>
+        <div>
+          <div class="canal-titulo">Canal 5: Acciones Locales Orgánicas</div>
+          <div class="canal-sub">Costo $0 — el voz a voz en Quito Sur sigue siendo enorme</div>
+        </div>
+      </div>
+      <div class="canal-body">
+        <div class="grid-2">
+          <div class="card">
+            <h3>📄 Volantes físicos</h3>
+            <p>Distribución en tiendas, farmacias y mercados del sector: Mena del Hierro, La Ecuatoriana, Chillogallo, Guamaní.</p>
+          </div>
+          <div class="card">
+            <h3>🎓 Alianzas con guarderías/CDIs</h3>
+            <p>Los niños que egresan de 5 años necesitan colegio. Contactar CDIs del sector para referidos.</p>
+          </div>
+          <div class="card">
+            <h3>🤝 Papás embajadores</h3>
+            <p>Ofrece descuento en mensualidad a padres actuales que refieran una familia nueva que se matricule.</p>
+          </div>
+          <div class="card">
+            <h3>📱 Grupos de WhatsApp vecinales</h3>
+            <p>Pide a papás actuales que compartan el mensaje en sus grupos vecinales y de barrio.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 3. FLUJO DEL LEAD -->
+  <div class="section">
+    <div class="section-title"><span class="num">3</span>Flujo Completo de un Lead</div>
+    <div class="flujo">
+      <div class="flujo-steps">
+        <div class="flujo-step">
+          <div class="circle">📱</div>
+          <div class="step-label">Ve el anuncio</div>
+          <div class="step-desc">Facebook, TikTok, Google o referido</div>
+        </div>
+        <div class="flujo-step">
+          <div class="circle">💬</div>
+          <div class="step-label">Escribe al WA</div>
+          <div class="step-desc">Clic directo a WhatsApp del colegio</div>
+        </div>
+        <div class="flujo-step">
+          <div class="circle">🤖</div>
+          <div class="step-label">Bot responde</div>
+          <div class="step-desc">En menos de 30 segundos, 24/7</div>
+        </div>
+        <div class="flujo-step">
+          <div class="circle">📋</div>
+          <div class="step-label">Califica lead</div>
+          <div class="step-desc">"¿Hijos? ¿En qué año están?"</div>
+        </div>
+        <div class="flujo-step">
+          <div class="circle">📅</div>
+          <div class="step-label">Agenda visita</div>
+          <div class="step-desc">Bot envía horarios o agenda Open House</div>
+        </div>
+        <div class="flujo-step">
+          <div class="circle">🏫</div>
+          <div class="step-label">Visita al colegio</div>
+          <div class="step-desc">Si visitan, la tasa de cierre es alta</div>
+        </div>
+        <div class="flujo-step">
+          <div class="circle">✅</div>
+          <div class="step-label">Matrícula</div>
+          <div class="step-desc">Cierre por equipo humano</div>
+        </div>
+      </div>
+    </div>
+    <div class="alerta alerta-verde" style="margin-top:16px;">
+      <b>Conversión esperada:</b> De cada 100 leads → 30 visitan el colegio → 15 se matriculan. Esta tasa es realista cuando hay seguimiento activo por WhatsApp y respuesta rápida del bot.
+    </div>
+  </div>
+
+  <!-- 4. METAS MES A MES -->
+  <div class="section">
+    <div class="section-title"><span class="num">4</span>Metas Realistas Mes a Mes</div>
+    <div class="alerta alerta-azul">
+      <b>Contexto clave:</b> Junio 2026 es el inicio del período de inscripciones más importante del año para la Sierra. Los papás toman decisiones de cambio de colegio entre julio y noviembre. <b>El timing es ideal para arrancar ahora.</b>
+    </div>
+    <div class="metas-tabla">
+      <table>
+        <thead>
+          <tr>
+            <th>Mes</th>
+            <th>Actividad principal</th>
+            <th>Leads</th>
+            <th>Visitas al colegio</th>
+            <th>Matrículas</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="mes">Junio</td>
+            <td>Configurar campañas, preparar contenido TikTok/FB, activar broadcast WhatsApp</td>
+            <td><span class="num-meta num-leads">20–30</span></td>
+            <td><span class="num-meta num-visitas">5–8</span></td>
+            <td><span class="num-meta num-cierres">2–3</span></td>
+          </tr>
+          <tr>
+            <td class="mes">Julio</td>
+            <td>Campañas activas, empezar TikTok orgánico, primera oleada de volantes</td>
+            <td><span class="num-meta num-leads">50–70</span></td>
+            <td><span class="num-meta num-visitas">15–20</span></td>
+            <td><span class="num-meta num-cierres">6–8</span></td>
+          </tr>
+          <tr>
+            <td class="mes">Agosto</td>
+            <td>Pico de interés — fin de año escolar, papás decidiendo cambios para el próximo año</td>
+            <td><span class="num-meta num-leads">80–100</span></td>
+            <td><span class="num-meta num-visitas">25–30</span></td>
+            <td><span class="num-meta num-cierres">10–15</span></td>
+          </tr>
+          <tr class="pico">
+            <td class="mes">⭐ Septiembre</td>
+            <td><b>MES CLAVE</b> — Matrícula 2027 en mente de todos. Intensificar todas las campañas</td>
+            <td><span class="num-meta num-leads">80–100</span></td>
+            <td><span class="num-meta num-visitas">25–35</span></td>
+            <td><span class="num-meta num-cierres">12–18</span></td>
+          </tr>
+          <tr>
+            <td class="mes">Octubre</td>
+            <td>Mantener momentum, retargeting intenso, Open House especial</td>
+            <td><span class="num-meta num-leads">60–80</span></td>
+            <td><span class="num-meta num-visitas">20–25</span></td>
+            <td><span class="num-meta num-cierres">8–12</span></td>
+          </tr>
+          <tr>
+            <td class="mes">Noviembre</td>
+            <td>Urgencia: <em>"últimos cupos 2027"</em>, cierre de lista de espera</td>
+            <td><span class="num-meta num-leads">40–60</span></td>
+            <td><span class="num-meta num-visitas">15–20</span></td>
+            <td><span class="num-meta num-cierres">6–10</span></td>
+          </tr>
+          <tr>
+            <td class="mes">Diciembre</td>
+            <td>Cierre final — papás que deciden durante vacaciones navideñas</td>
+            <td><span class="num-meta num-leads">20–30</span></td>
+            <td><span class="num-meta num-visitas">8–12</span></td>
+            <td><span class="num-meta num-cierres">4–6</span></td>
+          </tr>
+          <tr>
+            <td class="mes">TOTAL</td>
+            <td><b>7 meses de campaña continua</b></td>
+            <td><span class="num-meta num-leads">350–470</span></td>
+            <td><span class="num-meta num-visitas">113–150</span></td>
+            <td><span class="num-meta num-cierres">48–72</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- 5. PRESUPUESTO -->
+  <div class="section">
+    <div class="section-title"><span class="num">5</span>Presupuesto Mensual Estimado</div>
+    <div class="presupuesto-grid">
+      <div class="presupuesto-card">
+        <div class="canal-nombre">📘 Facebook / Instagram</div>
+        <div class="monto">$150–$250</div>
+        <div class="monto-sub">por mes</div>
+      </div>
+      <div class="presupuesto-card">
+        <div class="canal-nombre">🔍 Google Ads</div>
+        <div class="monto">$80–$120</div>
+        <div class="monto-sub">por mes</div>
+      </div>
+      <div class="presupuesto-card">
+        <div class="canal-nombre">🎵 TikTok Ads</div>
+        <div class="monto">$50–$100</div>
+        <div class="monto-sub">opcional, desde mes 2</div>
+      </div>
+      <div class="presupuesto-card">
+        <div class="canal-nombre">📄 Materiales físicos</div>
+        <div class="monto">$30–$50</div>
+        <div class="monto-sub">volantes y carteles</div>
+      </div>
+    </div>
+    <div class="presupuesto-total">
+      <div class="label">INVERSIÓN MENSUAL TOTAL ESTIMADA</div>
+      <div class="monto">$310 – $520 / mes</div>
+    </div>
+    <div class="alerta alerta-verde" style="margin-top:16px;">
+      <b>TikTok orgánico no cuesta dinero</b>, solo tiempo de grabación (30–45 min por video). Empiézalo orgánico. Si un video supera las 5,000 vistas, ponle $20–30 de pauta para amplificarlo.
+    </div>
+  </div>
+
+  <!-- 6. PRIORIDADES -->
+  <div class="section">
+    <div class="section-title"><span class="num">6</span>Prioridades de Esta Semana</div>
+
+    <div class="prioridad-item">
+      <div class="prioridad-num">1</div>
+      <div class="prioridad-contenido">
+        <h4>Hoy / mañana: Activar campaña básica de Facebook</h4>
+        <p>Radio 4 km del colegio · presupuesto $8/día · objetivo: leads. Primero asegurar que el flujo del bot esté listo antes de que lleguen los primeros mensajes.</p>
+      </div>
+    </div>
+
+    <div class="prioridad-item">
+      <div class="prioridad-num">2</div>
+      <div class="prioridad-contenido">
+        <h4>Esta semana: Grabar los primeros 3 videos de TikTok</h4>
+        <p>Video 1: Tour del colegio (90 seg máx) · Video 2: Un taller en acción · Video 3: Un profesor presentándose. Subirlos sin pauta, observar cuál genera más vistas.</p>
+      </div>
+    </div>
+
+    <div class="prioridad-item">
+      <div class="prioridad-num">3</div>
+      <div class="prioridad-contenido">
+        <h4>Esta semana: Broadcast de WhatsApp a base existente</h4>
+        <p>Enviar mensaje de inscripciones a toda la base actual. Pedir a papás que reenvíen en sus grupos vecinales de WhatsApp. Un solo papá puede estar en 5–10 grupos del barrio.</p>
+      </div>
+    </div>
+
+    <div class="prioridad-item">
+      <div class="prioridad-num">4</div>
+      <div class="prioridad-contenido">
+        <h4>En 15 días: Revisar datos y ajustar presupuesto</h4>
+        <p>Identificar qué anuncio generó más leads, qué video tuvo más vistas, qué mensaje del bot tiene mejor respuesta. Mover el presupuesto hacia lo que funciona.</p>
+      </div>
+    </div>
+
+    <div class="prioridad-item">
+      <div class="prioridad-num">5</div>
+      <div class="prioridad-contenido">
+        <h4>Antes de agosto: Organizar un Open House</h4>
+        <p>Invitar a los leads calificados del bot a visitar el colegio en un día especial. Con talleres demostrativos para los niños. Si el niño disfruta la visita, el papá matricula.</p>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /container -->
+
+<footer>
+  Colegio San Guillermo &nbsp;·&nbsp; Plan de Captación Matrícula 2027 &nbsp;·&nbsp; Junio 2026 &nbsp;·&nbsp; Confidencial
+</footer>
+
+</body>
+</html>
