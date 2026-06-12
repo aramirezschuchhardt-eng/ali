@@ -76,6 +76,153 @@
       letter-spacing: 0.05em;
     }
 
+    /* LOGO */
+    .logo-wrapper {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 20px;
+    }
+    .logo-box {
+      width: 90px;
+      height: 90px;
+      border-radius: 16px;
+      background: rgba(255,255,255,0.15);
+      border: 2px dashed rgba(255,255,255,0.5);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      font-size: 11px;
+      color: rgba(255,255,255,0.7);
+      text-align: center;
+      gap: 4px;
+      overflow: hidden;
+    }
+    .logo-box img {
+      width: 90px;
+      height: 90px;
+      object-fit: contain;
+      border-radius: 14px;
+    }
+    .logo-box .placeholder-icon { font-size: 26px; }
+
+    /* SPEECH */
+    .speech-card {
+      background: white;
+      border-radius: 14px;
+      border: 1px solid var(--borde);
+      overflow: hidden;
+      margin-bottom: 24px;
+      box-shadow: 0 1px 6px rgba(0,0,0,0.07);
+    }
+    .speech-header {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 18px 24px;
+      border-bottom: 1px solid var(--borde);
+    }
+    .speech-icon {
+      font-size: 28px;
+      width: 52px;
+      height: 52px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .speech-icon.jard { background: #fce7f3; }
+    .speech-icon.feria { background: #fef9c3; }
+    .speech-icon.objecion { background: #fff1f2; }
+    .speech-titulo { font-size: 17px; font-weight: 700; color: var(--azul); }
+    .speech-sub    { font-size: 13px; color: var(--texto-suave); }
+    .speech-body   { padding: 24px; }
+    .speech-body p { font-size: 14px; color: var(--texto-suave); margin-bottom: 14px; line-height: 1.7; }
+
+    .dialogo {
+      background: var(--gris);
+      border-radius: 12px;
+      padding: 20px 24px;
+      margin: 12px 0;
+      border-left: 4px solid var(--azul-medio);
+      position: relative;
+    }
+    .dialogo .quien {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--azul-medio);
+      margin-bottom: 8px;
+    }
+    .dialogo .texto {
+      font-size: 14.5px;
+      color: var(--texto);
+      line-height: 1.75;
+      font-style: italic;
+    }
+    .dialogo .texto b { font-style: normal; color: var(--azul); }
+    .dialogo.variante { border-left-color: #16a34a; }
+    .dialogo.variante .quien { color: #15803d; }
+
+    .tip-box {
+      background: var(--amarillo-claro);
+      border: 1px solid #fde68a;
+      border-radius: 10px;
+      padding: 14px 18px;
+      font-size: 13px;
+      color: #92400e;
+      margin-top: 14px;
+      line-height: 1.6;
+    }
+    .tip-box b { color: #78350f; }
+
+    .objecion-item {
+      margin-bottom: 20px;
+      padding-bottom: 20px;
+      border-bottom: 1px solid var(--borde);
+    }
+    .objecion-item:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+    .objecion-pregunta {
+      background: #fff1f2;
+      border-radius: 8px;
+      padding: 10px 16px;
+      font-size: 14px;
+      font-weight: 600;
+      color: #be123c;
+      margin-bottom: 10px;
+    }
+    .objecion-respuesta {
+      background: var(--verde-claro);
+      border-radius: 8px;
+      padding: 12px 16px;
+      font-size: 14px;
+      color: var(--verde);
+      line-height: 1.65;
+    }
+    .objecion-respuesta b { font-weight: 700; }
+
+    .kit-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 12px;
+      margin-top: 12px;
+    }
+    .kit-item {
+      background: var(--gris);
+      border: 1px solid var(--borde);
+      border-radius: 10px;
+      padding: 14px 16px;
+      font-size: 13px;
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+    }
+    .kit-item .ki { font-size: 20px; flex-shrink: 0; }
+    .kit-item .kt { color: var(--texto); font-weight: 600; margin-bottom: 2px; font-size: 13px; }
+    .kit-item .kd { color: var(--texto-suave); font-size: 12px; }
+
     /* LAYOUT */
     .container {
       max-width: 1100px;
@@ -470,6 +617,13 @@
 
 <!-- HEADER -->
 <div class="header">
+  <div class="logo-wrapper">
+    <div class="logo-box">
+      <!-- Reemplazar src con la ruta real del logo -->
+      <img src="logo-san-guillermo.png" alt="Colegio San Guillermo"
+           onerror="this.parentElement.innerHTML='<span class=\'placeholder-icon\'>🏫</span><span>Logo</span>'" />
+    </div>
+  </div>
   <div class="badge">PLAN ESTRATÉGICO CONFIDENCIAL</div>
   <h1>Plan de Captación de Alumnos</h1>
   <p>Colegio San Guillermo &nbsp;·&nbsp; Matrícula 2027 &nbsp;·&nbsp; Junio – Diciembre 2026</p>
@@ -914,6 +1068,240 @@
         <p>Invitar a los leads calificados del bot a visitar el colegio en un día especial. Con talleres demostrativos para los niños. Si el niño disfruta la visita, el papá matricula.</p>
       </div>
     </div>
+  </div>
+
+
+  <!-- 7. SPEECH DE CAMPO -->
+  <div class="section">
+    <div class="section-title"><span class="num">7</span>Speech para Captación Presencial — Jardines y Ferias</div>
+
+    <div class="alerta alerta-azul">
+      <b>Antes de salir a campo:</b> La persona que represente al colegio debe ir con presentación impecable (polo o camiseta con logo del colegio), carpeta o tablet con fotos del colegio, volantes impresos, y el celular listo para agendar WhatsApp en el momento.
+    </div>
+
+    <!-- JARDINES / CDIs -->
+    <div class="speech-card">
+      <div class="speech-header">
+        <div class="speech-icon jard">🎒</div>
+        <div>
+          <div class="speech-titulo">Script para Jardines Infantiles y CDIs</div>
+          <div class="speech-sub">Visita directa al director/directora del jardín — objetivo: alianza de referidos</div>
+        </div>
+      </div>
+      <div class="speech-body">
+        <p><b>Situación:</b> Llegas al jardín, pides hablar con la directora o la persona a cargo. No necesitas cita. Ve con confianza, sonrisa y el uniforme del colegio puesto.</p>
+
+        <div class="dialogo">
+          <div class="quien">Apertura — con la directora del jardín</div>
+          <div class="texto">
+            "Buenos días, ¿cómo está? Me llamo [nombre], vengo del <b>Colegio San Guillermo</b>, que está aquí cerquita, en el sector de Mena. Quería pasar a presentarme y ver si podemos hacer algo juntos que le sirva a los papás de sus niños."
+          </div>
+        </div>
+
+        <div class="dialogo">
+          <div class="quien">Propuesta de alianza</div>
+          <div class="texto">
+            "Nosotros recibimos niños desde primer año de básica. Muchos papás que están aquí con ustedes, cuando los niños llegan a los 5 o 6 años, empiezan a buscar dónde continuar. <b>La idea es que usted nos pueda recomendar cuando le pregunten, y nosotros hacemos lo mismo: cuando algún papá nuestro busca jardín para un hermanito menor, le recomendamos a usted.</b>"
+          </div>
+        </div>
+
+        <div class="dialogo">
+          <div class="quien">Presentación del colegio (máx. 60 segundos)</div>
+          <div class="texto">
+            "El Colegio San Guillermo tiene más de [X] años en el sector. Tenemos <b>talleres de [mencionar 2–3: arte, música, deportes, tecnología]</b>, horario completo, ambiente seguro, y lo mejor es que estamos <b>a pocos minutos de aquí</b>. Los papás del sector nos conocen. Tenemos cupos disponibles para 2027 y queremos que los niños de su jardín puedan tener esa opción cerca."
+          </div>
+        </div>
+
+        <div class="dialogo variante">
+          <div class="quien">Cierre de la visita al jardín</div>
+          <div class="texto">
+            "Le dejo estos volantes por si algún papá le pregunta. Y si me da un número de WhatsApp, yo le mando la info del colegio con fotitos y todo para que lo tenga a mano. <b>No le vamos a llenar de mensajes, solo la info que le sirva.</b> ¿Cómo le parece?"
+          </div>
+        </div>
+
+        <div class="tip-box">
+          <b>Tip clave:</b> No vayas a vender — ve a crear una alianza. La directora del jardín tiene confianza con los papás. Si ella habla bien del colegio, vale por 10 anuncios de Facebook. Deja siempre un pequeño obsequio institucional si tienes: un calendario, una agenda, algo con el logo del colegio.
+        </div>
+
+        <p style="margin-top:18px;"><b>Manejo del momento: papás presentes en el jardín</b></p>
+        <p>Si en la visita hay papás esperando o retirando a sus hijos, acércate naturalmente:</p>
+
+        <div class="dialogo">
+          <div class="quien">Acercamiento espontáneo a un papá/mamá en el jardín</div>
+          <div class="texto">
+            "Buen día, disculpe — ¿su hijo está aquí en el jardín? Le pregunto porque vengo del <b>Colegio San Guillermo</b>, que está acá en Mena. Estamos abriendo inscripciones para el año que viene y quería contarle un poco sobre el cole, por si le sirve de información. ¿Tiene un minutito?"
+          </div>
+        </div>
+
+        <div class="dialogo">
+          <div class="quien">Si el papá/mamá dice que sí — continúa así</div>
+          <div class="texto">
+            "Mire, somos un colegio pequeño, de barrio, lo cual es bueno porque <b>los profesores conocen a cada niño por su nombre</b>. Tenemos talleres de [mencionar 2], horario hasta las [hora], y el ambiente es muy tranquilo y seguro. Muchos papás del sector ya tienen a sus hijos con nosotros. ¿Su hijo está por terminar el jardín este año?"
+          </div>
+        </div>
+
+        <div class="dialogo variante">
+          <div class="quien">Cierre siempre en WhatsApp</div>
+          <div class="texto">
+            "¿Me regala su WhatsApp? Le mando la info del colegio con fotos y los talleres que tenemos. Sin compromiso — si le interesa, coordina una visita y lo conoce con su hijo. <b>Muchos papás que vienen a verlo se quedan.</b>"
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- FERIAS Y PERSAS -->
+    <div class="speech-card">
+      <div class="speech-header">
+        <div class="speech-icon feria">🎪</div>
+        <div>
+          <div class="speech-titulo">Script para Ferias, Persas y Eventos del Sector</div>
+          <div class="speech-sub">Stand o presencia móvil — alto tráfico, contacto breve, cierre en WhatsApp</div>
+        </div>
+      </div>
+      <div class="speech-body">
+        <p><b>Situación:</b> Estás en una feria, presa o evento comunitario del sector. Puedes tener un pequeño stand o simplemente moverte entre la gente con volantes y el uniforme del colegio. El objetivo no es contar todo — es captar el número y agendar una visita.</p>
+
+        <div class="alerta alerta-verde" style="margin-bottom:14px;">
+          <b>Regla de oro en ferias:</b> Habla en máximo 45 segundos. En ferias la gente está de paso. Tu único objetivo es conseguir el WhatsApp. Todo lo demás lo hace el bot después.
+        </div>
+
+        <div class="dialogo">
+          <div class="quien">Apertura en feria — gancho directo</div>
+          <div class="texto">
+            "Buen día, ¿cómo está? ¿Tiene hijos en edad escolar?" <b>[espera respuesta]</b> "Justo — yo soy del <b>Colegio San Guillermo</b>, estamos aquí en el sector. Estamos abriendo cupos para el 2027 y quería contarle dos cositas. ¿Le molesta?"
+          </div>
+        </div>
+
+        <div class="dialogo">
+          <div class="quien">Pitch de 30 segundos</div>
+          <div class="texto">
+            "Somos un colegio <b>pequeño, seguro y con talleres</b> — de arte, música, deportes [o los que correspondan]. Estamos en Mena, a [X minutos] de aquí. Los papás del sector nos conocen y los niños están felices. Tenemos cupos limitados para el próximo año y los queremos llenar antes de diciembre."
+          </div>
+        </div>
+
+        <div class="dialogo variante">
+          <div class="quien">Cierre inmediato</div>
+          <div class="texto">
+            "Le dejo este volante con toda la info. Y si me da su número, le mando las fotos del cole por WhatsApp para que lo vea con calma. Si le llama la atención, puede venir a visitarlo cuando quiera — <b>sin cita, sin compromiso</b>. ¿Me da su número?"
+          </div>
+        </div>
+
+        <p style="margin-top:18px;"><b>Variante: si hay niños presentes</b></p>
+        <div class="dialogo">
+          <div class="quien">Cuando el papá viene con sus hijos — usa a los niños a tu favor</div>
+          <div class="texto">
+            "¡Hola! ¿Cómo te llamas? [espera nombre del niño] — qué nombre tan bonito. Mira, yo soy del Colegio San Guillermo, tenemos talleres de [arte/música/deportes], ¿te gustaría? [al niño]" <b>[el niño va a decir que sí o va a mostrar interés]</b> — luego al papá: "Ya ven, a los niños les llama la atención. ¿Le gustaría venir a conocerlo? Le mando la info por WhatsApp."
+          </div>
+        </div>
+
+        <div class="tip-box">
+          <b>Tips de feria:</b><br>
+          · Párate en el pasillo, no detrás de la mesa — el contacto activo duplica las conversaciones.<br>
+          · Lleva una tablet o celular con fotos del colegio, del patio, de los talleres — mostrar es más potente que describir.<br>
+          · Ten una hoja o cuaderno donde anotes nombre + número en el momento. No confíes en la memoria.<br>
+          · Si la gente no quiere dar el número, pide que ellos te escriban al WhatsApp del colegio en ese momento: "Escríbeme 'hola' al [número] y le mando toda la info."
+        </div>
+      </div>
+    </div>
+
+    <!-- MANEJO DE OBJECIONES -->
+    <div class="speech-card">
+      <div class="speech-header">
+        <div class="speech-icon objecion">💡</div>
+        <div>
+          <div class="speech-titulo">Manejo de Objeciones Frecuentes</div>
+          <div class="speech-sub">Las respuestas que el captador debe tener memorizadas</div>
+        </div>
+      </div>
+      <div class="speech-body">
+
+        <div class="objecion-item">
+          <div class="objecion-pregunta">"¿Cuánto cuesta la mensualidad?"</div>
+          <div class="objecion-respuesta">
+            "Es muy accesible para el sector — y tenemos facilidades. Lo que le puedo decir es que por lo que paga tiene talleres, profesores comprometidos y un ambiente seguro. <b>¿Quiere que le mande los costos por WhatsApp con todo el detalle?</b> Así lo analiza con calma en casa."
+          </div>
+        </div>
+
+        <div class="objecion-item">
+          <div class="objecion-pregunta">"Ya tenemos colegio para el próximo año"</div>
+          <div class="objecion-respuesta">
+            "Qué bien, me alegra. No le quito más tiempo. Solo le dejo el volante por si en algún momento escucha a algún conocido buscando colegio — <b>un referido siempre ayuda</b>. Y si en algún momento quieren comparar opciones, aquí está el número de WhatsApp. Que les vaya muy bien."
+          </div>
+        </div>
+
+        <div class="objecion-item">
+          <div class="objecion-pregunta">"No conozco ese colegio"</div>
+          <div class="objecion-respuesta">
+            "Con gusto le cuento — llevamos [X] años en el sector de Mena. Somos pequeños pero eso es precisamente lo bueno: <b>cada niño recibe atención personalizada</b>. ¿Le mando fotos por WhatsApp para que lo vea? Muchos papás que no nos conocían, después de verlo se quedaron."
+          </div>
+        </div>
+
+        <div class="objecion-item">
+          <div class="objecion-pregunta">"Está muy lejos de mi casa"</div>
+          <div class="objecion-respuesta">
+            "Entiendo. ¿Dónde queda su casa? [escucha] — en realidad desde [zona] son solo [X] minutos, y muchos papás del sector ya hacen ese trayecto. <b>A veces la distancia que parece mucho en mapa resulta muy manejable en el día a día.</b> ¿Le cuento los horarios para que vea si le calza?"
+          </div>
+        </div>
+
+        <div class="objecion-item">
+          <div class="objecion-pregunta">"¿Tienen transporte escolar?"</div>
+          <div class="objecion-respuesta">
+            "Es algo que podemos coordinar. <b>Escríbanos al WhatsApp y le orientamos sobre las opciones</b> — hay rutas del sector que ya usamos con otros papás. No lo descarte por eso."
+          </div>
+        </div>
+
+        <div class="objecion-item">
+          <div class="objecion-pregunta">"Ahorita no tengo tiempo"</div>
+          <div class="objecion-respuesta">
+            "No hay problema, entiendo. Solo le dejo el volante — y si quiere, <b>escríbanos 'hola' al WhatsApp del colegio</b> cuando tenga un momento, y le mandamos toda la info. Sin compromiso. Que le vaya bien."
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- KIT DE CAMPO -->
+    <div class="speech-card">
+      <div class="speech-header">
+        <div class="speech-icon feria">🎒</div>
+        <div>
+          <div class="speech-titulo">Kit Completo del Captador de Campo</div>
+          <div class="speech-sub">Lo que debe llevar siempre la persona que sale a captar</div>
+        </div>
+      </div>
+      <div class="speech-body">
+        <div class="kit-grid">
+          <div class="kit-item">
+            <div class="ki">📄</div>
+            <div><div class="kt">Volantes impresos</div><div class="kd">Mínimo 50 por salida, con QR al WhatsApp</div></div>
+          </div>
+          <div class="kit-item">
+            <div class="ki">👕</div>
+            <div><div class="kt">Uniforme/polo del colegio</div><div class="kd">Genera identidad y confianza inmediata</div></div>
+          </div>
+          <div class="kit-item">
+            <div class="ki">📱</div>
+            <div><div class="kt">Celular con galería lista</div><div class="kd">Fotos del colegio, talleres, patio, niños</div></div>
+          </div>
+          <div class="kit-item">
+            <div class="ki">📓</div>
+            <div><div class="kt">Libreta de registro</div><div class="kd">Nombre + número de cada contacto captado</div></div>
+          </div>
+          <div class="kit-item">
+            <div class="ki">🎁</div>
+            <div><div class="kt">Obsequio institucional</div><div class="kd">Esfero, calendario o imán con logo del colegio</div></div>
+          </div>
+          <div class="kit-item">
+            <div class="ki">📋</div>
+            <div><div class="kt">Hoja de inscripción express</div><div class="kd">Nombre del niño, edad, teléfono. Para interesados en el momento</div></div>
+          </div>
+        </div>
+        <div class="alerta alerta-verde" style="margin-top:16px;">
+          <b>Meta mínima por salida:</b> 15 contactos nuevos (nombre + WhatsApp). Cada salida de 2 horas debería generar al menos 10–15 leads que el bot puede trabajar ese mismo día.
+        </div>
+      </div>
+    </div>
+
   </div>
 
 </div><!-- /container -->
