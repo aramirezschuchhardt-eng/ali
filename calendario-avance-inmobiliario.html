@@ -1,0 +1,1628 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Calendario de Contenido – Avance Inmobiliario – Jun/Jul 2026</title>
+<style>
+  :root {
+    --primary: #1a2e4a;
+    --accent: #c8973a;
+    --accent2: #e8b85a;
+    --light: #f5f7fa;
+    --white: #ffffff;
+    --text: #2c2c2c;
+    --muted: #6b7280;
+    --reel: #3b6fd4;
+    --carousel: #7c3aed;
+    --post: #059669;
+    --story: #db2777;
+    --campaign: #c8973a;
+    --holiday: #9ca3af;
+    --border: #e2e8f0;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Segoe UI', Arial, sans-serif; background: var(--light); color: var(--text); font-size: 14px; line-height: 1.6; }
+
+  /* PRINT */
+  @media print {
+    .no-print { display: none !important; }
+    body { background: white; font-size: 12px; }
+    .page-break { page-break-before: always; }
+    .card { break-inside: avoid; }
+    section { break-inside: avoid; }
+  }
+
+  /* HEADER */
+  .cover {
+    background: linear-gradient(135deg, var(--primary) 0%, #0d1f35 100%);
+    color: white;
+    padding: 60px 40px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .cover::before {
+    content: '';
+    position: absolute;
+    top: -50px; right: -50px;
+    width: 300px; height: 300px;
+    background: rgba(200,151,58,0.15);
+    border-radius: 50%;
+  }
+  .cover::after {
+    content: '';
+    position: absolute;
+    bottom: -80px; left: -30px;
+    width: 200px; height: 200px;
+    background: rgba(200,151,58,0.08);
+    border-radius: 50%;
+  }
+  .cover-logo {
+    font-size: 11px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--accent2);
+    margin-bottom: 16px;
+  }
+  .cover h1 {
+    font-size: 36px;
+    font-weight: 800;
+    margin-bottom: 10px;
+    position: relative;
+  }
+  .cover h1 span { color: var(--accent2); }
+  .cover-sub {
+    font-size: 16px;
+    color: rgba(255,255,255,0.75);
+    margin-bottom: 30px;
+  }
+  .cover-meta {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    flex-wrap: wrap;
+    margin-top: 30px;
+  }
+  .cover-meta-item {
+    text-align: center;
+  }
+  .cover-meta-item .num {
+    font-size: 28px;
+    font-weight: 800;
+    color: var(--accent2);
+    display: block;
+  }
+  .cover-meta-item .label {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: rgba(255,255,255,0.6);
+  }
+
+  /* PRINT BUTTON */
+  .print-bar {
+    background: var(--primary);
+    padding: 12px 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .print-bar span { color: rgba(255,255,255,0.7); font-size: 13px; }
+  .btn-print {
+    background: var(--accent);
+    color: white;
+    border: none;
+    padding: 10px 24px;
+    border-radius: 6px;
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+    letter-spacing: 0.5px;
+  }
+  .btn-print:hover { background: var(--accent2); }
+
+  /* LEGEND */
+  .legend-bar {
+    background: white;
+    padding: 14px 40px;
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    align-items: center;
+    border-bottom: 1px solid var(--border);
+  }
+  .legend-bar .lbl { font-size: 11px; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: 1px; margin-right: 6px; }
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12px;
+    font-weight: 600;
+  }
+  .legend-dot {
+    width: 10px; height: 10px; border-radius: 50%;
+  }
+
+  /* CONTAINER */
+  .container { max-width: 1100px; margin: 0 auto; padding: 40px 20px; }
+
+  /* SECTION TITLE */
+  .section-title {
+    font-size: 22px;
+    font-weight: 800;
+    color: var(--primary);
+    margin-bottom: 6px;
+  }
+  .section-sub {
+    font-size: 13px;
+    color: var(--muted);
+    margin-bottom: 28px;
+  }
+  .section-divider {
+    border: none;
+    border-top: 3px solid var(--accent);
+    width: 40px;
+    margin: 10px 0 24px 0;
+  }
+
+  /* WEEK HEADER */
+  .week-block { margin-bottom: 48px; }
+  .week-header {
+    background: var(--primary);
+    color: white;
+    padding: 14px 22px;
+    border-radius: 10px 10px 0 0;
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .week-header h3 {
+    font-size: 16px;
+    font-weight: 800;
+  }
+  .week-header .week-theme {
+    font-size: 12px;
+    background: rgba(200,151,58,0.3);
+    color: var(--accent2);
+    padding: 3px 10px;
+    border-radius: 20px;
+    font-weight: 600;
+  }
+  .week-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    border: 1px solid var(--border);
+    border-top: none;
+    border-radius: 0 0 10px 10px;
+    overflow: hidden;
+  }
+
+  /* DAY CARD */
+  .day-card {
+    border-right: 1px solid var(--border);
+    background: white;
+    min-height: 180px;
+    display: flex;
+    flex-direction: column;
+  }
+  .day-card:last-child { border-right: none; }
+  .day-card.holiday {
+    background: #f9fafb;
+  }
+  .day-header {
+    padding: 8px 12px 6px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .day-name {
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--muted);
+    font-weight: 700;
+  }
+  .day-number {
+    font-size: 18px;
+    font-weight: 800;
+    color: var(--primary);
+    line-height: 1;
+  }
+  .day-month-label {
+    font-size: 9px;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  .day-body { padding: 10px 12px; flex: 1; }
+  .format-badge {
+    display: inline-block;
+    font-size: 9px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    padding: 2px 7px;
+    border-radius: 10px;
+    color: white;
+    margin-bottom: 6px;
+  }
+  .badge-reel { background: var(--reel); }
+  .badge-carousel { background: var(--carousel); }
+  .badge-post { background: var(--post); }
+  .badge-story { background: var(--story); }
+  .badge-campaign { background: var(--campaign); }
+  .badge-holiday { background: var(--holiday); }
+
+  .day-title {
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--primary);
+    margin-bottom: 4px;
+    line-height: 1.3;
+  }
+  .day-desc {
+    font-size: 11px;
+    color: var(--muted);
+    line-height: 1.4;
+  }
+  .holiday-label {
+    font-size: 11px;
+    color: var(--holiday);
+    font-style: italic;
+    margin-top: 8px;
+  }
+  .see-script {
+    font-size: 10px;
+    color: var(--reel);
+    font-weight: 700;
+    margin-top: 6px;
+    text-decoration: none;
+  }
+
+  /* DETAIL CARDS */
+  .detail-section { margin-top: 60px; }
+  .card {
+    background: white;
+    border-radius: 12px;
+    border: 1px solid var(--border);
+    margin-bottom: 28px;
+    overflow: hidden;
+  }
+  .card-header {
+    padding: 16px 24px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    border-bottom: 1px solid var(--border);
+  }
+  .card-header .date-chip {
+    background: var(--primary);
+    color: white;
+    padding: 6px 14px;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: 700;
+    white-space: nowrap;
+  }
+  .card-header .format-chip {
+    font-size: 10px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    padding: 4px 10px;
+    border-radius: 20px;
+    color: white;
+  }
+  .card-header h4 {
+    font-size: 15px;
+    font-weight: 800;
+    color: var(--primary);
+    flex: 1;
+  }
+  .card-body { padding: 20px 24px; }
+  .card-body p { margin-bottom: 10px; color: var(--text); line-height: 1.65; }
+  .card-body strong { color: var(--primary); }
+
+  .script-box {
+    background: #f8fafc;
+    border-left: 4px solid var(--reel);
+    border-radius: 0 8px 8px 0;
+    padding: 16px 20px;
+    margin: 14px 0;
+  }
+  .script-box.purple { border-left-color: var(--carousel); }
+  .script-box.green { border-left-color: var(--post); }
+  .script-box p { font-size: 13px; margin-bottom: 8px; }
+  .script-box .scene {
+    font-size: 11px;
+    font-style: italic;
+    color: var(--muted);
+    background: rgba(0,0,0,0.04);
+    padding: 4px 10px;
+    border-radius: 4px;
+    margin-bottom: 8px;
+    display: block;
+  }
+  .script-box .dialogue {
+    font-size: 13px;
+    color: var(--text);
+    padding-left: 8px;
+    border-left: 2px solid rgba(0,0,0,0.1);
+    margin-bottom: 8px;
+    font-style: italic;
+  }
+  .caption-box {
+    background: #fef9ec;
+    border: 1px solid #fde68a;
+    border-radius: 8px;
+    padding: 12px 16px;
+    margin-top: 14px;
+  }
+  .caption-box .label {
+    font-size: 10px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #92400e;
+    margin-bottom: 6px;
+  }
+  .caption-box p { font-size: 12px; color: #78350f; margin: 0; }
+
+  .slides-list {
+    list-style: none;
+    counter-reset: slide;
+  }
+  .slides-list li {
+    counter-increment: slide;
+    display: flex;
+    gap: 10px;
+    padding: 8px 0;
+    border-bottom: 1px solid var(--border);
+    font-size: 13px;
+  }
+  .slides-list li:last-child { border-bottom: none; }
+  .slides-list li::before {
+    content: counter(slide);
+    background: var(--carousel);
+    color: white;
+    width: 20px; height: 20px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 10px;
+    font-weight: 800;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  /* CAMPAIGN VIDEOS */
+  .campaign-section { margin-top: 70px; }
+  .campaign-card {
+    background: white;
+    border-radius: 14px;
+    border: 2px solid var(--accent);
+    margin-bottom: 40px;
+    overflow: hidden;
+  }
+  .campaign-header {
+    background: linear-gradient(135deg, var(--primary), #0d1f35);
+    color: white;
+    padding: 24px 30px;
+  }
+  .campaign-header .num {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    color: var(--accent2);
+    margin-bottom: 8px;
+  }
+  .campaign-header h3 {
+    font-size: 20px;
+    font-weight: 800;
+    margin-bottom: 6px;
+  }
+  .campaign-header .meta {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    margin-top: 12px;
+  }
+  .campaign-header .meta span {
+    font-size: 12px;
+    color: rgba(255,255,255,0.7);
+    background: rgba(255,255,255,0.1);
+    padding: 3px 10px;
+    border-radius: 20px;
+  }
+  .campaign-body { padding: 28px 30px; }
+  .location-box {
+    background: #f0f9ff;
+    border: 1px solid #bae6fd;
+    border-radius: 10px;
+    padding: 16px 20px;
+    margin-bottom: 24px;
+  }
+  .location-box .loc-title {
+    font-size: 11px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #0369a1;
+    margin-bottom: 10px;
+  }
+  .location-box ul {
+    padding-left: 16px;
+    font-size: 13px;
+    color: #0c4a6e;
+  }
+  .location-box li { margin-bottom: 5px; }
+
+  .scene-block {
+    margin-bottom: 20px;
+    border-radius: 10px;
+    overflow: hidden;
+    border: 1px solid var(--border);
+  }
+  .scene-label {
+    background: var(--primary);
+    color: var(--accent2);
+    font-size: 10px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    padding: 8px 16px;
+  }
+  .scene-content {
+    padding: 16px 20px;
+    background: white;
+  }
+  .scene-content .dir {
+    font-size: 11px;
+    font-style: italic;
+    color: var(--muted);
+    margin-bottom: 10px;
+    display: block;
+  }
+  .scene-content .lines {
+    font-size: 13px;
+    color: var(--text);
+    line-height: 1.7;
+  }
+  .scene-content .lines p {
+    margin-bottom: 8px;
+  }
+
+  .production-box {
+    background: #fefce8;
+    border: 1px solid #fef08a;
+    border-radius: 10px;
+    padding: 16px 20px;
+    margin-top: 20px;
+  }
+  .production-box .prod-title {
+    font-size: 11px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #713f12;
+    margin-bottom: 10px;
+  }
+  .production-box ul {
+    padding-left: 16px;
+    font-size: 13px;
+    color: #78350f;
+  }
+  .production-box li { margin-bottom: 4px; }
+
+  /* FOOTER */
+  .doc-footer {
+    background: var(--primary);
+    color: rgba(255,255,255,0.6);
+    text-align: center;
+    padding: 30px;
+    font-size: 12px;
+    margin-top: 60px;
+  }
+  .doc-footer strong { color: var(--accent2); }
+
+  /* TWO COLUMNS */
+  .two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+  @media (max-width: 700px) {
+    .week-grid { grid-template-columns: 1fr; }
+    .two-col { grid-template-columns: 1fr; }
+    .cover h1 { font-size: 24px; }
+    .container { padding: 20px 12px; }
+    .campaign-body { padding: 18px; }
+  }
+
+  /* MINI TABLE (overview) */
+  .overview-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 12px;
+    margin-bottom: 40px;
+    background: white;
+    border-radius: 10px;
+    overflow: hidden;
+    border: 1px solid var(--border);
+  }
+  .overview-table th {
+    background: var(--primary);
+    color: white;
+    padding: 10px 14px;
+    text-align: left;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+  .overview-table td {
+    padding: 9px 14px;
+    border-bottom: 1px solid var(--border);
+    vertical-align: top;
+  }
+  .overview-table tr:last-child td { border-bottom: none; }
+  .overview-table tr:nth-child(even) td { background: #fafafa; }
+</style>
+</head>
+<body>
+
+<!-- COVER -->
+<div class="cover">
+  <div class="cover-logo">Avance Inmobiliario · Estrategia de Contenido</div>
+  <h1>Calendario <span>Junio – Julio 2026</span></h1>
+  <div class="cover-sub">Presenter: Diego Birt · Instagram / TikTok / Facebook / YouTube</div>
+  <div class="cover-meta">
+    <div class="cover-meta-item"><span class="num">27</span><span class="label">Publicaciones</span></div>
+    <div class="cover-meta-item"><span class="num">6</span><span class="label">Semanas</span></div>
+    <div class="cover-meta-item"><span class="num">8</span><span class="label">Videos con guión</span></div>
+    <div class="cover-meta-item"><span class="num">3</span><span class="label">Videos de Campaña</span></div>
+  </div>
+</div>
+
+<!-- PRINT BAR -->
+<div class="print-bar no-print">
+  <span>Lunes 22 de Junio → Jueves 30 de Julio · Chile</span>
+  <button class="btn-print" onclick="window.print()">⬇ Descargar / Imprimir PDF</button>
+</div>
+
+<!-- LEGEND -->
+<div class="legend-bar no-print">
+  <span class="lbl">Tipos:</span>
+  <div class="legend-item"><div class="legend-dot" style="background:var(--reel)"></div> Reel / Video</div>
+  <div class="legend-item"><div class="legend-dot" style="background:var(--carousel)"></div> Carrusel</div>
+  <div class="legend-item"><div class="legend-dot" style="background:var(--post)"></div> Post Estático</div>
+  <div class="legend-item"><div class="legend-dot" style="background:var(--story)"></div> Historia / Story</div>
+  <div class="legend-item"><div class="legend-dot" style="background:var(--campaign)"></div> Video Campaña</div>
+  <div class="legend-item"><div class="legend-dot" style="background:var(--holiday)"></div> Feriado</div>
+</div>
+
+<div class="container">
+
+  <!-- OVERVIEW TABLE -->
+  <div class="section-title">Vista General del Período</div>
+  <hr class="section-divider">
+  <table class="overview-table">
+    <thead>
+      <tr><th>Semana</th><th>Fechas</th><th>Tema</th><th>Publicaciones</th><th>Nota</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><strong>1</strong></td><td>22–26 Jun</td><td>¿Es el momento de comprar?</td><td>5 posts</td><td>Arranque del calendario</td></tr>
+      <tr><td><strong>2</strong></td><td>30 Jun – 3 Jul</td><td>Financiamiento sin misterio</td><td>4 posts</td><td>Feriado Lun 29 Jun (San Pedro y San Pablo)</td></tr>
+      <tr><td><strong>3</strong></td><td>6–10 Jul</td><td>Zonas y plusvalía</td><td>5 posts</td><td>Semana completa</td></tr>
+      <tr><td><strong>4</strong></td><td>13–17 Jul</td><td>Inversión inteligente</td><td>4 posts</td><td>Feriado Jue 16 Jul (Virgen del Carmen)</td></tr>
+      <tr><td><strong>5</strong></td><td>20–24 Jul</td><td>Confianza y marca personal</td><td>5 posts</td><td>Semana completa</td></tr>
+      <tr><td><strong>6</strong></td><td>27–30 Jul</td><td>Cierre y llamada a la acción</td><td>4 posts</td><td>Cierre hasta jueves</td></tr>
+    </tbody>
+  </table>
+
+  <!-- ======================== SEMANA 1 ======================== -->
+  <div class="week-block">
+    <div class="week-header">
+      <h3>SEMANA 1 · 22 – 26 de Junio</h3>
+      <span class="week-theme">¿Es el momento de comprar?</span>
+    </div>
+    <div class="week-grid">
+
+      <div class="day-card">
+        <div class="day-header">
+          <div><div class="day-name">Lunes</div><div class="day-number">22</div><div class="day-month-label">Junio</div></div>
+        </div>
+        <div class="day-body">
+          <span class="format-badge badge-reel">Reel</span>
+          <div class="day-title">¿Es buen momento para comprar en Chile?</div>
+          <div class="day-desc">Diego en exterior, 45 seg. Responde el debate más común del mercado con 3 argumentos claros.</div>
+          <a href="#script-22jun" class="see-script">Ver guión ↓</a>
+        </div>
+      </div>
+
+      <div class="day-card">
+        <div class="day-header">
+          <div><div class="day-name">Martes</div><div class="day-number">23</div><div class="day-month-label">Junio</div></div>
+        </div>
+        <div class="day-body">
+          <span class="format-badge badge-carousel">Carrusel</span>
+          <div class="day-title">5 errores al comprar tu primer departamento</div>
+          <div class="day-desc">7 slides educativos. Errores reales que cometen los compradores primerizos.</div>
+          <a href="#script-23jun" class="see-script">Ver contenido ↓</a>
+        </div>
+      </div>
+
+      <div class="day-card">
+        <div class="day-header">
+          <div><div class="day-name">Miércoles</div><div class="day-number">24</div><div class="day-month-label">Junio</div></div>
+        </div>
+        <div class="day-body">
+          <span class="format-badge badge-post">Post</span>
+          <div class="day-title">¿Cuánto vale el m² en tu zona? Dato del mercado</div>
+          <div class="day-desc">Infografía con precio m² por comuna en Santiago. Diseño impactante.</div>
+        </div>
+      </div>
+
+      <div class="day-card">
+        <div class="day-header">
+          <div><div class="day-name">Jueves</div><div class="day-number">25</div><div class="day-month-label">Junio</div></div>
+        </div>
+        <div class="day-body">
+          <span class="format-badge badge-reel">Reel</span>
+          <div class="day-title">¿Qué es la UF y cómo afecta tu hipoteca?</div>
+          <div class="day-desc">Diego en café/terraza, 50 seg. Explica la UF en lenguaje simple para quienes no la conocen.</div>
+          <a href="#script-25jun" class="see-script">Ver guión ↓</a>
+        </div>
+      </div>
+
+      <div class="day-card">
+        <div class="day-header">
+          <div><div class="day-name">Viernes</div><div class="day-number">26</div><div class="day-month-label">Junio</div></div>
+        </div>
+        <div class="day-body">
+          <span class="format-badge badge-story">Historia</span>
+          <div class="day-title">Quiz: ¿Cuánto vale el m² en Las Condes?</div>
+          <div class="day-desc">3 historias interactivas: quiz, dato sorpresa, CTA fin de semana.</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ======================== SEMANA 2 ======================== -->
+  <div class="week-block">
+    <div class="week-header">
+      <h3>SEMANA 2 · 29 Jun – 3 de Julio</h3>
+      <span class="week-theme">Financiamiento sin misterio</span>
+    </div>
+    <div class="week-grid">
+
+      <div class="day-card holiday">
+        <div class="day-header">
+          <div><div class="day-name">Lunes</div><div class="day-number">29</div><div class="day-month-label">Junio</div></div>
+        </div>
+        <div class="day-body">
+          <span class="format-badge badge-holiday">Feriado</span>
+          <div class="day-title">San Pedro y San Pablo</div>
+          <div class="holiday-label">Día libre de publicación orgánica. Opcional: historia corta de saludo.</div>
+        </div>
+      </div>
+
+      <div class="day-card">
+        <div class="day-header">
+          <div><div class="day-name">Martes</div><div class="day-number">30</div><div class="day-month-label">Junio</div></div>
+        </div>
+        <div class="day-body">
+          <span class="format-badge badge-reel">Reel</span>
+          <div class="day-title">Los 3 subsidios habitacionales que debes conocer</div>
+          <div class="day-desc">Diego en exterior, 60 seg. DS49, DS1 y DS19 explicados de forma simple. Alta viralidad.</div>
+          <a href="#script-30jun" class="see-script">Ver guión ↓</a>
+        </div>
+      </div>
+
+      <div class="day-card">
+        <div class="day-header">
+          <div><div class="day-name">Miércoles</div><div class="day-number">1</div><div class="day-month-label">Julio</div></div>
+        </div>
+        <div class="day-body">
+          <span class="format-badge badge-carousel">Carrusel</span>
+          <div class="day-title">¿Cuánto necesitas ahorrar para tu primer depa?</div>
+          <div class="day-desc">8 slides con números reales: pie, gastos escritura, operacionales. Con y sin subsidio.</div>
+        </div>
+      </div>
+
+      <div class="day-card">
+        <div class="day-header">
+          <div><div class="day-name">Jueves</div><div class="day-number">2</div><div class="day-month-label">Julio</div></div>
+        </div>
+        <div class="day-body">
+          <span class="format-badge badge-reel">Reel</span>
+          <div class="day-title">Banco vs. Mutuaria: ¿Cuál conviene para tu hipoteca?</div>
+          <div class="day-desc">Diego caminando en exterior, 55 seg. Diferencias clave, qué revisar, qué es el CAE.</div>
+          <a href="#script-2jul" class="see-script">Ver guión ↓</a>
+        </div>
+      </div>
+
+      <div class="day-card">
+        <div class="day-header">
+          <div><div class="day-name">Viernes</div><div class="day-number">3</div><div class="day-month-label">Julio</div></div>
+        </div>
+        <div class="day-body">
+          <span class="format-badge badge-post">Post</span>
+          <div class="day-title">"No compras una propiedad. Compras tu próxima década."</div>
+          <div class="day-desc">Imagen aspiracional con frase potente. Foto lifestyle de departamento con vista.</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ======================== SEMANA 3 ======================== -->
+  <div class="week-block">
+    <div class="week-header">
+      <h3>SEMANA 3 · 6 – 10 de Julio</h3>
+      <span class="week-theme">Zonas y plusvalía</span>
+    </div>
+    <div class="week-grid">
+
+      <div class="day-card">
+        <div class="day-header">
+          <div><div class="day-name">Lunes</div><div class="day-number">6</div><div class="day-month-label">Julio</div></div>
+        </div>
+        <div class="day-body">
+          <span class="format-badge badge-reel">Reel</span>
+          <div class="day-title">Las 5 comunas de Santiago con más plusvalía en 2026</div>
+          <div class="day-desc">Diego con cortes rápidos en distintas zonas, 60 seg. Ñuñoa, San Joaquín, Estación Central, Maipú, Lo Barnechea.</div>
+          <a href="#script-6jul" class="see-script">Ver guión ↓</a>
+        </div>
+      </div>
+
+      <div class="day-card">
+        <div class="day-header">
+          <div><div class="day-name">Martes</div><div class="day-number">7</div><div class="day-month-label">Julio</div></div>
+        </div>
+        <div class="day-body">
+          <span class="format-badge badge-carousel">Carrusel</span>
+          <div class="day-title">Arriendo vs. Compra: ¿qué conviene en Chile hoy?</div>
+          <div class="day-desc">8 slides con comparación real en números. Incluye el análisis a 20 años. Muy guardable.</div>
+        </div>
+      </div>
+
+      <div class="day-card">
+        <div class="day-header">
+          <div><div class="day-name">Miércoles</div><div class="day-number">8</div><div class="day-month-label">Julio</div></div>
+        </div>
+        <div class="day-body">
+          <span class="format-badge badge-reel">Reel</span>
+          <div class="day-title">Tour: ¿Cómo es un departamento en UF 3.000 en Santiago?</div>
+          <div class="day-desc">Diego entra y recorre un depa piloto, 60 seg. Muy alto engagement. Formato "tour rápido".</div>
+          <a href="#script-8jul" class="see-script">Ver guión ↓</a>
+        </div>
+      </div>
+
+      <div class="day-card">
+        <div class="day-header">
+          <div><div class="day-name">Jueves</div><div class="day-number">9</div><div class="day-month-label">Julio</div></div>
+        </div>
+        <div class="day-body">
+          <span class="format-badge badge-post">Post</span>
+          <div class="day-title">Mapa de precios: precio m² por comuna en Santiago</div>
+          <div class="day-desc">Infografía con mapa estilizado. Providencia, Las Condes, Ñuñoa, La Florida, Maipú, San Joaquín.</div>
+        </div>
+      </div>
+
+      <div class="day-card">
+        <div class="day-header">
+          <div><div class="day-name">Viernes</div><div class="day-number">10</div><div class="day-month-label">Julio</div></div>
+        </div>
+        <div class="day-body">
+          <span class="format-badge badge-story">Historia</span>
+          <div class="day-title">¿En qué comuna soñas vivir? + Testimonio de cliente</div>
+          <div class="day-desc">Caja de respuesta abierta + captura de mensaje real de cliente (anonimizado).</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ======================== SEMANA 4 ======================== -->
+  <div class="week-block">
+    <div class="week-header">
+      <h3>SEMANA 4 · 13 – 17 de Julio</h3>
+      <span class="week-theme">Inversión inteligente</span>
+    </div>
+    <div class="week-grid">
+
+      <div class="day-card">
+        <div class="day-header">
+          <div><div class="day-name">Lunes</div><div class="day-number">13</div><div class="day-month-label">Julio</div></div>
+        </div>
+        <div class="day-body">
+          <span class="format-badge badge-reel">Reel</span>
+          <div class="day-title">¿Vale la pena comprar para arrendar en Chile?</div>
+          <div class="day-desc">Diego en terraza, atardecer, 55 seg. Rentabilidad bruta real + plusvalía. Tono analítico y honesto.</div>
+          <a href="#script-13jul" class="see-script">Ver guión ↓</a>
+        </div>
+      </div>
+
+      <div class="day-card">
+        <div class="day-header">
+          <div><div class="day-name">Martes</div><div class="day-number">14</div><div class="day-month-label">Julio</div></div>
+        </div>
+        <div class="day-body">
+          <span class="format-badge badge-carousel">Carrusel</span>
+          <div class="day-title">Paso a paso: cómo comprar una propiedad en Chile desde cero</div>
+          <div class="day-desc">10 slides, desde "define tu presupuesto" hasta "recibe las llaves". Muy guardable. Alto alcance orgánico.</div>
+        </div>
+      </div>
+
+      <div class="day-card">
+        <div class="day-header">
+          <div><div class="day-name">Miércoles</div><div class="day-number">15</div><div class="day-month-label">Julio</div></div>
+        </div>
+        <div class="day-body">
+          <span class="format-badge badge-reel">Reel</span>
+          <div class="day-title">El error más caro al firmar una promesa de compraventa</div>
+          <div class="day-desc">Diego en exterior, tono de alerta, 50 seg. Caso real. Alto potencial de shares por miedo a perder dinero.</div>
+          <a href="#script-15jul" class="see-script">Ver guión ↓</a>
+        </div>
+      </div>
+
+      <div class="day-card holiday">
+        <div class="day-header">
+          <div><div class="day-name">Jueves</div><div class="day-number">16</div><div class="day-month-label">Julio</div></div>
+        </div>
+        <div class="day-body">
+          <span class="format-badge badge-holiday">Feriado</span>
+          <div class="day-title">Virgen del Carmen</div>
+          <div class="holiday-label">Día libre. Opcional: historia de 1 slide con frase inspiracional.</div>
+        </div>
+      </div>
+
+      <div class="day-card">
+        <div class="day-header">
+          <div><div class="day-name">Viernes</div><div class="day-number">17</div><div class="day-month-label">Julio</div></div>
+        </div>
+        <div class="day-body">
+          <span class="format-badge badge-post">Post</span>
+          <div class="day-title">Dato de la semana: rentabilidad bruta promedio en Santiago</div>
+          <div class="day-desc">Post estático con dato impactante + CTA a conversación en DM. Cierre de semana fuerte.</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ======================== SEMANA 5 ======================== -->
+  <div class="week-block">
+    <div class="week-header">
+      <h3>SEMANA 5 · 20 – 24 de Julio</h3>
+      <span class="week-theme">Confianza y marca personal</span>
+    </div>
+    <div class="week-grid">
+
+      <div class="day-card">
+        <div class="day-header">
+          <div><div class="day-name">Lunes</div><div class="day-number">20</div><div class="day-month-label">Julio</div></div>
+        </div>
+        <div class="day-body">
+          <span class="format-badge badge-campaign">Campaña</span>
+          <div class="day-title">LANZAMIENTO: Video "Tu Primera Casa"</div>
+          <div class="day-desc">Publicar Video Campaña #1. El más emocional. Ideal para pauta pagada esta semana.</div>
+          <a href="#camp1" class="see-script">Ver guión completo ↓</a>
+        </div>
+      </div>
+
+      <div class="day-card">
+        <div class="day-header">
+          <div><div class="day-name">Martes</div><div class="day-number">21</div><div class="day-month-label">Julio</div></div>
+        </div>
+        <div class="day-body">
+          <span class="format-badge badge-carousel">Carrusel</span>
+          <div class="day-title">Preguntas frecuentes que nos hacen cada semana</div>
+          <div class="day-desc">7 slides con Q&A real: "¿Necesito pie?", "¿Puedo sin contrato fijo?", "¿Qué pasa si el banco rechaza?"</div>
+        </div>
+      </div>
+
+      <div class="day-card">
+        <div class="day-header">
+          <div><div class="day-name">Miércoles</div><div class="day-number">22</div><div class="day-month-label">Julio</div></div>
+        </div>
+        <div class="day-body">
+          <span class="format-badge badge-reel">Reel</span>
+          <div class="day-title">Glosario inmobiliario: 5 conceptos que debes entender</div>
+          <div class="day-desc">Diego explica DFL2, CBR, CAE, plusvalía y promesa en menos de 60 seg. Muy compartible.</div>
+        </div>
+      </div>
+
+      <div class="day-card">
+        <div class="day-header">
+          <div><div class="day-name">Jueves</div><div class="day-number">23</div><div class="day-month-label">Julio</div></div>
+        </div>
+        <div class="day-body">
+          <span class="format-badge badge-campaign">Campaña</span>
+          <div class="day-title">LANZAMIENTO: Video "Invierte Ahora"</div>
+          <div class="day-desc">Publicar Video Campaña #2. Para inversores y perfil más analítico. Pauta pagada en paralelo.</div>
+          <a href="#camp2" class="see-script">Ver guión completo ↓</a>
+        </div>
+      </div>
+
+      <div class="day-card">
+        <div class="day-header">
+          <div><div class="day-name">Viernes</div><div class="day-number">24</div><div class="day-month-label">Julio</div></div>
+        </div>
+        <div class="day-body">
+          <span class="format-badge badge-story">Historia</span>
+          <div class="day-title">Encuesta: ¿Cuánto pagarías de dividendo mensual?</div>
+          <div class="day-desc">2 historias: encuesta con rangos + resultado contextualizado. Alta interacción garantizada.</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ======================== SEMANA 6 ======================== -->
+  <div class="week-block">
+    <div class="week-header">
+      <h3>SEMANA 6 · 27 – 30 de Julio</h3>
+      <span class="week-theme">Cierre y llamada a la acción</span>
+    </div>
+    <div class="week-grid">
+
+      <div class="day-card">
+        <div class="day-header">
+          <div><div class="day-name">Lunes</div><div class="day-number">27</div><div class="day-month-label">Julio</div></div>
+        </div>
+        <div class="day-body">
+          <span class="format-badge badge-campaign">Campaña</span>
+          <div class="day-title">LANZAMIENTO: "La Historia de Avance Inmobiliario"</div>
+          <div class="day-desc">Publicar Video Campaña #3. El más personal y auténtico. Fijar en el perfil. Ideal para nuevos seguidores.</div>
+          <a href="#camp3" class="see-script">Ver guión completo ↓</a>
+        </div>
+      </div>
+
+      <div class="day-card">
+        <div class="day-header">
+          <div><div class="day-name">Martes</div><div class="day-number">28</div><div class="day-month-label">Julio</div></div>
+        </div>
+        <div class="day-body">
+          <span class="format-badge badge-reel">Reel</span>
+          <div class="day-title">Por qué agosto es el mes para tomar la decisión</div>
+          <div class="day-desc">Diego directo a cámara, 40 seg. Urgencia real: tasas, proyección de mercado, momentum.</div>
+        </div>
+      </div>
+
+      <div class="day-card">
+        <div class="day-header">
+          <div><div class="day-name">Miércoles</div><div class="day-number">29</div><div class="day-month-label">Julio</div></div>
+        </div>
+        <div class="day-body">
+          <span class="format-badge badge-carousel">Carrusel</span>
+          <div class="day-title">Lo que aprendimos juntos este mes (recap)</div>
+          <div class="day-desc">7 slides con los mejores datos y tips del período. CTA a seguir en agosto. Muy guardable.</div>
+        </div>
+      </div>
+
+      <div class="day-card">
+        <div class="day-header">
+          <div><div class="day-name">Jueves</div><div class="day-number">30</div><div class="day-month-label">Julio</div></div>
+        </div>
+        <div class="day-body">
+          <span class="format-badge badge-post">Post</span>
+          <div class="day-title">Cierre de julio + CTA fuerte a contacto</div>
+          <div class="day-desc">Foto de Diego, mensaje personal de agradecimiento. "Si aún no has dado el paso, agosto es el mes. Escríbeme."</div>
+        </div>
+      </div>
+
+      <!-- Columna vacía para mantener grid -->
+      <div class="day-card" style="background:#fafafa; opacity:0.5;">
+        <div class="day-header">
+          <div><div class="day-name">Viernes</div><div class="day-number">31</div><div class="day-month-label">Julio</div></div>
+        </div>
+        <div class="day-body">
+          <span class="format-badge badge-holiday">Sin post</span>
+          <div class="holiday-label">Fin del período del calendario.</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ====================== GUIONES DE REELS ====================== -->
+
+  <div class="detail-section page-break">
+    <div class="section-title">Guiones de Reels del Calendario</div>
+    <div class="section-sub">Scripts completos para cada video incluido en las semanas</div>
+    <hr class="section-divider">
+
+    <!-- GUIÓN 22 JUN -->
+    <div class="card" id="script-22jun">
+      <div class="card-header">
+        <div class="date-chip">Lun 22 Jun</div>
+        <div class="format-chip" style="background:var(--reel)">Reel · 45 seg</div>
+        <h4>¿Es buen momento para comprar en Chile?</h4>
+      </div>
+      <div class="card-body">
+        <p><strong>Locación:</strong> Exterior. Frente a edificio moderno en Ñuñoa o Providencia. Luz de mañana.</p>
+        <p><strong>Outfit:</strong> Casual-profesional. Camisa entreabierta o polera blanca.</p>
+        <div class="script-box">
+          <span class="scene">[Diego de pie frente al edificio, mira a cámara]</span>
+          <p class="dialogue">"Todo el mundo me pregunta lo mismo: Diego, ¿es buen momento para comprar una propiedad en Chile?"</p>
+          <span class="scene">[Corte rápido, Diego camina hacia la cámara]</span>
+          <p class="dialogue">"La respuesta corta: depende de TI. No del mercado."</p>
+          <p class="dialogue">"Sí, las tasas de interés siguen altas. Sí, los precios no han bajado como mucha gente esperaba."</p>
+          <p class="dialogue">"Pero fíjate en esto:"</p>
+          <span class="scene">[Levanta dedos contando]</span>
+          <p class="dialogue">"Uno: las tasas van a la baja. Si compras hoy, puedes refinanciar mañana."</p>
+          <p class="dialogue">"Dos: esperar tiene un costo. El arriendo que pagas hoy no te construye patrimonio."</p>
+          <p class="dialogue">"Tres: la plusvalía en Chile históricamente sube."</p>
+          <span class="scene">[Mira directo a la cámara, pausa]</span>
+          <p class="dialogue">"El mejor momento para comprar era hace 5 años. El segundo mejor momento… es ahora."</p>
+          <p class="dialogue">"Soy Diego Birt de Avance Inmobiliario. Si quieres saber si HOY es tu momento, escríbeme."</p>
+        </div>
+        <div class="caption-box">
+          <div class="label">Caption sugerido</div>
+          <p>¿Esperar o comprar? Esa pregunta tiene respuesta, y es más personal de lo que crees 🏠 Si tienes dudas, te ayudamos a analizarlo sin costo. Link en bio. #MercadoInmobiliario #ComprarEnChile #AvanceInmobiliario #Hipoteca</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- CARRUSEL 23 JUN -->
+    <div class="card" id="script-23jun">
+      <div class="card-header">
+        <div class="date-chip">Mar 23 Jun</div>
+        <div class="format-chip" style="background:var(--carousel)">Carrusel · 7 slides</div>
+        <h4>5 errores al comprar tu primer departamento</h4>
+      </div>
+      <div class="card-body">
+        <ul class="slides-list">
+          <li><strong>Portada:</strong> "5 errores al comprar tu primer departamento 👇 (guarda esto)"</li>
+          <li><strong>Error 1:</strong> Fijarse solo en el precio de lista, no en el dividendo mensual real.</li>
+          <li><strong>Error 2:</strong> No considerar gastos operacionales: comunidad, estacionamiento, bodega.</li>
+          <li><strong>Error 3:</strong> No revisar el plan regulador de la zona (afecta plusvalía futura).</li>
+          <li><strong>Error 4:</strong> Firmar la promesa sin asesor ni abogado que la revise.</li>
+          <li><strong>Error 5:</strong> No comparar tasas en al menos 3 bancos o mutuarias.</li>
+          <li><strong>Cierre:</strong> "¿Quieres evitar estos errores? En Avance Inmobiliario te acompañamos en cada paso. Escríbenos."</li>
+        </ul>
+        <div class="caption-box">
+          <div class="label">Caption sugerido</div>
+          <p>Cometí (o vi cometer) estos errores más de una vez. Guarda este carrusel antes de que lo necesites 🙌 Comenta cuál te sorprendió más. #PrimerDepartamento #TipsInmobiliarios #Chile</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- GUIÓN 25 JUN -->
+    <div class="card" id="script-25jun">
+      <div class="card-header">
+        <div class="date-chip">Jue 25 Jun</div>
+        <div class="format-chip" style="background:var(--reel)">Reel · 50 seg</div>
+        <h4>¿Qué es la UF y cómo afecta tu hipoteca?</h4>
+      </div>
+      <div class="card-body">
+        <p><strong>Locación:</strong> Café o terraza con vista urbana. Tono cercano y relajado.</p>
+        <p><strong>Outfit:</strong> Casual. Camisa sin corbata o polera. Diego sentado.</p>
+        <div class="script-box">
+          <span class="scene">[Diego sentado, taza de café en mesa, cámara a nivel de los ojos]</span>
+          <p class="dialogue">"Si estás pensando en comprar un departamento en Chile, necesitas entender la UF. Sí o sí."</p>
+          <p class="dialogue">"La Unidad de Fomento es básicamente una unidad de valor que se actualiza diario según la inflación."</p>
+          <span class="scene">[Gesto con las manos explicando]</span>
+          <p class="dialogue">"¿Por qué importa? Porque la mayoría de los créditos hipotecarios en Chile son en UF."</p>
+          <p class="dialogue">"Eso significa que tu dividendo mensual puede variar un poco cada mes. Si la inflación sube, tu cuota sube."</p>
+          <p class="dialogue">"¿Malo? No necesariamente. En el largo plazo, la UF también protege el valor de tu inversión."</p>
+          <p class="dialogue">"Lo clave es que al planificar, calcules tu dividendo considerando una UF proyectada, no solo la de hoy."</p>
+          <span class="scene">[Diego mira directo a cámara]</span>
+          <p class="dialogue">"¿Quieres que te ayudemos a calcular cuánto sería tu dividendo real? Escríbenos, lo hacemos en 10 minutos."</p>
+        </div>
+        <div class="caption-box">
+          <div class="label">Caption sugerido</div>
+          <p>La UF confunde a mucha gente. Pero una vez que la entiendes, todo hace más sentido 💡 ¿Tienes dudas sobre cómo se calcula tu dividendo? Te ayudamos. #UF #CréditoHipotecario #Chile #AvanceInmobiliario</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- GUIÓN 30 JUN -->
+    <div class="card" id="script-30jun">
+      <div class="card-header">
+        <div class="date-chip">Mar 30 Jun</div>
+        <div class="format-chip" style="background:var(--reel)">Reel · 60 seg</div>
+        <h4>Los 3 subsidios habitacionales que debes conocer</h4>
+      </div>
+      <div class="card-body">
+        <p><strong>Locación:</strong> Exterior. Parque o plaza tranquila, verdes de fondo. Outfit casual-profesional.</p>
+        <div class="script-box">
+          <span class="scene">[Diego de pie, parque de fondo, tono directo]</span>
+          <p class="dialogue">"Muchos chilenos no saben que el Estado puede pagarte parte de tu casa. Sí, en serio."</p>
+          <p class="dialogue">"Hay tres subsidios principales que necesitas conocer:"</p>
+          <span class="scene">[Texto aparece en pantalla para cada punto]</span>
+          <p class="dialogue">"El DS49. Es para sectores de ingresos medios-bajos. Te puede dar hasta UF 490 de subsidio. No pagas ese monto, el Estado lo pone."</p>
+          <p class="dialogue">"El DS1. Para clase media. El más solicitado. Según tu ahorro y tu tramo, puedes recibir hasta UF 500."</p>
+          <p class="dialogue">"El DS19. Para vivienda colectiva, cooperativas o allegados. Ideal si tienes familia numerosa."</p>
+          <span class="scene">[Diego baja el ritmo, tono más personal]</span>
+          <p class="dialogue">"El tema es que postular tiene plazos y requisitos. Y no siempre es fácil entender la lógica."</p>
+          <p class="dialogue">"En Avance Inmobiliario te ayudamos a saber a cuál aplicas y cómo postular. Link en bio."</p>
+        </div>
+        <div class="caption-box">
+          <div class="label">Caption sugerido</div>
+          <p>El Estado puede financiar parte de tu vivienda y mucha gente no lo sabe 😮 ¿Quieres saber si calificas? Cuéntanos tu situación en los comentarios. #SubsidioHabitacional #DS1 #DS49 #ViviendaChile</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- GUIÓN 2 JUL -->
+    <div class="card" id="script-2jul">
+      <div class="card-header">
+        <div class="date-chip">Jue 2 Jul</div>
+        <div class="format-chip" style="background:var(--reel)">Reel · 55 seg</div>
+        <h4>Banco vs. Mutuaria: ¿cuál conviene para tu hipoteca?</h4>
+      </div>
+      <div class="card-body">
+        <p><strong>Locación:</strong> Calle del centro de Santiago o frente a edificio bancario. Diego caminando.</p>
+        <div class="script-box">
+          <span class="scene">[Diego caminando en exterior, habla mientras camina]</span>
+          <p class="dialogue">"Cuando vas a pedir un crédito hipotecario, tienes dos grandes opciones: banco o mutuaria. ¿Cuál conviene? Depende."</p>
+          <span class="scene">[Se detiene, mira a cámara]</span>
+          <p class="dialogue">"Los bancos suelen tener tasas más bajas y mejores condiciones si tienes buen perfil financiero. Pero el proceso es más lento y exigente."</p>
+          <p class="dialogue">"Las mutuarias —como Bci Seguros, Chilena, Consorcio— a veces son más flexibles y rápidas. Útil si eres independiente o tienes ingresos variables."</p>
+          <p class="dialogue">"Ojo: siempre compara al menos tres ofertas. Una diferencia de 0,2% en la tasa, en 20 años, son millones de pesos."</p>
+          <span class="scene">[Diego saca celular como si calculara]</span>
+          <p class="dialogue">"Y ojo con el CAE: el Costo Anual Equivalente. Es el número real que debes comparar, no solo la tasa nominal."</p>
+          <p class="dialogue">"¿Quieres que te ayudemos a comparar opciones para tu perfil? Escríbenos. Sin costo."</p>
+        </div>
+        <div class="caption-box">
+          <div class="label">Caption sugerido</div>
+          <p>Banco vs. Mutuaria: la comparación que nadie te explica bien 🏦 Comparte con alguien que esté buscando hipoteca. #HipotecaChile #CréditoHipotecario #TipsFinancieros</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- GUIÓN 6 JUL -->
+    <div class="card" id="script-6jul">
+      <div class="card-header">
+        <div class="date-chip">Lun 6 Jul</div>
+        <div class="format-chip" style="background:var(--reel)">Reel · 60 seg</div>
+        <h4>Las 5 comunas de Santiago con más plusvalía en 2026</h4>
+      </div>
+      <div class="card-body">
+        <p><strong>Locación:</strong> Distintas zonas de Santiago con cortes rápidos (1 corte por comuna). Se puede filmar en un mismo día.</p>
+        <div class="script-box">
+          <span class="scene">[Diego en auto o caminando, intro directa]</span>
+          <p class="dialogue">"Si quieres invertir en Santiago, tienes que saber dónde la plusvalía está siendo brutal."</p>
+          <span class="scene">[Corte 1 – Plaza Ñuñoa o Irarrázaval]</span>
+          <p class="dialogue">"Ñuñoa. Sigue siendo la estrella. Cercanía al metro, vida de barrio, y precios que llevan 10 años subiendo."</p>
+          <span class="scene">[Corte 2 – San Joaquín / Gran Avenida]</span>
+          <p class="dialogue">"San Joaquín. La comuna emergente. Extensión de líneas de metro y renovación urbana acelerada."</p>
+          <span class="scene">[Corte 3 – Estación Central]</span>
+          <p class="dialogue">"Estación Central. Alta densidad, mucha demanda de arriendo. Buena opción para inversión con renta."</p>
+          <span class="scene">[Corte 4 – Maipú]</span>
+          <p class="dialogue">"Maipú. El volumen. Proyectos nuevos, conectividad, y precios aún accesibles."</p>
+          <span class="scene">[Corte 5 – Lo Barnechea o Providencia]</span>
+          <p class="dialogue">"Lo Barnechea. La apuesta premium. Crecimiento explosivo hacia el oriente."</p>
+          <span class="scene">[Diego directo a cámara]</span>
+          <p class="dialogue">"¿Quieres saber cuál se adapta a tu presupuesto? Cuéntame en los comentarios o escríbeme."</p>
+        </div>
+        <div class="caption-box">
+          <div class="label">Caption sugerido</div>
+          <p>Santiago tiene zonas donde tu dinero trabaja más duro que tú 📈 ¿En cuál invertirías? Vota en los comentarios 👇 #Plusvalía #InversiónInmobiliaria #SantiagoChile</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- GUIÓN 8 JUL -->
+    <div class="card" id="script-8jul">
+      <div class="card-header">
+        <div class="date-chip">Mié 8 Jul</div>
+        <div class="format-chip" style="background:var(--reel)">Reel · 60 seg</div>
+        <h4>Tour rápido: ¿Cómo es un depa en UF 3.000 en Santiago?</h4>
+      </div>
+      <div class="card-body">
+        <p><strong>Locación:</strong> Departamento piloto o en venta en proyecto real. Coordinar acceso con inmobiliaria.</p>
+        <div class="script-box">
+          <span class="scene">[Diego entrando al departamento, cámara lo sigue desde atrás]</span>
+          <p class="dialogue">"Hoy te muestro qué puedes esperar con un presupuesto de UF 3.000 en Santiago. Vamos."</p>
+          <span class="scene">[Muestra el living]</span>
+          <p class="dialogue">"Living-comedor integrado, ventanales, vista. Esto es típico en comunas como Ñuñoa o San Miguel."</p>
+          <span class="scene">[Cocina]</span>
+          <p class="dialogue">"Cocina americana, muebles de serie, encimera. El estándar hoy en día."</p>
+          <span class="scene">[Dormitorios]</span>
+          <p class="dialogue">"Dos dormitorios. El principal con closet. El segundo puede ser oficina, pieza de bebé, lo que necesites."</p>
+          <span class="scene">[Baño]</span>
+          <p class="dialogue">"Baño completo, moderno. En algunos proyectos también viene baño de servicio."</p>
+          <span class="scene">[Terraza o ventana con vista]</span>
+          <p class="dialogue">"Y el diferenciador: la vista. Esto es lo que hace que la propiedad suba de valor en el tiempo."</p>
+          <span class="scene">[Diego mira a cámara]</span>
+          <p class="dialogue">"¿Te imaginas viviendo aquí? ¿Quieres ver opciones similares disponibles hoy? Escríbeme y te mando el catálogo."</p>
+        </div>
+        <div class="caption-box">
+          <div class="label">Caption sugerido</div>
+          <p>Así se ve un depa en UF 3.000 en Santiago 👀 ¿Te sorprendió para bien o para mal? Cuéntanos en los comentarios. #TourDepartamento #Santiago #Inmobiliaria</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- GUIÓN 13 JUL -->
+    <div class="card" id="script-13jul">
+      <div class="card-header">
+        <div class="date-chip">Lun 13 Jul</div>
+        <div class="format-chip" style="background:var(--reel)">Reel · 55 seg</div>
+        <h4>¿Vale la pena comprar para arrendar en Chile?</h4>
+      </div>
+      <div class="card-body">
+        <p><strong>Locación:</strong> Terraza o balcón con vista a la ciudad. Atardecer. Tono de conversación tranquila.</p>
+        <div class="script-box">
+          <span class="scene">[Diego sentado en terraza, atardecer, tono analítico y calmado]</span>
+          <p class="dialogue">"¿Comprar un departamento para arrendarlo en Chile es buena inversión? Te doy mi análisis honesto."</p>
+          <p class="dialogue">"Primero: ¿qué rentabilidad puedes esperar?"</p>
+          <p class="dialogue">"En Santiago, una propiedad bien ubicada te puede dar entre un 4% y un 6% de rentabilidad bruta anual."</p>
+          <p class="dialogue">"Si tu depa vale UF 3.000 y lo arriendas en UF 12 al mes… son UF 144 al año. Sobre UF 3.000, eso es un 4,8%."</p>
+          <span class="scene">[Diego asiente]</span>
+          <p class="dialogue">"¿Es mucho? En comparación con un depósito a plazo hoy, sí. Y además está la plusvalía, que históricamente suma otro 3–5% anual."</p>
+          <p class="dialogue">"La clave: comprar bien, en zona con demanda de arriendo alta. Metro, universidades, hospitales cerca."</p>
+          <span class="scene">[Mira directo a cámara]</span>
+          <p class="dialogue">"Si quieres que te armemos un análisis de rentabilidad para un proyecto específico, escríbeme. Lo hacemos gratis."</p>
+        </div>
+        <div class="caption-box">
+          <div class="label">Caption sugerido</div>
+          <p>Invertir en propiedades en Chile: ¿mito o realidad? Aquí los números reales sin maquillaje 📊 ¿Ya tienes una propiedad en arriendo? Cuéntanos cómo te ha ido. #InversiónInmobiliaria #RentaInmobiliaria</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- GUIÓN 15 JUL -->
+    <div class="card" id="script-15jul">
+      <div class="card-header">
+        <div class="date-chip">Mié 15 Jul</div>
+        <div class="format-chip" style="background:var(--reel)">Reel · 50 seg</div>
+        <h4>El error más caro al firmar una promesa de compraventa</h4>
+      </div>
+      <div class="card-body">
+        <p><strong>Locación:</strong> Exterior. Frente a edificio o en calle. Tono serio, de alerta, pero cercano.</p>
+        <div class="script-box">
+          <span class="scene">[Diego en exterior, directo, tono serio]</span>
+          <p class="dialogue">"El error más caro que veo en mis clientes: firmar una promesa de compraventa sin leerla bien."</p>
+          <p class="dialogue">"¿Por qué? Porque en esa promesa está TODO."</p>
+          <span class="scene">[Lista con gestos]</span>
+          <p class="dialogue">"Las condiciones de desistimiento. Si el banco no te aprueba el crédito, ¿recuperas el dinero? ¿Cuánto? ¿En qué plazo?"</p>
+          <p class="dialogue">"Las especificaciones del inmueble. Metros cuadrados, terminaciones, orientación."</p>
+          <p class="dialogue">"La fecha de entrega. Y las multas si se retrasan."</p>
+          <span class="scene">[Pausa dramática]</span>
+          <p class="dialogue">"Vi una familia perder UF 50 porque el contrato no contemplaba qué pasaba si el banco rechazaba el crédito. Eso no te tiene que pasar a ti."</p>
+          <span class="scene">[Directo]</span>
+          <p class="dialogue">"Antes de firmar cualquier promesa, hablemos. Te revisamos el contrato. Sin costo."</p>
+        </div>
+        <div class="caption-box">
+          <div class="label">Caption sugerido</div>
+          <p>No firmes nada sin entenderlo 🚨 Este consejo puede ahorrarte millones. Comparte con alguien que esté a punto de comprar. #Compraventa #ErroresInmobiliarios #TipsLegales</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ====================== VIDEOS DE CAMPAÑA ====================== -->
+
+  <div class="campaign-section page-break">
+    <div class="section-title">Videos de Campaña</div>
+    <div class="section-sub">Producciones de mayor envergadura para pauta pagada y posicionamiento de marca. Formato 16:9 para YouTube / versión 9:16 para Instagram y TikTok. Duración: 90–150 segundos.</div>
+    <hr class="section-divider">
+
+    <!-- CAMPAÑA 1 -->
+    <div class="campaign-card" id="camp1">
+      <div class="campaign-header">
+        <div class="num">Video Campaña #1</div>
+        <h3>"Tu Primera Casa: El Paso Que Cambia Todo"</h3>
+        <div class="meta">
+          <span>Duración: 2 min</span>
+          <span>Tono: Emocional · Inspirador</span>
+          <span>Objetivo: Compradores primerizos</span>
+          <span>Publicar: Lunes 20 de Julio</span>
+        </div>
+      </div>
+      <div class="campaign-body">
+
+        <div class="location-box">
+          <div class="loc-title">📍 Locaciones Recomendadas</div>
+          <ul>
+            <li><strong>Escena 1 – Exterior:</strong> Plaza activa en Ñuñoa (Plaza Ñuñoa o Plaza Sucre) o Providencia. Mañana de semana, 10:00–12:00. Que haya movimiento de fondo: gente caminando, niños, vida de barrio. Luz natural suave.</li>
+            <li><strong>Escena 2 – Interior:</strong> Departamento piloto o en entrega. Idealmente vacío o con amoblado mínimo para que el espacio "respire".</li>
+            <li><strong>Escena 3 – Cierre:</strong> Exterior del edificio con Diego mirando hacia la ciudad. Mismo día que escena 1.</li>
+          </ul>
+        </div>
+
+        <div class="scene-block">
+          <div class="scene-label">ESCENA 1 – PLAZA / BARRIO ACTIVO</div>
+          <div class="scene-content">
+            <span class="dir">Diego camina hacia la cámara. Luz de mañana. Outfit: casual-profesional, polera blanca o camisa sin corbata. Cámara a nivel de ojos.</span>
+            <div class="lines">
+              <p>"Hay un momento en la vida de casi todos en que alguien les dijo: 'Compra una propiedad'. Y la primera reacción fue: '¿Yo? ¿Con qué?'"</p>
+              <p><em>[Pausa. Diego sonríe.]</em></p>
+              <p>"Yo lo entiendo. Parece un mundo lejano, lleno de términos que no conoces, de papeles que no entiendes, de números que dan susto."</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="scene-block">
+          <div class="scene-label">ESCENA 2 – INTERIOR DEPARTAMENTO</div>
+          <div class="scene-content">
+            <span class="dir">Diego entra. Cámara lo sigue. El espacio está vacío o amoblado de forma simple. Él camina mientras habla, se detiene en el centro del espacio.</span>
+            <div class="lines">
+              <p>"Pero te voy a decir algo que aprendí trabajando con cientos de familias en Chile:"</p>
+              <p>"No existe el momento perfecto para comprar. Existe el momento en que decidiste informarte."</p>
+              <p>"Y eso... ya lo estás haciendo."</p>
+              <p><em>[Se para en el centro del espacio, gesticula hacia el lugar.]</em></p>
+              <p>"Esto que ves aquí no es solo un departamento. Es la cocina donde van a cocinar en Navidad. Es la pieza donde van a dormir tus hijos. Es el espacio que después de años de arriendo... finalmente va a ser TUYO."</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="scene-block">
+          <div class="scene-label">ESCENA 3 – EXTERIOR EDIFICIO · CIERRE</div>
+          <div class="scene-content">
+            <span class="dir">Diego sale del edificio, mira hacia la cámara. Luz de fondo. Tono propositivo y cálido.</span>
+            <div class="lines">
+              <p>"En Avance Inmobiliario trabajamos para que ese paso, que parece enorme, se sienta manejable."</p>
+              <p>"Te ayudamos a entender cuánto puedes pedir. A cuáles subsidios calificas. A qué zona se adapta a tu vida."</p>
+              <p>"No te vendemos una propiedad. Te acompañamos a comprar TU propiedad."</p>
+              <p><em>[Diego avanza dos pasos hacia la cámara. Sonrisa directa.]</em></p>
+              <p>"¿Estás listo para dar ese paso? Escríbenos hoy. Sin compromiso. Sin letra chica."</p>
+              <p>"Soy Diego Birt. Y en Avance Inmobiliario... hacemos que tu primera casa deje de ser un sueño."</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="production-box">
+          <div class="prod-title">Notas de Producción</div>
+          <ul>
+            <li>Grabar todo en mañana (10–12h) para luz consistente en todas las escenas</li>
+            <li>En la plaza: buscar que haya movimiento de fondo — da vida y autenticidad</li>
+            <li>En interior: abrir cortinas al máximo, encender todas las luces</li>
+            <li>B-roll sugerido: manos firmando documentos, familia entrando a depa, vista desde ventana</li>
+            <li>Versión corta 30 seg para pauta: usar solo escenas 2 y 3</li>
+            <li>Música: instrumental suave, aspiracional, sin letra. Fade out al final</li>
+            <li>Subtítulos siempre — el 70%+ de los videos se ve sin sonido</li>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- CAMPAÑA 2 -->
+    <div class="campaign-card" id="camp2">
+      <div class="campaign-header">
+        <div class="num">Video Campaña #2</div>
+        <h3>"Invierte Ahora, Vive Mejor Mañana"</h3>
+        <div class="meta">
+          <span>Duración: 2 min 30 seg</span>
+          <span>Tono: Analítico · Aspiracional</span>
+          <span>Objetivo: Inversores / perfil con visión patrimonial</span>
+          <span>Publicar: Jueves 23 de Julio</span>
+        </div>
+      </div>
+      <div class="campaign-body">
+
+        <div class="location-box">
+          <div class="loc-title">📍 Locaciones Recomendadas</div>
+          <ul>
+            <li><strong>Principal:</strong> Rooftop de edificio con vista panorámica a Santiago. El atardecer (18:30–19:30) es la joya de este video — coordinar hora de rodaje con la puesta de sol real.</li>
+            <li><strong>Alternativa:</strong> Piso 10+ de un proyecto en venta o piloto premium con vista a la ciudad.</li>
+            <li><strong>B-roll callejero:</strong> Av. Apoquindo, Costanera Center, grúas de construcción — para mostrar movimiento y crecimiento de Santiago.</li>
+            <li><strong>Outfit:</strong> Más formal. Camisa bien planchada, colores neutros (azul marino, blanco). Da autoridad.</li>
+          </ul>
+        </div>
+
+        <div class="scene-block">
+          <div class="scene-label">ESCENA 1 – ROOFTOP · INTRO</div>
+          <div class="scene-content">
+            <span class="dir">Diego apoyado en el barandal, mira la ciudad. Se gira hacia la cámara. Toma panorámica de Santiago.</span>
+            <div class="lines">
+              <p>"Mira eso."</p>
+              <p><em>[Pausa de 2 segundos con toma panorámica.]</em></p>
+              <p>"Una ciudad que no para de crecer. Que en los últimos 15 años casi duplicó su valor por metro cuadrado."</p>
+              <p>"Mucha gente mira esto y ve congestión. Los que invierten miran esto y ven oportunidad."</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="scene-block">
+          <div class="scene-label">ESCENA 2 – MISMO LUGAR · ANÁLISIS</div>
+          <div class="scene-content">
+            <span class="dir">Diego habla como si le hablara a un colega. Tono de conversación entre profesionales.</span>
+            <div class="lines">
+              <p>"Te voy a dar tres datos que necesitas saber sobre el mercado inmobiliario en Chile hoy:"</p>
+              <p>"Primero: las tasas hipotecarias están empezando a ceder. El valor de las propiedades que hoy ves estancado va a despertar."</p>
+              <p>"Segundo: la demanda de arriendo en Santiago sigue siendo altísima. Tasa de vacancia en comunas clave: bajo el 5%. Si compras bien, tu propiedad no va a estar vacía."</p>
+              <p>"Tercero: el suelo en Santiago no crece. La ciudad se densifica hacia arriba. Y eso tiene un solo efecto en los precios: hacia arriba."</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="scene-block">
+          <div class="scene-label">ESCENA 3 – WALKING SHOT · PROPUESTA</div>
+          <div class="scene-content">
+            <span class="dir">Diego camina mientras habla, energía más dinámica. Usar gimbal o steadicam para suavidad.</span>
+            <div class="lines">
+              <p>"Entonces, ¿cuándo es el mejor momento para entrar al mercado inmobiliario como inversor?"</p>
+              <p>"Cuando tienes el pie. Cuando tienes el perfil crediticio. Y cuando tienes la información correcta."</p>
+              <p>"Eso último es donde entramos nosotros."</p>
+              <p>"En Avance Inmobiliario hacemos el análisis de rentabilidad por proyecto. Te mostramos la rentabilidad bruta, la plusvalía proyectada, los costos reales."</p>
+              <p>"No te tiramos una propiedad y te decimos 'es buena'. Te mostramos por qué es buena, o por qué no lo es."</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="scene-block">
+          <div class="scene-label">ESCENA 4 – ROOFTOP · CIERRE</div>
+          <div class="scene-content">
+            <span class="dir">Diego regresa al barandal. Mira directo a cámara con confianza total.</span>
+            <div class="lines">
+              <p>"El patrimonio no se construye esperando el momento perfecto."</p>
+              <p>"Se construye tomando decisiones con información."</p>
+              <p>"¿Tienes el pie listo? ¿Tienes ganas de hacer que tu plata trabaje por ti?"</p>
+              <p>"Entonces hablemos. Escríbeme hoy."</p>
+              <p><em>[Sonrisa. Pausa de 1 segundo.]</em></p>
+              <p>"Soy Diego Birt. Y en Avance Inmobiliario, construimos patrimonio juntos."</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="production-box">
+          <div class="prod-title">Notas de Producción</div>
+          <ul>
+            <li>El atardecer en el rooftop es la imagen central de este video — NO sacrificar esta locación</li>
+            <li>B-roll: pantalla de laptop con gráficos de precios, manos sobre plano arquitectónico, drone de Santiago si hay presupuesto</li>
+            <li>Color grading: más frío/azul que los otros videos — refuerza el tono analítico y de negocios</li>
+            <li>Versión corta 30 seg para pauta: escenas 3 y 4 únicamente</li>
+            <li>Música: instrumental de negocios, ritmo moderado, profesional</li>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- CAMPAÑA 3 -->
+    <div class="campaign-card" id="camp3">
+      <div class="campaign-header">
+        <div class="num">Video Campaña #3</div>
+        <h3>"Encontré Mi Lugar: La Historia de Avance Inmobiliario"</h3>
+        <div class="meta">
+          <span>Duración: 2 min</span>
+          <span>Tono: Auténtico · Personal · Storytelling</span>
+          <span>Objetivo: Branding / confianza / conocer a Diego</span>
+          <span>Publicar: Lunes 27 de Julio · Fijar en perfil</span>
+        </div>
+      </div>
+      <div class="campaign-body">
+
+        <div class="location-box">
+          <div class="loc-title">📍 Locaciones Recomendadas</div>
+          <ul>
+            <li><strong>Escena 1 – Casa o depa de Diego:</strong> Si es posible, la casa real de Diego. Da autenticidad máxima. Alternativa: departamento real, no piloto. Que tenga personalidad y objetos personales.</li>
+            <li><strong>Escena 2 – Calle del barrio:</strong> Mañana de sábado, tranquila. Un barrio residencial que transmita comunidad, no centro corporativo.</li>
+            <li><strong>Escena 3 – Interior (regreso):</strong> Mismo espacio de la escena 1, para darle coherencia al video.</li>
+            <li><strong>Escena 4 – Umbral de puerta o exterior soleado:</strong> Diego de pie, simbólicamente "en la entrada" de algo nuevo.</li>
+            <li><strong>Outfit:</strong> Ropa de casa o casual real. Nada forzado. Cero traje.</li>
+          </ul>
+        </div>
+
+        <div class="scene-block">
+          <div class="scene-label">ESCENA 1 – CASA DE DIEGO · INTRO PERSONAL</div>
+          <div class="scene-content">
+            <span class="dir">Diego en cocina o living, comodidad total. Puede tener una taza de café. Cámara al nivel de los ojos, distancia íntima. Tono conversacional puro, como si hablara con un amigo.</span>
+            <div class="lines">
+              <p>"Te voy a contar algo que no cuento mucho."</p>
+              <p>"Cuando empecé en el mundo inmobiliario, no tenía ni idea. En serio."</p>
+              <p>"Trabajé con personas que llegaban emocionadas a comprar su primera casa... y se iban frustradas. Por el papeleo, por el banco, por no entender los contratos, por sentir que nadie les hablaba claro."</p>
+              <p><em>[Pausa. Baja la voz.]</em></p>
+              <p>"Y eso me molestaba."</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="scene-block">
+          <div class="scene-label">ESCENA 2 – CALLE DEL BARRIO</div>
+          <div class="scene-content">
+            <span class="dir">Diego camina por una calle tranquila, habla a cámara como si paseara. Mañana de sábado, luz suave.</span>
+            <div class="lines">
+              <p>"Así nació Avance Inmobiliario. No como otra empresa que vende metros cuadrados."</p>
+              <p>"Sino como un lugar donde la gente pudiera llegar con sus dudas reales, con sus miedos reales, con su presupuesto real... y salir con claridad."</p>
+              <p>"Donde alguien les hablara en chileno. Sin tecnicismos innecesarios. Sin apurarlos a firmar."</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="scene-block">
+          <div class="scene-label">ESCENA 3 – INTERIOR · LA PROPUESTA</div>
+          <div class="scene-content">
+            <span class="dir">Diego se sienta de nuevo. Mira la cámara directo. Esta es la escena más importante del video — la más honesta.</span>
+            <div class="lines">
+              <p>"¿Qué hacemos en Avance Inmobiliario?"</p>
+              <p>"Acompañamos. Desde el primer '¿cuánto necesito ahorrar?' hasta el día que recibes las llaves."</p>
+              <p>"Analizamos tu situación financiera. Te mostramos a qué subsidios puedes postular. Buscamos contigo la propiedad que se ajusta a TU vida, no a nuestras comisiones."</p>
+              <p><em>[Tono más firme]</em></p>
+              <p>"Y te decimos la verdad. Aunque la verdad sea que todavía no es el momento de comprar."</p>
+              <p>"Porque preferimos que vuelvas el año siguiente listo, a que compres hoy con un crédito que te ahogue."</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="scene-block">
+          <div class="scene-label">ESCENA 4 – UMBRAL / EXTERIOR · CIERRE</div>
+          <div class="scene-content">
+            <span class="dir">Diego de pie en exterior soleado o en umbral de puerta. Cámara lo encuadra con fondo limpio. Sonrisa genuina.</span>
+            <div class="lines">
+              <p>"Si estás pensando en comprar, si tienes dudas, si llevas meses dando vueltas y no sabes por dónde empezar..."</p>
+              <p>"Escríbeme. Te prometo que después de la primera conversación, el panorama va a ser mucho más claro."</p>
+              <p><em>[Un paso hacia la cámara. Sonrisa genuina.]</em></p>
+              <p>"Soy Diego Birt. Y esto es Avance Inmobiliario."</p>
+              <p><em>[Pausa de 2 segundos.]</em></p>
+              <p>"Bienvenido a casa."</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="production-box">
+          <div class="prod-title">Notas de Producción</div>
+          <ul>
+            <li>Este video DEBE sentirse real. Evitar el look "producción cara" — paradójicamente, más casero genera más confianza</li>
+            <li>Si se filma en casa de Diego: limpiar pero no vaciar todo. Que haya personalidad en los objetos</li>
+            <li>Opción adicional: plano de Diego en auto (GoPro o celular en soporte) — da dinamismo y naturalidad</li>
+            <li>Liberar el micrófono de corbata para que Diego pueda moverse con libertad</li>
+            <li>Este es el video para FIJAR en el perfil de Instagram como video de presentación de la cuenta</li>
+            <li>Música: acústica, cálida, mínima. No música de marketing genérica — algo íntimo</li>
+            <li>Color grading: cálido, casi como foto de película — refuerza el tono cercano</li>
+            <li>Versión corta 30 seg: escenas 3 y 4 únicamente</li>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+
+  <!-- TABLA RESUMEN LOCACIONES -->
+  <div style="margin-top:40px;">
+    <div class="section-title">Resumen de Locaciones · Los 3 Videos de Campaña</div>
+    <hr class="section-divider">
+    <table class="overview-table">
+      <thead>
+        <tr><th>Video</th><th>Locación Principal</th><th>Alternativa</th><th>Hora Ideal</th><th>Outfit Diego</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Campaña #1</strong><br>Tu Primera Casa</td>
+          <td>Plaza Ñuñoa / Providencia + Dpto piloto</td>
+          <td>Cualquier plaza barrial activa</td>
+          <td>10:00–12:00 (mañana)</td>
+          <td>Casual — polera blanca o camisa entreabierta</td>
+        </tr>
+        <tr>
+          <td><strong>Campaña #2</strong><br>Invierte Ahora</td>
+          <td>Rooftop con vista panorámica a Santiago</td>
+          <td>Piso 10+ de proyecto premium</td>
+          <td>18:30–19:30 (atardecer)</td>
+          <td>Formal — camisa planchada, color neutro</td>
+        </tr>
+        <tr>
+          <td><strong>Campaña #3</strong><br>Historia de Marca</td>
+          <td>Casa/depa real de Diego + calle barrial</td>
+          <td>Café íntimo + exterior tranquilo</td>
+          <td>Mañana de sábado</td>
+          <td>Ropa de casa / casual real. Sin forzar.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+</div>
+
+<!-- FOOTER -->
+<div class="doc-footer">
+  <p><strong>Avance Inmobiliario</strong> · Calendario de Contenido · Junio – Julio 2026</p>
+  <p style="margin-top:6px;">Presenter: Diego Birt · Documento confidencial · Uso interno</p>
+</div>
+
+</body>
+</html>
