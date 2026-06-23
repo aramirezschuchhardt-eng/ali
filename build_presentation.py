@@ -29,9 +29,9 @@ PROJ = os.path.join(ASSETS, 'projects')
 # Slides that still need renders are commented-out (will be added once images arrive).
 
 PROJECT_RENDERS = {
-    # Slide 1 — Cover: large top = Santa Elena strip center; bottom = Vive Radal
+    # Cover slide: top-large hero = Las Condes exterior night; bottom = Vive Radal renders
     0: [
-        dict(shape='Image 0', path=os.path.join(PROJ, 'santa_elena_strip.jpeg')),
+        dict(shape='Image 0', path=os.path.join(PROJ, 'las_condes.jpeg')),
         dict(shape='Image 1', path=os.path.join(PROJ, 'vive_radal_amenities.jpeg')),
         dict(shape='Image 2', path=os.path.join(PROJ, 'vive_radal_edificio.jpeg')),
     ],
@@ -50,6 +50,10 @@ PROJECT_RENDERS = {
         dict(shape='Image 1', path=os.path.join(PROJ, 'alto_serena.jpeg'),
              left=0.62, top=2.78, width=4.55, height=2.45,
              clear_text='Text 12'),
+    ],
+    # Slide 9 — Av. Las Condes: Image 1 already full-size portrait (3.35"×4.15")
+    8: [
+        dict(shape='Image 1', path=os.path.join(PROJ, 'las_condes.jpeg')),
     ],
     # Slide 10 — Lo Curro: square frame (4.10"×4.10")
     9: [
