@@ -29,8 +29,9 @@ PROJ = os.path.join(ASSETS, 'projects')
 # Slides that still need renders are commented-out (will be added once images arrive).
 
 PROJECT_RENDERS = {
-    # Slide 1 — Cover: replace the 2 right-side bottom images with Vive Radal renders
+    # Slide 1 — Cover: large top = Santa Elena strip center; bottom = Vive Radal
     0: [
+        dict(shape='Image 0', path=os.path.join(PROJ, 'santa_elena_strip.jpeg')),
         dict(shape='Image 1', path=os.path.join(PROJ, 'vive_radal_amenities.jpeg')),
         dict(shape='Image 2', path=os.path.join(PROJ, 'vive_radal_edificio.jpeg')),
     ],
