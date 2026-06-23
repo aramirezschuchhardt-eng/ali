@@ -29,11 +29,11 @@ PROJ = os.path.join(ASSETS, 'projects')
 # Slides that still need renders are commented-out (will be added once images arrive).
 
 PROJECT_RENDERS = {
-    # Cover slide: top-large hero = Las Condes exterior night; bottom = Vive Radal renders
+    # Cover slide: hero = Las Condes night, bottom-left = Vive Radal, bottom-right = Lo Curro
     0: [
         dict(shape='Image 0', path=os.path.join(PROJ, 'las_condes.jpeg')),
         dict(shape='Image 1', path=os.path.join(PROJ, 'vive_radal_amenities.jpeg')),
-        dict(shape='Image 2', path=os.path.join(PROJ, 'vive_radal_edificio.jpeg')),
+        dict(shape='Image 2', path=os.path.join(PROJ, 'lo_curro.jpeg')),
     ],
     # Slide 6 — Vive Radal: replace main render (already full-size in original)
     5: [
