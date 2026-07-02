@@ -1,0 +1,572 @@
+<!doctype html>
+<html lang="es-CL">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Terranova La Florida | Avance Inmobiliario</title>
+<meta name="description" content="Departamentos de entrega inmediata en Terranova, La Florida. A pasos del Metro Vicente Valdés. Bono pie hasta 20% y arriendo asegurado 2 años en 2D+2B. Venta a cargo de Avance Inmobiliario.">
+<style>
+  :root{
+    --ink:#182420;
+    --ink-soft:#4b5a54;
+    --paper:#faf7f2;
+    --paper-alt:#f1ece2;
+    --green:#1f4b3f;
+    --green-dark:#123028;
+    --gold:#c8873e;
+    --gold-soft:#eadfc9;
+    --line:#e2dccf;
+    --whatsapp:#25D366;
+    --radius:16px;
+    --maxw:1120px;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    color:var(--ink);
+    background:var(--paper);
+    line-height:1.5;
+  }
+  img{max-width:100%;display:block;}
+  a{color:inherit;}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 20px;}
+  section{padding:64px 0;}
+  h1,h2,h3{line-height:1.15;margin:0 0 12px;}
+  h2{font-size:clamp(24px,3.4vw,34px);color:var(--green-dark);}
+  .eyebrow{
+    text-transform:uppercase;letter-spacing:.12em;font-size:12px;font-weight:700;
+    color:var(--gold);margin-bottom:8px;display:block;
+  }
+  .lede{color:var(--ink-soft);font-size:17px;max-width:640px;}
+
+  /* ---------- Topbar ---------- */
+  .topbar{
+    position:sticky;top:0;z-index:50;
+    background:rgba(250,247,242,.92);backdrop-filter:blur(6px);
+    border-bottom:1px solid var(--line);
+  }
+  .topbar .wrap{display:flex;align-items:center;justify-content:space-between;padding:12px 20px;}
+  .brand{display:flex;align-items:center;gap:10px;font-weight:800;font-size:15px;}
+  .brand .dot{width:10px;height:10px;border-radius:50%;background:var(--gold);}
+  .brand small{display:block;font-weight:500;color:var(--ink-soft);font-size:11px;}
+  .btn{
+    display:inline-flex;align-items:center;gap:8px;
+    padding:12px 20px;border-radius:999px;font-weight:700;font-size:14px;
+    text-decoration:none;border:1px solid transparent;cursor:pointer;
+  }
+  .btn-primary{background:var(--green);color:#fff;}
+  .btn-primary:hover{background:var(--green-dark);}
+  .btn-whatsapp{background:var(--whatsapp);color:#fff;}
+  .btn-ghost{background:transparent;color:var(--green-dark);border-color:var(--green-dark);}
+  .btn-sm{padding:9px 16px;font-size:13px;}
+
+  /* ---------- Hero / Linkpage ---------- */
+  .hero{padding:56px 0 40px;}
+  .hero-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:40px;align-items:center;}
+  @media (max-width:860px){.hero-grid{grid-template-columns:1fr;}}
+  .hero h1{font-size:clamp(30px,5vw,46px);color:var(--green-dark);}
+  .hero-tags{display:flex;flex-wrap:wrap;gap:8px;margin:18px 0 26px;}
+  .tag{
+    background:var(--gold-soft);color:var(--green-dark);font-weight:700;font-size:13px;
+    padding:8px 14px;border-radius:999px;
+  }
+  .hero-actions{display:flex;flex-wrap:wrap;gap:12px;}
+
+  .hero-media{
+    aspect-ratio:4/5;border-radius:var(--radius);
+    background:linear-gradient(160deg,var(--green) 0%,var(--green-dark) 60%,#0c1e18 100%);
+    display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;
+    color:#fff;text-align:center;padding:24px;
+  }
+  .hero-media .placeholder-label{
+    position:absolute;bottom:16px;left:16px;right:16px;
+    background:rgba(0,0,0,.35);border:1px dashed rgba(255,255,255,.5);
+    border-radius:10px;padding:10px 12px;font-size:12px;
+  }
+  /* To use a real photo instead of the placeholder gradient above:
+     replace the <div class="hero-media"> content with
+     <img src="TU-FOTO.jpg" alt="Fachada Terranova La Florida"> */
+
+  .linkpage{display:flex;flex-direction:column;gap:10px;margin-top:10px;}
+  .linkpage a{
+    display:flex;align-items:center;justify-content:space-between;gap:10px;
+    background:#fff;border:1px solid var(--line);border-radius:12px;padding:14px 16px;
+    font-weight:700;text-decoration:none;color:var(--green-dark);
+  }
+  .linkpage a:hover{border-color:var(--gold);}
+  .linkpage a span.arrow{color:var(--gold);}
+
+  /* ---------- Pillars ---------- */
+  .pillars{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;}
+  @media (max-width:860px){.pillars{grid-template-columns:repeat(2,1fr);}}
+  .pillar{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:22px;}
+  .pillar .icon{width:40px;height:40px;color:var(--gold);margin-bottom:10px;}
+  .pillar h3{font-size:16px;color:var(--green-dark);}
+  .pillar p{margin:0;color:var(--ink-soft);font-size:14px;}
+
+  /* ---------- Typologies ---------- */
+  .alt{background:var(--paper-alt);}
+  .cards{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-top:28px;}
+  @media (max-width:960px){.cards{grid-template-columns:repeat(2,1fr);}}
+  @media (max-width:560px){.cards{grid-template-columns:1fr;}}
+  .card{
+    background:#fff;border:1px solid var(--line);border-radius:var(--radius);
+    padding:22px;display:flex;flex-direction:column;gap:10px;
+  }
+  .card .badge{
+    align-self:flex-start;background:var(--green);color:#fff;font-size:11px;font-weight:700;
+    padding:4px 10px;border-radius:999px;text-transform:uppercase;letter-spacing:.05em;
+  }
+  .card .badge.gold{background:var(--gold);}
+  .card h3{font-size:19px;margin-bottom:0;color:var(--green-dark);}
+  .card .price{font-size:22px;font-weight:800;color:var(--green-dark);}
+  .card .price small{font-size:12px;font-weight:600;color:var(--ink-soft);}
+  .card ul{margin:0;padding-left:18px;color:var(--ink-soft);font-size:13.5px;}
+  .card .btn{margin-top:auto;}
+
+  /* ---------- Promo banner ---------- */
+  .promo{
+    background:var(--green);color:#fff;border-radius:var(--radius);
+    padding:36px;display:grid;grid-template-columns:1.3fr .7fr;gap:24px;align-items:center;
+  }
+  @media (max-width:760px){.promo{grid-template-columns:1fr;}}
+  .promo h2{color:#fff;}
+  .promo .num{font-size:40px;font-weight:800;color:var(--gold);}
+
+  /* ---------- Amenities ---------- */
+  .amenities{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;}
+  @media (max-width:760px){.amenities{grid-template-columns:repeat(2,1fr);}}
+  .amenity{
+    display:flex;align-items:center;gap:12px;background:#fff;border:1px solid var(--line);
+    border-radius:12px;padding:14px 16px;font-weight:600;font-size:14px;
+  }
+  .amenity .icon{width:22px;height:22px;color:var(--gold);flex:none;}
+  .amenity.soon{opacity:.65;}
+  .amenity.soon .tag2{font-size:10px;font-weight:700;background:var(--gold-soft);color:var(--green-dark);padding:2px 8px;border-radius:999px;margin-left:auto;}
+
+  /* ---------- Gallery placeholders ---------- */
+  .gallery{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;}
+  @media (max-width:760px){.gallery{grid-template-columns:repeat(2,1fr);}}
+  .ph{
+    aspect-ratio:1/1;border-radius:12px;background:repeating-linear-gradient(135deg,var(--paper-alt),var(--paper-alt) 10px,#e8e0cf 10px,#e8e0cf 20px);
+    border:1px dashed #c9bfa2;display:flex;align-items:center;justify-content:center;
+    color:var(--ink-soft);font-size:12px;text-align:center;padding:10px;
+  }
+
+  /* ---------- Location ---------- */
+  .map-frame{border-radius:var(--radius);overflow:hidden;border:1px solid var(--line);}
+  .map-frame iframe{width:100%;height:360px;border:0;display:block;}
+
+  /* ---------- Conditions table ---------- */
+  table.cond{width:100%;border-collapse:collapse;background:#fff;border-radius:var(--radius);overflow:hidden;border:1px solid var(--line);}
+  table.cond th, table.cond td{padding:14px 16px;text-align:left;font-size:14px;border-bottom:1px solid var(--line);}
+  table.cond th{background:var(--paper-alt);color:var(--green-dark);width:38%;}
+  table.cond tr:last-child td{border-bottom:none;}
+
+  /* ---------- Form ---------- */
+  .form-card{
+    background:#fff;border:1px solid var(--line);border-radius:var(--radius);
+    padding:32px;max-width:640px;margin:0 auto;
+  }
+  .field{margin-bottom:16px;}
+  .field label{display:block;font-weight:700;font-size:13px;margin-bottom:6px;color:var(--green-dark);}
+  .field input, .field select, .field textarea{
+    width:100%;padding:12px 14px;border-radius:10px;border:1px solid var(--line);
+    font-size:14px;font-family:inherit;background:var(--paper);
+  }
+  .field textarea{min-height:90px;resize:vertical;}
+  .consent{display:flex;gap:8px;align-items:flex-start;font-size:12.5px;color:var(--ink-soft);margin-bottom:18px;}
+  .consent input{margin-top:3px;}
+  .form-actions{display:flex;gap:12px;flex-wrap:wrap;}
+  .form-note{font-size:12px;color:var(--ink-soft);margin-top:12px;}
+
+  /* ---------- Footer ---------- */
+  footer{background:var(--green-dark);color:#dfe7e3;padding:40px 0 24px;font-size:13px;}
+  footer .wrap{display:flex;flex-direction:column;gap:14px;}
+  footer .legal{color:#9fb1aa;line-height:1.6;}
+  footer a.f-link{color:#fff;font-weight:700;text-decoration:none;}
+
+  .sticky-cta{
+    position:fixed;bottom:16px;right:16px;z-index:60;
+  }
+  @media (min-width:860px){.sticky-cta{display:none;}}
+</style>
+</head>
+<body>
+
+<!-- =======================================================
+  CONFIGURACIÓN RÁPIDA (edita aquí antes de publicar)
+  - whatsappNumber: número en formato internacional sin +, ej. 56912345678
+  - contactEmail: correo de contacto de Avance Inmobiliario
+  - Reemplaza las fotos: busca los bloques <div class="ph"> y
+    <div class="hero-media"> y cámbialos por <img src="...">
+======================================================== -->
+
+<header class="topbar">
+  <div class="wrap">
+    <div class="brand">
+      <span class="dot"></span>
+      <div>
+        Avance Inmobiliario
+        <small>Broker autorizado · Terranova La Florida</small>
+      </div>
+    </div>
+    <a href="#" class="btn btn-whatsapp btn-sm" id="btn-whatsapp-top">WhatsApp</a>
+  </div>
+</header>
+
+<!-- ============ HERO / LINKPAGE ============ -->
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <span class="eyebrow">Terranova · La Florida</span>
+      <h1>Múdate hoy, no en 2 años.</h1>
+      <p class="lede">Departamentos de entrega inmediata a pasos del Metro Vicente Valdés. Estudios, 1 y 2 dormitorios, con hasta 20% de bono pie y arriendo asegurado por 2 años en la tipología 2D+2B.</p>
+      <div class="hero-tags">
+        <span class="tag">Entrega inmediata</span>
+        <span class="tag">Bono pie hasta 20%</span>
+        <span class="tag">A pasos del Metro</span>
+        <span class="tag">Arriendo asegurado 2D+2B</span>
+      </div>
+      <div class="hero-actions">
+        <a href="#tipologias" class="btn btn-primary">Ver tipologías y precios</a>
+        <a href="#contacto" class="btn btn-ghost">Agendar visita</a>
+      </div>
+
+      <!-- Estilo "linkpage": accesos directos para tráfico de campañas -->
+      <div class="linkpage">
+        <a href="#tipologias"><span>📐 Ver tipologías y precios</span><span class="arrow">→</span></a>
+        <a href="#promocion"><span>💰 Arriendo asegurado 2 años</span><span class="arrow">→</span></a>
+        <a href="#ubicacion"><span>📍 Ubicación y conectividad</span><span class="arrow">→</span></a>
+        <a href="#" id="link-whatsapp"><span>💬 Hablar por WhatsApp ahora</span><span class="arrow">→</span></a>
+      </div>
+    </div>
+
+    <div class="hero-media">
+      <div>
+        <strong>FOTO / VIDEO REAL DE TERRANOVA AQUÍ</strong>
+        <div class="placeholder-label">Reemplaza este bloque por una foto real de la fachada o un render del proyecto (recomendado: 1080×1350px).</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PILLARS ============ -->
+<section>
+  <div class="wrap">
+    <span class="eyebrow">Por qué Terranova</span>
+    <h2>Un edificio pensado para vivir ya, o para invertir con retorno inmediato</h2>
+    <div class="pillars" style="margin-top:24px;">
+      <div class="pillar">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 11l9-7 9 7"/><path d="M5 10v10h14V10"/></svg>
+        <h3>Entrega inmediata</h3>
+        <p>No es venta en verde: te mudas o arriendas apenas firmas.</p>
+      </div>
+      <div class="pillar">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>
+        <h3>A pasos del Metro</h3>
+        <p>Metro Vicente Valdés (L4) y a 2 cuadras de Av. Américo Vespucio.</p>
+      </div>
+      <div class="pillar">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 2l3 6 7 1-5 5 1 7-6-3-6 3 1-7-5-5 7-1z"/></svg>
+        <h3>Bono pie hasta 20%</h3>
+        <p>Entrada accesible según tipología y forma de pago.</p>
+      </div>
+      <div class="pillar">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 12h18M3 12l4-4M3 12l4 4M21 12l-4-4M21 12l-4 4"/></svg>
+        <h3>Arriendo asegurado</h3>
+        <p>2D+2B con renta garantizada sobre mercado por 2 años.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ TIPOLOGIAS ============ -->
+<section class="alt" id="tipologias">
+  <div class="wrap">
+    <span class="eyebrow">Stock disponible · actualizado 22/06</span>
+    <h2>Tipologías y precios</h2>
+    <p class="lede">Precios cliente en UF. El stock cambia semanalmente — confirma disponibilidad exacta con un asesor.</p>
+
+    <div class="cards">
+      <div class="card">
+        <span class="badge">6 disponibles</span>
+        <h3>Estudio</h3>
+        <div class="price">Desde UF 2.465<br><small>23,8 m² interior</small></div>
+        <ul>
+          <li>Hasta 15% de bono pie</li>
+          <li>Bodega opcional</li>
+          <li>Ideal primera vivienda o inversión</li>
+        </ul>
+        <a href="#contacto" class="btn btn-primary btn-sm" data-tipologia="Estudio">Quiero este</a>
+      </div>
+
+      <div class="card">
+        <span class="badge">28 disponibles</span>
+        <h3>1D + 1B</h3>
+        <div class="price">Desde UF 2.920<br><small>34,3 – 37,2 m² interior</small></div>
+        <ul>
+          <li>Hasta 15% de bono pie</li>
+          <li>Estacionamiento y bodega opcionales</li>
+          <li>Buena disponibilidad de stock</li>
+        </ul>
+        <a href="#contacto" class="btn btn-primary btn-sm" data-tipologia="1D+1B">Quiero este</a>
+      </div>
+
+      <div class="card">
+        <span class="badge">14 disponibles</span>
+        <h3>2D + 1B</h3>
+        <div class="price">Desde UF 3.130<br><small>37,4 – 45,8 m² interior</small></div>
+        <ul>
+          <li>Hasta 15% de bono pie</li>
+          <li>Estacionamiento obligatorio</li>
+          <li>Ideal para familias</li>
+        </ul>
+        <a href="#contacto" class="btn btn-primary btn-sm" data-tipologia="2D+1B">Quiero este</a>
+      </div>
+
+      <div class="card">
+        <span class="badge gold">3 disponibles</span>
+        <h3>2D + 2B</h3>
+        <div class="price">Desde UF 3.560<br><small>52,1 m² interior</small></div>
+        <ul>
+          <li>Hasta 20% de bono pie</li>
+          <li>Estacionamiento obligatorio</li>
+          <li>Disponible con Arriendo Asegurado</li>
+        </ul>
+        <a href="#contacto" class="btn btn-primary btn-sm" data-tipologia="2D+2B">Quiero este</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PROMO ARRIENDO ASEGURADO ============ -->
+<section id="promocion">
+  <div class="wrap">
+    <div class="promo">
+      <div>
+        <span class="eyebrow" style="color:var(--gold);">Promoción exclusiva 2D+2B</span>
+        <h2>Arriendo asegurado 2 años, sobre el precio de mercado</h2>
+        <p style="color:#dfe7e3;max-width:520px;">Compra tu 2D+2B con estacionamiento y recibe renta garantizada durante 24 meses, sin preocuparte por buscar arrendatario ni por vacancia. Ideal si buscas invertir con retorno desde el primer mes.</p>
+        <a href="#contacto" class="btn" style="background:var(--gold);color:#fff;margin-top:14px;" data-tipologia="2D+2B Arriendo Asegurado">Quiero invertir</a>
+      </div>
+      <div style="text-align:center;">
+        <div class="num">$750.000</div>
+        <div style="color:#dfe7e3;font-size:14px;">mensuales garantizados por 24 meses</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ AMENITIES ============ -->
+<section class="alt">
+  <div class="wrap">
+    <span class="eyebrow">Equipamiento</span>
+    <h2>Áreas comunes</h2>
+    <div class="amenities" style="margin-top:20px;">
+      <div class="amenity"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 4v16M18 4v16M6 12h12"/></svg>Gimnasio equipado</div>
+      <div class="amenity"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="4" width="18" height="14" rx="2"/><path d="M3 9h18"/></svg>Salón co-work</div>
+      <div class="amenity"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="4" y="4" width="16" height="16" rx="2"/></svg>Sala multiuso</div>
+      <div class="amenity"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="8"/></svg>Sala de lavado y secado</div>
+      <div class="amenity"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2v20M2 12h20"/></svg>Zona de juegos infantiles</div>
+      <div class="amenity soon"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 18c3-6 15-6 18 0"/></svg>Piscina <span class="tag2">Etapa 2</span></div>
+      <div class="amenity soon"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 12h16M4 12a2 2 0 100-4 2 2 0 000 4zM4 16a2 2 0 100-4 2 2 0 000 4z"/></svg>Quinchos <span class="tag2">Etapa 2</span></div>
+      <div class="amenity soon"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/></svg>Zona de mascotas <span class="tag2">Etapa 2</span></div>
+    </div>
+
+    <div style="margin-top:32px;">
+      <span class="eyebrow">Galería</span>
+      <div class="gallery">
+        <div class="ph">Foto real 1<br>(fachada)</div>
+        <div class="ph">Foto real 2<br>(interior depto)</div>
+        <div class="ph">Foto real 3<br>(cocina)</div>
+        <div class="ph">Foto real 4<br>(áreas comunes)</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ UBICACION ============ -->
+<section id="ubicacion">
+  <div class="wrap">
+    <span class="eyebrow">Ubicación</span>
+    <h2>Av. Vicuña Mackenna 7637, La Florida</h2>
+    <p class="lede">A pasos del Metro Vicente Valdés (Línea 4) y a 2 cuadras de Av. Américo Vespucio. Entorno con clínicas, hospitales, malls, colegios, bancos y restaurantes.</p>
+    <div class="map-frame" style="margin-top:20px;">
+      <iframe loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+        src="https://maps.google.com/maps?q=Av.%20Vicu%C3%B1a%20Mackenna%207637%2C%20La%20Florida%2C%20Santiago&t=&z=15&ie=UTF8&iwloc=&output=embed">
+      </iframe>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CONDICIONES ============ -->
+<section class="alt">
+  <div class="wrap">
+    <span class="eyebrow">Condiciones comerciales</span>
+    <h2>Cómo reservar</h2>
+    <table class="cond">
+      <tr><th>Valor de reserva</th><td>$100.000 (se abona a fondo de reserva)</td></tr>
+      <tr><th>Requisito para promesa</th><td>Aprobación de crédito hipotecario</td></tr>
+      <tr><th>Bono pie</th><td>Hasta 15% (Estudio, 1D1B, 2D1B) · Hasta 20% (2D2B)</td></tr>
+      <tr><th>Pago en escritura</th><td>Contado, o tarjeta de crédito (hasta 36 cuotas Getnet / 18 cuotas Banco de Chile precio contado)</td></tr>
+      <tr><th>Estacionamiento</th><td>Crédito directo a 60 cuotas sin interés disponible</td></tr>
+      <tr><th>Venta a cargo de</th><td>Avance Inmobiliario, broker autorizado del proyecto</td></tr>
+    </table>
+  </div>
+</section>
+
+<!-- ============ CONTACTO ============ -->
+<section id="contacto">
+  <div class="wrap">
+    <span class="eyebrow">Contacto</span>
+    <h2 style="text-align:center;">Cotiza tu departamento en Terranova</h2>
+    <p class="lede" style="margin:0 auto 28px;text-align:center;">Completa tus datos y te contactamos por WhatsApp con disponibilidad real y condiciones de pie.</p>
+
+    <div class="form-card">
+      <form id="lead-form">
+        <div class="field">
+          <label for="nombre">Nombre completo</label>
+          <input type="text" id="nombre" name="nombre" required placeholder="Tu nombre">
+        </div>
+        <div class="field">
+          <label for="telefono">Teléfono (WhatsApp)</label>
+          <input type="tel" id="telefono" name="telefono" required placeholder="+56 9 ...">
+        </div>
+        <div class="field">
+          <label for="email">Correo electrónico</label>
+          <input type="email" id="email" name="email" placeholder="tucorreo@ejemplo.cl">
+        </div>
+        <div class="field">
+          <label for="tipologia">Tipología de interés</label>
+          <select id="tipologia" name="tipologia">
+            <option>Estudio</option>
+            <option>1D+1B</option>
+            <option>2D+1B</option>
+            <option>2D+2B</option>
+            <option>2D+2B Arriendo Asegurado</option>
+            <option>Aún no sé, quiero asesoría</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="mensaje">Mensaje (opcional)</label>
+          <textarea id="mensaje" name="mensaje" placeholder="Ej: busco para invertir, ¿cuál es el pie mínimo?"></textarea>
+        </div>
+        <div class="consent">
+          <input type="checkbox" id="consentimiento" required>
+          <label for="consentimiento">Autorizo a Avance Inmobiliario a contactarme por WhatsApp/correo respecto de Terranova La Florida, conforme a la Ley 19.628 sobre protección de datos personales.</label>
+        </div>
+        <div class="form-actions">
+          <button type="submit" class="btn btn-whatsapp">Enviar por WhatsApp</button>
+          <a href="#" id="mailto-fallback" class="btn btn-ghost">Enviar por correo</a>
+        </div>
+        <p class="form-note">Al enviar, se abrirá WhatsApp con tus datos pre-cargados para que un asesor de Avance Inmobiliario te responda directamente.</p>
+      </form>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="brand" style="color:#fff;">
+      <span class="dot"></span> Avance Inmobiliario
+    </div>
+    <div class="legal">
+      Venta de Terranova (Av. Vicuña Mackenna 7637, La Florida) a cargo de <strong>Avance Inmobiliario</strong>, broker autorizado del proyecto de Inmobiliaria Vida Nueva.
+      Avance Inmobiliario actúa como corredor/intermediario; los fondos de reserva y escrituración se cursan a nombre de la inmobiliaria titular del proyecto.
+      Precios en UF, sujetos a variación según disponibilidad de stock. Imágenes referenciales.
+    </div>
+    <div>
+      <a class="f-link" id="link-whatsapp-footer" href="#">WhatsApp</a> ·
+      <a class="f-link" id="link-email-footer" href="#">Correo</a>
+    </div>
+  </div>
+</footer>
+
+<a href="#" class="btn btn-whatsapp sticky-cta" id="btn-whatsapp-sticky">💬 WhatsApp</a>
+
+<script>
+  // =====================================================
+  // CONFIGURACIÓN — reemplaza estos valores antes de publicar
+  // =====================================================
+  const CONFIG = {
+    whatsappNumber: "56930386399",
+    contactEmail: "Diego@avanceinmobiliario.cl"
+  };
+
+  function buildWhatsappLink(message){
+    const text = encodeURIComponent(message);
+    return `https://wa.me/${CONFIG.whatsappNumber}?text=${text}`;
+  }
+
+  // Capturar UTM de la campaña para incluir el origen en el mensaje de WhatsApp
+  const params = new URLSearchParams(window.location.search);
+  const utmSource = params.get("utm_source") || "landing";
+  const utmCampaign = params.get("utm_campaign") || "";
+
+  const defaultMsg = `Hola, vi el anuncio de Terranova en La Florida y quiero más información sobre disponibilidad, precios y bono pie.`;
+
+  document.querySelectorAll("#btn-whatsapp-top, #link-whatsapp, #btn-whatsapp-sticky, #link-whatsapp-footer").forEach(el=>{
+    el.href = buildWhatsappLink(defaultMsg);
+    el.target = "_blank";
+    el.rel = "noopener";
+  });
+
+  document.getElementById("link-email-footer").href = `mailto:${CONFIG.contactEmail}`;
+
+  // Pre-seleccionar tipología cuando se hace click en "Quiero este" desde una card
+  document.querySelectorAll("[data-tipologia]").forEach(btn=>{
+    btn.addEventListener("click", (e)=>{
+      const tipologia = btn.getAttribute("data-tipologia");
+      const select = document.getElementById("tipologia");
+      const optionExists = Array.from(select.options).some(o => o.value === tipologia || o.text === tipologia);
+      if(optionExists){
+        select.value = tipologia;
+      }
+    });
+  });
+
+  // Formulario -> arma mensaje de WhatsApp con los datos ingresados
+  const form = document.getElementById("lead-form");
+  form.addEventListener("submit", function(e){
+    e.preventDefault();
+    const nombre = document.getElementById("nombre").value.trim();
+    const telefono = document.getElementById("telefono").value.trim();
+    const email = document.getElementById("email").value.trim();
+    const tipologia = document.getElementById("tipologia").value;
+    const mensaje = document.getElementById("mensaje").value.trim();
+
+    const lines = [
+      `Hola, soy ${nombre} y quiero información de Terranova (La Florida).`,
+      `Tipología de interés: ${tipologia}`,
+      `Mi teléfono: ${telefono}`,
+      email ? `Mi correo: ${email}` : null,
+      mensaje ? `Mensaje: ${mensaje}` : null,
+      utmCampaign ? `(Campaña: ${utmCampaign} / ${utmSource})` : `(Origen: ${utmSource})`
+    ].filter(Boolean);
+
+    window.open(buildWhatsappLink(lines.join("\n")), "_blank", "noopener");
+  });
+
+  document.getElementById("mailto-fallback").addEventListener("click", function(e){
+    e.preventDefault();
+    const nombre = document.getElementById("nombre").value.trim();
+    const telefono = document.getElementById("telefono").value.trim();
+    const tipologia = document.getElementById("tipologia").value;
+    const mensaje = document.getElementById("mensaje").value.trim();
+    const subject = encodeURIComponent(`Interés en Terranova La Florida - ${tipologia}`);
+    const body = encodeURIComponent(`Nombre: ${nombre}\nTeléfono: ${telefono}\nTipología: ${tipologia}\nMensaje: ${mensaje}`);
+    window.location.href = `mailto:${CONFIG.contactEmail}?subject=${subject}&body=${body}`;
+  });
+
+  // ---------------------------------------------------------------
+  // TODO seguimiento: pega aquí el Meta Pixel / Conversions API y el
+  // Google Tag (gtag.js) antes de encender campañas pagadas, para
+  // poder optimizar por conversión en el landing.
+  // ---------------------------------------------------------------
+</script>
+
+</body>
+</html>
