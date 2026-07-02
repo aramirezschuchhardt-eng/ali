@@ -82,14 +82,12 @@
     display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;
     color:#fff;text-align:center;padding:24px;
   }
+  .hero-media img{width:100%;height:100%;object-fit:cover;object-position:center;}
   .hero-media .placeholder-label{
     position:absolute;bottom:16px;left:16px;right:16px;
     background:rgba(0,0,0,.35);border:1px dashed rgba(255,255,255,.5);
     border-radius:10px;padding:10px 12px;font-size:12px;
   }
-  /* To use a real photo instead of the placeholder gradient above:
-     replace the <div class="hero-media"> content with
-     <img src="TU-FOTO.jpg" alt="Fachada Terranova La Florida"> */
 
   .linkpage{display:flex;flex-direction:column;gap:10px;margin-top:10px;}
   .linkpage a{
@@ -148,7 +146,7 @@
   .amenity.soon{opacity:.65;}
   .amenity.soon .tag2{font-size:10px;font-weight:700;background:var(--gold-soft);color:var(--green-dark);padding:2px 8px;border-radius:999px;margin-left:auto;}
 
-  /* ---------- Gallery placeholders ---------- */
+  /* ---------- Gallery ---------- */
   .gallery{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;}
   @media (max-width:760px){.gallery{grid-template-columns:repeat(2,1fr);}}
   .ph{
@@ -156,6 +154,11 @@
     border:1px dashed #c9bfa2;display:flex;align-items:center;justify-content:center;
     color:var(--ink-soft);font-size:12px;text-align:center;padding:10px;
   }
+  .gphoto{margin:0;}
+  .gphoto img{
+    aspect-ratio:1/1;width:100%;object-fit:cover;border-radius:12px;display:block;
+  }
+  .gphoto figcaption{margin-top:8px;font-size:12.5px;font-weight:600;color:var(--ink-soft);text-align:center;}
 
   /* ---------- Location ---------- */
   .map-frame{border-radius:var(--radius);overflow:hidden;border:1px solid var(--line);}
@@ -246,10 +249,7 @@
     </div>
 
     <div class="hero-media">
-      <div>
-        <strong>FOTO / VIDEO REAL DE TERRANOVA AQUÍ</strong>
-        <div class="placeholder-label">Reemplaza este bloque por una foto real de la fachada o un render del proyecto (recomendado: 1080×1350px).</div>
-      </div>
+      <img src="assets/foto-fachada.jpg" alt="Fachada Edificio Terranova, La Florida">
     </div>
   </div>
 </section>
@@ -380,10 +380,10 @@
     <div style="margin-top:32px;">
       <span class="eyebrow">Galería</span>
       <div class="gallery">
-        <div class="ph">Foto real 1<br>(fachada)</div>
-        <div class="ph">Foto real 2<br>(interior depto)</div>
-        <div class="ph">Foto real 3<br>(cocina)</div>
-        <div class="ph">Foto real 4<br>(áreas comunes)</div>
+        <figure class="gphoto"><img src="assets/foto-cocina.jpg" alt="Cocina equipada, Edificio Terranova"><figcaption>Cocina equipada</figcaption></figure>
+        <figure class="gphoto"><img src="assets/foto-gimnasio.jpg" alt="Gimnasio, Edificio Terranova"><figcaption>Gimnasio</figcaption></figure>
+        <figure class="gphoto"><img src="assets/foto-juegos.jpg" alt="Zona de juegos infantiles, Edificio Terranova"><figcaption>Zona de juegos infantiles</figcaption></figure>
+        <figure class="gphoto"><img src="assets/foto-terraza.jpg" alt="Vista desde terraza, Edificio Terranova"><figcaption>Vista desde el piso alto</figcaption></figure>
       </div>
     </div>
   </div>
