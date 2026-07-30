@@ -7,6 +7,18 @@
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
+  /* ==========================================================
+     PALETA DE MARCA — BARBAZUL
+     Para adaptar la presentación a los colores oficiales de la
+     marca, basta con reemplazar los seis valores de abajo.
+     Todo el documento (fondos, títulos, tarjetas, precios,
+     gráficos y bordes) toma sus colores desde aquí.
+       --navy-900  fondo principal, el más oscuro
+       --navy-800  fondo de las secciones alternas
+       --navy-700 / --navy-600  azules de apoyo y degradados
+       --gold-400  color de acento (bordes, viñetas, badges)
+       --gold-300 / --gold-200  variantes claras del acento
+     ========================================================== */
   :root {
     --navy-900: #060d1c;
     --navy-800: #0a1730;
@@ -133,6 +145,39 @@
     max-width: 130px;
     line-height: 1.5;
   }
+
+  /* Logo real: se muestra apenas exista el archivo; si no,
+     aparece el marcador de posición. */
+  .logo-slot .logo-img {
+    max-width: 68%;
+    max-height: 68%;
+    object-fit: contain;
+  }
+  .logo-slot .fallback {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+  }
+  .logo-slot.is-empty .logo-img { display: none; }
+  .logo-slot.is-empty .fallback { display: flex; }
+
+  /* Marca discreta repetida en el borde superior de cada lámina */
+  .slide-mark {
+    position: absolute;
+    top: 34px; left: 6vw;
+    display: flex; align-items: center; gap: 10px;
+    opacity: 0.7;
+  }
+  .slide-mark img { height: 26px; width: auto; object-fit: contain; }
+  .slide-mark .wordmark {
+    font-family: var(--serif);
+    font-size: 0.82rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--gold-400);
+  }
+  .slide-mark img.is-missing { display: none; }
 
   .cover h1 {
     font-family: var(--serif);
@@ -487,9 +532,16 @@
 <!-- 1 · PORTADA -->
 <section class="slide cover" id="portada" data-n="01">
   <div class="inner">
-    <div class="logo-slot" role="img" aria-label="Espacio reservado para el logo de Barbazul">
-      <span class="mark">B</span>
-      <span class="hint">Espacio reservado logo Barbazul</span>
+    <!-- LOGO BARBAZUL · portada.
+         Al reemplazar el archivo logo-barbazul.png (o incrustarlo como
+         data URI en el atributo src) el logo aparece automáticamente. -->
+    <div class="logo-slot" role="img" aria-label="Logo de Barbazul">
+      <img class="logo-img" src="logo-barbazul.png" alt="Barbazul"
+           onerror="this.closest('.logo-slot').classList.add('is-empty')" />
+      <span class="fallback">
+        <span class="mark">B</span>
+        <span class="hint">Espacio reservado logo Barbazul</span>
+      </span>
     </div>
     <p class="eyebrow">Propuesta Comercial · 2026</p>
     <h1>Bot de Reservas por WhatsApp<br />para <em>Barbazul</em></h1>
@@ -505,6 +557,10 @@
 
 <!-- 2 · EL DESAFÍO -->
 <section class="slide slide--alt" id="desafio" data-n="02">
+  <div class="slide-mark" aria-hidden="true">
+    <img src="logo-barbazul.png" alt="" onerror="this.classList.add('is-missing')" />
+    <span class="wordmark">Barbazul</span>
+  </div>
   <div class="inner">
     <p class="eyebrow">01 — Diagnóstico</p>
     <h2>El Desafío</h2>
@@ -544,6 +600,10 @@
 
 <!-- 3 · LA SOLUCIÓN -->
 <section class="slide" id="solucion" data-n="03">
+  <div class="slide-mark" aria-hidden="true">
+    <img src="logo-barbazul.png" alt="" onerror="this.classList.add('is-missing')" />
+    <span class="wordmark">Barbazul</span>
+  </div>
   <div class="inner">
     <p class="eyebrow">02 — Propuesta</p>
     <h2>La Solución</h2>
@@ -587,6 +647,10 @@
 
 <!-- 4 · CÓMO FUNCIONA -->
 <section class="slide slide--alt" id="como-funciona" data-n="04">
+  <div class="slide-mark" aria-hidden="true">
+    <img src="logo-barbazul.png" alt="" onerror="this.classList.add('is-missing')" />
+    <span class="wordmark">Barbazul</span>
+  </div>
   <div class="inner">
     <p class="eyebrow">03 — Experiencia</p>
     <h2>Cómo funciona</h2>
@@ -627,6 +691,10 @@
 
 <!-- 5 · FIDELIZACIÓN -->
 <section class="slide" id="fidelizacion" data-n="05">
+  <div class="slide-mark" aria-hidden="true">
+    <img src="logo-barbazul.png" alt="" onerror="this.classList.add('is-missing')" />
+    <span class="wordmark">Barbazul</span>
+  </div>
   <div class="inner">
     <p class="eyebrow">04 — Retención</p>
     <h2>Flujo de fidelización</h2>
@@ -667,6 +735,10 @@ Reserva por aquí mismo cuando quieras. 🔵</div>
 
 <!-- 6 · CONVERSACIÓN -->
 <section class="slide slide--alt" id="conversacion" data-n="06">
+  <div class="slide-mark" aria-hidden="true">
+    <img src="logo-barbazul.png" alt="" onerror="this.classList.add('is-missing')" />
+    <span class="wordmark">Barbazul</span>
+  </div>
   <div class="inner">
     <p class="eyebrow">05 — Demostración</p>
     <h2>Ejemplo de conversación real</h2>
@@ -736,6 +808,10 @@ Te enviaremos un recordatorio 1 hora antes. ¡Te esperamos! 🍷<span class="t">
 
 <!-- 7 · ARQUITECTURA -->
 <section class="slide" id="arquitectura" data-n="07">
+  <div class="slide-mark" aria-hidden="true">
+    <img src="logo-barbazul.png" alt="" onerror="this.classList.add('is-missing')" />
+    <span class="wordmark">Barbazul</span>
+  </div>
   <div class="inner">
     <p class="eyebrow">06 — Tecnología</p>
     <h2>Arquitectura técnica</h2>
@@ -788,6 +864,10 @@ Te enviaremos un recordatorio 1 hora antes. ¡Te esperamos! 🍷<span class="t">
 
 <!-- 8 · BENEFICIOS -->
 <section class="slide slide--alt" id="beneficios" data-n="08">
+  <div class="slide-mark" aria-hidden="true">
+    <img src="logo-barbazul.png" alt="" onerror="this.classList.add('is-missing')" />
+    <span class="wordmark">Barbazul</span>
+  </div>
   <div class="inner">
     <p class="eyebrow">07 — Impacto</p>
     <h2>Beneficios clave para Barbazul</h2>
@@ -837,6 +917,10 @@ Te enviaremos un recordatorio 1 hora antes. ¡Te esperamos! 🍷<span class="t">
 
 <!-- 9 · INVERSIÓN -->
 <section class="slide" id="inversion" data-n="09">
+  <div class="slide-mark" aria-hidden="true">
+    <img src="logo-barbazul.png" alt="" onerror="this.classList.add('is-missing')" />
+    <span class="wordmark">Barbazul</span>
+  </div>
   <div class="inner">
     <p class="eyebrow">08 — Inversión</p>
     <h2>Inversión</h2>
@@ -881,6 +965,10 @@ Te enviaremos un recordatorio 1 hora antes. ¡Te esperamos! 🍷<span class="t">
 
 <!-- 10 · PRÓXIMOS PASOS -->
 <section class="slide slide--alt" id="contacto" data-n="10">
+  <div class="slide-mark" aria-hidden="true">
+    <img src="logo-barbazul.png" alt="" onerror="this.classList.add('is-missing')" />
+    <span class="wordmark">Barbazul</span>
+  </div>
   <div class="inner">
     <p class="eyebrow">09 — Siguiente etapa</p>
     <h2>Próximos pasos</h2>
