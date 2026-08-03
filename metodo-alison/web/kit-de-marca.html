@@ -1,0 +1,637 @@
+<title>Kit de Marca en 45 minutos</title>
+
+<style>
+:root{
+  --bg:#F4F5EE; --card:#FFFFFF; --soft:#EAEDE1; --line:#D3D9C6;
+  --ink:#161C17; --ink-2:#5A6455; --ink-3:#8A9382;
+  --hot:#9C2B1F; --hot-soft:#9C2B1F14;
+  --ok:#3F6B4A; --ok-soft:#3F6B4A14;
+  --serif:Charter,"Bitstream Charter","Sitka Text",Cambria,Georgia,serif;
+  --mono:ui-monospace,"SF Mono",SFMono-Regular,Menlo,"Cascadia Mono",Consolas,monospace;
+}
+@media (prefers-color-scheme:dark){
+  :root{
+    --bg:#0E120E; --card:#171C16; --soft:#1E241D; --line:#2E362C;
+    --ink:#E3E7DA; --ink-2:#9BA593; --ink-3:#727C6A;
+    --hot:#E8846C; --hot-soft:#E8846C1F;
+    --ok:#7FB58C; --ok-soft:#7FB58C1F;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0E120E; --card:#171C16; --soft:#1E241D; --line:#2E362C;
+  --ink:#E3E7DA; --ink-2:#9BA593; --ink-3:#727C6A;
+  --hot:#E8846C; --hot-soft:#E8846C1F;
+  --ok:#7FB58C; --ok-soft:#7FB58C1F;
+}
+:root[data-theme="light"]{
+  --bg:#F4F5EE; --card:#FFFFFF; --soft:#EAEDE1; --line:#D3D9C6;
+  --ink:#161C17; --ink-2:#5A6455; --ink-3:#8A9382;
+  --hot:#9C2B1F; --hot-soft:#9C2B1F14;
+  --ok:#3F6B4A; --ok-soft:#3F6B4A14;
+}
+
+*{box-sizing:border-box}
+body{
+  margin:0;background:var(--bg);color:var(--ink);font-family:var(--serif);
+  font-size:1.05rem;line-height:1.55;-webkit-font-smoothing:antialiased;
+}
+button{font:inherit;cursor:pointer}
+.mono{font-family:var(--mono)}
+
+/* ---------------------------------------------- barra superior */
+#top{
+  position:sticky;top:0;z-index:20;background:var(--bg);
+  border-bottom:1px solid var(--line);
+}
+#topin{
+  max-width:52rem;margin:0 auto;padding:.75rem 1.25rem;
+  display:flex;align-items:center;gap:1rem;
+}
+#step{
+  font-family:var(--mono);font-size:.63rem;letter-spacing:.13em;text-transform:uppercase;
+  color:var(--hot);white-space:nowrap;
+}
+#dots{display:flex;gap:3px;flex:1;min-width:0}
+.dot{height:4px;flex:1;background:var(--line);border-radius:2px;transition:background .2s}
+.dot.done{background:var(--ok)}
+.dot.now{background:var(--hot)}
+#saved{
+  font-family:var(--mono);font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--ink-3);white-space:nowrap;opacity:0;transition:opacity .3s;
+}
+#saved.on{opacity:1}
+.icon{
+  background:none;border:1px solid var(--line);color:var(--ink-2);border-radius:3px;
+  font-family:var(--mono);font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;
+  padding:.35rem .55rem;white-space:nowrap;
+}
+.icon:hover{border-color:var(--ink-2);color:var(--ink)}
+.icon:focus-visible,button:focus-visible,textarea:focus-visible,a:focus-visible{outline:2px solid var(--hot);outline-offset:2px}
+
+/* ---------------------------------------------- lienzo */
+.wrap{max-width:52rem;margin:0 auto;padding:2rem 1.25rem 5rem}
+.screen{display:none}
+.screen.on{display:block;animation:in .22s ease}
+@keyframes in{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+
+/* ---------------------------------------------- inicio */
+.hero__kicker{
+  font-family:var(--mono);font-size:.65rem;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--hot);margin:2rem 0 1.1rem;
+}
+.hero__h1{
+  font-size:clamp(2.2rem,6.5vw,3.6rem);line-height:1.02;letter-spacing:-.03em;
+  margin:0 0 1.1rem;text-wrap:balance;
+}
+.hero__h1 em{font-style:normal;color:var(--hot)}
+.hero__p{font-size:1.15rem;color:var(--ink-2);max-width:34ch;margin:0 0 2rem;line-height:1.45}
+
+.facts{display:flex;gap:.5rem;flex-wrap:wrap;margin:0 0 2.4rem;padding:0;list-style:none}
+.facts li{
+  font-family:var(--mono);font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;
+  border:1px solid var(--line);padding:.4rem .6rem;border-radius:3px;color:var(--ink-2);
+}
+
+.sum{background:var(--card);border:1px solid var(--line);border-radius:6px;padding:1.5rem;margin:0 0 2rem}
+.sum h2{
+  font-family:var(--mono);font-size:.66rem;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--hot);margin:0 0 1.1rem;font-weight:400;
+}
+.sum ol{margin:0;padding:0;list-style:none;counter-reset:s}
+.sum li{
+  counter-increment:s;display:flex;gap:.85rem;padding:.6rem 0;
+  border-bottom:1px solid var(--soft);line-height:1.4;
+}
+.sum li:last-child{border-bottom:0}
+.sum li::before{
+  content:counter(s,decimal-leading-zero);font-family:var(--mono);font-size:.68rem;
+  color:var(--hot);flex:none;padding-top:.28em;
+}
+
+/* ---------------------------------------------- pregunta */
+.blocktag{
+  font-family:var(--mono);font-size:.63rem;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--hot);margin:0 0 1rem;
+}
+.q{
+  font-size:clamp(1.7rem,4.6vw,2.5rem);line-height:1.13;letter-spacing:-.025em;
+  margin:0 0 .8rem;text-wrap:balance;
+}
+.hint{color:var(--ink-2);margin:0 0 1.4rem;max-width:44ch}
+textarea{
+  width:100%;background:var(--card);color:var(--ink);border:1px solid var(--line);
+  border-radius:5px;padding:1rem 1.1rem;font-family:var(--serif);font-size:1.1rem;
+  line-height:1.5;resize:vertical;min-height:7.5rem;
+}
+textarea::placeholder{color:var(--ink-3)}
+textarea:focus{border-color:var(--hot)}
+.eg{
+  margin:.9rem 0 0;padding:.85rem 1rem;background:var(--soft);border-radius:5px;
+  font-size:.92rem;color:var(--ink-2);line-height:1.45;
+}
+.eg b{
+  display:block;font-family:var(--mono);font-size:.58rem;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--ink-3);margin-bottom:.35rem;font-weight:400;
+}
+.nav{display:flex;gap:.6rem;align-items:center;margin-top:1.6rem;flex-wrap:wrap}
+.btn{
+  border:1px solid var(--hot);background:var(--hot);color:#fff;border-radius:4px;
+  padding:.75rem 1.5rem;font-size:1rem;font-family:var(--serif);
+}
+@media (prefers-color-scheme:dark){.btn{color:#12160F}}
+:root[data-theme="dark"] .btn{color:#12160F}
+:root[data-theme="light"] .btn{color:#fff}
+.btn:hover{filter:brightness(1.08)}
+.btn--ghost{background:none;color:var(--ink-2);border-color:var(--line)}
+.btn--ghost:hover{color:var(--ink);border-color:var(--ink-2);filter:none}
+.tip{font-family:var(--mono);font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3);margin-left:auto}
+
+/* ---------------------------------------------- kit */
+.kit__h1{font-size:clamp(2rem,5.5vw,3rem);line-height:1.05;letter-spacing:-.03em;margin:1rem 0 .6rem}
+.kit__p{color:var(--ink-2);margin:0 0 1.6rem;max-width:40ch}
+.gap{
+  background:var(--hot-soft);border:1px solid var(--hot);border-radius:5px;
+  padding:.85rem 1rem;margin:0 0 1.6rem;font-size:.95rem;
+}
+.piece{background:var(--card);border:1px solid var(--line);border-radius:6px;margin:0 0 1rem;overflow:hidden}
+.piece__top{
+  display:flex;align-items:center;gap:.75rem;padding:.85rem 1.1rem;
+  border-bottom:1px solid var(--soft);
+}
+.piece__n{
+  font-family:var(--mono);font-size:.66rem;color:var(--hot);flex:none;
+  font-variant-numeric:tabular-nums;
+}
+.piece__t{
+  font-family:var(--mono);font-size:.68rem;letter-spacing:.13em;text-transform:uppercase;
+  color:var(--ink-2);flex:1;
+}
+.copy{
+  background:none;border:1px solid var(--line);border-radius:3px;color:var(--ink-2);
+  font-family:var(--mono);font-size:.58rem;letter-spacing:.1em;text-transform:uppercase;
+  padding:.35rem .6rem;flex:none;
+}
+.copy:hover{border-color:var(--ink-2);color:var(--ink)}
+.copy.done{background:var(--ok);border-color:var(--ok);color:var(--card)}
+.piece__body{padding:1.1rem;white-space:pre-wrap;line-height:1.55;font-size:1rem}
+.piece__body .miss{color:var(--hot);font-family:var(--mono);font-size:.86em}
+.kit__foot{display:flex;gap:.6rem;flex-wrap:wrap;margin-top:2rem}
+
+@media (max-width:560px){
+  .wrap{padding:1.5rem 1rem 4rem}
+  #topin{padding:.65rem 1rem;gap:.7rem}
+  #saved,#dots{display:none}
+  .nav .btn{flex:1;text-align:center}
+  .tip{display:none}
+}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+
+<div id="top"><div id="topin">
+  <span id="step" class="mono">Inicio</span>
+  <span id="dots"></span>
+  <span id="saved" class="mono">Guardado</span>
+  <button class="icon" id="kitBtn">Mi kit</button>
+  <button class="icon" id="themeBtn">Tema</button>
+</div></div>
+
+<div class="wrap">
+
+  <!-- ---------------------------------------------- INICIO -->
+  <section class="screen on" id="s-intro">
+    <p class="hero__kicker">El Método Alison · versión corta</p>
+    <h1 class="hero__h1">Tu kit de marca<br><em>en 45 minutos</em></h1>
+    <p class="hero__p">17 preguntas cortas. Al final esto te arma sola tu frase, tu bio, tu historia, tus pilares de contenido y tu guion de venta. Listo para copiar y pegar.</p>
+
+    <ul class="facts">
+      <li>17 preguntas</li>
+      <li>~45 min</li>
+      <li>Puedes parar y seguir</li>
+      <li>Se guarda solo</li>
+    </ul>
+
+    <div class="sum">
+      <h2>Antes de empezar · el método en 1 minuto</h2>
+      <ol>
+        <li>Marca personal no es ser famosa. Es ser la primera persona en la que piensan cuando tienen un problema que tú resuelves.</li>
+        <li>Confianza → autoridad → oportunidades → negocios. En ese orden. Nunca al revés.</li>
+        <li>Nadie compra departamentos. Compra tranquilidad. Habla de eso, no del producto.</li>
+        <li>Háblale a UNA persona. Si le hablas a todos, no te escucha nadie.</li>
+        <li>Tu cliente es el héroe de la historia. Tú eres la guía, no la protagonista.</li>
+        <li>Tu historia vale más que tu currículum. Las cicatrices convencen; los títulos no.</li>
+        <li>Di siempre lo mismo. Cuando tú ya estés aburrida, recién te están empezando a recordar.</li>
+        <li>90% enseñar, 10% vender. El 10% funciona justamente porque existe el 90%.</li>
+        <li>Cobra bien. Barato no te hace accesible, te hace dudosa.</li>
+        <li>Publica aunque no tengas ganas. La consistencia le gana al talento. Siempre.</li>
+      </ol>
+    </div>
+
+    <div class="nav">
+      <button class="btn" data-go="0">Empezar</button>
+      <button class="btn btn--ghost" id="resumeBtn" hidden>Seguir donde quedé</button>
+    </div>
+  </section>
+
+  <!-- las pantallas de preguntas se generan aquí -->
+  <div id="questions"></div>
+
+  <!-- ---------------------------------------------- KIT -->
+  <section class="screen" id="s-kit">
+    <p class="blocktag">Tu kit de marca</p>
+    <h1 class="kit__h1">Listo. Esto es tuyo.</h1>
+    <p class="kit__p">Cada pieza tiene su botón de copiar. Úsalas hoy: cambia tu bio, graba tu historia, publica lo primero de tu semana.</p>
+    <div class="gap" id="gap" hidden></div>
+    <div id="pieces"></div>
+    <div class="kit__foot">
+      <button class="btn" id="dlBtn">Descargar todo</button>
+      <button class="btn btn--ghost" id="editBtn">Volver a editar</button>
+      <button class="btn btn--ghost" id="resetBtn">Empezar de nuevo</button>
+    </div>
+  </section>
+
+</div>
+
+<script>
+(function(){
+"use strict";
+
+/* ============================================ preguntas */
+var BLOCKS=[
+  {name:"Bloque 1 · Propósito", tip:"12 minutos"},
+  {name:"Bloque 2 · Tu historia", tip:"12 minutos"},
+  {name:"Bloque 3 · Tus valores", tip:"10 minutos"},
+  {name:"Bloque 4 · Lo práctico", tip:"10 minutos"}
+];
+
+var Q=[
+ {b:0,k:"quien",q:"¿A quién ayudas?",
+  h:"Una persona concreta, no “todo el mundo”. Corto: máximo 10 palabras.",
+  p:"Escribe: mujeres que…",
+  eg:"Mujeres de 30 a 45 que nunca han invertido y quieren su primera propiedad."},
+
+ {b:0,k:"dolor",q:"¿De qué la sacas?",
+  h:"El problema con el que llega. Dilo con las palabras que ella usa, no con las tuyas.",
+  p:"Llega sintiendo que…",
+  eg:"De sentir que trabaja hace 15 años y no tiene nada suyo."},
+
+ {b:0,k:"resultado",q:"¿A dónde la llevas?",
+  h:"Concreto y medible. Corto: máximo 8 palabras. Que se pueda tomar una foto del resultado.",
+  p:"Termina logrando…",
+  eg:"A comprar su primera propiedad sin equivocarse."},
+
+ {b:0,k:"obstaculo",q:"¿Qué la frena hoy?",
+  h:"El miedo o la creencia que la tiene detenida. Esta respuesta es oro: va en toda tu comunicación.",
+  p:"Cree que…",
+  eg:"Cree que necesita mucha plata ahorrada y que ya se le pasó la edad."},
+
+ {b:0,k:"importa",q:"¿Por qué te importa a ti?",
+  h:"Sin adornos. La razón real, la que dirías en una conversación privada.",
+  p:"Porque yo…",
+  eg:"Porque yo estuve ahí y nadie me explicó nada sin hacerme sentir tonta."},
+
+ {b:1,k:"antes",q:"¿Cómo estabas antes de todo esto?",
+  h:"Dos líneas. Concreto: dónde trabajabas, cómo te sentías, qué te faltaba.",
+  p:"Antes yo…",
+  eg:"Trabajaba en una oficina, ganaba lo justo, y la plata se me acababa antes que el mes."},
+
+ {b:1,k:"quiebre",q:"¿Cuál fue el momento en que dijiste “basta”?",
+  h:"Una escena, no un resumen. ¿Dónde estabas? ¿Qué pasó exactamente? Esto es lo que más conecta de todo el kit.",
+  p:"Fue el día que…",
+  eg:"Fue el día que mi hija me preguntó por qué siempre estaba cansada y no supe qué contestarle."},
+
+ {b:1,k:"error",q:"¿Qué intentaste que no resultó?",
+  h:"Un error tuyo, concreto, con lo que te costó. La gente confía en quien reconoce que se equivocó.",
+  p:"Me equivoqué en…",
+  eg:"Compré mi primer departamento sin revisar los gastos comunes. Me comieron la rentabilidad dos años."},
+
+ {b:1,k:"entendi",q:"¿Qué entendiste que lo cambió todo?",
+  h:"La frase que hoy le repites a todo el mundo. Si te sale larga, córtala a la mitad.",
+  p:"Entendí que…",
+  eg:"Entendí que no me faltaba plata. Me faltaba información."},
+
+ {b:2,k:"nunca",q:"¿Qué NO haces nunca, aunque te convenga?",
+  h:"Tu línea roja. Aquí está tu valor más fuerte.",
+  p:"Nunca voy a…",
+  eg:"Nunca le vendo a alguien algo que no le recomendaría a mi hermana."},
+
+ {b:2,k:"costo",q:"¿Qué te ha costado sostener eso?",
+  h:"Un caso real. Un valor que nunca te ha costado nada, no es un valor: es un adorno.",
+  p:"Me costó…",
+  eg:"Le dije a una clienta “no compres todavía” y perdí la operación. Volvió al año y me trajo a tres amigas."},
+
+ {b:2,k:"agradecen",q:"¿Qué te agradecen tus clientes que no esperaban?",
+  h:"Eso que para ti es normal y para ellos no. Ahí está tu diferencia real.",
+  p:"Me dicen que…",
+  eg:"Que les explico en simple y que no los apuro nunca."},
+
+ {b:2,k:"rabia",q:"¿Qué te da rabia de tu industria?",
+  h:"Sin diplomacia. Esto se convierte en tu bandera, y es lo que hace que te recuerden.",
+  p:"Me da rabia que…",
+  eg:"Me da rabia que le hagan firmar a la gente cosas que no entiende, y que nadie se detenga a explicárselas."},
+
+ {b:3,k:"prueba",q:"Un resultado concreto tuyo o de un cliente",
+  h:"Con número si puedes. Cuántas personas, cuánto tiempo, cuánta plata, cuántos años.",
+  p:"Por ejemplo…",
+  eg:"He acompañado a 180 mujeres a comprar su primera propiedad en los últimos 4 años."},
+
+ {b:3,k:"faq",q:"Las 3 preguntas que más te hacen",
+  h:"Una por línea. Estas se convierten solas en tus primeros 3 contenidos.",
+  p:"1.\n2.\n3.",
+  eg:"1. ¿Cuánta plata necesito para empezar?\n2. ¿Conviene comprar o arrendar?\n3. ¿Y si me quedo sin trabajo y no puedo pagar?"},
+
+ {b:3,k:"oferta",q:"¿Qué vendes exactamente?",
+  h:"Sin adornos. Como se lo dirías a una amiga por WhatsApp.",
+  p:"Vendo / ofrezco…",
+  eg:"Asesoría completa para comprar tu primera propiedad de inversión, desde elegir hasta firmar."},
+
+ {b:3,k:"cta",q:"¿Qué quieres que haga la gente?",
+  h:"UNA sola acción. Escríbela como orden, empezando con un verbo: “Escríbeme…”, “Agenda…”, “Descarga…”. Nada de “cualquier cosa me avisan”.",
+  p:"Escríbeme…",
+  eg:"Escríbeme la palabra CASA por mensaje directo y te mando la guía."}
+];
+
+/* ============================================ estado */
+var KEY="kit-marca-alison-v1";
+var data={}, at=-1;
+try{ var raw=localStorage.getItem(KEY); if(raw) data=JSON.parse(raw)||{}; }catch(e){}
+
+function save(){
+  try{ localStorage.setItem(KEY,JSON.stringify(data)); }catch(e){}
+  var s=document.getElementById("saved");
+  s.classList.add("on"); clearTimeout(save._t);
+  save._t=setTimeout(function(){s.classList.remove("on");},1200);
+}
+function v(k){ return (data[k]||"").trim(); }
+function has(k){ return v(k).length>0; }
+
+/* ============================================ construir pantallas */
+var host=document.getElementById("questions");
+Q.forEach(function(item,i){
+  var sec=document.createElement("section");
+  sec.className="screen"; sec.id="s-q"+i;
+  sec.innerHTML=
+    '<p class="blocktag">'+BLOCKS[item.b].name+'</p>'+
+    '<h2 class="q">'+item.q+'</h2>'+
+    '<p class="hint">'+item.h+'</p>'+
+    '<textarea id="t'+i+'" rows="4" placeholder="'+item.p.replace(/"/g,"&quot;").replace(/\n/g,"&#10;")+'" aria-label="'+item.q.replace(/"/g,"&quot;")+'"></textarea>'+
+    '<div class="eg"><b>Ejemplo</b>'+item.eg.replace(/\n/g,"<br>")+'</div>'+
+    '<div class="nav">'+
+      '<button class="btn" data-next="'+i+'">'+(i===Q.length-1?"Ver mi kit":"Siguiente")+'</button>'+
+      '<button class="btn btn--ghost" data-prev="'+i+'">Atrás</button>'+
+      '<span class="tip">'+BLOCKS[item.b].tip+' · escribe feo, después arreglas</span>'+
+    '</div>';
+  host.appendChild(sec);
+  var ta=sec.querySelector("textarea");
+  ta.value=data[item.k]||"";
+  ta.addEventListener("input",function(){ data[item.k]=ta.value; save(); paintDots(); });
+  ta.addEventListener("keydown",function(e){
+    if((e.metaKey||e.ctrlKey)&&e.key==="Enter"){ e.preventDefault(); go(i+1); }
+  });
+});
+
+/* dots */
+var dots=document.getElementById("dots");
+Q.forEach(function(_,i){ var d=document.createElement("span"); d.className="dot"; d.dataset.i=i; dots.appendChild(d); });
+function paintDots(){
+  [].forEach.call(dots.children,function(d,i){
+    d.className="dot"+(has(Q[i].k)?" done":"")+(i===at?" now":"");
+  });
+}
+dots.addEventListener("click",function(e){
+  var d=e.target.closest(".dot"); if(d) go(+d.dataset.i);
+});
+
+/* ============================================ navegación */
+function show(id){
+  [].forEach.call(document.querySelectorAll(".screen"),function(s){ s.classList.toggle("on",s.id===id); });
+  window.scrollTo(0,0);
+}
+function go(i){
+  if(i>=Q.length){ buildKit(); at=Q.length; show("s-kit"); label("Tu kit"); paintDots(); return; }
+  if(i<0){ at=-1; show("s-intro"); label("Inicio"); paintDots(); return; }
+  at=i; show("s-q"+i);
+  label(BLOCKS[Q[i].b].name.split(" · ")[0]+" · pregunta "+(i+1)+" de "+Q.length);
+  paintDots();
+  var ta=document.getElementById("t"+i);
+  if(ta&&window.matchMedia("(min-width:700px)").matches) ta.focus();
+}
+function label(t){ document.getElementById("step").textContent=t; }
+
+document.addEventListener("click",function(e){
+  var b=e.target.closest("button"); if(!b) return;
+  if(b.dataset.go!==undefined) go(+b.dataset.go);
+  else if(b.dataset.next!==undefined) go(+b.dataset.next+1);
+  else if(b.dataset.prev!==undefined) go(+b.dataset.prev-1);
+});
+
+/* ============================================ el kit */
+function m(k,txt){ return has(k) ? v(k) : '<span class="miss">['+(txt||"falta responder")+']</span>'; }
+function low(s){ return s ? s.charAt(0).toLowerCase()+s.slice(1) : s; }
+function clean(k){ // quita el arranque tipo "Entendí que ", "Nunca voy a "
+  var s=v(k);
+  return s.replace(/^(entend[ií] que|nunca voy a|nunca|me da rabia que|me da rabia|creen? que|piensan? que|porque|antes yo|antes|fue el d[ií]a (en )?que|me equivoqu[ée] en|me dicen que|me agradecen que|vendo|ofrezco|quiero que|llega )\s*/i,"");
+}
+function faqLines(){
+  return v("faq").split("\n").map(function(s){return s.replace(/^\s*\d+[.)-]?\s*/,"").trim();}).filter(Boolean);
+}
+
+function PIECES(){
+  var quien=m("quien"), res=m("resultado");
+  var faq=faqLines();
+  var f1=faq[0]||"(tu pregunta más frecuente)", f2=faq[1]||"(tu segunda pregunta)", f3=faq[2]||"(tu tercera pregunta)";
+  var cap=function(k){ var s=clean(k); return s ? s.charAt(0).toUpperCase()+s.slice(1) : m(k); };
+
+  return [
+  {t:"Tu frase — la que repites siempre",
+   x:"Ayudo a "+low(quien)+" a "+low(res)+".\n\n"+
+     "— Cuando tengas más tiempo para explicar:\n"+
+     "“Ayudo a "+low(quien)+" a "+low(res)+".\n"+
+     "Lo que más las frena: "+low(m("obstaculo"))+".\n"+
+     "Ahí es donde entro yo.”"},
+
+  {t:"Tu bio de Instagram y LinkedIn",
+   x:"Ayudo a "+low(quien)+" a "+low(res)+"\n"+
+     m("prueba")+"\n"+
+     cap("entendi")+"\n"+
+     "↓ "+m("cta")},
+
+  {t:"Tu presentación de 30 segundos",
+   x:"Cuando te pregunten a qué te dedicas:\n\n"+
+     "“Yo ayudo a "+low(quien)+".\n\n"+
+     "La mayoría llega así: "+low(m("dolor"))+".\n"+
+     "Y lo que más las frena: "+low(m("obstaculo"))+".\n\n"+
+     "Mi trabajo es que lleguen a esto: "+low(res)+".\n\n"+
+     "Y lo hago porque "+low(clean("importa")||m("importa"))+".”"},
+
+  {t:"Tu historia en 90 segundos — guion para grabar",
+   x:"ANTES\n"+m("antes")+"\n\n"+
+     "EL DÍA QUE DIJE BASTA\n"+m("quiebre")+"\n\n"+
+     "LO QUE ME SALIÓ MAL\n"+m("error")+"\n\n"+
+     "LO QUE ENTENDÍ\n"+m("entendi")+"\n\n"+
+     "POR ESO HOY\nPor eso hoy ayudo a "+low(quien)+" a "+low(res)+".\n\n"+
+     "— Una sola toma. Mirando al lente. Si se te quiebra la voz, déjalo."},
+
+  {t:"Tu bandera — lo que defiendes",
+   x:"MI BANDERA\n"+m("rabia")+"\n\n"+
+     "MI LÍNEA ROJA\n"+m("nunca")+"\n\n"+
+     "LA PRUEBA DE QUE ES VERDAD\n"+m("costo")+"\n\n"+
+     "MI DIFERENCIA\n"+m("agradecen")+"\n\n"+
+     "— Esto no se publica tal cual. Es tu filtro: cada vez que dudes si aceptar algo, léelo."},
+
+  {t:"Tus 5 frases — dilas hasta aburrirte",
+   x:"1. TU DESCUBRIMIENTO\n   "+m("entendi")+"\n\n"+
+     "2. TU BANDERA\n   "+m("rabia")+"\n\n"+
+     "3. TU LÍNEA ROJA\n   "+m("nunca")+"\n\n"+
+     "4. TU DIFERENCIA\n   "+m("agradecen")+"\n\n"+
+     "5. TU INVITACIÓN\n   "+m("cta")+"\n\n"+
+     "— Cuando tú ya estés aburrida de decirlas, la gente recién las va a estar recordando."},
+
+  {t:"Tus 4 pilares de contenido",
+   x:"1. ENSEÑAR — resolver las dudas de "+low(quien)+"\n"+
+     "2. HISTORIA — tu camino, tus errores, tu gente\n"+
+     "3. BANDERA — lo que defiendes y lo que criticas\n"+
+     "4. PRUEBA — casos, resultados, testimonios\n\n"+
+     "Mezcla: 40% enseñar · 25% historia · 20% bandera · 15% prueba\n"+
+     "Y solo un 10% vendiendo. El 10% funciona porque existe el 90%."},
+
+  {t:"Tus 20 primeras ideas de contenido",
+   x:[
+     "1. "+f1,
+     "2. "+f2,
+     "3. "+f3,
+     "4. El error que me costó caro: "+m("error"),
+     "5. El día que dije basta: "+m("quiebre"),
+     "6. Lo que me da rabia de mi industria: "+m("rabia"),
+     "7. Lo que nunca voy a hacer: "+m("nunca"),
+     "8. La vez que sostener eso me costó plata: "+m("costo"),
+     "9. Lo que más las frena: "+m("obstaculo")+" — hablemos de eso",
+     "10. Lo que la gente cree, versus lo que pasa de verdad",
+     "11. Los 3 errores más comunes de "+low(quien),
+     "12. Checklist: qué revisar antes de decidir",
+     "13. Un caso real, paso a paso",
+     "14. Lo que me agradecen y no esperaban: "+m("agradecen"),
+     "15. Para quién NO es lo que hago",
+     "16. Cómo era mi vida antes de esto: "+m("antes"),
+     "17. Las 3 preguntas que hay que hacer siempre",
+     "18. Lo que aprendí este año y me costó plata",
+     "19. Respondo la pregunta que nadie se atreve a hacerme",
+     "20. Qué hago exactamente y cómo se empieza: "+m("oferta")
+   ].join("\n")},
+
+  {t:"Tu semana — qué publicas cada día",
+   x:"LUNES · Enseñar\n"+f1+"\n\n"+
+     "MARTES · Resolver\nUn checklist o un paso a paso que puedan usar hoy mismo\n\n"+
+     "MIÉRCOLES · Historia\nUn pedazo de tu historia o de tu semana real\n\n"+
+     "JUEVES · Prueba\n"+m("prueba")+"  — o el caso de una clienta\n\n"+
+     "VIERNES · Bandera\n"+m("rabia")+"\n\n"+
+     "— Cada dos semanas cambia un día por tu oferta:\n"+m("oferta")+"\n"+
+     "y cierra siempre con: "+m("cta")},
+
+  {t:"Tu guion de venta — imprímelo",
+   x:"1. ABRE\n“Cuéntame en qué estás.”  → y te callas 3 minutos.\n\n"+
+     "2. PREGUNTA (no argumentes todavía)\n"+
+     "· ¿Hace cuánto le das vueltas a esto?\n"+
+     "· ¿Qué has intentado?\n"+
+     "· ¿Qué te ha frenado?\n"+
+     "· ¿Qué es lo que más te preocupa?\n"+
+     "· ¿Qué pasa si no haces nada?\n\n"+
+     "3. REPITE LO QUE ENTENDISTE\n“A ver si entendí: ______. ¿Es así?”\n\n"+
+     "4. MUESTRA EL CAMINO\n“Para tu caso hay dos opciones… Yo haría esta, y te explico por qué.”\n\n"+
+     "5. DI LA VERDAD QUE NO TE CONVIENE\n“Te tengo que decir algo honesto: ______.”\n"+
+     "Tu línea roja es: "+m("nunca")+"\n\n"+
+     "6. CIERRA SIN PRESIONAR\n“¿Qué te parece que hagamos?”\n"+
+     "Dices el precio. Y te callas. Cuenta hasta 7 en tu cabeza."},
+
+  {t:"Tu primer paso — hoy, no mañana",
+   x:"HOY · 15 minutos\n"+
+     "Cambia tu bio con la pieza 02. Nada más. Eso solo ya te cambia el día.\n\n"+
+     "ESTA SEMANA\n"+
+     "· Graba tu historia de 90 segundos con la pieza 04. Una toma.\n"+
+     "· Publica la idea 1 de tu lista: "+f1+"\n\n"+
+     "ESTE MES\n"+
+     "· 3 publicaciones por semana siguiendo tu semana tipo.\n"+
+     "· Pídele testimonio en video a 3 clientas felices.\n\n"+
+     "SI HOY SOLO PUEDES HACER UNA COSA\nLa bio. Ahora."}
+  ];
+}
+
+function buildKit(){
+  var box=document.getElementById("pieces"); box.innerHTML="";
+  var faltan=Q.filter(function(q){return !has(q.k);});
+  var gap=document.getElementById("gap");
+  if(faltan.length){
+    gap.hidden=false;
+    gap.innerHTML="Te faltan <b>"+faltan.length+"</b> respuesta"+(faltan.length>1?"s":"")+
+      ". El kit igual funciona — lo que falte aparece marcado en rojo y lo puedes completar cuando quieras.";
+  } else { gap.hidden=true; }
+
+  PIECES().forEach(function(p,i){
+    var el=document.createElement("div"); el.className="piece";
+    var n=String(i+1).padStart(2,"0");
+    el.innerHTML='<div class="piece__top"><span class="piece__n">'+n+'</span>'+
+      '<span class="piece__t">'+p.t+'</span>'+
+      '<button class="copy" data-i="'+i+'">Copiar</button></div>'+
+      '<div class="piece__body" id="pb'+i+'">'+p.x+'</div>';
+    box.appendChild(el);
+  });
+}
+
+document.getElementById("pieces").addEventListener("click",function(e){
+  var b=e.target.closest(".copy"); if(!b) return;
+  var txt=document.getElementById("pb"+b.dataset.i).innerText;
+  var done=function(){ b.textContent="Copiado"; b.classList.add("done");
+    setTimeout(function(){ b.textContent="Copiar"; b.classList.remove("done"); },1400); };
+  if(navigator.clipboard&&navigator.clipboard.writeText){
+    navigator.clipboard.writeText(txt).then(done,fallback);
+  } else fallback();
+  function fallback(){
+    var ta=document.createElement("textarea"); ta.value=txt;
+    ta.style.position="fixed"; ta.style.opacity="0";
+    document.body.appendChild(ta); ta.select();
+    try{ document.execCommand("copy"); done(); }catch(err){ b.textContent="Selecciona y copia"; }
+    document.body.removeChild(ta);
+  }
+});
+
+/* descargar */
+document.getElementById("dlBtn").addEventListener("click",function(){
+  var out="MI KIT DE MARCA\n"+new Date().toLocaleDateString("es-CL")+"\n\n";
+  PIECES().forEach(function(p,i){
+    var body=document.getElementById("pb"+i);
+    out+="\n"+"=".repeat(46)+"\n"+(i+1)+". "+p.t.toUpperCase()+"\n"+"=".repeat(46)+"\n\n"+(body?body.innerText:"")+"\n";
+  });
+  out+="\n\n"+"=".repeat(46)+"\nMIS RESPUESTAS\n"+"=".repeat(46)+"\n";
+  Q.forEach(function(q){ out+="\n"+q.q+"\n"+(v(q.k)||"(sin responder)")+"\n"; });
+  var a=document.createElement("a");
+  a.href=URL.createObjectURL(new Blob([out],{type:"text/plain;charset=utf-8"}));
+  a.download="mi-kit-de-marca.txt"; a.click();
+  setTimeout(function(){URL.revokeObjectURL(a.href);},2000);
+});
+
+document.getElementById("editBtn").addEventListener("click",function(){ go(0); });
+document.getElementById("resetBtn").addEventListener("click",function(){
+  if(!confirm("Esto borra todas tus respuestas. ¿Seguro?")) return;
+  data={}; try{localStorage.removeItem(KEY);}catch(e){}
+  Q.forEach(function(q,i){ document.getElementById("t"+i).value=""; });
+  go(-1);
+});
+document.getElementById("kitBtn").addEventListener("click",function(){ buildKit(); at=Q.length; show("s-kit"); label("Tu kit"); paintDots(); });
+document.getElementById("themeBtn").addEventListener("click",function(){
+  var r=document.documentElement;
+  var dark=r.getAttribute("data-theme")==="dark"||(!r.hasAttribute("data-theme")&&matchMedia("(prefers-color-scheme:dark)").matches);
+  r.setAttribute("data-theme",dark?"light":"dark");
+});
+
+/* retomar */
+var answered=Q.filter(function(q){return has(q.k);}).length;
+if(answered){
+  var btn=document.getElementById("resumeBtn"); btn.hidden=false;
+  btn.textContent="Seguir donde quedé ("+answered+"/"+Q.length+")";
+  btn.addEventListener("click",function(){
+    for(var i=0;i<Q.length;i++){ if(!has(Q[i].k)){ go(i); return; } }
+    buildKit(); at=Q.length; show("s-kit"); label("Tu kit"); paintDots();
+  });
+}
+paintDots();
+})();
+</script>
