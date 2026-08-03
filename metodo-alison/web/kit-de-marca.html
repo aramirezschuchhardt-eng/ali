@@ -1,4 +1,4 @@
-<title>Kit de Marca en 45 minutos</title>
+<title>Kit de Marca + 20 días</title>
 
 <style>
 :root{
@@ -177,6 +177,75 @@ textarea:focus{border-color:var(--hot)}
 .piece__body .miss{color:var(--hot);font-family:var(--mono);font-size:.86em}
 .kit__foot{display:flex;gap:.6rem;flex-wrap:wrap;margin-top:2rem}
 
+/* ---------------------------------------------- tu día */
+.day__head{display:flex;align-items:baseline;gap:1rem;flex-wrap:wrap;margin:0 0 1.4rem}
+.day__prog{
+  font-family:var(--mono);font-size:.63rem;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--ink-3);margin-left:auto;
+}
+.dcard{
+  background:var(--card);border:1px solid var(--line);border-left:4px solid var(--hot);
+  border-radius:6px;padding:1.6rem;margin:0 0 1.2rem;
+}
+.dcard__tag{
+  font-family:var(--mono);font-size:.62rem;letter-spacing:.15em;text-transform:uppercase;
+  color:var(--hot);margin:0 0 .7rem;display:flex;gap:.7rem;flex-wrap:wrap;
+}
+.dcard__tag span{color:var(--ink-3)}
+.dcard__t{font-size:clamp(1.5rem,4vw,2.1rem);line-height:1.15;letter-spacing:-.02em;margin:0 0 .6rem;text-wrap:balance}
+.dcard__why{color:var(--ink-2);margin:0 0 1.2rem;max-width:44ch}
+.script{
+  background:var(--soft);border-radius:5px;padding:1rem 1.1rem;margin:0 0 1.1rem;
+  white-space:pre-wrap;line-height:1.5;font-size:.98rem;
+}
+.script__top{
+  display:flex;align-items:center;gap:.7rem;margin:0 0 .7rem;
+}
+.script__lab{
+  font-family:var(--mono);font-size:.58rem;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--ink-3);flex:1;
+}
+.mini{
+  border:1px dashed var(--line);border-radius:5px;padding:.8rem 1rem;margin:0 0 1.2rem;
+  font-size:.93rem;color:var(--ink-2);
+}
+.mini b{
+  display:block;font-family:var(--mono);font-size:.58rem;letter-spacing:.13em;
+  text-transform:uppercase;color:var(--ink-3);margin-bottom:.3rem;font-weight:400;
+}
+.dnav{display:flex;gap:.6rem;flex-wrap:wrap;align-items:center}
+.btn--ok{background:var(--ok);border-color:var(--ok);color:#fff}
+:root[data-theme="dark"] .btn--ok{color:#0E120E}
+@media (prefers-color-scheme:dark){.btn--ok{color:#0E120E}}
+
+.dlist{margin:2.5rem 0 0;border-top:1px solid var(--line)}
+.dlist h3{
+  font-family:var(--mono);font-size:.65rem;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--ink-3);font-weight:400;margin:1.4rem 0 .8rem;
+}
+.drow{
+  display:flex;align-items:center;gap:.8rem;width:100%;text-align:left;
+  background:none;border:0;border-bottom:1px solid var(--soft);
+  padding:.7rem .2rem;color:var(--ink-2);font-size:.95rem;
+}
+.drow:hover{color:var(--ink)}
+.drow__n{font-family:var(--mono);font-size:.66rem;color:var(--ink-3);flex:none;min-width:2.6rem}
+.drow__t{flex:1;line-height:1.35}
+.drow__s{
+  font-family:var(--mono);font-size:.58rem;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--ink-3);flex:none;
+}
+.drow.is-done .drow__t{color:var(--ink-3);text-decoration:line-through}
+.drow.is-done .drow__s{color:var(--ok)}
+.drow.is-now{color:var(--ink)}
+.drow.is-now .drow__n{color:var(--hot)}
+.done-all{
+  background:var(--ok-soft);border:1px solid var(--ok);border-radius:6px;
+  padding:1.4rem;margin:0 0 1.2rem;
+}
+.done-all h2{font-size:1.5rem;margin:0 0 .5rem;letter-spacing:-.02em}
+.done-all p{margin:0;color:var(--ink-2)}
+
 @media (max-width:560px){
   .wrap{padding:1.5rem 1rem 4rem}
   #topin{padding:.65rem 1rem;gap:.7rem}
@@ -191,6 +260,7 @@ textarea:focus{border-color:var(--hot)}
   <span id="step" class="mono">Inicio</span>
   <span id="dots"></span>
   <span id="saved" class="mono">Guardado</span>
+  <button class="icon" id="dayBtn">Mi día</button>
   <button class="icon" id="kitBtn">Mi kit</button>
   <button class="icon" id="themeBtn">Tema</button>
 </div></div>
@@ -201,12 +271,12 @@ textarea:focus{border-color:var(--hot)}
   <section class="screen on" id="s-intro">
     <p class="hero__kicker">El Método Alison · versión corta</p>
     <h1 class="hero__h1">Tu kit de marca<br><em>en 45 minutos</em></h1>
-    <p class="hero__p">17 preguntas cortas. Al final esto te arma sola tu frase, tu bio, tu historia, tus pilares de contenido y tu guion de venta. Listo para copiar y pegar.</p>
+    <p class="hero__p">Contestas 17 preguntas cortas. Esto arma tu kit solo. Y después te dice qué hacer cada día durante 20 días, con el texto ya escrito.</p>
 
     <ul class="facts">
-      <li>17 preguntas</li>
-      <li>~45 min</li>
-      <li>Puedes parar y seguir</li>
+      <li>1 · El resumen</li>
+      <li>2 · 17 preguntas → tu kit</li>
+      <li>3 · 20 días de acción</li>
       <li>Se guarda solo</li>
     </ul>
 
@@ -235,6 +305,20 @@ textarea:focus{border-color:var(--hot)}
   <!-- las pantallas de preguntas se generan aquí -->
   <div id="questions"></div>
 
+
+  <!-- ---------------------------------------------- TU DÍA -->
+  <section class="screen" id="s-dia">
+    <div class="day__head">
+      <p class="blocktag" style="margin:0">Tu plan · 20 días</p>
+      <span class="day__prog" id="dprog"></span>
+    </div>
+    <div id="dtoday"></div>
+    <div class="dlist">
+      <h3>Los 20 días</h3>
+      <div id="dall"></div>
+    </div>
+  </section>
+
   <!-- ---------------------------------------------- KIT -->
   <section class="screen" id="s-kit">
     <p class="blocktag">Tu kit de marca</p>
@@ -243,7 +327,8 @@ textarea:focus{border-color:var(--hot)}
     <div class="gap" id="gap" hidden></div>
     <div id="pieces"></div>
     <div class="kit__foot">
-      <button class="btn" id="dlBtn">Descargar todo</button>
+      <button class="btn" id="goDay">Empezar mis 20 días →</button>
+      <button class="btn btn--ghost" id="dlBtn">Descargar todo</button>
       <button class="btn btn--ghost" id="editBtn">Volver a editar</button>
       <button class="btn btn--ghost" id="resetBtn">Empezar de nuevo</button>
     </div>
@@ -611,7 +696,7 @@ document.getElementById("dlBtn").addEventListener("click",function(){
 document.getElementById("editBtn").addEventListener("click",function(){ go(0); });
 document.getElementById("resetBtn").addEventListener("click",function(){
   if(!confirm("Esto borra todas tus respuestas. ¿Seguro?")) return;
-  data={}; try{localStorage.removeItem(KEY);}catch(e){}
+  data={}; viewDay=null; try{localStorage.removeItem(KEY);}catch(e){}
   Q.forEach(function(q,i){ document.getElementById("t"+i).value=""; });
   go(-1);
 });
@@ -633,5 +718,224 @@ if(answered){
   });
 }
 paintDots();
+/* ============================================ el plan de 20 días */
+var WEEKS=["Semana 1 · Que se entienda qué haces","Semana 2 · Que vean que sabes",
+           "Semana 3 · Que te escriban","Semana 4 · Que no dependa de tus ganas"];
+
+function cap2(k){ var t=clean(k); return t ? t.charAt(0).toUpperCase()+t.slice(1) : m(k); }
+function fq(i){ var f=faqLines(); return f[i]||'<span class="miss">[tu pregunta '+(i+1)+']</span>'; }
+
+function DAYS(){
+  var quien=m("quien"), res=m("resultado"), P=PIECES();
+  return [
+  {w:0,t:"Cambia tu bio",min:15,
+   why:"Es lo único que ve alguien que llega por primera vez. Si no se entiende en 3 segundos, se va.",
+   lab:"Copia esto en Instagram y LinkedIn",s:P[1].x,
+   mini:"Cambia solo la primera línea. Con eso basta por hoy."},
+
+  {w:0,t:"Publica tu frase",min:10,
+   why:"Tu primera publicación de posición. No vende nada: solo dice quién eres y qué defiendes.",
+   lab:"Publícalo así",
+   s:cap2("entendi")+"\n\n"+m("rabia")+"\n\nPor eso hoy ayudo a "+low(quien)+" a "+low(res)+".\n\n¿Te ha pasado?",
+   mini:"Súbelo como historia en vez de publicación. Igual cuenta."},
+
+  {w:0,t:"Graba tu historia",min:20,
+   why:"Es el contenido que más conexión te va a dar en todo el mes. No lo grabes bonito: grábalo verdadero.",
+   lab:"Tu guion — una sola toma, mirando al lente",s:P[3].x,
+   mini:"Grábalo aunque no lo publiques hoy. Solo grábalo."},
+
+  {w:0,t:"Publica tu historia",min:5,
+   why:"Ayer la grabaste. Hoy solo se sube. No la vuelvas a ver, no la vas a mejorar.",
+   lab:"Texto que la acompaña",
+   s:"Nunca lo había contado así.\n\n"+m("quiebre")+"\n\nHoy ayudo a "+low(quien)+" a "+low(res)+". Y lo hago porque "+low(clean("importa")||m("importa"))+".\n\nSi estás ahí, escríbeme.",
+   mini:"Súbela sin texto. El video habla solo."},
+
+  {w:0,t:"Responde tu pregunta más frecuente",min:15,
+   why:"Si te la preguntan mucho, hay mucha gente buscándola. Contéstala una vez para todos.",
+   lab:"Estructura del video · 60 segundos",
+   s:"SEGUNDO 0-3 — el gancho, sin saludar:\n\""+fq(0)+"\"\n\nDESPUÉS:\n· Lo que casi todos creen: "+m("obstaculo")+"\n· Lo que pasa de verdad: [tu respuesta]\n· Lo que yo haría en tu lugar: [tu recomendación]\n\nCIERRE:\n"+m("cta"),
+   mini:"Escríbelo en vez de grabarlo. Un texto también sirve."},
+
+  {w:1,t:"Responde tu segunda pregunta",min:15,
+   why:"Segunda semana. Ya no estás presentándote: estás enseñando. Aquí empieza la autoridad.",
+   lab:"Misma estructura, otro tema",
+   s:"SEGUNDO 0-3:\n\""+fq(1)+"\"\n\nDESPUÉS:\n· El error que comete casi todo el mundo: [cuál]\n· Cómo se hace bien: [pasos]\n\nCIERRE:\n"+m("cta"),
+   mini:"Contesta esa misma pregunta en una historia de 20 segundos."},
+
+  {w:1,t:"Haz un checklist",min:15,
+   why:"El contenido que la gente guarda es el que le sirve hoy. Guardar vale más que un me gusta.",
+   lab:"Escribe 5 puntos",
+   s:"CHECKLIST: lo que hay que revisar antes de "+low(res)+"\n\n1. ______________________\n2. ______________________\n3. ______________________\n4. ______________________\n5. ______________________\n\nGuárdalo, te va a servir.",
+   mini:"Hazlo de 3 puntos en vez de 5."},
+
+  {w:1,t:"Cuenta tu error caro",min:12,
+   why:"Reconocer un error no te baja la autoridad. Te la sube, porque demuestra que sabes distinguir.",
+   lab:"Publícalo así",
+   s:"Te voy a contar algo que me costó plata.\n\n"+m("error")+"\n\nLo que aprendí:\n"+m("entendi")+"\n\nSi estás por hacer lo mismo, para y revisa.",
+   mini:"Cuéntalo en una historia hablando a la cámara. 40 segundos."},
+
+  {w:1,t:"Pide 3 testimonios",min:15,
+   why:"Tú diciendo que eres buena vale 1. Otro diciéndolo vale 100. Y nunca los pides.",
+   lab:"Mándale esto a 3 clientas felices",
+   s:"Hola [nombre]. Estoy armando material para ayudar a personas que están donde tú estabas cuando nos conocimos.\n\n¿Te parecería bien que cuente tu caso? Puedo cambiar tu nombre si prefieres.\n\nY si me regalas dos minutos, me encantaría grabarte respondiendo tres preguntas:\n1. ¿Cómo estabas antes?\n2. ¿Qué te hizo dudar?\n3. ¿Cómo estás ahora?\n\nCon el celular está perfecto, no tiene que ser producido.",
+   mini:"Mándaselo a una sola persona. La que sabes que te va a decir que sí."},
+
+  {w:1,t:"Publica tu bandera",min:12,
+   why:"Las marcas que no incomodan a nadie no le importan a nadie. Hoy toca decir lo que piensas.",
+   lab:"Publícalo sin suavizarlo",
+   s:m("rabia")+"\n\nPor eso yo "+low(clean("nunca")||m("nunca"))+".\n\nMe ha costado. "+m("costo")+"\n\nPero prefiero eso.",
+   mini:"Publica solo la primera línea. Sola ya dice bastante."},
+
+  {w:2,t:"Escríbele a los que no cerraron",min:20,
+   why:"Ahí hay plata dormida. Gente que te escribió, no cerró, y nadie volvió a hablarle nunca.",
+   lab:"Uno por uno, no en grupo",
+   s:"Hola [nombre], ¿cómo has estado?\n\nQuedé pensando en lo que conversamos hace un tiempo. Te mando esto que creo que te sirve, sin compromiso: [tu checklist o tu video]\n\nSi en algún momento quieres retomarlo, acá estoy.",
+   mini:"Escríbele a 3, no a todos. Personaliza la primera línea de cada uno."},
+
+  {w:2,t:"Responde tu tercera pregunta",min:15,
+   why:"Ya llevas tres semanas. La gente empieza a asociarte con un tema. No cambies de tema ahora.",
+   lab:"Misma estructura",
+   s:"SEGUNDO 0-3:\n\""+fq(2)+"\"\n\nDESPUÉS:\n· Por qué esto asusta tanto: [razón]\n· Lo que en realidad pasa: [tu respuesta]\n\nCIERRE:\n"+m("cta"),
+   mini:"Contéstala por escrito en 4 líneas."},
+
+  {w:2,t:"Cuenta el caso de una clienta",min:15,
+   why:"No es un testimonio: es una historia. La protagonista es ella, tú apareces en una sola línea.",
+   lab:"Con su permiso. Cambia el nombre si prefiere.",
+   s:"[Nombre] llegó así:\n"+m("dolor")+"\n\nLo que la frenaba:\n"+m("obstaculo")+"\n\nHoy:\n"+low(res)+"\n\nLo que me dijo cuando terminamos:\n\"[cita textual de ella]\"",
+   mini:"Publica solo la cita de ella con una línea de contexto."},
+
+  {w:2,t:"Di para quién NO es",min:12,
+   why:"Cuando dices para quién no sirve, el que sí calza se convence solo. Y te ahorras clientes malos.",
+   lab:"Publícalo",
+   s:"Esto no es para todo el mundo.\n\nNO es para ti si:\n· [caso 1]\n· [caso 2]\n· [caso 3]\n\nSÍ es para ti si eres de "+low(quien)+" y quieres "+low(res)+".\n\n"+m("cta"),
+   mini:"Escribe solo los 3 \"no\". Eso ya funciona."},
+
+  {w:2,t:"Ofrece. Directo.",min:10,
+   why:"Llevas 14 días dando. Hoy te toca pedir. El 10% que vende funciona porque existió el 90%.",
+   lab:"Sin rodeos y sin disculparte",
+   s:m("oferta")+"\n\nPara "+low(quien)+".\n\n"+m("prueba")+"\n\n"+m("cta"),
+   mini:"Publícalo solo en historias. Igual vale."},
+
+  {w:3,t:"Graba 5 videos de una sentada",min:20,
+   why:"Esto es lo que hace que el mes que viene no dependa de tus ganas. Un lugar, una ropa, cinco temas.",
+   lab:"Tus 5 temas de hoy",
+   s:"1. "+fq(0)+"\n2. "+fq(1)+"\n3. "+fq(2)+"\n4. El error que me costó caro\n5. Lo que nunca voy a hacer\n\nReglas:\n· Máximo 2 tomas por video. La segunda es la que va.\n· No los mires hoy. Mañana.\n· Para el video 4 ya vas a dejar de actuar. Ahí están los buenos.",
+   mini:"Graba 2 en vez de 5."},
+
+  {w:3,t:"Publica un testimonio",min:8,
+   why:"Ya los pediste el día 9. Hoy se usan. Un testimonio en video vale más que diez publicaciones tuyas.",
+   lab:"Texto para acompañarlo",
+   s:"Ella llegó igual que muchas: "+low(m("dolor"))+".\n\nEsto es lo que dice hoy. Yo no tengo nada que agregar.\n\n"+m("cta"),
+   mini:"Sube la captura del mensaje que te mandó. Con permiso."},
+
+  {w:3,t:"Practica tu \"no te conviene\"",min:12,
+   why:"La persona que te dice que no te conviene es a la que le compras el resto de tu vida.",
+   lab:"Tenlo escrito antes de la próxima reunión",
+   s:"MI LÍNEA ROJA\n"+m("nunca")+"\n\nLO QUE VOY A DECIR CUANDO CORRESPONDA:\n\"Te tengo que decir algo honesto: esto no te conviene si [caso]. Prefiero decírtelo ahora aunque yo pierda.\"\n\nY después: silencio. No lo llenes.",
+   mini:"Solo léelo en voz alta 3 veces. Nada más."},
+
+  {w:3,t:"Mira tus números",min:10,
+   why:"5 números, no 20. Lo que se mide mal, se empeora.",
+   lab:"Anótalos con fecha",
+   s:"FECHA: ____________\n\nMensajes directos este mes: ______\n(el número que más importa)\n\nGuardados y compartidos: ______\nConversaciones de venta: ______\nClientes cerrados: ______\nDe dónde vino cada uno: ______\n\nEL MÁS BAJO ES: ______________\nMI ACCIÓN: ___________________",
+   mini:"Anota solo los mensajes directos. Con ese basta."},
+
+  {w:3,t:"Arma tu semana permanente",min:15,
+   why:"Último día del plan. Ahora esto tiene que seguir sin que nadie te diga qué hacer.",
+   lab:"Tu semana de aquí en adelante",s:P[8].x,
+   mini:"Agenda solo dos bloques de 90 minutos en el calendario. Con nombre: MARCA."}
+  ];
+}
+
+/* estado */
+function doneList(){ return (data.__done||"").split(",").filter(Boolean).map(Number); }
+function isDone(i){ return doneList().indexOf(i)>=0; }
+function setDone(i,on){
+  var l=doneList().filter(function(x){return x!==i;});
+  if(on) l.push(i);
+  data.__done=l.sort(function(a,b){return a-b;}).join(","); save();
+}
+function firstOpen(){
+  var D=DAYS();
+  for(var i=0;i<D.length;i++){ if(!isDone(i)) return i; }
+  return -1;
+}
+
+var viewDay=null;
+function renderDay(){
+  var D=DAYS(), done=doneList().length;
+  var i=(viewDay===null)?firstOpen():viewDay;
+  document.getElementById("dprog").textContent=done+" de "+D.length+" hechos";
+
+  var box=document.getElementById("dtoday");
+  var faltan=Q.filter(function(q){return !has(q.k);}).length;
+  var aviso = faltan>=Q.length-2
+    ? '<div class="gap">Cada día usa <b>tus</b> respuestas para escribirte el texto. Contesta primero las 17 preguntas &mdash; son 45 minutos y después todo esto sale solo. <button class="copy" id="goQ" style="margin-left:.5rem">Ir a las preguntas</button></div>'
+    : '';
+  if(i<0){
+    box.innerHTML=aviso+'<div class="done-all"><h2>Los 20 días están hechos.</h2>'+
+      '<p>Ahora se repite: publica tu semana, pide testimonios, revisa números una vez al mes. Ya no necesitas el plan.</p></div>';
+  } else {
+    var d=D[i], hecho=isDone(i);
+    box.innerHTML= aviso +
+      '<div class="dcard">'+
+        '<p class="dcard__tag">Día '+(i+1)+' <span>'+WEEKS[d.w]+'</span> <span>'+d.min+' min</span></p>'+
+        '<h2 class="dcard__t">'+d.t+'</h2>'+
+        '<p class="dcard__why">'+d.why+'</p>'+
+        (d.s?('<div class="script"><div class="script__top"><span class="script__lab">'+d.lab+'</span>'+
+              '<button class="copy" id="dcopy">Copiar</button></div><span id="dscript">'+d.s+'</span></div>'):'')+
+        (d.mini?('<div class="mini"><b>Si hoy solo tienes 5 minutos</b>'+d.mini+'</div>'):'')+
+        '<div class="dnav">'+
+          '<button class="btn '+(hecho?'btn--ok':'')+'" id="dmark">'+(hecho?'Hecho ✓':'Marcar como hecho')+'</button>'+
+          '<button class="btn btn--ghost" id="dskip">Hoy no puedo</button>'+
+        '</div>'+
+      '</div>';
+    var mk=document.getElementById("dmark");
+    mk.onclick=function(){ setDone(i,!isDone(i)); viewDay=null; renderDay(); window.scrollTo(0,0); };
+    document.getElementById("dskip").onclick=function(){
+      viewDay=Math.min(i+1,D.length-1); renderDay(); window.scrollTo(0,0);
+    };
+    var cp=document.getElementById("dcopy");
+    if(cp) cp.onclick=function(){ copyText(document.getElementById("dscript").innerText, cp); };
+  }
+
+  var gq=document.getElementById("goQ");
+  if(gq) gq.onclick=function(){ go(0); };
+
+  var list=document.getElementById("dall"); list.innerHTML="";
+  var lastW=-1;
+  D.forEach(function(d,j){
+    if(d.w!==lastW){ lastW=d.w;
+      var h=document.createElement("h3"); h.textContent=WEEKS[d.w]; list.appendChild(h); }
+    var b=document.createElement("button");
+    b.className="drow"+(isDone(j)?" is-done":"")+(j===i?" is-now":"");
+    b.innerHTML='<span class="drow__n">Día '+(j+1)+'</span>'+
+      '<span class="drow__t">'+d.t+'</span>'+
+      '<span class="drow__s">'+(isDone(j)?"Hecho":d.min+" min")+'</span>';
+    b.onclick=function(){ viewDay=j; renderDay(); window.scrollTo(0,0); };
+    list.appendChild(b);
+  });
+}
+
+function copyText(txt,btn){
+  var ok=function(){ var o=btn.textContent; btn.textContent="Copiado"; btn.classList.add("done");
+    setTimeout(function(){ btn.textContent=o; btn.classList.remove("done"); },1400); };
+  if(navigator.clipboard&&navigator.clipboard.writeText){ navigator.clipboard.writeText(txt).then(ok,fb); }
+  else fb();
+  function fb(){
+    var ta=document.createElement("textarea"); ta.value=txt;
+    ta.style.position="fixed"; ta.style.opacity="0"; document.body.appendChild(ta); ta.select();
+    try{ document.execCommand("copy"); ok(); }catch(e){ btn.textContent="Selecciona y copia"; }
+    document.body.removeChild(ta);
+  }
+}
+
+document.getElementById("goDay").addEventListener("click",function(){
+  viewDay=null; renderDay(); show("s-dia"); label("Tu día"); at=-2; paintDots();
+});
+document.getElementById("dayBtn").addEventListener("click",function(){
+  viewDay=null; renderDay(); show("s-dia"); label("Tu día"); at=-2; paintDots();
+});
+
 })();
 </script>
