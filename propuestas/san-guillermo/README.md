@@ -22,9 +22,15 @@ SALIDA=/ruta/propuesta.docx node generar-propuesta.js
 El script busca automáticamente dos imágenes (`.png`, `.jpg`, `.gif`, `.bmp`):
 
 - **Colegio San Guillermo** — nombre con `colegio`, `guillermo`, `escudo`,
-  `isotipo` o simplemente `logo.png`. Se incrusta arriba en la portada (130 px).
-- **CORE AI** — nombre con `core` (por ejemplo `logo-core.png`). Se incrusta al
-  pie de la portada, como emisor de la propuesta (80 px).
+  `isotipo` o simplemente `logo.png`. Va arriba en la portada, a 250 × 71 px
+  (proporción 3,53:1, la del logotipo horizontal del colegio).
+- **CORE AI** — nombre con `core` (por ejemplo `logo-core.png`). Va al pie de la
+  portada, como emisor, a 215 × 101 px (proporción 2,13:1).
+
+Si los archivos que entregues tienen otra proporción, ajusta los valores en las
+llamadas a `logoOMarco(...)` dentro del script para que no se deformen. Cuando
+el logo de CORE AI está presente, el nombre y el lema en texto se omiten
+automáticamente, porque ya vienen dentro de la imagen.
 
 Directorios donde busca, en orden:
 

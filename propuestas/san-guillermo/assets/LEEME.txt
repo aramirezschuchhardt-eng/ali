@@ -1,3 +1,6 @@
-Deja aquí los logos:
-- logo-colegio.png (Colegio San Guillermo)
-- logo-core.png (CORE AI)
+Deja aqui los logos (se incrustan solos al regenerar el documento):
+
+- logo-colegio.png  Colegio San Guillermo   proporcion 3,53:1  (250 x 71 px en la portada)
+- logo-core.png     CORE AI                proporcion 2,13:1  (215 x 101 px en la portada)
+
+Formatos aceptados: .png .jpg .gif .bmp

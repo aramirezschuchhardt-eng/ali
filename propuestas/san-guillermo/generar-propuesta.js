@@ -159,15 +159,16 @@ const etapaCell = (num, nombre, fill, color) => cell([
 const spacer = (h = 200) => new Paragraph({ spacing: { after: h }, children: [new TextRun({ text: '', size: 2 })] });
 
 // ================= PORTADA =================
-// Devuelve el logo real si el archivo existe, o un marco punteado reservado
-const logoOMarco = (logo, etiqueta, px, before) => logo
+// Devuelve el logo real si el archivo existe, o un marco punteado de la misma
+// proporción. Ambos logos son horizontales, por eso ancho y alto van separados.
+const logoOMarco = (logo, etiqueta, w, h, before) => logo
   ? [new Paragraph({
       spacing: { before, after: 0 },
       alignment: AlignmentType.CENTER,
       children: [new ImageRun({
         data: fs.readFileSync(logo.file),
         type: logo.type,
-        transformation: { width: px, height: px },
+        transformation: { width: w, height: h },
       })],
     })]
   : [
@@ -178,8 +179,8 @@ const logoOMarco = (logo, etiqueta, px, before) => logo
       }),
       new Table({
         alignment: AlignmentType.CENTER,
-        width: { size: px * 15, type: WidthType.DXA },
-        columnWidths: [px * 15],
+        width: { size: w * 15, type: WidthType.DXA },
+        columnWidths: [w * 15],
         borders: {
           top: { style: BorderStyle.DASHED, size: 6, color: 'BFBFBF' },
           bottom: { style: BorderStyle.DASHED, size: 6, color: 'BFBFBF' },
@@ -187,14 +188,14 @@ const logoOMarco = (logo, etiqueta, px, before) => logo
           right: { style: BorderStyle.DASHED, size: 6, color: 'BFBFBF' },
         },
         rows: [new TableRow({
-          height: { value: px * 14, rule: 'atLeast' },
+          height: { value: h * 15, rule: 'atLeast' },
           children: [new TableCell({
-            width: { size: px * 15, type: WidthType.DXA },
+            width: { size: w * 15, type: WidthType.DXA },
             verticalAlign: VerticalAlign.CENTER,
-            margins: { top: 120, bottom: 120, left: 100, right: 100 },
+            margins: { top: 80, bottom: 80, left: 100, right: 100 },
             children: [
               new Paragraph({
-                alignment: AlignmentType.CENTER, spacing: { after: 40 },
+                alignment: AlignmentType.CENTER, spacing: { after: 30 },
                 children: [new TextRun({ text: 'LOGO', bold: true, size: 18, color: 'BFBFBF', font: 'Calibri', characterSpacing: 60 })],
               }),
               new Paragraph({
@@ -218,7 +219,7 @@ const portada = [
       size: 16, color: 'BFBFBF', italics: true, font: 'Calibri',
     })],
   }),
-  ...logoOMarco(LOGO_COLEGIO, 'Colegio San Guillermo', 130, 500),
+  ...logoOMarco(LOGO_COLEGIO, 'Colegio San Guillermo', 250, 71, 460),
   new Paragraph({
     spacing: { before: 500, after: 0 },
     alignment: AlignmentType.CENTER,
@@ -268,27 +269,30 @@ const portada = [
 
 // Bloque emisor: CORE AI presenta la propuesta
 const bloqueEmisor = [
-  ...logoOMarco(LOGO_CORE, 'CORE AI', 80, 420),
   new Paragraph({
-    spacing: { before: 160, after: 0 },
+    spacing: { before: 400, after: 0 },
     alignment: AlignmentType.CENTER,
     children: [new TextRun({ text: 'Propuesta elaborada y presentada por', size: 17, color: '808080', font: 'Calibri' })],
   }),
-  new Paragraph({
-    spacing: { before: 40, after: 0 },
-    alignment: AlignmentType.CENTER,
-    children: [new TextRun({
-      text: 'CORE AI', bold: true, size: 26, color: NAVY, font: 'Calibri', characterSpacing: 40,
-    })],
-  }),
-  new Paragraph({
-    spacing: { before: 40, after: 0 },
-    alignment: AlignmentType.CENTER,
-    children: [new TextRun({
-      text: 'Automatización de procesos con inteligencia artificial',
-      size: 17, italics: true, color: '808080', font: 'Calibri',
-    })],
-  }),
+  ...logoOMarco(LOGO_CORE, 'CORE AI', 215, 101, 120),
+  // El logo ya contiene el nombre y el lema; el texto solo aparece si falta la imagen
+  ...(LOGO_CORE ? [] : [
+    new Paragraph({
+      spacing: { before: 120, after: 0 },
+      alignment: AlignmentType.CENTER,
+      children: [new TextRun({
+        text: 'CORE AI', bold: true, size: 26, color: NAVY, font: 'Calibri', characterSpacing: 40,
+      })],
+    }),
+    new Paragraph({
+      spacing: { before: 40, after: 0 },
+      alignment: AlignmentType.CENTER,
+      children: [new TextRun({
+        text: 'Automatización de procesos con inteligencia artificial',
+        size: 17, italics: true, color: '808080', font: 'Calibri',
+      })],
+    }),
+  ]),
 ];
 
 const portadaTabla = new Table({
