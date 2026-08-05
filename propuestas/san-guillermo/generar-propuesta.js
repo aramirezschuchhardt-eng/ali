@@ -6,24 +6,31 @@ const {
 const fs = require('fs');
 const path = require('path');
 
-// ---- Logo del colegio: se incrusta automáticamente si el archivo está disponible ----
-function buscarLogo() {
-  const dirs = ['/mnt/user-data/uploads', '/mnt/user-data/outputs', '/home/user/ali',
-                '/home/user/ali/assets', process.cwd()];
-  const exts = { '.png': 'png', '.jpg': 'jpg', '.jpeg': 'jpg', '.gif': 'gif', '.bmp': 'bmp' };
-  for (const d of dirs) {
+// ---- Logos: se incrustan automáticamente si los archivos están disponibles ----
+// Nombres esperados:  logo-colegio.png  (Colegio San Guillermo)
+//                     logo-core.png     (CORE AI)
+const DIRS_LOGO = ['/mnt/user-data/uploads', '/home/user/ali/propuestas/san-guillermo/assets',
+                   '/home/user/ali/assets', '/home/user/ali', process.cwd()];
+const EXT_LOGO = { '.png': 'png', '.jpg': 'jpg', '.jpeg': 'jpg', '.gif': 'gif', '.bmp': 'bmp' };
+
+function buscarLogo(patron, excluir) {
+  for (const d of DIRS_LOGO) {
     let files = [];
-    try { files = fs.readdirSync(d); } catch (e) { continue; }
+    try { files = fs.readdirSync(d).sort(); } catch (e) { continue; }
     for (const f of files) {
       const ext = path.extname(f).toLowerCase();
-      if (!exts[ext]) continue;
-      if (!/logo|guillermo|isotipo|escudo/i.test(f)) continue;
-      return { file: path.join(d, f), type: exts[ext] };
+      if (!EXT_LOGO[ext]) continue;
+      if (excluir && excluir.test(f)) continue;
+      if (!patron.test(f)) continue;
+      return { file: path.join(d, f), type: EXT_LOGO[ext] };
     }
   }
   return null;
 }
-const LOGO = buscarLogo();
+
+const LOGO_CORE = buscarLogo(/core/i);
+// "logo.png" a secas se interpreta como el logo del colegio
+const LOGO_COLEGIO = buscarLogo(/colegio|guillermo|escudo|isotipo|csg|^logo\./i, /core/i);
 
 const NAVY = '1F3864';
 const BLUE = '2E75B6';
@@ -152,29 +159,27 @@ const etapaCell = (num, nombre, fill, color) => cell([
 const spacer = (h = 200) => new Paragraph({ spacing: { after: h }, children: [new TextRun({ text: '', size: 2 })] });
 
 // ================= PORTADA =================
-// Bloque del logo: imagen real si existe, o marco reservado si no
-const bloqueLogo = LOGO
-  ? [
-      new Paragraph({
-        spacing: { before: 900, after: 0 },
-        alignment: AlignmentType.CENTER,
-        children: [new ImageRun({
-          data: fs.readFileSync(LOGO.file),
-          type: LOGO.type,
-          transformation: { width: 150, height: 150 },
-        })],
-      }),
-    ]
+// Devuelve el logo real si el archivo existe, o un marco punteado reservado
+const logoOMarco = (logo, etiqueta, px, before) => logo
+  ? [new Paragraph({
+      spacing: { before, after: 0 },
+      alignment: AlignmentType.CENTER,
+      children: [new ImageRun({
+        data: fs.readFileSync(logo.file),
+        type: logo.type,
+        transformation: { width: px, height: px },
+      })],
+    })]
   : [
       new Paragraph({
-        spacing: { before: 900, after: 0 },
+        spacing: { before, after: 0 },
         alignment: AlignmentType.CENTER,
         children: [new TextRun({ text: '', size: 2 })],
       }),
       new Table({
         alignment: AlignmentType.CENTER,
-        width: { size: 2200, type: WidthType.DXA },
-        columnWidths: [2200],
+        width: { size: px * 15, type: WidthType.DXA },
+        columnWidths: [px * 15],
         borders: {
           top: { style: BorderStyle.DASHED, size: 6, color: 'BFBFBF' },
           bottom: { style: BorderStyle.DASHED, size: 6, color: 'BFBFBF' },
@@ -182,19 +187,19 @@ const bloqueLogo = LOGO
           right: { style: BorderStyle.DASHED, size: 6, color: 'BFBFBF' },
         },
         rows: [new TableRow({
-          height: { value: 2200, rule: 'atLeast' },
+          height: { value: px * 14, rule: 'atLeast' },
           children: [new TableCell({
-            width: { size: 2200, type: WidthType.DXA },
+            width: { size: px * 15, type: WidthType.DXA },
             verticalAlign: VerticalAlign.CENTER,
-            margins: { top: 200, bottom: 200, left: 120, right: 120 },
+            margins: { top: 120, bottom: 120, left: 100, right: 100 },
             children: [
               new Paragraph({
                 alignment: AlignmentType.CENTER, spacing: { after: 40 },
-                children: [new TextRun({ text: 'LOGO', bold: true, size: 20, color: 'BFBFBF', font: 'Calibri', characterSpacing: 60 })],
+                children: [new TextRun({ text: 'LOGO', bold: true, size: 18, color: 'BFBFBF', font: 'Calibri', characterSpacing: 60 })],
               }),
               new Paragraph({
                 alignment: AlignmentType.CENTER, spacing: { after: 0 },
-                children: [new TextRun({ text: 'Colegio San Guillermo', size: 15, italics: true, color: 'BFBFBF', font: 'Calibri' })],
+                children: [new TextRun({ text: etiqueta, size: 14, italics: true, color: 'BFBFBF', font: 'Calibri' })],
               }),
             ],
           })],
@@ -206,16 +211,16 @@ const portada = [
   // Espacio reservado para membrete institucional
   new Paragraph({ spacing: { after: 0 }, children: [new TextRun({ text: '', size: 2 })] }),
   new Paragraph({
-    spacing: { before: 900, after: 0 },
+    spacing: { before: 400, after: 0 },
     alignment: AlignmentType.CENTER,
     children: [new TextRun({
       text: '[ Espacio reservado para membrete institucional ]',
       size: 16, color: 'BFBFBF', italics: true, font: 'Calibri',
     })],
   }),
-  ...bloqueLogo,
+  ...logoOMarco(LOGO_COLEGIO, 'Colegio San Guillermo', 130, 500),
   new Paragraph({
-    spacing: { before: 700, after: 0 },
+    spacing: { before: 500, after: 0 },
     alignment: AlignmentType.CENTER,
     border: { bottom: { style: BorderStyle.SINGLE, size: 18, color: BLUE, space: 10 } },
     children: [new TextRun({
@@ -224,30 +229,30 @@ const portada = [
     })],
   }),
   new Paragraph({
-    spacing: { before: 380, after: 100 },
+    spacing: { before: 300, after: 80 },
     alignment: AlignmentType.CENTER,
     children: [new TextRun({
       text: 'Optimización del Proceso de Matrículas',
-      bold: true, size: 52, color: NAVY, font: 'Calibri',
+      bold: true, size: 48, color: NAVY, font: 'Calibri',
     })],
   }),
   new Paragraph({
-    spacing: { before: 0, after: 260 },
+    spacing: { before: 0, after: 200 },
     alignment: AlignmentType.CENTER,
     children: [new TextRun({
       text: 'mediante automatización con Inteligencia Artificial',
-      size: 28, color: BLUE, font: 'Calibri',
+      size: 26, color: BLUE, font: 'Calibri',
     })],
   }),
   new Paragraph({
-    spacing: { before: 500, after: 60 },
+    spacing: { before: 340, after: 60 },
     alignment: AlignmentType.CENTER,
     children: [new TextRun({ text: 'Preparada para', size: 19, color: '808080', font: 'Calibri' })],
   }),
   new Paragraph({
     spacing: { after: 40 },
     alignment: AlignmentType.CENTER,
-    children: [new TextRun({ text: 'Colegio San Guillermo', bold: true, size: 32, color: NAVY, font: 'Calibri' })],
+    children: [new TextRun({ text: 'Colegio San Guillermo', bold: true, size: 30, color: NAVY, font: 'Calibri' })],
   }),
   new Paragraph({
     spacing: { after: 20 },
@@ -255,9 +260,34 @@ const portada = [
     children: [new TextRun({ text: 'RBD 12076-6', size: 20, color: TEXT, font: 'Calibri' })],
   }),
   new Paragraph({
-    spacing: { after: 600 },
+    spacing: { after: 360 },
     alignment: AlignmentType.CENTER,
     children: [new TextRun({ text: 'El Silo 3014, Bajos de Mena, Puente Alto', size: 20, color: TEXT, font: 'Calibri' })],
+  }),
+];
+
+// Bloque emisor: CORE AI presenta la propuesta
+const bloqueEmisor = [
+  ...logoOMarco(LOGO_CORE, 'CORE AI', 80, 420),
+  new Paragraph({
+    spacing: { before: 160, after: 0 },
+    alignment: AlignmentType.CENTER,
+    children: [new TextRun({ text: 'Propuesta elaborada y presentada por', size: 17, color: '808080', font: 'Calibri' })],
+  }),
+  new Paragraph({
+    spacing: { before: 40, after: 0 },
+    alignment: AlignmentType.CENTER,
+    children: [new TextRun({
+      text: 'CORE AI', bold: true, size: 26, color: NAVY, font: 'Calibri', characterSpacing: 40,
+    })],
+  }),
+  new Paragraph({
+    spacing: { before: 40, after: 0 },
+    alignment: AlignmentType.CENTER,
+    children: [new TextRun({
+      text: 'Automatización de procesos con inteligencia artificial',
+      size: 17, italics: true, color: '808080', font: 'Calibri',
+    })],
   }),
 ];
 
@@ -273,6 +303,10 @@ const portadaTabla = new Table({
     insideVertical: { style: BorderStyle.SINGLE, size: 4, color: 'D0D7E5' },
   },
   rows: [
+    new TableRow({ children: [
+      tcell('Preparada por', { w: 2900, bold: true, fill: LIGHT, color: NAVY }),
+      tcell('CORE AI — Automatización de procesos con inteligencia artificial', { w: 6460 }),
+    ]}),
     new TableRow({ children: [
       tcell('Dirigida a', { w: 2900, bold: true, fill: LIGHT, color: NAVY }),
       tcell('Sr. Enzo Ramírez Schuchhardt — Sostenedor', { w: 6460 }),
@@ -388,7 +422,7 @@ const diagnostico = [
 const solucion = [
   new Paragraph({ children: [new PageBreak()] }),
   H1(3, 'Solución propuesta'),
-  P('Proponemos implementar un sistema de gestión y automatización de matrículas construido sobre la plataforma GoHighLevel, complementada con inteligencia artificial conversacional y de voz. Todo el sistema opera exclusivamente dentro del proceso de matrícula.'),
+  P('Proponemos implementar un sistema de gestión y automatización de matrículas construido sobre nuestra plataforma CORE AI, que integra la gestión de contactos, las automatizaciones y la inteligencia artificial conversacional y de voz en un solo lugar. Todo el sistema opera exclusivamente dentro del proceso de matrícula.'),
   P('La solución se compone de cuatro piezas que funcionan de manera integrada:'),
 
   H2('3.1  Asistente virtual de matrículas en WhatsApp'),
@@ -468,7 +502,7 @@ const solucion = [
   Bullet('Encuesta breve de satisfacción (3 a 4 preguntas) sobre la experiencia del proceso de matrícula.'),
   P('La encuesta entrega al sostenedor información directa sobre cómo perciben las familias el proceso de ingreso al colegio, y permite corregir puntos de fricción de un período al siguiente.'),
 
-  H2('3.4  CRM de matrículas en GoHighLevel'),
+  H2('3.4  CRM de matrículas en CORE AI'),
   P('Todo lo anterior se apoya en un sistema centralizado donde queda registrado cada apoderado que se contacta con el colegio, en qué etapa está y qué se ha hecho con él.'),
   H3('Embudo visual de matrículas'),
   P('Un tablero muestra a cada apoderado como una tarjeta que avanza por las etapas del proceso:'),
@@ -532,7 +566,7 @@ const plataformas = [
         tcell('Plataforma', { w: 3100, bold: true, fill: NAVY, color: 'FFFFFF' }),
         tcell('Función en el proceso de matrículas', { w: 6260, bold: true, fill: NAVY, color: 'FFFFFF' }),
       ]}),
-      platRow('GoHighLevel', 'Corazón del sistema. Contiene el CRM de matrículas, el embudo visual por etapas, la ficha de cada apoderado, las automatizaciones de WhatsApp y correo, el calendario de agendamiento, los formularios de postulación y los informes para el sostenedor.'),
+      platRow('CORE AI', 'Corazón del sistema. Contiene el CRM de matrículas, el embudo visual por etapas, la ficha de cada apoderado, las automatizaciones de WhatsApp y correo, el calendario de agendamiento, los formularios de postulación y los informes para el sostenedor.'),
     ],
   }),
 
@@ -549,7 +583,7 @@ const plataformas = [
       platRow('WhatsApp Business API (Meta)', 'Canal oficial y verificado por el cual el asistente conversa con los apoderados. Permite el uso del número institucional del colegio con respaldo de Meta, sin depender de un teléfono encendido.'),
       platRow('Twilio', 'Proveedor de telefonía. Entrega el número saliente para las llamadas con inteligencia artificial y el envío de mensajes de texto (SMS) cuando el apoderado no tiene WhatsApp.', true),
       platRow('Correo electrónico transaccional (Mailgun o el correo institucional del colegio)', 'Envío de confirmaciones de matrícula, listados de documentos requeridos y recordatorios formales que quedan como respaldo escrito.'),
-      platRow('Formularios y páginas de captación de GoHighLevel', 'Formulario de pre-inscripción y página de información de matrículas, enlazables desde el sitio web y las redes sociales del colegio.', true),
+      platRow('Formularios y páginas de captación CORE AI', 'Formulario de pre-inscripción y página de información de matrículas, enlazables desde el sitio web y las redes sociales del colegio.', true),
     ],
   }),
 
@@ -584,7 +618,7 @@ const plataformas = [
       platRow('Google Sheets', 'Planilla viva de postulantes y de cupos por curso, para quienes en el colegio prefieran trabajar sobre una planilla conocida.', true),
       platRow('n8n', 'Motor de integraciones a medida. Conecta el sistema de matrículas con planillas, sistemas internos del colegio o el SIGE cuando se requiera un traspaso de datos específico.'),
       platRow('Looker Studio', 'Panel de indicadores del sostenedor: conversión por etapa, tiempo promedio de matrícula y ocupación de cupos por curso, actualizado automáticamente.', true),
-      platRow('Aplicación móvil de GoHighLevel', 'Permite al sostenedor y al director revisar el estado de las matrículas y responder conversaciones desde el teléfono, en cualquier momento.'),
+      platRow('Aplicación móvil CORE AI', 'Permite al sostenedor y al director revisar el estado de las matrículas y responder conversaciones desde el teléfono, en cualquier momento.'),
     ],
   }),
   spacer(160),
@@ -609,7 +643,7 @@ const plataformas = [
       ], { w: CONTENT_W, fill: 'EAF0F8' })]}),
       arrowRow(),
       new TableRow({ children: [cell([
-        P('GOHIGHLEVEL  +  INTELIGENCIA ARTIFICIAL', { bold: true, size: 20, color: 'FFFFFF', align: AlignmentType.CENTER, after: 40 }),
+        P('CORE AI  ·  PLATAFORMA + INTELIGENCIA ARTIFICIAL', { bold: true, size: 20, color: 'FFFFFF', align: AlignmentType.CENTER, after: 40 }),
         P('Responde · Califica · Agenda · Registra en el CRM · Envía seguimientos · Llama', { size: 18, color: 'FFFFFF', align: AlignmentType.CENTER, after: 0 }),
       ], { w: CONTENT_W, fill: BLUE })]}),
       arrowRow(),
@@ -854,7 +888,7 @@ const inversion = [
   ], { shading: { type: ShadingType.CLEAR, fill: LIGHT, color: 'auto' } }),
 
   H2('7.2  Qué incluye la mantención mensual'),
-  Bullet('Licencia y operación de la plataforma GoHighLevel.'),
+  Bullet('Licencia y operación de la plataforma CORE AI.'),
   Bullet('Soporte por WhatsApp y correo en horario hábil, con respuesta dentro del día hábil siguiente.'),
   Bullet('Ajustes de contenido del asistente cuando cambien requisitos, fechas, aranceles o vacantes.'),
   Bullet('Monitoreo del funcionamiento del sistema y corrección de fallas.'),
@@ -958,7 +992,7 @@ const cierre = [
           border: { top: { style: BorderStyle.SINGLE, size: 6, color: '808080', space: 4 } },
           children: [new TextRun({ text: '', size: 2 })],
         }),
-        P('Por el prestador del servicio', { align: AlignmentType.CENTER, size: 19, after: 20, bold: true, color: NAVY }),
+        P('Por CORE AI', { align: AlignmentType.CENTER, size: 19, after: 20, bold: true, color: NAVY }),
         P('Nombre y firma', { align: AlignmentType.CENTER, size: 18, after: 0 }),
       ], { w: 4680 }),
     ]})],
@@ -997,7 +1031,7 @@ const doc = new Document({
           margin: { top: 1080, bottom: 1080, left: 1440, right: 1440 },
         },
       },
-      children: [...portada, portadaTabla],
+      children: [...portada, portadaTabla, ...bloqueEmisor],
     },
     // --- Cuerpo ---
     {
@@ -1026,7 +1060,7 @@ const doc = new Document({
             alignment: AlignmentType.CENTER,
             spacing: { before: 0 },
             children: [
-              new TextRun({ text: 'Propuesta comercial  ·  Página ', size: 16, color: '808080', font: 'Calibri' }),
+              new TextRun({ text: 'CORE AI  ·  Propuesta comercial  ·  Página ', size: 16, color: '808080', font: 'Calibri' }),
               new TextRun({ children: [PageNumber.CURRENT], size: 16, color: '808080', font: 'Calibri' }),
               new TextRun({ text: ' de ', size: 16, color: '808080', font: 'Calibri' }),
               new TextRun({ children: [PageNumber.TOTAL_PAGES], size: 16, color: '808080', font: 'Calibri' }),
