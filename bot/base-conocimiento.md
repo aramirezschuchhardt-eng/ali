@@ -25,7 +25,8 @@ ni deducir** información que no esté aquí.
 
 ## 2. Horario de atención de Admisión
 
-- **Lunes a viernes, de 09:00 a 17:00 horas.**
+- **Todos los días, de 08:00 a 17:00 horas.**
+- Se atiende directamente en el colegio, sin necesidad de agendar previamente.
 
 ---
 
@@ -86,8 +87,10 @@ Para iniciar el proceso de matrícula, el apoderado debe presentar **únicamente
 Con esos documentos puede:
 
 - **Agendar una visita** mediante el enlace `[LINK DE AGENDAMIENTO]`, **o**
-- **Acercarse directamente al colegio** en horario de atención (lunes a viernes,
-  09:00 a 17:00 horas) si le resulta más conveniente.
+- **Acercarse directamente al colegio** en horario de atención (todos los días,
+  08:00 a 17:00 horas) si le resulta más conveniente.
+
+**Hay cupos disponibles en todos los niveles**, de Prekínder a 8° Básico.
 
 **El proceso no tiene costo:** el colegio es 100% gratuito, por lo que no se
 cobra matrícula ni mensualidad. Es un dato que conviene mencionar, porque suele
@@ -99,18 +102,47 @@ aplicar la regla de derivación (ver `system-prompt.md`).
 
 ---
 
-## 7. Fuera de alcance
+## 7. Beneficios para las familias
+
+### 7.1 Alimentación JUNAEB
+
+- **Todos los estudiantes** del colegio reciben alimentación JUNAEB.
+- Incluye **desayuno, colación y almuerzo**.
+- Es un beneficio que conviene mencionar cuando se habla de matrícula o de la
+  jornada, junto con la gratuidad.
+
+### 7.2 Transporte escolar
+
+- El colegio **cuenta con transporte gratuito**.
+- **Depende del sector** donde vive la familia: no cubre todos los sectores.
+- **Cómo responder:** confirmar que el transporte existe y es gratuito, pero
+  **nunca asegurar** que llega a la dirección del apoderado. Preguntar en qué
+  sector vive y derivar la confirmación al equipo de admisión.
+
+### 7.3 Uniforme de preescolares — mención condicionada
+
+- El colegio **regala el uniforme** a los estudiantes de preescolar.
+- **Regla de uso:** este beneficio se menciona **únicamente cuando la consulta es
+  por Prekínder**. No ofrecerlo ni mencionarlo en consultas por otros niveles, ni
+  en el mensaje de bienvenida, ni en respuestas generales.
+- Si el apoderado pregunta expresamente por el uniforme de otro nivel, no se
+  afirma que sea gratuito: se deriva al equipo de admisión.
+
+---
+
+## 8. Fuera de alcance
 
 Temas sobre los que el bot **no tiene información** y debe derivar al equipo de
 admisión:
 
-- Disponibilidad de cupos por nivel.
+- Si el **transporte gratuito cubre un sector determinado**. El beneficio existe,
+  pero la cobertura la confirma el equipo de admisión.
+- **Uniforme de 1° a 8° Básico**, útiles escolares y listas de materiales. El
+  uniforme regalado aplica a preescolares (ver 7.3).
 - Si la **extensión horaria** de Prekínder y Kínder tiene algún costo o requisito
   adicional. La gratuidad declarada es de la enseñanza; sobre la extensión no hay
   información, así que no se debe afirmar que es gratuita.
 - Fechas y plazos del proceso de admisión.
-- Uniforme, útiles escolares y listas de materiales.
-- Transporte escolar y alimentación.
 - Situaciones particulares de un estudiante ya matriculado.
 - Detalles del PIE más allá de su existencia y del equipo multidisciplinario.
 - Horarios, días o costos específicos de cada taller extraprogramático.

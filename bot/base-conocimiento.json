@@ -54,10 +54,32 @@
   ],
 
   "atencion_admision": {
-    "dias": "Lunes a viernes",
-    "desde": "09:00",
+    "dias": "Todos los días",
+    "desde": "08:00",
     "hasta": "17:00",
-    "texto": "Lunes a viernes, de 09:00 a 17:00 horas"
+    "requiere_agendar": false,
+    "texto": "Atendemos todos los días en el colegio, de 08:00 a 17:00 horas"
+  },
+
+  "beneficios": {
+    "alimentacion": {
+      "programa": "JUNAEB",
+      "cobertura": "Todos los estudiantes del colegio",
+      "incluye": ["Desayuno", "Colación", "Almuerzo"],
+      "texto": "Todos nuestros estudiantes reciben alimentación JUNAEB: desayuno, colación y almuerzo"
+    },
+    "transporte": {
+      "disponible": true,
+      "gratuito": true,
+      "condicion": "Depende del sector donde vive la familia; no cubre todos los sectores",
+      "regla_bot": "Confirmar que existe y es gratuito, pero nunca asegurar cobertura de una dirección: preguntar el sector y derivar al equipo de admisión"
+    },
+    "uniforme_preescolar": {
+      "lo_regala_el_colegio": true,
+      "aplica_a": "Preescolares",
+      "mencion_condicionada": true,
+      "regla_bot": "Mencionar ÚNICAMENTE cuando la consulta es por Prekínder. No incluirlo en el mensaje de bienvenida ni en consultas por otros niveles."
+    }
   },
 
   "talleres_extraprogramaticos": {
@@ -80,6 +102,10 @@
       "Certificado de notas"
     ],
     "costo": "Sin costo: el colegio es 100% gratuito, no se cobra matrícula ni mensualidad",
+    "cupos": {
+      "disponibles": true,
+      "texto": "Hay cupos disponibles en todos los niveles, de Prekínder a 8° Básico"
+    },
     "vias": [
       {
         "tipo": "agendamiento_online",
@@ -89,17 +115,16 @@
       {
         "tipo": "presencial",
         "descripcion": "Acercarse directamente al colegio en horario de atención",
-        "horario": "Lunes a viernes, de 09:00 a 17:00 horas"
+        "horario": "Todos los días, de 08:00 a 17:00 horas"
       }
     ]
   },
 
   "fuera_de_alcance": [
-    "Disponibilidad de cupos por nivel",
+    "Si el transporte gratuito cubre un sector determinado: el beneficio existe, la cobertura la confirma admisión",
+    "Uniforme de 1° a 8° Básico, útiles escolares y listas de materiales",
     "Costo o requisitos adicionales de la extensión horaria de Prekínder y Kínder: no afirmar que es gratuita",
     "Fechas y plazos del proceso de admisión",
-    "Uniforme, útiles escolares y listas de materiales",
-    "Transporte escolar y alimentación",
     "Situaciones particulares de un estudiante ya matriculado",
     "Detalles del PIE más allá de su existencia y del equipo multidisciplinario",
     "Horarios, días o costos específicos de cada taller extraprogramático"
