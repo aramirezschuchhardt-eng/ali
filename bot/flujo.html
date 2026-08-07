@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<title>Flujo conversacional — Bot de Admisión, Colegio San Guillermo</title>
+<style>
+  @page { size: A4 landscape; margin: 0; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'DejaVu Sans', 'Segoe UI', Arial, sans-serif;
+    color: #16233d;
+    background: #fff;
+  }
+
+  .page {
+    width: 297mm;
+    height: 210mm;
+    padding: 11mm 13mm 9mm;
+    display: flex;
+    flex-direction: column;
+    page-break-after: always;
+    overflow: hidden;
+  }
+  .page:last-child { page-break-after: auto; }
+
+  header.doc {
+    border-bottom: 2px solid #0d2b6e;
+    padding-bottom: 6px;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+  }
+  header.doc h1 { font-size: 15pt; color: #0d2b6e; letter-spacing: -0.2px; }
+  header.doc .sub { font-size: 8.5pt; color: #62708c; }
+
+  /* min-height:0 permite que el SVG se reduzca para caber junto al pie de página */
+  .diagram { flex: 1; min-height: 0; display: flex; align-items: center; }
+  .diagram svg { display: block; width: 100%; height: 100%; }
+
+  footer.doc {
+    margin-top: 6px;
+    border-top: 1px solid #d7deea;
+    padding-top: 5px;
+    font-size: 7.5pt;
+    color: #7b879e;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  /* ---- página 2 ---- */
+  .cols { flex: 1; display: grid; grid-template-columns: 1fr 1fr; gap: 10mm; }
+  h2 {
+    font-size: 11pt;
+    color: #0d2b6e;
+    margin-bottom: 8px;
+    padding-bottom: 4px;
+    border-bottom: 1px solid #c9d4e6;
+  }
+  .rule {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 9px;
+    font-size: 9pt;
+    line-height: 1.38;
+  }
+  .rule .n {
+    flex: 0 0 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: #0d2b6e;
+    color: #fff;
+    font-size: 8pt;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 1px;
+  }
+  .rule b { color: #0d2b6e; }
+
+  .note {
+    margin-top: 10px;
+    background: #fff6e5;
+    border-left: 3px solid #d99413;
+    padding: 8px 10px;
+    font-size: 8.5pt;
+    line-height: 1.4;
+  }
+  .note b { color: #9a6a08; }
+
+  .chat { display: flex; flex-direction: column; gap: 7px; }
+  .bubble {
+    max-width: 84%;
+    padding: 7px 11px;
+    border-radius: 12px;
+    font-size: 8.7pt;
+    line-height: 1.42;
+  }
+  .them {
+    align-self: flex-start;
+    background: #eef1f6;
+    border-bottom-left-radius: 3px;
+  }
+  .us {
+    align-self: flex-end;
+    background: #0d2b6e;
+    color: #fff;
+    border-bottom-right-radius: 3px;
+  }
+  .tag {
+    align-self: center;
+    font-size: 7pt;
+    letter-spacing: .5px;
+    text-transform: uppercase;
+    color: #8a94a8;
+    margin: 3px 0 1px;
+  }
+</style>
+</head>
+<body>
+
+<!-- ================= PÁGINA 1 — DIAGRAMA ================= -->
+<section class="page">
+  <header class="doc">
+    <h1>Flujo conversacional del bot de admisión</h1>
+    <div class="sub">Colegio San Guillermo &middot; Prekínder a 8° Básico</div>
+  </header>
+
+  <div class="diagram">
+  <svg viewBox="0 0 1035 700" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <marker id="ar" viewBox="0 0 10 10" refX="9" refY="5"
+              markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+        <path d="M 0 0 L 10 5 L 0 10 z" fill="#8fa0bd"/>
+      </marker>
+      <style>
+        .box  { rx:7; ry:7; }
+        .ln   { stroke:#8fa0bd; stroke-width:1.4; fill:none; }
+        .t    { font-family:'DejaVu Sans',Arial,sans-serif; }
+        .h    { font-size:11px; font-weight:700; }
+        .b    { font-size:9.6px; }
+        .s    { font-size:8.8px; }
+      </style>
+    </defs>
+
+    <!-- INICIO -->
+    <rect class="box" x="387" y="4" width="260" height="36" fill="#0d2b6e"/>
+    <text class="t h" x="517" y="27" text-anchor="middle" fill="#fff">El apoderado escribe</text>
+    <path class="ln" d="M517 40 L517 66" marker-end="url(#ar)"/>
+
+    <!-- SALUDO -->
+    <rect class="box" x="337" y="68" width="360" height="44" fill="#eef2f9" stroke="#b9c8e0"/>
+    <text class="t b" x="517" y="86" text-anchor="middle" fill="#16233d">¿Es el primer mensaje? → saluda, variando el saludo</text>
+    <text class="t s" x="517" y="101" text-anchor="middle" fill="#62708c">Un solo saludo por conversación; después, entra directo al tema</text>
+    <path class="ln" d="M517 112 L517 138" marker-end="url(#ar)"/>
+
+    <!-- HUB -->
+    <rect class="box" x="367" y="140" width="300" height="38" fill="#1c4fa8"/>
+    <text class="t h" x="517" y="164" text-anchor="middle" fill="#fff">Identificar qué está preguntando</text>
+
+    <!-- BUS SUPERIOR -->
+    <path class="ln" d="M517 178 L517 200"/>
+    <path class="ln" d="M80 200 L955 200"/>
+    <path class="ln" d="M80 200 L80 224"  marker-end="url(#ar)"/>
+    <path class="ln" d="M255 200 L255 224" marker-end="url(#ar)"/>
+    <path class="ln" d="M430 200 L430 224" marker-end="url(#ar)"/>
+    <path class="ln" d="M605 200 L605 224" marker-end="url(#ar)"/>
+    <path class="ln" d="M780 200 L780 224" marker-end="url(#ar)"/>
+    <path class="ln" d="M955 200 L955 224" marker-end="url(#ar)"/>
+
+    <!-- ===== CABECERAS DE INTENCIÓN ===== -->
+    <rect class="box" x="0"   y="226" width="160" height="34" fill="#2f6fd0"/>
+    <text class="t h" x="80"  y="248" text-anchor="middle" fill="#fff">Horarios</text>
+
+    <rect class="box" x="175" y="226" width="160" height="34" fill="#2f6fd0"/>
+    <text class="t h" x="255" y="248" text-anchor="middle" fill="#fff">Talleres</text>
+
+    <rect class="box" x="350" y="226" width="160" height="34" fill="#2f6fd0"/>
+    <text class="t h" x="430" y="248" text-anchor="middle" fill="#fff">Dónde estamos</text>
+
+    <rect class="box" x="525" y="226" width="160" height="34" fill="#2f6fd0"/>
+    <text class="t h" x="605" y="248" text-anchor="middle" fill="#fff">El colegio</text>
+
+    <rect class="box" x="700" y="226" width="160" height="34" fill="#2f6fd0"/>
+    <text class="t h" x="780" y="248" text-anchor="middle" fill="#fff">Matrícula</text>
+
+    <rect class="box" x="875" y="226" width="160" height="34" fill="#c0821a"/>
+    <text class="t h" x="955" y="248" text-anchor="middle" fill="#fff">No está en la base</text>
+
+    <path class="ln" d="M80 260 L80 282"   marker-end="url(#ar)"/>
+    <path class="ln" d="M255 260 L255 282" marker-end="url(#ar)"/>
+    <path class="ln" d="M430 260 L430 282" marker-end="url(#ar)"/>
+    <path class="ln" d="M605 260 L605 282" marker-end="url(#ar)"/>
+    <path class="ln" d="M780 260 L780 282" marker-end="url(#ar)"/>
+    <path class="ln" d="M955 260 L955 282" marker-end="url(#ar)"/>
+
+    <!-- ===== CONTENIDO ===== -->
+    <rect class="box" x="0" y="284" width="160" height="172" fill="#f6f8fc" stroke="#c9d4e6"/>
+    <text class="t s" x="12" y="303" fill="#0d2b6e" font-weight="700">Prekínder y Kínder</text>
+    <text class="t s" x="12" y="318" fill="#16233d">08:00 a 12:30 h</text>
+    <text class="t s" x="12" y="333" fill="#16233d">Extensión opcional</text>
+    <text class="t s" x="12" y="346" fill="#16233d">hasta las 16:00 h</text>
+    <text class="t s" x="12" y="374" fill="#0d2b6e" font-weight="700">1° a 8° Básico</text>
+    <text class="t s" x="12" y="389" fill="#16233d">08:00 a 15:25 h</text>
+    <text class="t s" x="12" y="404" fill="#16233d">Martes: salida a las</text>
+    <text class="t s" x="12" y="417" fill="#16233d">13:10 h</text>
+    <text class="t s" x="12" y="441" fill="#62708c">Preguntar el nivel si</text>
+    <text class="t s" x="12" y="452" fill="#62708c">no lo mencionó</text>
+
+    <rect class="box" x="175" y="284" width="160" height="172" fill="#f6f8fc" stroke="#c9d4e6"/>
+    <text class="t s" x="187" y="303" fill="#0d2b6e" font-weight="700">Después de clases</text>
+    <text class="t s" x="187" y="325" fill="#16233d">Fútbol</text>
+    <text class="t s" x="187" y="340" fill="#16233d">Taekwondo</text>
+    <text class="t s" x="187" y="355" fill="#16233d">Música</text>
+    <text class="t s" x="187" y="370" fill="#16233d">Batucada</text>
+    <text class="t s" x="187" y="385" fill="#16233d">Danza</text>
+    <text class="t s" x="187" y="400" fill="#16233d">Patinaje</text>
+    <text class="t s" x="187" y="424" fill="#62708c">La oferta varía según</text>
+    <text class="t s" x="187" y="435" fill="#62708c">el nivel y la programa-</text>
+    <text class="t s" x="187" y="446" fill="#62708c">ción anual del colegio</text>
+
+    <rect class="box" x="350" y="284" width="160" height="172" fill="#f6f8fc" stroke="#c9d4e6"/>
+    <text class="t s" x="362" y="303" fill="#0d2b6e" font-weight="700">Dirección</text>
+    <text class="t s" x="362" y="318" fill="#16233d">Silo 3014,</text>
+    <text class="t s" x="362" y="333" fill="#16233d">comuna de Puente Alto</text>
+    <text class="t s" x="362" y="361" fill="#0d2b6e" font-weight="700">Atención de admisión</text>
+    <text class="t s" x="362" y="376" fill="#16233d">Lunes a viernes,</text>
+    <text class="t s" x="362" y="391" fill="#16233d">09:00 a 17:00 h</text>
+    <text class="t s" x="362" y="424" fill="#62708c">Invitar cordialmente</text>
+    <text class="t s" x="362" y="435" fill="#62708c">a venir a conocer</text>
+    <text class="t s" x="362" y="446" fill="#62708c">el colegio</text>
+
+    <rect class="box" x="525" y="284" width="160" height="172" fill="#f6f8fc" stroke="#c9d4e6"/>
+    <text class="t s" x="537" y="303" fill="#16233d">Desde Prekínder</text>
+    <text class="t s" x="537" y="316" fill="#16233d">hasta 8° Básico</text>
+    <text class="t s" x="537" y="340" fill="#16233d">Proyecto de Integración</text>
+    <text class="t s" x="537" y="353" fill="#16233d">Escolar (PIE) y equipo</text>
+    <text class="t s" x="537" y="366" fill="#16233d">multidisciplinario</text>
+    <text class="t s" x="537" y="390" fill="#16233d">Formación integral:</text>
+    <text class="t s" x="537" y="403" fill="#16233d">lo académico y lo</text>
+    <text class="t s" x="537" y="416" fill="#16233d">personal y valórico</text>
+    <text class="t s" x="537" y="440" fill="#16233d">Comunicación cercana</text>
+    <text class="t s" x="537" y="453" fill="#16233d">con las familias</text>
+
+    <rect class="box" x="700" y="284" width="160" height="172" fill="#f6f8fc" stroke="#c9d4e6"/>
+    <text class="t s" x="712" y="303" fill="#0d2b6e" font-weight="700">Solo dos documentos</text>
+    <text class="t s" x="712" y="325" fill="#16233d">Certificado de</text>
+    <text class="t s" x="712" y="338" fill="#16233d">nacimiento</text>
+    <text class="t s" x="712" y="360" fill="#16233d">Certificado de notas</text>
+    <text class="t s" x="712" y="392" fill="#62708c">No mencionar otros</text>
+    <text class="t s" x="712" y="403" fill="#62708c">requisitos, aranceles,</text>
+    <text class="t s" x="712" y="414" fill="#62708c">cupos ni plazos: no</text>
+    <text class="t s" x="712" y="425" fill="#62708c">están definidos</text>
+
+    <rect class="box" x="875" y="284" width="160" height="172" fill="#fff6e5" stroke="#e2bd76"/>
+    <text class="t s" x="887" y="303" fill="#8a5e07" font-weight="700">Por ejemplo</text>
+    <text class="t s" x="887" y="320" fill="#16233d">Aranceles y mensualidad</text>
+    <text class="t s" x="887" y="335" fill="#16233d">Cupos por nivel</text>
+    <text class="t s" x="887" y="350" fill="#16233d">Fechas y plazos</text>
+    <text class="t s" x="887" y="365" fill="#16233d">Uniforme y útiles</text>
+    <text class="t s" x="887" y="380" fill="#16233d">Transporte y alimentación</text>
+    <text class="t s" x="887" y="404" fill="#8a5e07" font-weight="700">Nunca inventar</text>
+    <text class="t s" x="887" y="419" fill="#16233d">ni estimar el dato</text>
+
+    <!-- ===== CONVERGENCIA ===== -->
+    <path class="ln" d="M80 456 L80 480"/>
+    <path class="ln" d="M255 456 L255 480"/>
+    <path class="ln" d="M430 456 L430 480"/>
+    <path class="ln" d="M605 456 L605 480"/>
+    <path class="ln" d="M780 456 L780 480"/>
+    <path class="ln" d="M80 480 L780 480"/>
+    <path class="ln" d="M430 480 L430 508" marker-end="url(#ar)"/>
+
+    <!-- derivación -->
+    <path class="ln" d="M955 456 L955 494" marker-end="url(#ar)"/>
+    <rect class="box" x="855" y="496" width="180" height="62" fill="#c0821a"/>
+    <text class="t s" x="945" y="516" text-anchor="middle" fill="#fff" font-weight="700">Derivar al equipo</text>
+    <text class="t s" x="945" y="530" text-anchor="middle" fill="#fff" font-weight="700">de admisión</text>
+    <text class="t s" x="945" y="547" text-anchor="middle" fill="#fbeed3">y avisar que se responderá</text>
+
+    <!-- CIERRE -->
+    <rect class="box" x="230" y="510" width="400" height="48" fill="#1c4fa8"/>
+    <text class="t h" x="430" y="530" text-anchor="middle" fill="#fff">Cerrar guiando el siguiente paso</text>
+    <text class="t s" x="430" y="546" text-anchor="middle" fill="#cfe0f8">Una sola invitación por mensaje, sin presionar</text>
+
+    <path class="ln" d="M430 558 L430 574"/>
+    <path class="ln" d="M215 574 L645 574"/>
+    <path class="ln" d="M215 574 L215 598" marker-end="url(#ar)"/>
+    <path class="ln" d="M645 574 L645 598" marker-end="url(#ar)"/>
+
+    <rect class="box" x="75" y="600" width="280" height="56" fill="#eef2f9" stroke="#b9c8e0"/>
+    <text class="t s" x="215" y="620" text-anchor="middle" fill="#0d2b6e" font-weight="700">Agendar una visita</text>
+    <text class="t s" x="215" y="636" text-anchor="middle" fill="#16233d">[LINK DE AGENDAMIENTO]</text>
+
+    <rect class="box" x="505" y="600" width="280" height="56" fill="#eef2f9" stroke="#b9c8e0"/>
+    <text class="t s" x="645" y="620" text-anchor="middle" fill="#0d2b6e" font-weight="700">Acercarse al colegio</text>
+    <text class="t s" x="645" y="636" text-anchor="middle" fill="#16233d">Lunes a viernes, 09:00 a 17:00 h</text>
+
+    <text class="t s" x="430" y="678" text-anchor="middle" fill="#62708c">Si el apoderado ya agendó o dijo que vendrá, no insistir: agradecer y quedar disponible, variando la despedida</text>
+  </svg>
+  </div>
+
+  <footer class="doc">
+    <span>Base de conocimiento: <b>bot/base-conocimiento.md</b> &middot; Reglas y tono: <b>bot/system-prompt.md</b></span>
+    <span>Página 1 de 2</span>
+  </footer>
+</section>
+
+<!-- ================= PÁGINA 2 — REGLAS Y EJEMPLO ================= -->
+<section class="page">
+  <header class="doc">
+    <h1>Reglas de cada respuesta y ejemplo de conversación</h1>
+    <div class="sub">Colegio San Guillermo &middot; Equipo de admisión</div>
+  </header>
+
+  <div class="cols">
+    <div>
+      <h2>Qué revisar antes de enviar cada mensaje</h2>
+
+      <div class="rule"><div class="n">1</div><div><b>Habla como persona del colegio.</b> Cálido, cercano, cordial y profesional. Nunca decir que es un bot ni explicar cómo funciona.</div></div>
+      <div class="rule"><div class="n">2</div><div><b>Todo lo que se dice está en la base.</b> Si el dato no está, no se estima ni se deduce: se deriva al equipo de admisión.</div></div>
+      <div class="rule"><div class="n">3</div><div><b>Breve, claro y útil.</b> Dos a cuatro líneas. Primero la respuesta a lo que preguntaron, después el contexto.</div></div>
+      <div class="rule"><div class="n">4</div><div><b>Nada de plantillas.</b> Variar saludos, agradecimientos, invitaciones y despedidas; no repetir una frase ya usada en la misma conversación.</div></div>
+      <div class="rule"><div class="n">5</div><div><b>Un solo saludo por conversación.</b> A partir del segundo mensaje se responde directo.</div></div>
+      <div class="rule"><div class="n">6</div><div><b>Siempre queda un siguiente paso abierto:</b> conocer el colegio o iniciar la matrícula. Una invitación por mensaje, sin presionar.</div></div>
+      <div class="rule"><div class="n">7</div><div><b>No prometer</b> llamadas, correos, cupos ni excepciones que el colegio no haya comprometido.</div></div>
+
+      <div class="note">
+        <b>Pendiente antes de publicar:</b> reemplazar <b>[LINK DE AGENDAMIENTO]</b> por la URL real del formulario. Aparece en la base de conocimiento, en el prompt y en este flujo.
+      </div>
+    </div>
+
+    <div>
+      <h2>El flujo aplicado a una conversación real</h2>
+      <div class="chat">
+        <div class="tag">Intención: horarios</div>
+        <div class="bubble them">Hola, ¿a qué hora entran y salen los niños de kínder?</div>
+        <div class="bubble us">¡Hola! Gracias por escribirnos. En Prekínder y Kínder la jornada es de 08:00 a 12:30 horas, y tenemos extensión horaria opcional hasta las 16:00. Si quieres, te invitamos a conocer el colegio y ver cómo trabajamos con los más pequeños.</div>
+
+        <div class="tag">Intención: talleres &middot; sin volver a saludar</div>
+        <div class="bubble them">¿Y qué talleres tienen?</div>
+        <div class="bubble us">Los talleres se hacen una vez terminada la jornada: fútbol, taekwondo, música, batucada, danza y patinaje. La oferta puede variar según el nivel y la programación del año. Sería un gusto mostrártelos en una visita.</div>
+
+        <div class="tag">Fuera de la base → derivación</div>
+        <div class="bubble them">¿Cuánto sale la mensualidad?</div>
+        <div class="bubble us">Ese dato prefiero confirmártelo con exactitud: lo reviso con el equipo de admisión y te respondo a la brevedad.</div>
+
+        <div class="tag">Intención: matrícula → cierre</div>
+        <div class="bubble them">Ya, y para matricular qué piden</div>
+        <div class="bubble us">Es más simple de lo que parece: solo el certificado de nacimiento y el certificado de notas. Con eso puedes agendar una visita en [LINK DE AGENDAMIENTO] o acercarte al colegio de lunes a viernes entre 09:00 y 17:00 horas, lo que te acomode más.</div>
+      </div>
+    </div>
+  </div>
+
+  <footer class="doc">
+    <span>Colegio San Guillermo &middot; Silo 3014, Puente Alto &middot; Prekínder a 8° Básico</span>
+    <span>Página 2 de 2</span>
+  </footer>
+</section>
+
+</body>
+</html>
