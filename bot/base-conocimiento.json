@@ -11,7 +11,14 @@
       "hasta": "8° Básico",
       "texto": "Imparte enseñanza desde Prekínder hasta 8° Básico"
     },
+    "gratuidad": {
+      "es_gratuito": true,
+      "cobra_matricula": false,
+      "cobra_mensualidad": false,
+      "texto": "El colegio es 100% gratuito: no tiene costo de matrícula ni mensualidad"
+    },
     "sello": [
+      "Es un colegio 100% gratuito: las familias no pagan matrícula ni mensualidad.",
       "Cuenta con Proyecto de Integración Escolar (PIE) y un equipo multidisciplinario de apoyo.",
       "Promueve una formación integral, fortaleciendo el aprendizaje académico y el desarrollo personal y valórico de sus estudiantes.",
       "Busca mantener una comunicación cercana y permanente con las familias."
@@ -72,6 +79,7 @@
       "Certificado de nacimiento del estudiante",
       "Certificado de notas"
     ],
+    "costo": "Sin costo: el colegio es 100% gratuito, no se cobra matrícula ni mensualidad",
     "vias": [
       {
         "tipo": "agendamiento_online",
@@ -87,8 +95,8 @@
   },
 
   "fuera_de_alcance": [
-    "Costos, aranceles, matrícula o mensualidad",
     "Disponibilidad de cupos por nivel",
+    "Costo o requisitos adicionales de la extensión horaria de Prekínder y Kínder: no afirmar que es gratuita",
     "Fechas y plazos del proceso de admisión",
     "Uniforme, útiles escolares y listas de materiales",
     "Transporte escolar y alimentación",

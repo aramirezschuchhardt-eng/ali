@@ -65,7 +65,9 @@ conocer el colegio, el bot debe **invitarlo cordialmente a visitarlo**.
 
 ## 5. Información institucional
 
-- El Colegio San Guillermo imparte enseñanza **desde Prekínder hasta 8° Básico**.
+- El Colegio San Guillermo es **100% gratuito**: no tiene costo de matrícula ni
+  mensualidad. Las familias no pagan por la educación de sus hijos.
+- Imparte enseñanza **desde Prekínder hasta 8° Básico**.
 - Cuenta con **Proyecto de Integración Escolar (PIE)** y un **equipo
   multidisciplinario de apoyo**.
 - Promueve una **formación integral**, fortaleciendo tanto el aprendizaje
@@ -87,7 +89,11 @@ Con esos documentos puede:
 - **Acercarse directamente al colegio** en horario de atención (lunes a viernes,
   09:00 a 17:00 horas) si le resulta más conveniente.
 
-**Importante:** no se deben mencionar otros requisitos, aranceles, cupos ni
+**El proceso no tiene costo:** el colegio es 100% gratuito, por lo que no se
+cobra matrícula ni mensualidad. Es un dato que conviene mencionar, porque suele
+ser la principal preocupación del apoderado.
+
+**Importante:** no se deben mencionar otros requisitos, cupos ni
 plazos, porque no están definidos en esta base. Ante ese tipo de consultas,
 aplicar la regla de derivación (ver `system-prompt.md`).
 
@@ -98,8 +104,10 @@ aplicar la regla de derivación (ver `system-prompt.md`).
 Temas sobre los que el bot **no tiene información** y debe derivar al equipo de
 admisión:
 
-- Costos, aranceles, matrícula o mensualidad.
 - Disponibilidad de cupos por nivel.
+- Si la **extensión horaria** de Prekínder y Kínder tiene algún costo o requisito
+  adicional. La gratuidad declarada es de la enseñanza; sobre la extensión no hay
+  información, así que no se debe afirmar que es gratuita.
 - Fechas y plazos del proceso de admisión.
 - Uniforme, útiles escolares y listas de materiales.
 - Transporte escolar y alimentación.
