@@ -1,0 +1,103 @@
+{
+  "colegio": {
+    "nombre": "Colegio San Guillermo",
+    "direccion": {
+      "calle": "Silo 3014",
+      "comuna": "Puente Alto",
+      "texto": "Silo 3014, comuna de Puente Alto"
+    },
+    "niveles": {
+      "desde": "Prekínder",
+      "hasta": "8° Básico",
+      "texto": "Imparte enseñanza desde Prekínder hasta 8° Básico"
+    },
+    "sello": [
+      "Cuenta con Proyecto de Integración Escolar (PIE) y un equipo multidisciplinario de apoyo.",
+      "Promueve una formación integral, fortaleciendo el aprendizaje académico y el desarrollo personal y valórico de sus estudiantes.",
+      "Busca mantener una comunicación cercana y permanente con las familias."
+    ]
+  },
+
+  "horarios_clases": [
+    {
+      "niveles": ["Prekínder", "Kínder"],
+      "entrada": "08:00",
+      "salida": "12:30",
+      "excepciones": [],
+      "extension_horaria": {
+        "disponible": true,
+        "opcional": true,
+        "hasta": "16:00"
+      }
+    },
+    {
+      "niveles": [
+        "1° Básico", "2° Básico", "3° Básico", "4° Básico",
+        "5° Básico", "6° Básico", "7° Básico", "8° Básico"
+      ],
+      "entrada": "08:00",
+      "salida": "15:25",
+      "excepciones": [
+        { "dia": "martes", "salida": "13:10" }
+      ],
+      "extension_horaria": {
+        "disponible": false
+      }
+    }
+  ],
+
+  "atencion_admision": {
+    "dias": "Lunes a viernes",
+    "desde": "09:00",
+    "hasta": "17:00",
+    "texto": "Lunes a viernes, de 09:00 a 17:00 horas"
+  },
+
+  "talleres_extraprogramaticos": {
+    "momento": "Después de la jornada escolar",
+    "objetivo": "Potenciar el desarrollo deportivo, artístico, cultural y recreativo de los estudiantes",
+    "disponibles": [
+      "Fútbol",
+      "Taekwondo",
+      "Música",
+      "Batucada",
+      "Danza",
+      "Patinaje"
+    ],
+    "nota": "Durante el año pueden incorporarse otros talleres según la planificación académica y la disponibilidad. La oferta puede variar de acuerdo con el nivel del estudiante y la programación anual del colegio."
+  },
+
+  "admision": {
+    "documentos_requeridos": [
+      "Certificado de nacimiento del estudiante",
+      "Certificado de notas"
+    ],
+    "vias": [
+      {
+        "tipo": "agendamiento_online",
+        "descripcion": "Agendar una visita mediante el enlace de agendamiento",
+        "enlace": "[LINK DE AGENDAMIENTO]"
+      },
+      {
+        "tipo": "presencial",
+        "descripcion": "Acercarse directamente al colegio en horario de atención",
+        "horario": "Lunes a viernes, de 09:00 a 17:00 horas"
+      }
+    ]
+  },
+
+  "fuera_de_alcance": [
+    "Costos, aranceles, matrícula o mensualidad",
+    "Disponibilidad de cupos por nivel",
+    "Fechas y plazos del proceso de admisión",
+    "Uniforme, útiles escolares y listas de materiales",
+    "Transporte escolar y alimentación",
+    "Situaciones particulares de un estudiante ya matriculado",
+    "Detalles del PIE más allá de su existencia y del equipo multidisciplinario",
+    "Horarios, días o costos específicos de cada taller extraprogramático"
+  ],
+
+  "placeholders": {
+    "[LINK DE AGENDAMIENTO]": "Reemplazar por la URL real del formulario de agendamiento antes de producción"
+  }
+}
