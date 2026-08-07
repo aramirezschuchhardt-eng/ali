@@ -6,17 +6,30 @@ Archivos fuente del bot que atiende consultas de apoderados.
 | --- | --- | --- |
 | `base-conocimiento.md` | Toda la información del colegio (horarios, talleres, dirección, admisión) | Se carga como contexto del modelo. Es la única fuente de verdad. |
 | `base-conocimiento.json` | Los mismos datos en formato estructurado | Para usarlos desde código: validaciones, respuestas fijas, sincronizar con un CRM o sitio web. |
-| `system-prompt.md` | Identidad, reglas, tono, banco de variaciones y ejemplos | Se usa como *system prompt* del modelo. |
+| `system-prompt.md` | Identidad (Andrea), reglas, tono y ejemplos | Se usa como *system prompt* del modelo. |
+| `guion-mensajes.md` | Los mensajes concretos: bienvenida, cada opción del menú, derivaciones y cierres | Referencia de voz. Se carga junto al prompt o se usa como guía para el equipo. |
+| `flujo.html` → `flujo-bot-admision.pdf` | El flujo conversacional en diagrama | Para revisar y compartir con el colegio. |
+| `guion.html` → `guion-mensajes.pdf` | El guion en formato imprimible | Para revisar y compartir con el colegio. |
 
 ## Cómo se arma el prompt
 
 ```
-system  = system-prompt.md + "\n\n" + base-conocimiento.md
+system  = system-prompt.md + "\n\n" + base-conocimiento.md + "\n\n" + guion-mensajes.md
 user    = mensaje del apoderado
 ```
 
-Ambos archivos deben ir juntos: `system-prompt.md` define **cómo** responder y
-`base-conocimiento.md` define **qué** puede responder.
+Los tres archivos van juntos: `system-prompt.md` define **cómo** responder,
+`base-conocimiento.md` define **qué** puede responder y `guion-mensajes.md` es la
+referencia de **con qué palabras** lo dice.
+
+## Regenerar los PDF
+
+```
+chrome --headless --no-pdf-header-footer \
+  --print-to-pdf=bot/flujo-bot-admision.pdf file://$PWD/bot/flujo.html
+chrome --headless --no-pdf-header-footer \
+  --print-to-pdf=bot/guion-mensajes.pdf    file://$PWD/bot/guion.html
+```
 
 ## Antes de producción
 
