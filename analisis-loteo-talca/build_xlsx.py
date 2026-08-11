@@ -30,6 +30,10 @@ def head(ws, row, cells):
 
 ws["A1"] = "MODELO — LOTEO 19,26 HA · AV. SAN MIGUEL 6850, TALCA"; ws["A1"].font = TIT
 ws["A2"] = "Las celdas en rojo son inputs. Todo lo demás se calcula."; ws["A2"].font = Font(italic=True, size=9)
+ws["A3"] = ("Verificado contra la tabla de escenarios del informe: capital máximo idéntico, ingresos y utilidad dentro de ±5%, "
+            "TIR entre 2 y 4 puntos más baja. La diferencia viene de dos simplificaciones: el precio maduro se mantiene constante "
+            "(el informe lo sube 0,1 UF/m² al año desde el cuarto año de venta) y el impuesto se devenga anual, no por venta.")
+ws["A3"].font = Font(italic=True, size=9, color="9C3B2E")
 
 ws["A4"] = "DATOS DUROS (planos L_02 / L_03, agosto 2023)"; ws["A4"].font = LBL
 datos = [
@@ -49,7 +53,7 @@ for n, v, u, f in datos:
     ws.cell(row=r, column=3, value=u).border = bd
     ws.cell(row=r, column=6, value=f).font = Font(size=9, italic=True)
     r += 1
-ws["B13"] = "=B6/B7"; ws["A13"] = "Superficie promedio por sitio"; ws["B13"].number_format = "#,##0"
+ws["B13"] = "=B7/B8"; ws["A13"] = "Superficie promedio por sitio"; ws["B13"].number_format = "#,##0"
 ws["C13"] = "m²"
 r = 15
 
@@ -57,7 +61,7 @@ ws.cell(row=r, column=1, value="INPUTS — TERRENO").font = LBL; r += 1
 head(ws, r, ["Variable", "Valor", "Unidad", "", "", "Comentario"]); r += 1
 terreno = [
     ("Precio del terreno", 119000, "UF", "Precio pedido por el vendedor"),
-    ("Pie", 10000, "UF", "Propuesto: 10.000 en vez de 20.000"),
+    ("Pie", 20000, "UF", "Bajarlo a 10.000 es la recomendación: sube la TIR ~3 puntos"),
     ("% de cada venta destinado al terreno", 0.30, "%", "30% de cada escritura"),
     ("Año de vencimiento del plazo", 6, "año", "5 años desde el permiso, obtenido en el año 1"),
 ]
@@ -89,7 +93,7 @@ esc = [
     ("Contribuciones anuales", 500, 500, 500, "#,##0", "UF/año, incluye sobretasa sitio eriazo"),
     ("Impuesto a la renta", 0.27, 0.27, 0.27, "0%", "Primera categoría"),
     ("Tasa de descuento", 0.12, 0.12, 0.12, "0%", "Costo de capital del desarrollador"),
-    ("Preventa cobrada un año antes", 0.20, 0.20, 0.20, "0%", "Pie de promesa"),
+    ("Preventa cobrada un año antes", 0, 0, 0, "0%", "Subir a 20% para ver la estructura optimizada"),
 ]
 SUP = {}
 for n, a, b, cc, fmt, com in esc:
@@ -145,7 +149,7 @@ for esc_name in ("Conservador", "Base", "Optimista"):
     disc  = f"{S}${k}${SUP['Tasa de descuento']}"
     prev  = f"{S}${k}${SUP['Preventa cobrada un año antes']}"
     m2    = f"{S}$B$13"
-    nlot  = f"{S}$B$7"
+    nlot  = f"{S}$B$8"
     pterr = f"{S}$B${FILA['Precio del terreno']}"
     ppie  = f"{S}$B${FILA['Pie']}"
     ppct  = f"{S}$B${FILA['% de cada venta destinado al terreno']}"
@@ -196,11 +200,11 @@ for esc_name in ("Conservador", "Base", "Optimista"):
             s.cell(row=r_caja, column=2 + i, value=f"={col}{r_ing}*(1-{prev})").number_format = "#,##0"
 
     r_urb = 12
-    s.cell(row=r_urb, column=1, value="Urbanización (4 macro-etapas)")
+    s.cell(row=r_urb, column=1, value="Urbanización (3 macro-etapas)")
     for i in range(N + 1):
         col = get_column_letter(2 + i)
         s.cell(row=r_urb, column=2 + i,
-               value=f"={urbt}*(IF({i}={ini}-1,0.3,0)+IF({i}={ini},0.25,0)+IF({i}={ini}+2,0.25,0)+IF({i}={ini}+4,0.2,0))"
+               value=f"={urbt}*(IF({i}={ini}-1,0.45,0)+IF({i}={ini}+1,0.3,0)+IF({i}={ini}+3,0.25,0))"
                ).number_format = "#,##0"
 
     r_proy = 13
@@ -277,7 +281,7 @@ for esc_name in ("Conservador", "Base", "Optimista"):
         ("Capital máximo expuesto", f"=-MIN(B{r_ac}:{get_column_letter(2+N)}{r_ac},0)", "#,##0"),
         ("TIR del proyecto", f"=IRR(B{r_fc}:{get_column_letter(2+N)}{r_fc})", "0.0%"),
         ("VAN a la tasa de descuento", f"=NPV({disc},C{r_fc}:{get_column_letter(2+N)}{r_fc})+B{r_fc}", "#,##0"),
-        ("Precio promedio logrado (UF/m²)", f"=B26/{S}$B$6", "0.00"),
+        ("Precio promedio logrado (UF/m²)", f"=B26/{S}$B$7", "0.00"),
         ("Saldo impago al vencer el plazo", f"=INDEX(B{r_ter+1}:{get_column_letter(2+N)}{r_ter+1},{pplazo}+1)", "#,##0"),
     ]
     rr = 26
