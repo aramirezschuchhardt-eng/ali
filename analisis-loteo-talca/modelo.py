@@ -52,15 +52,15 @@ def npv(flows, r=0.12):
 ESC = {
     "Conservador": dict(
         inicio_venta=3, ritmo=10, precio=[3.3, 3.3, 3.4, 3.5, 3.6, 3.7, 3.8, 3.8, 3.8, 3.8, 3.8],
-        urb=185_000, gasto_com=0.055, admin=3_000, horizonte=14,
+        urb=80_000, gasto_com=0.055, admin=3_000, horizonte=14,
     ),
     "Base": dict(
         inicio_venta=2, ritmo=15, precio=[3.5, 3.5, 4.0, 4.0, 4.1, 4.2, 4.2, 4.2, 4.2],
-        urb=155_000, gasto_com=0.045, admin=2_500, horizonte=11,
+        urb=60_000, gasto_com=0.045, admin=2_500, horizonte=11,
     ),
     "Optimista": dict(
         inicio_venta=1, ritmo=21, precio=[3.5, 4.0, 4.0, 4.2, 4.3, 4.4, 4.4, 4.4, 4.4],
-        urb=135_000, gasto_com=0.040, admin=2_500, horizonte=9,
+        urb=45_000, gasto_com=0.040, admin=2_500, horizonte=9,
     ),
 }
 

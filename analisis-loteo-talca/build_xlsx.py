@@ -58,8 +58,8 @@ head(ws, r, ["Variable", "Valor", "Unidad", "", "", "Comentario"]); r += 1
 terreno = [
     ("Precio del terreno", 119000, "UF", "Precio pedido por el vendedor"),
     ("Pie", 10000, "UF", "Propuesto: 10.000 en vez de 20.000"),
-    ("% de cada venta destinado al terreno", 0.35, "%", "35% para caber en el plazo de 5 años"),
-    ("Plazo máximo para pagar el terreno", 5, "años", "Debe contarse desde el permiso de loteo"),
+    ("% de cada venta destinado al terreno", 0.30, "%", "30% de cada escritura"),
+    ("Año de vencimiento del plazo", 6, "año", "5 años desde el permiso, obtenido en el año 1"),
 ]
 FILA = {}
 for n, v, u, f in terreno:
@@ -81,7 +81,7 @@ esc = [
     ("Precio inicial", 3.3, 3.5, 3.5, "0.00", "UF/m²"),
     ("Precio maduro", 3.8, 4.0, 4.2, "0.00", "UF/m², desde el año 3 de venta"),
     ("Año de venta en que sube el precio", 4, 3, 2, "0", "1 = primer año de venta"),
-    ("Urbanización total (IVA incluido)", 185000, 155000, 135000, "#,##0", "UF — cotizar con 3 contratistas"),
+    ("Urbanización total (IVA incluido)", 80000, 60000, 45000, "#,##0", "UF — reconstruido del resumen por km; cotizar en firme"),
     ("Gasto comercial", 0.055, 0.045, 0.040, "0.0%", "% sobre ventas"),
     ("Administración anual", 3000, 2500, 2500, "#,##0", "UF/año"),
     ("Proyectos y permisos año 0", 9000, 9000, 9000, "#,##0", "UF"),
@@ -149,7 +149,7 @@ for esc_name in ("Conservador", "Base", "Optimista"):
     pterr = f"{S}$B${FILA['Precio del terreno']}"
     ppie  = f"{S}$B${FILA['Pie']}"
     ppct  = f"{S}$B${FILA['% de cada venta destinado al terreno']}"
-    pplazo= f"{S}$B${FILA['Plazo máximo para pagar el terreno']}"
+    pplazo= f"{S}$B${FILA['Año de vencimiento del plazo']}"
 
     # fila 5: año índice
     r5 = 5
@@ -298,11 +298,14 @@ r = 3
 s.cell(row=r, column=1, value="ETAPA 2 — STRIP CENTER (terreno 4.386 m²)").font = LBL; r += 1
 head(s, r, ["Variable", "Conservador", "Base", "Optimista", "Comentario"]); r += 1
 sc = [
-    ("Superficie arrendable (m²)", 1150, 1400, 1600, "#,##0", "~32% de ocupación del paño"),
+    ("Superficie arrendable (m²)", 619.2, 619.2, 619.2, "#,##0", "L_05: 8 locales de 38,4 + 2 restaurantes de 156"),
+    ("Superficie construida total (m²)", 729.7, 729.7, 729.7, "#,##0", "Incluye administración y baños/camarines"),
     ("Renta (UF/m²/mes)", 0.28, 0.35, 0.42, "0.00", "Referencia RM: 0,69 en primer piso"),
+    ("NOI de 4 canchas de pádel (UF/año)", 500, 900, 1350, "#,##0", "Arrendadas a operador, sin operar"),
+    ("Inversión en canchas de pádel (UF)", 4200, 3500, 3200, "#,##0", "4 canchas, cierres e iluminación"),
     ("Vacancia", 0.15, 0.08, 0.05, "0%", ""),
     ("Costo de construcción (UF/m²)", 27, 24, 22, "#,##0", "Shell & core"),
-    ("Obras exteriores y empalmes (UF)", 6000, 6000, 6000, "#,##0", "Estacionamientos, paisajismo"),
+    ("Obras exteriores y empalmes (UF)", 4500, 4500, 4500, "#,##0", "Estacionamientos, paisajismo"),
     ("Costos blandos", 0.10, 0.10, 0.10, "0%", "Proyectos, permisos, gerencia"),
     ("Terreno asignado (UF)", 2710, 2710, 2710, "#,##0", "2,3% de las 119.000 UF"),
     ("Gastos no recuperables", 0.12, 0.12, 0.12, "0%", "Contribuciones, administración"),
@@ -317,9 +320,9 @@ for n, a, b, c_, fmt, com in sc:
     s.cell(row=r, column=5, value=com).font = Font(size=9, italic=True)
     SC[n] = r; r += 1
 res_sc = [
-    ("Inversión total (UF)", lambda k: f"={k}{SC['Superficie arrendable (m²)']}*{k}{SC['Costo de construcción (UF/m²)']}*(1+{k}{SC['Costos blandos']})+{k}{SC['Obras exteriores y empalmes (UF)']}+{k}{SC['Terreno asignado (UF)']}", "#,##0"),
+    ("Inversión total (UF)", lambda k: f"={k}{SC['Superficie construida total (m²)']}*{k}{SC['Costo de construcción (UF/m²)']}*(1+{k}{SC['Costos blandos']})+{k}{SC['Inversión en canchas de pádel (UF)']}+{k}{SC['Obras exteriores y empalmes (UF)']}+{k}{SC['Terreno asignado (UF)']}", "#,##0"),
     ("Renta bruta anual (UF)", lambda k: f"={k}{SC['Superficie arrendable (m²)']}*{k}{SC['Renta (UF/m²/mes)']}*12", "#,##0"),
-    ("NOI anual (UF)", lambda k: f"={k}{r+1}*(1-{k}{SC['Vacancia']})*(1-{k}{SC['Gastos no recuperables']})", "#,##0"),
+    ("NOI anual (UF)", lambda k: f"={k}{r+1}*(1-{k}{SC['Vacancia']})*(1-{k}{SC['Gastos no recuperables']})+{k}{SC['NOI de 4 canchas de pádel (UF/año)']}", "#,##0"),
     ("Yield on cost", lambda k: f"={k}{r+2}/{k}{r}", "0.0%"),
     ("Valor estabilizado (UF)", lambda k: f"={k}{r+2}/{k}{SC['Cap rate de salida']}", "#,##0"),
     ("Creación de valor (UF)", lambda k: f"={k}{r+4}-{k}{r}", "#,##0"),
@@ -335,12 +338,13 @@ r += len(res_sc) + 2
 s.cell(row=r, column=1, value="ETAPA 3 — COMPARACIÓN DE ALTERNATIVAS PARA EL PAÑO NORTE (18.619 m²)").font = LBL; r += 1
 head(s, r, ["", "Colegio build-to-suit", "Venta del paño", "EDS arrendada", "Comentario"]); r += 1
 comp = [
-    ("Inversión propia (UF)", 255102, 0, 4859, "#,##0", "EDS: sólo accesos, EISTU y empalmes"),
-    ("Flujo anual (UF)", 22230, 0, 4200, "#,##0", "EDS: canon de 350 UF/mes"),
-    ("Rentabilidad sobre costo", 0.087, 0, 0.864, "0.0%", ""),
-    ("Valor del activo (UF)", 261529, 46548, 56000, "#,##0", "Venta del paño a 2,5 UF/m²"),
-    ("Payback (años)", 11.5, 0, 1.2, "0.0", ""),
-    ("Superficie que ocupa (m²)", 18619, 18619, 2200, "#,##0", "La EDS deja 16.400 m² libres"),
+    ("Inversión propia (UF)", 177894, 0, 4879, "#,##0", "Colegio L_09: 3.849 m² cerrados + 2.088 patio techado"),
+    ("Flujo anual (UF)", 12286, 0, 4200, "#,##0", "EDS: canon de 350 UF/mes"),
+    ("Rentabilidad sobre costo", 0.069, 0, 0.861, "0.0%", ""),
+    ("Valor del activo (UF)", 144541, 45885, 56000, "#,##0", "Venta del paño a 2,5 UF/m²"),
+    ("Creación de valor (UF)", -33352, 34383, 51121, "#,##0", "El colegio destruye valor en escenario Base"),
+    ("Payback (años)", 14.5, 0, 1.2, "0.0", ""),
+    ("Superficie que ocupa (m²)", 18354, 18354, 2200, "#,##0", "La EDS deja 16.154 m² libres"),
 ]
 for n, a, b, c_, fmt, com in comp:
     s.cell(row=r, column=1, value=n).border = bd
