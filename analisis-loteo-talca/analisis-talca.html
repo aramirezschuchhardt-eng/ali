@@ -1,0 +1,694 @@
+<title>Loteo Av. San Miguel 6850, Talca — Evaluación de compra y estructuración por etapas</title>
+<style>
+:root{
+  --paper:#F1F2EE; --surface:#FBFBF8; --surface-2:#E9EBE4;
+  --ink:#17212A; --ink-soft:#59636C; --ink-faint:#8A939A;
+  --rule:#D3D7CD; --rule-strong:#A9B0A4;
+  --blue:#2C5D7C; --blue-wash:#E2EAEF;
+  --cons:#8C5A2B; --base:#2C5D7C; --opt:#3E6B4A;
+  --flag:#9C3B2E; --flag-wash:#F3E4E0;
+  --ok-wash:#E4EBE2;
+  --serif:"Iowan Old Style","Charter","Palatino Linotype",Palatino,Georgia,serif;
+  --sans:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  --mono:ui-monospace,"SF Mono",SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --paper:#12181D; --surface:#182027; --surface-2:#1F2931;
+    --ink:#E3E7E1; --ink-soft:#A2ACB2; --ink-faint:#78838A;
+    --rule:#2C3740; --rule-strong:#48555E;
+    --blue:#7FB0D0; --blue-wash:#1D2A34;
+    --cons:#C9945C; --base:#7FB0D0; --opt:#84AC8E;
+    --flag:#D87A68; --flag-wash:#2E1F1C;
+    --ok-wash:#1C2620;
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#12181D; --surface:#182027; --surface-2:#1F2931;
+  --ink:#E3E7E1; --ink-soft:#A2ACB2; --ink-faint:#78838A;
+  --rule:#2C3740; --rule-strong:#48555E;
+  --blue:#7FB0D0; --blue-wash:#1D2A34;
+  --cons:#C9945C; --base:#7FB0D0; --opt:#84AC8E;
+  --flag:#D87A68; --flag-wash:#2E1F1C;
+  --ok-wash:#1C2620;
+}
+*{box-sizing:border-box}
+body{
+  background:var(--paper); color:var(--ink);
+  font-family:var(--sans); font-size:16.5px; line-height:1.62;
+  margin:0; padding:0;
+  -webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:1000px;margin:0 auto;padding:0 clamp(18px,4vw,56px) 96px}
+.col{max-width:73ch}
+h1,h2,h3,h4{font-family:var(--serif);font-weight:600;text-wrap:balance;margin:0}
+h1{font-size:clamp(30px,4.6vw,46px);line-height:1.12;letter-spacing:-.012em}
+h2{font-size:clamp(23px,3vw,30px);line-height:1.2;letter-spacing:-.008em}
+h3{font-size:20px;line-height:1.3}
+h4{font-size:17px;line-height:1.35;font-family:var(--sans);font-weight:650}
+p{margin:0}
+a{color:var(--blue)}
+
+/* ---- CAD-sheet lettering: spaced uppercase, as on the plan sheets ---- */
+.label{
+  font-family:var(--mono); font-size:11px; font-weight:600;
+  letter-spacing:.22em; text-transform:uppercase; color:var(--ink-faint);
+}
+
+header.sheet{
+  border-bottom:2px solid var(--ink); padding:clamp(40px,7vw,84px) 0 26px;
+  display:flex; flex-direction:column; gap:20px;
+}
+.sheet-meta{display:flex;flex-wrap:wrap;gap:8px 28px;align-items:baseline}
+.lead{font-family:var(--serif);font-size:clamp(18px,2.2vw,21px);line-height:1.5;color:var(--ink-soft);max-width:62ch}
+.stamp{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
+  border:1px solid var(--rule-strong); background:var(--surface);
+}
+.stamp div{padding:12px 16px;border-right:1px solid var(--rule);display:flex;flex-direction:column;gap:5px}
+.stamp div:last-child{border-right:0}
+.stamp b{font-family:var(--mono);font-size:17px;font-weight:600;font-variant-numeric:tabular-nums;letter-spacing:-.01em}
+
+section{padding-top:56px;display:flex;flex-direction:column;gap:20px}
+.sec-head{display:flex;flex-direction:column;gap:9px;border-top:1px solid var(--rule-strong);padding-top:14px}
+.sec-num{font-family:var(--mono);font-size:11px;letter-spacing:.22em;color:var(--blue);font-weight:700}
+
+table{border-collapse:collapse;width:100%;font-size:14.5px;font-variant-numeric:tabular-nums}
+.scroll{overflow-x:auto;border:1px solid var(--rule);background:var(--surface)}
+th,td{padding:9px 13px;text-align:right;border-bottom:1px solid var(--rule);white-space:nowrap}
+th:first-child,td:first-child{text-align:left;white-space:normal;min-width:170px}
+thead th{
+  font-family:var(--mono);font-size:10.5px;letter-spacing:.13em;text-transform:uppercase;
+  color:var(--ink-soft);font-weight:600;border-bottom:1.5px solid var(--rule-strong);
+  background:var(--surface-2);
+}
+tbody tr:last-child td{border-bottom:0}
+tfoot td{font-weight:700;border-top:1.5px solid var(--rule-strong);background:var(--surface-2)}
+td.num,th.num{font-family:var(--mono);font-size:13.5px}
+tr.total td{font-weight:700;background:var(--surface-2)}
+
+.note{
+  border-left:3px solid var(--rule-strong); background:var(--surface);
+  padding:15px 20px; display:flex; flex-direction:column; gap:9px; font-size:15.5px;
+}
+.note.flag{border-left-color:var(--flag);background:var(--flag-wash)}
+.note.ok{border-left-color:var(--opt);background:var(--ok-wash)}
+.note.blue{border-left-color:var(--blue);background:var(--blue-wash)}
+.note .label{color:inherit;opacity:.72}
+
+ul,ol{margin:0;padding-left:1.35em;display:flex;flex-direction:column;gap:9px}
+li::marker{color:var(--ink-faint)}
+ol.answers{padding-left:0;list-style:none;counter-reset:a;gap:18px}
+ol.answers>li{counter-increment:a;display:grid;grid-template-columns:34px 1fr;gap:14px;align-items:start}
+ol.answers>li::before{
+  content:counter(a,decimal-leading-zero);font-family:var(--mono);font-size:12px;font-weight:700;
+  color:var(--blue);padding-top:5px;letter-spacing:.05em;
+}
+ol.answers h4{margin-bottom:4px}
+
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:18px}
+.card{border:1px solid var(--rule);background:var(--surface);padding:18px 20px;display:flex;flex-direction:column;gap:10px}
+.card.win{border-color:var(--opt);border-width:1.5px}
+.pill{
+  display:inline-block;font-family:var(--mono);font-size:10.5px;letter-spacing:.13em;
+  text-transform:uppercase;font-weight:700;padding:3px 8px;border:1px solid currentColor;
+}
+.p-cons{color:var(--cons)} .p-base{color:var(--base)} .p-opt{color:var(--opt)} .p-flag{color:var(--flag)}
+
+.gate{display:grid;grid-template-columns:auto 1fr;gap:0 20px}
+.gate .bar{border-left:2px solid var(--rule-strong);position:relative}
+.gate .bar::before{content:"";position:absolute;left:-5px;top:6px;width:8px;height:8px;background:var(--blue);border-radius:50%}
+.gate>div:nth-child(even){padding-bottom:26px;display:flex;flex-direction:column;gap:7px}
+.gate .yr{font-family:var(--mono);font-size:12px;font-weight:700;letter-spacing:.1em;color:var(--blue);padding-top:2px;text-align:right;min-width:64px}
+
+.heat td.num{font-weight:600}
+.h1{background:color-mix(in srgb,var(--flag) 16%,transparent)}
+.h2{background:color-mix(in srgb,var(--cons) 14%,transparent)}
+.h3{background:color-mix(in srgb,var(--opt) 13%,transparent)}
+.h4{background:color-mix(in srgb,var(--opt) 26%,transparent)}
+
+footer{margin-top:72px;border-top:2px solid var(--ink);padding-top:20px;display:flex;flex-direction:column;gap:10px;font-size:14px;color:var(--ink-soft)}
+:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
+</style>
+
+<div class="wrap">
+
+<header class="sheet">
+  <div class="sheet-meta">
+    <span class="label">Evaluación de inversión</span>
+    <span class="label">Agosto 2026</span>
+    <span class="label">Rol 3721-2 / 3721-12 · Talca</span>
+  </div>
+  <h1>Loteo 19,26 ha, Avenida San Miguel 6850<br>Compra del terreno y masterplan por etapas</h1>
+  <p class="lead">Análisis crítico de la compra a 119.000 UF con saldo contra flujo, del loteo de 90 sitios como motor de caja, y de las tres alternativas de activo ancla —strip center, colegio y estación de servicio— sobre los datos reales de los planos L_02 y L_03 y la memoria explicativa de agosto 2023.</p>
+  <div class="stamp">
+    <div><span class="label">Veredicto</span><b>Comprar, con condiciones</b></div>
+    <div><span class="label">Precio máximo</span><b>133.000 UF</b></div>
+    <div><span class="label">Capital real</span><b>65.000 UF</b></div>
+    <div><span class="label">Meta de gestión</span><b>1,5 sitios/mes</b></div>
+  </div>
+</header>
+
+<section>
+  <div class="sec-head col">
+    <span class="sec-num">Resumen ejecutivo</span>
+    <h2>Lo que decide este negocio no es el precio del terreno</h2>
+  </div>
+  <div class="col" style="display:flex;flex-direction:column;gap:18px">
+    <p>El terreno a 119.000 UF equivale a <strong>0,62 UF/m² del paño</strong> y a <strong>0,93 UF/m² de superficie vendible</strong>: entre 24% y 27% de los ingresos brutos proyectados del loteo. Es un precio razonable. Con el escenario Base, el máximo pagable para una TIR de 18% es de 134.000 UF con estructura simple y 178.000 UF con estructura optimizada, así que <strong>hay colchón de precio</strong>.</p>
+    <p>El problema está en otra parte. El proyecto es extremadamente sensible a la <strong>velocidad de venta</strong>, y muy poco sensible al precio del terreno. A 15 sitios al año el negocio rinde 20–27% de TIR. A 10 sitios al año rinde 5% y destruye valor —aunque el terreno fuera gratis. Ese es el eje sobre el que hay que negociar y estructurar todo lo demás.</p>
+    <div class="note flag">
+      <span class="label">Tres correcciones a los supuestos entregados</span>
+      <ul>
+        <li><strong>El pie de 20.000 UF no es el capital que se necesita.</strong> El peak de caja negativa es de 110.000 UF con una estructura ingenua y de 65.000 UF con la estructura optimizada que se propone más abajo. Quien entre pensando que necesita 20.000 UF se queda sin caja en el año 1, antes de vender el primer sitio.</li>
+        <li><strong>"El precio sube a 4 UF/m² después del segundo año" no es un supuesto, es un deseo.</strong> El precio no sube con el calendario: sube cuando el proyecto está urbanizado, con áreas verdes ejecutadas y con un ancla comercial operando. Si se llega a 4 UF/m² sin haber construido nada de eso, se está apostando al mercado, no gestionando el activo.</li>
+        <li><strong>El plazo de 5 años convierte el pago contra flujo en deuda a plazo fijo.</strong> Pagar «con la venta» reparte el riesgo de absorción con el vendedor; ponerle fecha se lo devuelve completo al comprador. A 2 sitios al mes el plazo sobra; a 1 al mes falta, y quedan 43.000 UF por pagar de una vez en el año 5. Es la cláusula que más hay que trabajar en la negociación.</li>
+        <li><strong>90 sitios de 1.400 m² es mucho inventario para Talca.</strong> La superficie predial mínima de la zona U-17 impide subdividir más fino, así que el producto está fijado: sitios de ~1.421 m² a ~5.000 UF. Ese comprador —autoconstructor de ingreso medio-alto— es un segmento angosto. Absorber 90 unidades exige ser el proyecto dominante del sector durante seis años seguidos.</li>
+      </ul>
+    </div>
+    <div class="note ok">
+      <span class="label">Y una oportunidad que la propuesta actual no está capturando</span>
+      <p>Los 4.386 m² comerciales y los 18.619 m² del colegio se compran, dentro del paño, a 0,62 UF/m². Un paño comercial con frente a Avenida San Miguel vale entre 2,5 y 4 UF/m² una vez que el loteo esté urbanizado y habitado. <strong>El mayor retorno por peso invertido de todo el proyecto no está en las parcelas: está en el terreno de la estación de servicio arrendado a un operador de marca</strong> —payback de 1,2 años y un activo de 56.000 UF sobre 4.900 UF de inversión propia.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="sec-head col">
+    <span class="sec-num">01 · Datos entregados</span>
+    <h2>Lo que dicen los planos, medido</h2>
+  </div>
+  <p class="col">Estas cifras no son estimaciones: salen del cuadro de superficies de la lámina L_03 y del cuadro de fusión de la L_02. Se sumaron los 90 registros del listado de lotes.</p>
+  <div class="scroll">
+    <table>
+      <thead><tr><th>Partida</th><th class="num">Superficie (m²)</th><th class="num">% del paño</th><th>Destino en el modelo</th></tr></thead>
+      <tbody>
+        <tr><td>90 sitios (Lote A1)</td><td class="num">127.866</td><td class="num">66,4%</td><td>Venta — Etapa 1</td></tr>
+        <tr><td>Vialidad interior + expropiación</td><td class="num">27.958</td><td class="num">14,5%</td><td>Costo de urbanización</td></tr>
+        <tr><td>Paño colegio</td><td class="num">18.619</td><td class="num">9,7%</td><td>Etapa 3 — colegio o EDS</td></tr>
+        <tr><td>Áreas verdes (11.649 + 2.149)</td><td class="num">13.798</td><td class="num">7,2%</td><td>Costo / plusvalía</td></tr>
+        <tr><td>Locales comerciales</td><td class="num">4.386</td><td class="num">2,3%</td><td>Etapa 2 — strip center</td></tr>
+      </tbody>
+      <tfoot><tr><td>Paño fusionado (Lote A + Lote B)</td><td class="num">192.627</td><td class="num">100%</td><td>19,2627 ha</td></tr></tfoot>
+    </table>
+  </div>
+  <div class="grid2">
+    <div class="card">
+      <span class="label">Producto</span>
+      <p><strong>Sitio promedio 1.421 m²</strong> (rango 1.400–1.590 m²). Servidumbres de canal afectan 1.725 m² repartidos en los lotes con franja de 2,50 m. Superficie útil neta 126.141 m².</p>
+    </div>
+    <div class="card">
+      <span class="label">Régimen</span>
+      <p><strong>Condominio tipo B</strong> (nota de la lámina L_03). Calles y áreas verdes quedan como bienes comunes: no hay cesión gratuita al municipio, pero sí gastos comunes y reglamento de copropiedad desde el primer comprador.</p>
+    </div>
+    <div class="card">
+      <span class="label">Cargas físicas</span>
+      <p>Cinco servidumbres de canal (dos entubadas, tres a canal abierto), un tranque, un foso de desagüe y <strong>1.843,70 m² afectos a expropiación</strong> por ensanche de Avenida San Miguel.</p>
+    </div>
+    <div class="card">
+      <span class="label">Norma</span>
+      <p>Zona <strong>U-17</strong> del PRC de Talca, superficie predial mínima 1.400 m². Perfiles: Calle 1 de 18 m con mediana, Calle 2 de 11 m con dos calzadas de 3,5 m.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="sec-head col">
+    <span class="sec-num">02 · Supuestos</span>
+    <h2>Lo que estoy asumiendo, y por qué</h2>
+  </div>
+  <p class="col">Todo lo que sigue depende de estos números. Ninguno es un dato: son supuestos explícitos que hay que reemplazar por cotizaciones y estudios reales antes de firmar.</p>
+  <div class="scroll">
+    <table>
+      <thead><tr><th>Supuesto</th><th class="num">Conservador</th><th class="num">Base</th><th class="num">Optimista</th><th>Fundamento y riesgo</th></tr></thead>
+      <tbody>
+        <tr><td>Velocidad de venta (sitios/año)</td><td class="num">10</td><td class="num">15</td><td class="num">21</td><td>Producto de nicho, ticket ~5.000 UF. El supuesto implícito de la propuesta (30/año) no tiene respaldo.</td></tr>
+        <tr><td>Precio inicial (UF/m²)</td><td class="num">3,3</td><td class="num">3,5</td><td class="num">3,5</td><td>Referencia de mercado: parcelas en condominio en Talca en torno a 4,6 UF/m². 3,5 es defendible.</td></tr>
+        <tr><td>Precio maduro (UF/m²)</td><td class="num">3,8</td><td class="num">4,0–4,2</td><td class="num">4,0–4,4</td><td>Sólo alcanzable con urbanización recibida y ancla comercial operando.</td></tr>
+        <tr><td>Urbanización total (UF, IVA incl.)</td><td class="num">185.000</td><td class="num">155.000</td><td class="num">135.000</td><td>~2.150 m lineales de calle a 42–60 UF/ml, más áreas verdes, cierre, portería, canales y 10% de imprevistos. <strong>Es el número más incierto del modelo.</strong></td></tr>
+        <tr><td>Inicio de ventas (año)</td><td class="num">3</td><td class="num">2</td><td class="num">1</td><td>Depende de permiso de loteo y factibilidad sanitaria.</td></tr>
+        <tr><td>Gasto comercial (% ventas)</td><td class="num">5,5%</td><td class="num">4,5%</td><td class="num">4,0%</td><td>Corretaje, sala de ventas, publicidad.</td></tr>
+        <tr><td>Impuesto a la renta</td><td class="num">27%</td><td class="num">27%</td><td class="num">27%</td><td>Primera categoría, régimen general.</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="note flag">
+    <span class="label">Dos efectos tributarios que suelen olvidarse</span>
+    <ul>
+      <li><strong>El IVA de la urbanización no se recupera.</strong> La venta de sitios sin construcción no está afecta a IVA, de modo que no hay crédito fiscal contra el cual imputar el IVA de los contratos de obra. Todo el presupuesto de urbanización debe cotizarse y modelarse <em>con IVA incluido</em>: si se presupuesta neto, faltan del orden de 25.000 UF.</li>
+      <li><strong>Sobretasa a sitios eriazos.</strong> Los sitios urbanizados y no edificados en área urbana pagan sobretasa de impuesto territorial. Cada año de inventario sin vender cuesta caja, lo que castiga doblemente el escenario lento.</li>
+    </ul>
+  </div>
+</section>
+
+<section>
+  <div class="sec-head col">
+    <span class="sec-num">03 · Resultados — Etapa 1</span>
+    <h2>El loteo, en tres escenarios</h2>
+  </div>
+  <div class="scroll">
+    <table>
+      <thead><tr><th>Resultado (Etapa 1)</th><th class="num">Conservador</th><th class="num">Base</th><th class="num">Optimista</th></tr></thead>
+      <tbody>
+        <tr><td>Superficie vendible</td><td class="num">127.866 m²</td><td class="num">127.866 m²</td><td class="num">127.866 m²</td></tr>
+        <tr><td>Precio promedio logrado</td><td class="num">3,58 UF/m²</td><td class="num">3,88 UF/m²</td><td class="num">3,95 UF/m²</td></tr>
+        <tr><td>Ingresos totales</td><td class="num">457.476</td><td class="num">496.546</td><td class="num">505.071</td></tr>
+        <tr><td>Costos totales (con terreno)</td><td class="num">373.949</td><td class="num">322.633</td><td class="num">294.491</td></tr>
+        <tr><td>Utilidad antes de impuesto</td><td class="num">83.527</td><td class="num">173.914</td><td class="num">210.580</td></tr>
+        <tr><td>Margen bruto</td><td class="num">18,3%</td><td class="num">35,0%</td><td class="num">41,7%</td></tr>
+        <tr><td>Utilidad neta</td><td class="num">60.975</td><td class="num">126.957</td><td class="num">153.723</td></tr>
+        <tr><td>Margen neto</td><td class="num">13,3%</td><td class="num">25,6%</td><td class="num">30,4%</td></tr>
+        <tr class="total"><td>TIR del proyecto</td><td class="num">4,2%</td><td class="num">20,0%</td><td class="num">50,6%</td></tr>
+        <tr><td>VAN al 12%</td><td class="num">−39.800</td><td class="num">+27.233</td><td class="num">+82.631</td></tr>
+        <tr><td>Capital máximo expuesto</td><td class="num">127.750</td><td class="num">109.750</td><td class="num">92.750</td></tr>
+        <tr><td>Último año de venta</td><td class="num">Año 11</td><td class="num">Año 7</td><td class="num">Año 5</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="col">Cifras en UF, con la estructura de pago tal como está planteada (pie 20.000 UF, 25% de cada venta al terreno, urbanización en tres etapas). La distancia entre escenarios no viene del precio de venta: viene de cuánto tiempo hay que financiar la urbanización antes de que la caja se dé vuelta.</p>
+
+  <h3 class="col" style="margin-top:12px">Flujo de caja — escenario Base</h3>
+  <div class="scroll">
+    <table>
+      <thead><tr><th>Año</th><th class="num">0</th><th class="num">1</th><th class="num">2</th><th class="num">3</th><th class="num">4</th><th class="num">5</th><th class="num">6</th><th class="num">7</th><th class="num">8</th></tr></thead>
+      <tbody>
+        <tr><td>Sitios vendidos</td><td class="num">—</td><td class="num">—</td><td class="num">15</td><td class="num">15</td><td class="num">15</td><td class="num">15</td><td class="num">15</td><td class="num">15</td><td class="num">—</td></tr>
+        <tr><td>Ingresos</td><td class="num">—</td><td class="num">—</td><td class="num">74.588</td><td class="num">74.588</td><td class="num">85.244</td><td class="num">85.244</td><td class="num">87.375</td><td class="num">89.506</td><td class="num">—</td></tr>
+        <tr><td>Urbanización</td><td class="num">—</td><td class="num">69.750</td><td class="num">—</td><td class="num">46.500</td><td class="num">—</td><td class="num">38.750</td><td class="num">—</td><td class="num">—</td><td class="num">—</td></tr>
+        <tr><td>Pago del terreno</td><td class="num">20.000</td><td class="num">—</td><td class="num">18.647</td><td class="num">18.647</td><td class="num">21.311</td><td class="num">21.311</td><td class="num">19.084</td><td class="num">—</td><td class="num">—</td></tr>
+        <tr class="total"><td>Flujo del período</td><td class="num">−32.000</td><td class="num">−77.750</td><td class="num">+49.585</td><td class="num">+3.085</td><td class="num">+57.097</td><td class="num">+1.892</td><td class="num">+55.367</td><td class="num">+65.474</td><td class="num">−20.054</td></tr>
+        <tr><td>Flujo acumulado</td><td class="num">−32.000</td><td class="num">−109.750</td><td class="num">−60.165</td><td class="num">−57.080</td><td class="num">+17</td><td class="num">+1.909</td><td class="num">+57.276</td><td class="num">+122.751</td><td class="num">+102.697</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="note">
+    <span class="label">Cómo leer esta tabla</span>
+    <p>El proyecto recién vuelve a cero en el <strong>año 4</strong>. Entre el año 1 y el año 4 hay que sostener del orden de 110.000 UF: eso es lo que realmente hay que financiar. El flujo del año 8 es negativo porque el impuesto de la última venta se paga al año siguiente.</p>
+  </div>
+</section>
+
+<section>
+  <div class="sec-head col">
+    <span class="sec-num">04 · Sensibilidad</span>
+    <h2>Dónde se rompe el negocio</h2>
+  </div>
+  <p class="col">TIR y VAN al 12% según velocidad de venta y costo de urbanización. Todo lo demás en supuestos Base.</p>
+  <div class="scroll">
+    <table class="heat">
+      <thead><tr><th>Sitios vendidos por año</th><th class="num">Urbanización 130.000 UF</th><th class="num">Urbanización 155.000 UF</th><th class="num">Urbanización 185.000 UF</th></tr></thead>
+      <tbody>
+        <tr><td>8 · uno cada mes y medio</td><td class="num h1">13,1%</td><td class="num h1">9,7%</td><td class="num h1">7,0%</td></tr>
+        <tr><td>10 · el escenario conservador</td><td class="num h2">17,2%</td><td class="num h1">12,9%</td><td class="num h1">9,5%</td></tr>
+        <tr><td>12 · uno al mes</td><td class="num h2">19,6%</td><td class="num h2">16,4%</td><td class="num h1">11,4%</td></tr>
+        <tr><td>15 · el escenario base</td><td class="num h3">26,1%</td><td class="num h3">20,0%</td><td class="num h2">13,5%</td></tr>
+        <tr><td>18</td><td class="num h4">31,2%</td><td class="num h3">25,1%</td><td class="num h2">17,4%</td></tr>
+        <tr><td>21 · el escenario optimista</td><td class="num h4">36,4%</td><td class="num h4">28,7%</td><td class="num h3">21,2%</td></tr>
+        <tr><td>24</td><td class="num h4">35,2%</td><td class="num h4">33,2%</td><td class="num h3">23,9%</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="note blue">
+    <span class="label">La línea de flotación</span>
+    <p>Con urbanización de 155.000 UF, el proyecto rinde sobre 15% recién a partir de <strong>12 sitios vendidos al año — uno al mes, todos los meses, durante siete años y medio</strong>. Por debajo de eso, la utilidad contable sigue siendo positiva pero el dinero se queda tanto tiempo adentro que el retorno no compensa.</p>
+    <p>La meta comercial declarada —<strong>1 a 2 sitios al mes</strong>— tiene su borde inferior justo sobre esa línea. Eso significa que el plan de ventas no tiene holgura por abajo: cumplir el mínimo del rango es apenas suficiente, y quedarse un poco corto ya no lo es. Vale la pena fijar la meta de gestión en 1,5 al mes y tratar 1 al mes como umbral de alarma, no como objetivo.</p>
+  </div>
+
+  <h3 class="col" style="margin-top:14px">¿Y si el precio llega a 4 UF/m² antes o después?</h3>
+  <div class="scroll">
+    <table>
+      <thead><tr><th>Trayectoria de precio</th><th class="num">Ingresos</th><th class="num">Margen neto</th><th class="num">TIR</th><th class="num">VAN 12%</th></tr></thead>
+      <tbody>
+        <tr><td>Llega a 4,0 en el año 2 de venta</td><td class="num">511.464</td><td class="num">26,9%</td><td class="num">22,3%</td><td class="num">+35.557</td></tr>
+        <tr><td>Llega a 4,0 en el año 3 <em>(Base)</em></td><td class="num">496.546</td><td class="num">25,6%</td><td class="num">20,0%</td><td class="num">+27.233</td></tr>
+        <tr><td>Llega a 4,0 en el año 4</td><td class="num">481.629</td><td class="num">24,2%</td><td class="num">18,3%</td><td class="num">+21.211</td></tr>
+        <tr><td>Nunca sube: 3,5 plano</td><td class="num">447.531</td><td class="num">20,7%</td><td class="num">15,0%</td><td class="num">+9.176</td></tr>
+        <tr><td>El mercado corrige a 3,2</td><td class="num">409.171</td><td class="num">16,1%</td><td class="num">11,4%</td><td class="num">−1.684</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="col">Puesto en la misma unidad: adelantar el alza de precio un año vale 8.300 UF de VAN. Subir la velocidad de venta de 12 a 15 sitios/año vale 8.700 UF. Bajar el costo de urbanización de 155.000 a 130.000 vale <strong>18.100 UF</strong>. <strong>Negociar el precio del terreno de 119.000 a 110.000 vale 9.000 UF nominales y bastante menos en VAN</strong>, porque se pagan a lo largo de seis años. El esfuerzo gerencial debería repartirse en ese orden —cotizar bien la urbanización primero, negociar el terreno último—, que es exactamente el inverso del orden en que suelen ocurrir estas conversaciones.</p>
+</section>
+
+<section>
+  <div class="sec-head col">
+    <span class="sec-num">05 · Punto de equilibrio</span>
+    <h2>Cuántos sitios hay que vender</h2>
+  </div>
+  <div class="grid2">
+    <div class="card">
+      <span class="label">Para cubrir el terreno completo</span>
+      <p><b style="font-family:var(--mono);font-size:26px">25 sitios</b></p>
+      <p>A 3,5 UF/m² y neto de gasto comercial, cada sitio deja 4.749 UF. Las 119.000 UF del terreno se cubren con 25 escrituras — el 28% del proyecto. El saldo de 99.000 UF, con 21.</p>
+    </div>
+    <div class="card">
+      <span class="label">Para no perder plata</span>
+      <p><b style="font-family:var(--mono);font-size:26px">64 sitios</b></p>
+      <p>Terreno más urbanización más gastos suman ~303.000 UF. A 3,5 UF/m² el equilibrio está en 64 sitios (71% del proyecto); si el precio sube a 4,0, baja a 56 sitios (62%). <strong>Toda la utilidad del negocio está en el último tercio del inventario</strong>, que es justamente el más lento de colocar.</p>
+    </div>
+  </div>
+  <div class="note flag">
+    <span class="label">Implicancia estratégica</span>
+    <p>Que la utilidad viva en la cola del inventario es la razón por la que el strip center y el ancla no son "una segunda etapa opcional": son <strong>lo que hace vendibles los últimos 30 sitios</strong>. Un loteo de 90 parcelas sin servicios a 8 km del centro se vende rápido al principio (los compradores oportunistas) y después se estanca. Construir el ancla temprano es una decisión comercial de la Etapa 1, no una decisión de inversión de la Etapa 2.</p>
+  </div>
+</section>
+
+<section>
+  <div class="sec-head col">
+    <span class="sec-num">06 · Compra del terreno</span>
+    <h2>Cómo estructurar las 119.000 UF</h2>
+  </div>
+  <p class="col">La idea de pagar el saldo contra flujo es correcta. Lo que está mal calibrado es el resto: el pie es demasiado grande, el porcentaje de flujo comprometido es alto, y no hay ningún mecanismo que proteja al comprador si los permisos se demoran o si la venta es lenta.</p>
+
+  <h3 class="col">La estructura que propongo</h3>
+  <div class="scroll">
+    <table>
+      <thead><tr><th>Variable</th><th class="num">Planteado</th><th class="num">Propuesto</th><th>Efecto</th></tr></thead>
+      <tbody>
+        <tr><td>Pie</td><td class="num">20.000 UF</td><td class="num">10.000 UF</td><td>Libera 10.000 UF para urbanización, que sí genera ventas. Cada 10.000 UF menos de pie suben la TIR ~2,9 puntos.</td></tr>
+        <tr><td>Saldo</td><td class="num">99.000 UF</td><td class="num">109.000 UF</td><td>Se paga íntegro contra escrituras, no contra calendario.</td></tr>
+        <tr><td>% de cada venta al terreno</td><td class="num">—</td><td class="num">20–25%</td><td>1.150–1.250 UF por sitio escriturado. Deja 75% del precio para urbanizar y operar.</td></tr>
+        <tr><td>Garantía</td><td class="num">—</td><td class="num">Hipoteca con alzamientos parciales</td><td>Cada sitio se alza contra el pago de su cuota. El vendedor mantiene garantía real sobre lo no pagado sin bloquear la venta.</td></tr>
+        <tr><td>Reajuste</td><td class="num">—</td><td class="num">UF, sin interés</td><td>Si el vendedor exige interés, tope de 3% real anual sobre saldo insoluto.</td></tr>
+        <tr><td>Plazo máximo</td><td class="num">5 años</td><td class="num">5 años + 24 meses</td><td>El plazo debe correr <strong>desde la aprobación del permiso de loteo</strong>, no desde la escritura, con prórroga automática por demora de tramitación. Ver sección 07.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3 class="col" style="margin-top:14px">Las condiciones que hay que exigir, en orden de importancia</h3>
+  <ol class="col">
+    <li><strong>Condición suspensiva de permiso y factibilidad.</strong> La promesa se firma con pie, pero la compraventa sólo se celebra si dentro de 18 meses se obtienen permiso de loteo aprobado por la DOM de Talca y certificados de factibilidad de agua potable y alcantarillado. Si no, se restituye el pie íntegro. <em>Sin esta cláusula no se firma nada.</em></li>
+    <li><strong>Alzamientos parciales tarifados en la escritura.</strong> Monto exacto por sitio y plazo de otorgamiento del alzamiento (máximo 10 días hábiles desde el pago), con multa por atraso. Un vendedor que se demora en alzar paraliza las escrituras y mata el flujo.</li>
+    <li><strong>Saneamiento previo de las servidumbres de canal.</strong> Las cinco servidumbres y el tranque de la lámina L_03 deben quedar resueltas —acuerdo escrito con la junta de vigilancia o asociación de canalistas sobre entubamiento y redirección— antes de la compraventa, o con retención de precio equivalente al costo estimado de la obra.</li>
+    <li><strong>Expropiación por cuenta del vendedor.</strong> Los 1.843,70 m² afectos al ensanche de Avenida San Miguel: definir quién cobra la indemnización y quién asume el retiro de cierres. Se descuenta del precio si la carga queda con el comprador.</li>
+    <li><strong>Prepago sin multa.</strong> Si el proyecto vende más rápido de lo previsto, hay que poder liquidar el saldo sin penalización.</li>
+    <li><strong>Sin cláusula de aceleración por incumplimiento de metas de venta.</strong> Es la trampa habitual del pago contra flujo: un vendedor que exige un mínimo anual traslada al comprador todo el riesgo de absorción manteniendo su garantía intacta. Si el vendedor insiste, el precio debe bajar a 105.000 UF.</li>
+    <li><strong>Derecho de primera oferta del comprador</strong> sobre cualquier paño colindante que el vendedor tenga o adquiera. El valor de largo plazo está en consolidar el polo, no en estas 19 hectáreas aisladas.</li>
+  </ol>
+
+  <div class="note blue">
+    <span class="label">Alternativa que vale la pena tantear</span>
+    <p><strong>El vendedor aporta el terreno a la sociedad y participa de la utilidad.</strong> Por ejemplo: 60.000 UF en efectivo contra flujo más un 15% de la utilidad neta del loteo. En el escenario Base eso le entrega ~79.000 UF (menos que las 119.000 nominales, pero con upside) y al comprador le reduce el desembolso fijo en 59.000 UF. Es la estructura que más baja el riesgo del proyecto, porque alinea al dueño del terreno con la velocidad de venta en vez de dejarlo indiferente a ella. Vale la pena ofrecerla aunque el vendedor probablemente prefiera el precio cerrado.</p>
+  </div>
+</section>
+
+<section>
+  <div class="sec-head col">
+    <span class="sec-num">07 · El plazo</span>
+    <h2>Pagar el terreno en 5 años: qué exige eso realmente</h2>
+  </div>
+  <p class="col">El plazo máximo de 5 años es una restricción distinta del pago contra flujo, y hay que verla por separado. «Contra flujo» reparte el riesgo de absorción con el vendedor. «En 5 años» se lo devuelve íntegro al comprador. Cuando se combinan, lo que queda es una deuda a plazo fijo con apariencia de estructura flexible: si las ventas van lentas, el saldo hay que pagarlo igual, con capital propio.</p>
+  <p class="col">La meta comercial declarada es de <strong>1 a 2 sitios al mes</strong>. Ese rango —12 a 24 al año— es exactamente donde el plazo de 5 años pasa de imposible a cómodo:</p>
+  <div class="scroll">
+    <table>
+      <thead><tr><th>Ritmo de venta</th><th class="num">Años para vender los 90</th><th class="num">Vendidos al año 5</th><th class="num">Ingresos acumulados</th><th class="num">% de cada venta al terreno</th><th class="num">Saldo a pagar de golpe en el año 5</th></tr></thead>
+      <tbody>
+        <tr><td><strong>1,0 al mes</strong> · 12 al año</td><td class="num">7,5</td><td class="num">48</td><td class="num">255.732</td><td class="num">43%</td><td class="num">43.362</td></tr>
+        <tr><td>1,2 al mes · 15 al año</td><td class="num">6,0</td><td class="num">60</td><td class="num">319.665</td><td class="num">34%</td><td class="num">26.953</td></tr>
+        <tr><td>1,5 al mes · 18 al año</td><td class="num">5,0</td><td class="num">72</td><td class="num">383.598</td><td class="num">28%</td><td class="num">10.543</td></tr>
+        <tr><td><strong>2,0 al mes</strong> · 24 al año</td><td class="num">3,8</td><td class="num">90</td><td class="num">477.366</td><td class="num">23%</td><td class="num">0</td></tr>
+        <tr class="total"><td>Escenario conservador · 10 al año</td><td class="num">9,0</td><td class="num">30</td><td class="num">142.073</td><td class="num">77%</td><td class="num">déficit de 148.000</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="note flag">
+    <span class="label">El límite inferior de la meta es el problema</span>
+    <p>A <strong>2 sitios al mes el plazo de 5 años sobra</strong>: el inventario completo se vende en 3 años y 9 meses, el terreno se paga con el 23% de cada escritura y no queda saldo. A <strong>1 sitio al mes el plazo no alcanza</strong>: al año 5 se habrán vendido 48 de 90 sitios y quedará un saldo de <strong>43.362 UF que hay que pagar de una vez</strong>, justo cuando todavía faltan 42 parcelas por colocar y hay una macro-etapa de urbanización pendiente. Y si el ritmo cae a 10 al mes —el escenario conservador— el plazo es directamente inviable: exigiría el 77% de cada peso vendido y deja un déficit de caja de 148.000 UF.</p>
+    <p>Dicho de otro modo: <strong>la meta de «1 a 2 al mes» no es un rango, son dos negocios distintos.</strong> El extremo alto es un proyecto excelente. El extremo bajo es un proyecto que funciona pero que no cabe en el plazo pactado y obliga a reservar capital para el año 5.</p>
+  </div>
+  <div class="scroll">
+    <table class="heat">
+      <thead><tr><th>TIR con plazo de 5 años, pie 10.000 UF y 35% de cada venta al terreno</th><th class="num">Urbanización 135.000</th><th class="num">Urbanización 155.000</th><th class="num">Urbanización 185.000</th></tr></thead>
+      <tbody>
+        <tr><td>1,0 al mes · 12 al año</td><td class="num h3">18,5%</td><td class="num h2">14,4%</td><td class="num h1">10,7%</td></tr>
+        <tr><td>1,2 al mes · 15 al año</td><td class="num h3">24,6%</td><td class="num h3">20,6%</td><td class="num h2">13,7%</td></tr>
+        <tr><td>1,5 al mes · 18 al año</td><td class="num h4">31,2%</td><td class="num h3">24,9%</td><td class="num h2">18,3%</td></tr>
+        <tr><td>2,0 al mes · 24 al año</td><td class="num h4">41,5%</td><td class="num h4">33,5%</td><td class="num h3">25,3%</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="col">Comparado con un pago contra flujo sin plazo fijo, forzar los 5 años cuesta entre 2 y 8 puntos de TIR en los escenarios buenos —es un costo asumible— pero en el escenario conservador <strong>eleva el capital máximo expuesto de 118.000 a 205.000 UF</strong>. Ahí no es un costo: es lo que rompe el proyecto.</p>
+  <div class="note blue">
+    <span class="label">Las tres cláusulas que hacen manejable el plazo</span>
+    <ol>
+      <li><strong>Que los 5 años corran desde la aprobación del permiso de loteo</strong>, no desde la escritura de compraventa. Si la tramitación se demora 20 meses, el comprador no puede perder un tercio de su plazo de venta en un trámite que no controla. Esta sola cláusula vale más que cualquier rebaja de precio.</li>
+      <li><strong>Prórroga automática de 24 meses</strong> contra pago de un premio acotado —del orden de 3.000 a 5.000 UF, o 3% de interés real sobre el saldo insoluto durante la extensión—. Es un seguro barato contra el único evento que puede costar el terreno completo.</li>
+      <li><strong>Derecho a saldar con macrolotes.</strong> Si al año 5 queda saldo, poder pagarlo transfiriendo al vendedor macrolotes urbanizados a un valor pactado hoy (por ejemplo 3,2 UF/m², bajo el precio de venta al público). Convierte un evento de incumplimiento en una transacción ordenada y le da al vendedor algo que sí quiere: suelo urbanizado en vez de suelo agrícola.</li>
+    </ol>
+  </div>
+  <div class="note ok">
+    <span class="label">Consecuencia operativa</span>
+    <p>Con plazo de 5 años, el plan comercial deja de ser una aspiración y pasa a ser una obligación contractual. Eso exige <strong>18 sitios al año como meta de gestión —1,5 al mes— y 12 como piso de alarma</strong>: si dos semestres consecutivos caen bajo 12, hay que activar el plan B (bajar precio, ofrecer financiamiento directo al comprador, o vender un macrolote completo a otro desarrollador) antes de llegar al año 5 sin caja.</p>
+  </div>
+</section>
+
+<section>
+  <div class="sec-head col">
+    <span class="sec-num">08 · Capital</span>
+    <h2>Cuánto dinero hay que poner de verdad</h2>
+  </div>
+  <div class="scroll">
+    <table>
+      <thead><tr><th>Estructura</th><th class="num">Capital máximo expuesto</th><th class="num">TIR</th><th class="num">VAN 12%</th></tr></thead>
+      <tbody>
+        <tr><td>Simple — pie 20.000, urbanización en 3 etapas, sin preventa</td><td class="num">109.750</td><td class="num">20,0%</td><td class="num">+28.631</td></tr>
+        <tr class="total"><td>Optimizada — pie 10.000, urbanización en 4 macro-etapas, promesas con 20% anticipado</td><td class="num">65.312</td><td class="num">26,8%</td><td class="num">+39.664</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="col">Los tres movimientos que producen esa diferencia no cambian ni un peso de la utilidad final —los 126.957 UF de utilidad neta son idénticos— pero reducen el capital en riesgo en un 40% y suben la TIR casi siete puntos:</p>
+  <ol class="col">
+    <li><strong>Urbanizar por macro-etapas de ~23 sitios</strong>, no el paño completo. Las matrices troncales de agua, alcantarillado y aguas lluvias son inevitables al principio; el pavimento, las veredas y el alumbrado de las calles interiores se pueden diferir tres años.</li>
+    <li><strong>Vender en verde con promesas y pie del 20%</strong> desde que se obtiene el permiso de loteo. En Chile se puede escriturar antes de la recepción de urbanización constituyendo garantía por las obras pendientes, lo que adelanta caja aproximadamente un año.</li>
+    <li><strong>Pie de 10.000 UF en lugar de 20.000.</strong> El dinero puesto en el pie no genera ninguna venta; el mismo dinero puesto en la primera macro-etapa de urbanización sí.</li>
+  </ol>
+  <div class="grid2">
+    <div class="card"><span class="pill p-cons">Conservador</span><p><b style="font-family:var(--mono);font-size:22px">123.800 UF</b> de capital máximo, TIR 4,9%. Ni la estructura optimizada salva un escenario de 10 sitios/año.</p></div>
+    <div class="card"><span class="pill p-base">Base</span><p><b style="font-family:var(--mono);font-size:22px">65.312 UF</b> de capital máximo, TIR 26,8%, caja positiva desde el año 5.</p></div>
+    <div class="card"><span class="pill p-opt">Optimista</span><p><b style="font-family:var(--mono);font-size:22px">46.836 UF</b> de capital máximo, TIR 80,6%. El proyecto se autofinancia desde el año 2.</p></div>
+  </div>
+  <div class="note flag">
+    <span class="label">Recomendación de estructura de capital</span>
+    <p>Levantar <strong>90.000 UF</strong>: 65.000 UF de necesidad modelada más 25.000 UF de colchón. De esos, 60.000 UF como capital propio o de socios y 30.000 UF como línea de crédito de urbanización con garantía sobre macrolotes no vendidos. No financiar el pie con deuda cara: en el escenario conservador el proyecto no genera caja hasta el año 9 y una deuda con amortización fija lo quiebra.</p>
+  </div>
+</section>
+
+<section>
+  <div class="sec-head col">
+    <span class="sec-num">09 · Etapa 2</span>
+    <h2>Strip center: 4.386 m² que valen más de lo que parecen</h2>
+  </div>
+  <p class="col">El paño comercial de la lámina L_03 admite del orden de 1.400 m² arrendables con estacionamientos normativos. Es un strip center de barrio, no un centro comercial: la referencia de mercado en la Región Metropolitana es de 0,69 UF/m²/mes en primer piso; para Talca periférica con una población cautiva de 90 hogares más el flujo de Avenida San Miguel, 0,35 UF/m²/mes es un supuesto prudente.</p>
+  <div class="scroll">
+    <table>
+      <thead><tr><th>Strip center</th><th class="num">Conservador</th><th class="num">Base</th><th class="num">Optimista</th></tr></thead>
+      <tbody>
+        <tr><td>Superficie arrendable</td><td class="num">1.150 m²</td><td class="num">1.400 m²</td><td class="num">1.600 m²</td></tr>
+        <tr><td>Renta</td><td class="num">0,28 UF/m²</td><td class="num">0,35 UF/m²</td><td class="num">0,42 UF/m²</td></tr>
+        <tr><td>Vacancia</td><td class="num">15%</td><td class="num">8%</td><td class="num">5%</td></tr>
+        <tr><td>Inversión (con terreno asignado)</td><td class="num">42.865</td><td class="num">45.670</td><td class="num">47.430</td></tr>
+        <tr><td>NOI anual</td><td class="num">2.890</td><td class="num">4.760</td><td class="num">6.742</td></tr>
+        <tr><td>Yield on cost</td><td class="num">6,7%</td><td class="num">10,4%</td><td class="num">14,2%</td></tr>
+        <tr><td>Cap rate de salida</td><td class="num">9,5%</td><td class="num">8,5%</td><td class="num">7,5%</td></tr>
+        <tr class="total"><td>Valor estabilizado</td><td class="num">30.424</td><td class="num">56.005</td><td class="num">89.887</td></tr>
+        <tr><td>Creación de valor</td><td class="num">−12.441</td><td class="num">+10.336</td><td class="num">+42.457</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="grid2">
+    <div class="card">
+      <span class="label">Mezcla de locales</span>
+      <p>El error clásico es diseñar para el arriendo más alto por m². Para un condominio de 90 familias la mezcla que funciona es: <strong>minimarket o supermercado de conveniencia de 350–450 m² como ancla</strong>, farmacia, panadería-café, botillería, peluquería, veterinaria, lavandería y dos locales de servicios (inmobiliaria, gimnasio boutique). Un local gastronómico con terraza es lo que hace que el proyecto se vea vivo en las fotos de venta de las parcelas.</p>
+    </div>
+    <div class="card">
+      <span class="label">Anclas realistas</span>
+      <p>Para 400 m² en Talca periurbana: formatos de conveniencia (OK Market, Súper 10, Alvi para formato mayor), farmacias de cadena y una sucursal bancaria o caja. No perseguir un supermercado grande: no cabe en 4.386 m² con estacionamientos.</p>
+    </div>
+  </div>
+  <div class="note">
+    <span class="label">Conservar o vender</span>
+    <p><strong>Conservar en renta.</strong> Vender un strip center de 56.000 UF genera menos valor del que aporta como amenidad: su existencia es parte de lo que sostiene el precio de 4,0 UF/m² de los últimos 30 sitios. Además, el arriendo de local comercial con instalaciones está afecto a IVA, de modo que el IVA de la construcción sí es recuperable —a diferencia del de la urbanización—. La decisión de venta se reevalúa recién cuando esté estabilizado a 90% de ocupación con contratos de más de tres años, momento en que el cap rate se comprime y la venta rinde de verdad.</p>
+  </div>
+</section>
+
+<section>
+  <div class="sec-head col">
+    <span class="sec-num">10 · Etapa 3</span>
+    <h2>Colegio o estación de servicio</h2>
+  </div>
+  <p class="col">Los 18.619 m² del paño norte, con frente a Avenida San Miguel, son el activo más flexible del proyecto. Las dos alternativas no compiten en rentabilidad: compiten en escala de capital, y no juegan en la misma liga.</p>
+
+  <div class="grid2">
+    <div class="card">
+      <span class="label">Alternativa A</span>
+      <h3>Colegio de 1.000 alumnos</h3>
+      <p>Unos 7.500 m² construidos. Inversión de <strong>255.000 UF</strong> —el doble de la utilidad completa del loteo—. En modalidad <em>build-to-suit</em> con arriendo triple neto a un sostenedor solvente: renta de 22.200 UF/año, yield on cost 8,7%, valor capitalizado 261.500 UF, payback 11,5 años.</p>
+      <p><strong>El problema no es el retorno, es todo lo demás:</strong> requiere reconocimiento oficial del MINEDUC, un sostenedor con historial, y el arrendatario es monofuncional —si el colegio quiebra, el activo no tiene uso alternativo y el valor cae a suelo. Para un desarrollador que ya tendrá 65.000 UF comprometidas en el loteo, es una concentración de riesgo desproporcionada.</p>
+    </div>
+    <div class="card win">
+      <span class="label">Alternativa B</span>
+      <h3>Estación de servicio en terreno arrendado</h3>
+      <p>2.200 m² con frente a Avenida San Miguel, entregados en arriendo a un operador de marca que construye e invierte por su cuenta. Inversión propia: <strong>4.900 UF</strong> (accesos, EISTU, empalmes, urbanización del frente). Canon de 350 UF/mes en escenario Base.</p>
+      <p><b style="font-family:var(--mono);font-size:22px">86% de yield on cost · payback 1,2 años · activo de 56.000 UF</b></p>
+      <p>Es, por un margen enorme, el mejor retorno sobre capital de todo el masterplan. Y deja 16.400 m² libres para vender, para un segundo loteo o para el colegio más adelante.</p>
+    </div>
+  </div>
+
+  <div class="scroll">
+    <table>
+      <thead><tr><th>Comparación</th><th class="num">Colegio propio</th><th class="num">Colegio build-to-suit</th><th class="num">Venta del paño</th><th class="num">EDS arrendada</th></tr></thead>
+      <tbody>
+        <tr><td>Inversión propia</td><td class="num">255.000</td><td class="num">255.000</td><td class="num">0</td><td class="num">4.900</td></tr>
+        <tr><td>Flujo anual</td><td class="num">variable</td><td class="num">22.230</td><td class="num">0</td><td class="num">4.200</td></tr>
+        <tr><td>Rentabilidad sobre costo</td><td class="num">operativa</td><td class="num">8,7%</td><td class="num">4,0x el costo</td><td class="num">86,4%</td></tr>
+        <tr><td>Valor del activo</td><td class="num">261.529</td><td class="num">261.529</td><td class="num">46.548</td><td class="num">56.000</td></tr>
+        <tr><td>Payback</td><td class="num">&gt;12 años</td><td class="num">11,5 años</td><td class="num">inmediato</td><td class="num">1,2 años</td></tr>
+        <tr><td>Riesgo</td><td class="num">Muy alto</td><td class="num">Alto</td><td class="num">Nulo</td><td class="num">Bajo</td></tr>
+        <tr><td>Liquidez</td><td class="num">Muy baja</td><td class="num">Baja</td><td class="num">Total</td><td class="num">Media</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="note ok">
+    <span class="label">Recomendación</span>
+    <p><strong>Estación de servicio primero, y el colegio nunca como inversión propia.</strong> Se subdividen los 18.619 m² en un paño de 2.200–2.500 m² con frente a la avenida para la EDS y un remanente de ~16.400 m². La EDS se licita entre operadores de marca —Copec, Enex/Shell, Petrobras, Terpel, Aramco/JLE— bajo contrato de arriendo de suelo a 20–25 años, canon fijo en UF con piso más porcentaje de volumen, y con la tienda de conveniencia del operador como ancla adicional del strip center. El remanente se vende a un sostenedor educacional o se reserva para un segundo loteo.</p>
+    <p><strong>El requisito duro:</strong> ningún operador de marca firma sin tráfico. Un emplazamiento estándar necesita del orden de 8.000–12.000 vehículos diarios. Antes de comprometerse con esta ruta hay que obtener el TMDA real de Avenida San Miguel en la Dirección de Vialidad del Maule. Si el flujo está bajo 8.000, la alternativa es un operador independiente con canon menor (180–250 UF/mes), que sigue siendo un retorno excelente sobre 4.900 UF.</p>
+  </div>
+  <div class="note">
+    <span class="label">Efecto cruzado sobre el resto del proyecto</span>
+    <p>Una EDS de marca con tienda de conveniencia multiplica el flujo peatonal y vehicular del frente, lo que sube la renta alcanzable del strip center entre 15% y 25% y hace creíble el precio de 4,0 UF/m² de los sitios. En el modelo esos efectos están tratados por separado; en la realidad se refuerzan. El costo de la sinergia es cero: es cuestión de secuencia.</p>
+  </div>
+</section>
+
+<section>
+  <div class="sec-head col">
+    <span class="sec-num">11 · Secuencia</span>
+    <h2>El masterplan por etapas, con puertas de decisión</h2>
+  </div>
+  <p class="col">Cada hito es una puerta: si no se cumple, no se pasa a la etapa siguiente ni se compromete el capital siguiente.</p>
+  <div class="gate">
+    <div class="yr">Año 0</div><div class="bar"></div>
+    <div>
+      <h4>Promesa condicionada y permisos</h4>
+      <p>Pie de 10.000 UF contra promesa con condición suspensiva. Proyecto de loteo, especialidades, factibilidades, EISTU, tramitación en la DOM.</p>
+      <p><span class="pill p-flag">Puerta</span> Permiso de loteo aprobado y factibilidad sanitaria emitida. <strong>Si a los 18 meses no están, se ejerce la condición y se recupera el pie.</strong></p>
+    </div>
+    <div class="yr">Año 1</div><div class="bar"></div>
+    <div>
+      <h4>Urbanización macro-etapa 1 y preventa</h4>
+      <p>Matrices troncales, acceso, Calle 1 y las primeras 23 parcelas. Sala de ventas en terreno. Promesas con pie del 20%. En paralelo: licitación del paño de la EDS.</p>
+      <p><span class="pill p-flag">Puerta</span> 12 promesas firmadas antes de comprometer la macro-etapa 2.</p>
+    </div>
+    <div class="yr">Año 2</div><div class="bar"></div>
+    <div>
+      <h4>Primeras escrituras y contrato de la EDS</h4>
+      <p>Escrituración con garantía de obras, alzamientos parciales, inicio del pago del saldo del terreno. Firma del arriendo de suelo de la estación de servicio: <strong>4.900 UF de inversión que generan la primera renta permanente del proyecto</strong>.</p>
+      <p><span class="pill p-flag">Puerta</span> Ritmo de venta ≥12 sitios/año sostenido en dos semestres.</p>
+    </div>
+    <div class="yr">Año 3</div><div class="bar"></div>
+    <div>
+      <h4>Strip center</h4>
+      <p>Se construye cuando hay entre 30 y 40 sitios vendidos y la EDS está operando: recién ahí hay demanda que muestre a los arrendatarios. Inversión de 45.700 UF financiable con la caja del propio loteo.</p>
+      <p><span class="pill p-flag">Puerta</span> Tres cartas de intención de arriendo firmadas, incluido el ancla de conveniencia, antes de iniciar obra.</p>
+    </div>
+    <div class="yr">Año 5</div><div class="bar"></div>
+    <div>
+      <h4>Vencimiento del plazo del terreno</h4>
+      <p>Se liquida el saldo. Con 1,5 sitios al mes el pago se extingue solo; con 1 al mes hay que cubrir ~43.000 UF.</p>
+      <p><span class="pill p-flag">Puerta</span> Revisar la proyección en el <strong>año 3</strong>, no en el año 5: si el ritmo acumulado va bajo 15 sitios/año, activar la prórroga o preparar la venta de un macrolote con dos años de anticipación.</p>
+    </div>
+    <div class="yr">Años 4–6</div><div class="bar"></div>
+    <div>
+      <h4>Consolidación y precio maduro</h4>
+      <p>Macro-etapas 3 y 4. Con áreas verdes ejecutadas, EDS operando y strip center arrendado, el precio de 4,0–4,2 UF/m² deja de ser un supuesto y pasa a ser un hecho verificable. Se liquida el saldo del terreno.</p>
+    </div>
+    <div class="yr">Años 6–10</div><div class="bar"></div>
+    <div>
+      <h4>Decisión sobre el remanente</h4>
+      <p>Los 16.400 m² del paño norte: venta a sostenedor educacional, build-to-suit con arriendo largo, o segundo loteo si el mercado absorbió las 90 unidades. La decisión se toma con seis años de datos de absorción reales, no hoy.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="sec-head col">
+    <span class="sec-num">12 · Riesgos</span>
+    <h2>Lo que puede salir mal</h2>
+  </div>
+  <div class="scroll">
+    <table>
+      <thead><tr><th>Riesgo</th><th class="num">Probabilidad</th><th class="num">Impacto</th><th>Mitigación</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Absorción bajo 12 sitios/año</strong></td><td class="num">Media</td><td class="num">Crítico</td><td>Es el riesgo que hunde el proyecto. Estudio de mercado propio antes de firmar; urbanización por macro-etapas; pago del terreno 100% contra escritura sin mínimos anuales.</td></tr>
+        <tr><td><strong>Vencimiento del plazo de 5 años con saldo pendiente</strong></td><td class="num">Media</td><td class="num">Crítico</td><td>A 1 sitio/mes quedan 43.000 UF impagas al año 5. Plazo contado desde el permiso de loteo, prórroga automática de 24 meses y derecho a saldar con macrolotes urbanizados.</td></tr>
+        <tr><td>Urbanización sobre 185.000 UF</td><td class="num">Media-alta</td><td class="num">Alto</td><td>Tres cotizaciones cerradas con contratista antes de la compraventa. Presupuestar con IVA incluido. El precio del terreno debe ajustarse a la baja por cada 10.000 UF de sobrecosto detectado.</td></tr>
+        <tr><td>Sin factibilidad sanitaria en el sector</td><td class="num">Media</td><td class="num">Crítico</td><td>Condición suspensiva. Si obliga a planta elevadora o PTAS propia, son 20.000–40.000 UF adicionales y una carga operativa permanente sobre la copropiedad.</td></tr>
+        <tr><td>Demora de permisos sobre 24 meses</td><td class="num">Media</td><td class="num">Alto</td><td>Prórroga automática del plazo del terreno por causal de tramitación. Anteproyecto antes de la promesa.</td></tr>
+        <tr><td>Servidumbres de canal y tranque</td><td class="num">Alta</td><td class="num">Medio</td><td>Acuerdo escrito con la asociación de canalistas antes de comprar. Cinco servidumbres sin sanear pueden bloquear la recepción de la urbanización.</td></tr>
+        <tr><td>Gestión de la copropiedad tipo B</td><td class="num">Alta</td><td class="num">Medio</td><td>Reglamento redactado desde el inicio, con fondo de reserva y gastos comunes realistas. Un condominio mal administrado desde el sitio 10 destruye la venta de los 80 restantes.</td></tr>
+        <tr><td>Competencia: otro loteo en el sector</td><td class="num">Media</td><td class="num">Alto</td><td>El ancla comercial es la defensa. Un competidor sin servicios no puede igualar el precio si este proyecto tiene EDS y strip center operando.</td></tr>
+        <tr><td>Expropiación de Avenida San Miguel</td><td class="num">Alta</td><td class="num">Bajo</td><td>Ya está dibujada en el plano (1.843,70 m²). Definir titularidad de la indemnización en la escritura.</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section>
+  <div class="sec-head col">
+    <span class="sec-num">13 · Data room</span>
+    <h2>Lo que falta antes de firmar</h2>
+  </div>
+  <p class="col">Nada de lo anterior reemplaza estos ocho antecedentes. Los cuatro primeros son bloqueantes: sin ellos no hay decisión de inversión, hay una apuesta.</p>
+  <ol class="col">
+    <li><strong>Certificados de factibilidad de agua potable y alcantarillado</strong> de la sanitaria para los 90 sitios, con plazos y aportes financieros reembolsables cuantificados.</li>
+    <li><strong>Tres presupuestos cerrados de urbanización</strong>, IVA incluido, desagregados por partida y por macro-etapa. Es el número que decide el negocio y hoy es un supuesto mío.</li>
+    <li><strong>Certificado de informaciones previas vigente</strong> de la DOM de Talca y confirmación de que la zona U-17 y el condominio tipo B admiten el loteo tal como está dibujado, incluido el equipamiento comercial y educacional.</li>
+    <li><strong>Estudio de títulos de ambos roles</strong>, con la situación de las cinco servidumbres, el tranque, los derechos de agua y el estado de la expropiación.</li>
+    <li><strong>Estudio de absorción real en Talca</strong>: cuántos sitios sobre 1.000 m² se vendieron por año en los últimos tres años en el sector oriente, a qué precio efectivo de escritura —no de publicación— y con qué stock competidor en trámite.</li>
+    <li><strong>TMDA de Avenida San Miguel</strong> (Dirección de Vialidad, Región del Maule) y proyección de crecimiento. Define si la estación de servicio de marca es viable.</li>
+    <li><strong>Sondeo con dos o tres operadores de EDS</strong> para un rango de canon real, y con dos cadenas de conveniencia para el ancla del strip center. Una carta de intención no vinculante cambia por completo el perfil de riesgo del proyecto.</li>
+    <li><strong>Avalúo fiscal y contribuciones</strong> de ambos roles, con el cálculo de la sobretasa de sitios eriazos aplicable al inventario no vendido.</li>
+  </ol>
+</section>
+
+<section>
+  <div class="sec-head col">
+    <span class="sec-num">14 · Recomendación</span>
+    <h2>Las doce respuestas</h2>
+  </div>
+  <ol class="answers col">
+    <li><div><h4>¿Comprarías el terreno por 119.000 UF?</h4><p>Sí, condicionado. El precio es defendible —24% de los ingresos brutos, bajo el valor residual de 134.000 UF a TIR 18%—. Pero sólo con condición suspensiva de permisos y factibilidad, y sin mínimos anuales de pago. Sin esas dos cláusulas, no.</p></div></li>
+    <li><div><h4>¿Cuánto pagarías como máximo?</h4><p><strong>133.000 UF</strong> con la estructura de pago simple, o hasta 178.000 UF con la estructura optimizada, ambos a TIR objetivo de 18% en escenario Base. Si el estudio de absorción arroja 12 sitios/año en vez de 15, el máximo cae a <strong>90.000 UF</strong>; si además la urbanización se va a 185.000 UF, cae a <strong>63.000 UF</strong> y el negocio deja de tener sentido a cualquier precio negociable.</p></div></li>
+    <li><div><h4>¿Qué condiciones exigirías al vendedor?</h4><p>Las siete de la sección 06, más las tres del plazo de la sección 07, en ese orden. Las irrenunciables: condición suspensiva de permiso y factibilidad con devolución del pie; alzamientos parciales tarifados con plazo y multa; servidumbres de canal saneadas; y ninguna cláusula de aceleración por metas de venta.</p></div></li>
+    <li><div><h4>¿Cuánto capital inicial se necesita realmente?</h4><p><strong>65.000 UF de peak</strong> con la estructura optimizada; 110.000 UF si se ejecuta como está planteado. Recomiendo levantar 90.000 UF —60.000 de capital y 30.000 de línea de urbanización—. Las 20.000 UF del pie no alcanzan ni para la primera macro-etapa.</p></div></li>
+    <li><div><h4>¿Cómo estructurarías el pago de las 99.000 UF restantes?</h4><p>Pie de 10.000 y saldo de 109.000 pagado como <strong>35% de cada escritura</strong> (≈1.700 UF por sitio) —no 25%, porque el plazo de 5 años obliga a amortizar más rápido—, garantizado con hipoteca de alzamiento parcial, en UF sin interés, con prepago libre. Con 1,5 sitios al mes el saldo se extingue casi exactamente dentro del plazo. Con 1 al mes queda un balloon de 43.000 UF en el año 5: para eso son la prórroga de 24 meses y el derecho a saldar con macrolotes de la sección 07.</p></div></li>
+    <li><div><h4>¿Cuántas parcelas hay que vender para cubrir el terreno?</h4><p><strong>25 sitios</strong> a 3,5 UF/m² cubren las 119.000 UF completas; 21 cubren el saldo de 99.000. Para no perder plata en el proyecto entero hacen falta 64 sitios; con precio de 4,0 UF/m², 56.</p></div></li>
+    <li><div><h4>¿En cuánto tiempo se recupera la inversión?</h4><p>El flujo acumulado vuelve a cero en el <strong>año 4</strong> en escenario Base (año 3 con estructura optimizada y preventa), año 2 en optimista, y año 9 en conservador. Los activos de renta —EDS y strip center— tienen payback propio de 1,2 y 9,6 años.</p></div></li>
+    <li><div><h4>¿Cuál es la rentabilidad del proyecto completo?</h4><p>Etapa 1: TIR de 26,8% y utilidad neta de 127.000 UF en escenario Base optimizado. Sumando las tres etapas, el valor creado sobre el capital comprometido es del orden de <strong>219.000 UF</strong>. En conservador, TIR de 4,9% y destrucción de valor: el rango entre escenarios es el verdadero mensaje de este análisis.</p></div></li>
+    <li><div><h4>¿Qué etapa genera más valor?</h4><p>En monto absoluto, el loteo: 127.000 UF. En retorno sobre capital, la estación de servicio: 51.000 UF de valor sobre 4.900 UF invertidas, 25 veces más eficiente por peso comprometido. La estrategia correcta usa el loteo como motor de caja y los activos ancla como creadores de valor patrimonial.</p></div></li>
+    <li><div><h4>¿Conviene mantener el strip center en renta o venderlo?</h4><p><strong>Mantenerlo</strong>, al menos hasta estabilizarlo sobre 90% de ocupación con contratos de más de tres años. Su función no es sólo rentar 4.760 UF al año: es lo que sostiene el precio de 4,0 UF/m² de los últimos 30 sitios, que es donde vive la utilidad del loteo. Vender antes de estabilizar, a cap rate de 9,5%, destruye valor.</p></div></li>
+    <li><div><h4>¿Colegio o bomba de bencina?</h4><p><strong>Bomba de bencina, sin discusión</strong>, y en terreno arrendado a un operador de marca: 4.900 UF contra 255.000 UF, payback de 1,2 años contra 11,5, y sin riesgo de operación. El colegio sólo se justifica como venta del paño a un sostenedor, o como build-to-suit con arriendo triple neto largo si aparece un operador solvente que lo pida. Y no son excluyentes: la EDS ocupa 2.200 m² de los 18.619 disponibles.</p></div></li>
+    <li><div><h4>¿Qué estrategia maximiza el valor a 5, 10 y 15 años?</h4>
+      <p><strong>A 5 años</strong> — dominar la absorción: urbanizar por macro-etapas, tener la EDS operando en el año 2 y el strip center arrendado en el año 4. Patrimonio estimado: caja acumulada más dos activos de renta, del orden de 120.000–140.000 UF.</p>
+      <p><strong>A 10 años</strong> — completar el loteo, decidir el paño remanente y consolidar los activos de renta. Del orden de 220.000 UF entre caja liberada y activos, con un NOI recurrente de 9.000–11.000 UF/año.</p>
+      <p><strong>A 15 años</strong> — el valor ya no está en estas 19 hectáreas sino en haberse convertido en el operador del polo de Santa Elena de Huilquilemu. Por eso importa el derecho de primera oferta sobre paños colindantes: la segunda compra de terreno, hecha con el flujo de la primera y con el ancla comercial ya instalada, es donde este negocio se vuelve grande.</p>
+    </div></li>
+  </ol>
+</section>
+
+<section>
+  <div class="sec-head col">
+    <span class="sec-num">Cierre</span>
+    <h2>En una frase</h2>
+  </div>
+  <div class="note ok col">
+    <p style="font-family:var(--serif);font-size:19px;line-height:1.5">El terreno está bien de precio y el masterplan está bien concebido; lo que hay que comprar barato no es la tierra sino <strong>el tiempo</strong>. Todo el esfuerzo de negociación debería ir a que el vendedor financie el ritmo real de venta —no el ritmo que a él le gustaría— y todo el esfuerzo de gestión debería ir a instalar el ancla comercial antes de necesitarla.</p>
+  </div>
+</section>
+
+<footer>
+  <p class="label">Fuentes y alcance</p>
+  <p>Superficies y programa: láminas L_02 y L_03, Jonathan Amaya Miño, agosto 2023 (cuadro de fusión, cuadro de superficies de lotes, cuadro general). Memoria explicativa de loteo, agosto 2023. Estructura de pago: propuesta de flujos 80%, sin fecha. Referencias de mercado: precios de parcelas en condominio en Talca y estadísticas de strip centers en Chile, consultadas en agosto 2026.</p>
+  <p>Los resultados financieros son modelaciones propias construidas sobre los supuestos declarados en la sección 02. No constituyen una tasación, una asesoría tributaria ni una opinión legal. Antes de comprometer capital deben reemplazarse por los ocho antecedentes de la sección 13.</p>
+</footer>
+
+</div>
