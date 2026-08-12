@@ -4,7 +4,7 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <meta name="description" content="Modelo operativo y estructura de la nueva empresa inmobiliaria: Avance Inmobiliario + Polka Propiedades. Documento de trabajo." />
-<title>Nueva Empresa Inmobiliaria · Avance + Polka</title>
+<title>Integración Avance + Polka</title>
 <style>
 /* ============================================================
    SISTEMA DE DISEÑO
@@ -291,8 +291,10 @@ html[data-theme="dark"] .chip.active{background:var(--accent);color:#14181C;bord
 .callout h4{margin-bottom:.2rem}
 
 /* animación de entrada */
-.reveal{opacity:0;transform:translateY(16px)}
-.reveal.in{opacity:1;transform:none;transition:opacity .6s var(--ease), transform .6s var(--ease)}
+/* El contenido es visible por defecto. La animación de entrada solo se activa
+   si el JavaScript confirma que puede volver a mostrarlo (html.js-reveal). */
+html.js-reveal .reveal{opacity:0;transform:translateY(16px)}
+html.js-reveal .reveal.in{opacity:1;transform:none;transition:opacity .6s var(--ease), transform .6s var(--ease)}
 @media (prefers-reduced-motion:reduce){
   .reveal,.reveal.in{opacity:1;transform:none;transition:none}
   html{scroll-behavior:auto}
@@ -323,6 +325,37 @@ html[data-theme="dark"] .chip.active{background:var(--accent);color:#14181C;bord
   .tabpane{display:block!important}
   section.sec{page-break-inside:avoid;padding:22px 0}
   .reveal{opacity:1!important;transform:none!important}
+}
+
+
+/* Mismo esquema oscuro cuando el visor sigue la preferencia del sistema
+   y no hay una elección explícita de tema. */
+@media (prefers-color-scheme: dark){
+:root:not([data-theme="light"]){
+  --paper:#0E1216;
+  --paper-2:#141A20;
+  --surface:#171E25;
+  --line:#28313B;
+  --line-strong:#3A4652;
+  --text:#E8EAED;
+  --text-2:#A3ADB9;
+  --text-3:#7B8592;
+  --accent:#D5A45C;
+  --accent-2:#E7BE7E;
+  --accent-soft:#2A2216;
+  --teal:#54B3A2;  --teal-soft:#12241F;
+  --blue:#7FA9D4;  --blue-soft:#141E29;
+  --green:#5FBA88; --green-soft:#122117;
+  --red:#DE857C;   --red-soft:#251413;
+  --amber:#D9AA45; --amber-soft:#231C0E;
+  --shadow-1:0 1px 2px rgba(0,0,0,.4);
+  --shadow-2:0 2px 8px rgba(0,0,0,.45), 0 16px 40px rgba(0,0,0,.35);
+  --shadow-3:0 30px 70px rgba(0,0,0,.55);
+}
+:root:not([data-theme="light"]) .nav{background:#090C0F;border-right:1px solid var(--line)}
+:root:not([data-theme="light"]) .chip.active{background:var(--accent);color:#14181C;border-color:var(--accent)}
+:root:not([data-theme="light"]) .org-node.top{background:#05080A}
+:root:not([data-theme="light"]) .duo{background:linear-gradient(120deg,#241D12,#12241F)}
 }
 
 /* ============================================================
@@ -2763,10 +2796,15 @@ tr.dim{opacity:.3}
   /* ---------- TEMA ---------- */
   var saved = store.get('nei-theme');
   if(saved){ document.documentElement.setAttribute('data-theme', saved); }
+  function currentTheme(){
+    var attr = document.documentElement.getAttribute('data-theme');
+    if(attr) return attr;
+    return (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) ? 'dark' : 'light';
+  }
   function toggleTheme(){
-    var cur = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
-    document.documentElement.setAttribute('data-theme', cur);
-    store.set('nei-theme', cur);
+    var next = currentTheme() === 'dark' ? 'light' : 'dark';
+    document.documentElement.setAttribute('data-theme', next);
+    store.set('nei-theme', next);
   }
   ['themeBtn','themeBtnMobile'].forEach(function(id){
     var b = document.getElementById(id); if(b) b.addEventListener('click', toggleTheme);
@@ -2799,16 +2837,29 @@ tr.dim{opacity:.3}
   window.addEventListener('resize', onScroll);
   if(toTop) toTop.addEventListener('click', function(){ window.scrollTo({top:0, behavior:'smooth'}); });
 
-  /* ---------- REVEAL ---------- */
-  if('IntersectionObserver' in window){
+  /* ---------- REVEAL ----------
+     A prueba de fallos: si algo impide que la animación se dispare
+     (visor incrustado, observador no soportado, movimiento reducido),
+     todo el contenido se muestra igual. */
+  function revealAll(){ $$('.reveal').forEach(function(el){ el.classList.add('in'); }); }
+  var prefersReduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if('IntersectionObserver' in window && !prefersReduced){
+    document.documentElement.classList.add('js-reveal');
     var io = new IntersectionObserver(function(entries){
       entries.forEach(function(en){
         if(en.isIntersecting){ en.target.classList.add('in'); io.unobserve(en.target); }
       });
-    }, {threshold:0.08, rootMargin:'0px 0px -40px 0px'});
+    }, {threshold:0.02, rootMargin:'240px 0px 240px 0px'});
     $$('.reveal').forEach(function(el){ io.observe(el); });
+    /* Si en 4 segundos no hubo ningún scroll dentro del documento, es probable
+       que se esté viendo dentro de un visor incrustado que no dispara el
+       observador: en ese caso se muestra todo el contenido de una vez. */
+    var scrolled = false;
+    window.addEventListener('scroll', function(){ scrolled = true; }, {passive:true, once:true});
+    setTimeout(function(){ if(!scrolled) revealAll(); }, 4000);
+    window.addEventListener('beforeprint', revealAll);
   } else {
-    $$('.reveal').forEach(function(el){ el.classList.add('in'); });
+    revealAll();
   }
 
   /* ---------- ACORDEONES ---------- */
