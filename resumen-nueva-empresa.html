@@ -1,0 +1,662 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="description" content="Resumen ejecutivo de la nueva empresa inmobiliaria: Avance Inmobiliario + Polka Propiedades." />
+<title>Avance + Polka en 10 minutos</title>
+<style>
+:root{
+  --paper:#F5F3EF; --paper-2:#EBE8E1; --surface:#FFFFFF;
+  --ink:#0F1317; --line:#E0DCD3; --line-2:#C9C3B6;
+  --text:#1B222B; --text-2:#5A6472; --text-3:#8A93A0;
+  --accent:#B5823C; --accent-2:#8C6229; --accent-soft:#F4EADA;
+  --teal:#1F6F63; --teal-soft:#E2F0ED;
+  --blue:#33608C; --blue-soft:#E4ECF4;
+  --green:#2F7D57; --green-soft:#E4F1EA;
+  --red:#A9453C;   --red-soft:#F7E7E5;
+  --amber:#B07C16; --amber-soft:#FBF0D8;
+  --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Inter,Roboto,"Helvetica Neue",Arial,sans-serif;
+  --serif:"Iowan Old Style","Palatino Linotype",Palatino,"Book Antiqua",Georgia,"Times New Roman",serif;
+  --mono:"SF Mono",ui-monospace,Menlo,Consolas,monospace;
+  --r:12px;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --paper:#0E1216; --paper-2:#161C22; --surface:#171E25;
+    --line:#28313B; --line-2:#3A4652;
+    --text:#E8EAED; --text-2:#A3ADB9; --text-3:#7B8592;
+    --accent:#D5A45C; --accent-2:#E7BE7E; --accent-soft:#2A2216;
+    --teal:#54B3A2; --teal-soft:#12241F;
+    --blue:#7FA9D4; --blue-soft:#141E29;
+    --green:#5FBA88; --green-soft:#122117;
+    --red:#DE857C;  --red-soft:#251413;
+    --amber:#D9AA45; --amber-soft:#231C0E;
+  }
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+body{
+  font-family:var(--sans);background:var(--paper);color:var(--text);
+  line-height:1.6;font-size:15px;-webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:900px;margin:0 auto;padding:0 22px 90px}
+h1,h2,h3,h4{line-height:1.2;letter-spacing:-.015em;font-weight:600}
+h2{font-family:var(--serif);font-weight:400;font-size:clamp(1.5rem,3.2vw,2.05rem);letter-spacing:-.02em}
+h3{font-size:1.02rem;margin-bottom:.3rem}
+h4{font-size:.9rem;margin-bottom:.25rem}
+p{color:var(--text-2)}
+strong,b{color:var(--text);font-weight:600}
+.tiny{font-size:.83rem;line-height:1.5}
+.note{font-size:.78rem;color:var(--text-3);font-style:italic}
+.mono{font-family:var(--mono);font-variant-numeric:tabular-nums}
+
+/* --- portada --- */
+.cover{
+  background:linear-gradient(155deg,#141B22 0%,#0C1015 60%,#171E26 100%);
+  color:#fff;padding:clamp(38px,7vw,66px) 22px clamp(30px,5vw,48px);margin-bottom:8px;
+}
+.cover-in{max-width:900px;margin:0 auto}
+.kicker{font-size:.66rem;letter-spacing:.22em;text-transform:uppercase;color:var(--accent);font-weight:700;margin-bottom:1rem}
+.cover h1{font-family:var(--serif);font-weight:400;font-size:clamp(1.9rem,5vw,3rem);color:#fff;line-height:1.05;margin-bottom:.6rem}
+.cover .sub{color:rgba(255,255,255,.82);font-size:clamp(.95rem,2vw,1.1rem);margin-bottom:1rem}
+.cover .claim{font-family:var(--serif);color:var(--accent);font-size:clamp(1rem,2.4vw,1.3rem);border-left:2px solid var(--accent);padding-left:14px;margin-bottom:1.6rem}
+.figs{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.14);border-radius:var(--r)}
+.fig{background:#11161B;padding:13px 14px}
+.fig b{display:block;font-family:var(--serif);font-size:clamp(1.15rem,3vw,1.6rem);color:#fff;font-weight:400}
+.fig span{font-size:.72rem;color:rgba(255,255,255,.6);line-height:1.3;display:block;margin-top:3px}
+.cover .who{margin-top:1.1rem;font-size:.78rem;color:rgba(255,255,255,.5)}
+
+/* --- índice --- */
+.toc{
+  background:var(--surface);border:1px solid var(--line);border-radius:var(--r);
+  padding:14px 18px;margin:22px 0 6px;display:flex;flex-wrap:wrap;gap:6px 16px;
+}
+.toc a{color:var(--text-2);text-decoration:none;font-size:.82rem;border-bottom:1px solid transparent}
+.toc a:hover{color:var(--accent-2);border-bottom-color:var(--accent)}
+.toc a .n{color:var(--text-3);font-size:.7rem;font-weight:700;margin-right:4px}
+
+/* --- secciones --- */
+section{padding:34px 0 4px;border-top:1px solid var(--line);margin-top:26px}
+section:first-of-type{border-top:none}
+.eyebrow{font-size:.67rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);margin-bottom:.5rem}
+.lede{color:var(--text-2);margin:.5rem 0 1.3rem;max-width:70ch}
+
+.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:16px 18px}
+.grid{display:grid;gap:12px}
+.grid > *{min-width:0}
+.g2{grid-template-columns:repeat(2,minmax(0,1fr))}
+.g3{grid-template-columns:repeat(3,minmax(0,1fr))}
+.g4{grid-template-columns:repeat(4,minmax(0,1fr))}
+.mt{margin-top:14px}.mt2{margin-top:24px}
+
+ul.l{list-style:none;display:flex;flex-direction:column;gap:5px}
+ul.l li{position:relative;padding-left:16px;font-size:.86rem;color:var(--text-2)}
+ul.l li::before{content:"";position:absolute;left:1px;top:.6em;width:5px;height:5px;background:var(--accent);transform:rotate(45deg);opacity:.8}
+ul.l.no li::before{content:"×";background:none;width:auto;height:auto;transform:none;top:-1px;left:0;color:var(--red);font-weight:800}
+ul.l.si li::before{content:"✓";background:none;width:auto;height:auto;transform:none;top:-1px;left:0;color:var(--green);font-weight:800}
+
+table{width:100%;border-collapse:collapse;font-size:.84rem}
+.tw{overflow-x:auto;border:1px solid var(--line);border-radius:var(--r);background:var(--surface)}
+.tw table{min-width:540px}
+th{text-align:left;font-size:.67rem;text-transform:uppercase;letter-spacing:.08em;color:var(--text-3);font-weight:700;padding:9px 12px;background:var(--paper-2);border-bottom:1px solid var(--line);white-space:nowrap}
+td{padding:9px 12px;border-bottom:1px solid var(--line);vertical-align:top;color:var(--text-2)}
+tbody tr:last-child td{border-bottom:none}
+td.k{color:var(--text);font-weight:600;white-space:nowrap}
+
+.pill{display:inline-block;padding:2px 9px;border-radius:999px;font-size:.71rem;font-weight:700;white-space:nowrap}
+.p-a{background:var(--accent-soft);color:var(--accent-2)}
+.p-t{background:var(--teal-soft);color:var(--teal)}
+.p-b{background:var(--blue-soft);color:var(--blue)}
+.p-g{background:var(--green-soft);color:var(--green)}
+.p-r{background:var(--red-soft);color:var(--red)}
+.p-m{background:var(--amber-soft);color:var(--amber)}
+.tbd{display:inline-block;background:var(--amber-soft);color:var(--amber);border:1px dashed color-mix(in srgb,var(--amber) 45%,transparent);padding:0 7px;border-radius:5px;font-size:.71rem;font-weight:700;white-space:nowrap}
+
+.rule{background:var(--accent-soft);border:1px solid color-mix(in srgb,var(--accent) 32%,transparent);border-radius:var(--r);padding:15px 18px}
+.rule h3{color:var(--accent-2)}
+.warn{background:var(--amber-soft);border:1px solid color-mix(in srgb,var(--amber) 32%,transparent);border-radius:var(--r);padding:15px 18px}
+
+.kpi{background:var(--surface);border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:var(--r);padding:12px 14px}
+.kpi .kl{font-size:.66rem;text-transform:uppercase;letter-spacing:.09em;color:var(--text-3);font-weight:700}
+.kpi .kv{font-family:var(--serif);font-size:1.3rem;line-height:1.2;margin-top:3px;color:var(--text)}
+.kpi .kf{font-size:.74rem;color:var(--text-2);margin-top:2px}
+.kpi.t{border-left-color:var(--teal)}.kpi.b{border-left-color:var(--blue)}.kpi.g{border-left-color:var(--green)}
+
+/* organigrama compacto */
+.org{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.on{background:var(--surface);border:1px solid var(--line);border-top:3px solid var(--c,var(--accent));border-radius:var(--r);padding:12px 13px}
+.on .r{font-size:.64rem;text-transform:uppercase;letter-spacing:.09em;color:var(--c,var(--accent));font-weight:700}
+.on .n{font-weight:700;font-size:.98rem;margin:1px 0 3px}
+.on .d{font-size:.76rem;color:var(--text-2);line-height:1.4}
+.top-node{background:var(--ink);color:#fff;border-radius:var(--r);padding:12px 16px;text-align:center;margin-bottom:10px}
+.top-node b{display:block;font-size:.95rem;color:#fff}
+.top-node span{font-size:.75rem;color:rgba(255,255,255,.6)}
+
+/* cascada */
+.wf{display:flex;flex-direction:column;gap:5px}
+.wf div{display:flex;justify-content:space-between;gap:12px;padding:9px 13px;border:1px solid var(--line);border-radius:9px;background:var(--surface);font-size:.85rem;color:var(--text-2)}
+.wf div b{color:var(--text)}
+.wf div.m{background:var(--red-soft);border-color:color-mix(in srgb,var(--red) 22%,transparent)}
+.wf div.s{background:var(--paper-2)}
+.wf div.f{background:var(--ink);border-color:var(--ink)}
+.wf div.f,.wf div.f b{color:#fff}
+.wf .v{font-family:var(--mono);font-weight:700;white-space:nowrap;color:inherit}
+
+.tl{display:flex;flex-direction:column;gap:10px}
+.ph{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:14px 16px;border-left:3px solid var(--c,var(--accent))}
+.ph h3{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+
+.two-col{columns:2;column-gap:26px}
+.two-col li{break-inside:avoid;margin-bottom:5px}
+.close{background:var(--ink);border-radius:var(--r);padding:28px 24px;text-align:center;margin-top:30px}
+.close p{font-family:var(--serif);color:#fff;font-size:clamp(1.05rem,2.6vw,1.4rem);line-height:1.35;max-width:34ch;margin:0 auto}
+.close span{display:block;margin-top:12px;font-size:.76rem;color:rgba(255,255,255,.55)}
+
+@media (max-width:760px){
+  .g4,.g3,.org{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .figs{grid-template-columns:repeat(2,1fr)}
+  .two-col{columns:1}
+}
+@media (max-width:520px){
+  .g2,.g3,.g4,.org,.figs{grid-template-columns:1fr}
+}
+
+/* ---------- IMPRESIÓN (al final para prevalecer en el cascade) ---------- */
+@media print{
+  @page{margin:14mm 12mm}
+  body{background:#fff;color:#111;font-size:9.6pt}
+  *{box-shadow:none!important}
+  .toc{display:none}
+  .wrap{max-width:none;padding:0}
+  section{padding:16px 0 2px;break-inside:auto;page-break-inside:auto}
+  .card,.kpi,.ph,.on,.rule,.warn,.tw{break-inside:avoid;page-break-inside:avoid}
+  tr,li,h2,h3,h4{break-inside:avoid;page-break-inside:avoid}
+  h2,h3{break-after:avoid;page-break-after:avoid}
+  .tw{overflow:visible}.tw table{min-width:0}
+  .cover{background:none!important;color:#111;padding:0 0 14px;margin:0}
+  .cover h1,.cover .sub{color:#111}
+  .fig{background:none!important}
+  .fig b{color:#111}
+  .fig span,.cover .who{color:#555}
+  .figs{border-color:#bbb}
+  .top-node,.top-node b{background:none!important;color:#111}
+  .top-node{border:1px solid #999}
+  .top-node span{color:#555}
+  .wf div.f{background:none!important;border-color:#999}
+  .wf div.f,.wf div.f b{color:#111}
+  .close{background:none!important;border:1px solid #bbb}
+  .close p{color:#111}
+  .close span{color:#555}
+  a{color:inherit;text-decoration:none}
+}
+</style>
+</head>
+<body>
+<header class="cover">
+  <div class="cover-in">
+    <div class="kicker">Resumen ejecutivo</div>
+    <h1>Nueva Empresa Inmobiliaria</h1>
+    <p class="sub">Avance Inmobiliario + Polka Propiedades</p>
+    <p class="claim">Una sola empresa. Un solo equipo. Un solo inventario.</p>
+    <div class="figs">
+      <div class="fig"><b>4</b><span>Socios fundadores</span></div>
+      <div class="fig"><b>+150</b><span>Proyectos nuevos</span></div>
+      <div class="fig"><b>65–70</b><span>Usadas iniciales</span></div>
+      <div class="fig"><b>90 días</b><span>Para operar integrados</span></div>
+    </div>
+    <p class="who">Alison · Diego · Francis · Rodrigo — documento de trabajo, versión resumida</p>
+  </div>
+</header>
+
+<div class="wrap">
+  <nav class="toc">
+    <a href="#a1"><span class="n">01</span>La empresa</a>
+    <a href="#a2"><span class="n">02</span>Los cuatro socios</a>
+    <a href="#a3"><span class="n">03</span>Inventario y captación</a>
+    <a href="#a4"><span class="n">04</span>Equipo comercial</a>
+    <a href="#a5"><span class="n">05</span>CRM y cliente</a>
+    <a href="#a6"><span class="n">06</span>Comisiones</a>
+    <a href="#a7"><span class="n">07</span>KPI</a>
+    <a href="#a8"><span class="n">08</span>Decisiones y reunión</a>
+    <a href="#a9"><span class="n">09</span>Plan de 90 días</a>
+    <a href="#a10"><span class="n">10</span>Legal</a>
+    <a href="#a11"><span class="n">11</span>Qué falta cerrar</a>
+  </nav>
+
+  <!-- 01 -->
+  <section id="a1">
+    <div class="eyebrow">01 · La empresa</div>
+    <h2>Qué se está construyendo</h2>
+    <p class="lede">No es una alianza entre dos inmobiliarias que siguen existiendo por separado. Es una empresa nueva: un inventario, un equipo, un CRM, una estrategia.</p>
+    <div class="grid g3">
+      <div class="card">
+        <h3>Punto de partida</h3>
+        <ul class="l mt"><li>~50 usadas de Polka.</li><li>15–20 usadas de Avance.</li><li>+150 proyectos nuevos.</li><li>Convenios con inmobiliarias y desarrolladores.</li><li>Equipo comercial operando + 4 posibles vendedoras.</li></ul>
+      </div>
+      <div class="card">
+        <h3>Lo que se construye</h3>
+        <ul class="l si mt"><li>Pool único de nuevas y usadas.</li><li>Equipo comercial único, sin silos.</li><li>CRM único como fuente de verdad.</li><li>Comisiones por rol cumplido.</li><li>Una marca frente al cliente.</li></ul>
+      </div>
+      <div class="card">
+        <h3>Lo que desaparece</h3>
+        <ul class="l no mt"><li>“Esta propiedad es de Avance”.</li><li>“Esta propiedad es de Polka”.</li><li>“Este cliente es mío”.</li><li>“Yo vendo nuevo, tú usado”.</li><li>Dos bases de datos, dos verdades.</li></ul>
+      </div>
+    </div>
+    <div class="rule mt2">
+      <h3>La regla que ordena todo</h3>
+      <p class="tiny mt"><strong>Todo es inventario de la nueva empresa y todos trabajamos para venderlo.</strong> El origen de una propiedad o de un cliente sirve para atribuir comisiones y medir resultados; nunca para restringir quién vende qué ni a quién se atiende.</p>
+    </div>
+    <div class="grid g2 mt2">
+      <div class="card">
+        <h3>La propuesta al cliente</h3>
+        <p class="tiny mt">Una sola puerta de entrada para primera vivienda, inversión, nuevo, usado, departamento o casa — y la forma de financiarlo. Es lo que ninguna de las dos operaciones podía ofrecer por separado.</p>
+      </div>
+      <div class="card">
+        <h3>El diferencial</h3>
+        <p class="tiny mt"><strong>Financiamiento.</strong> La mayoría de las operaciones se cae por crédito. Preevaluar antes de la primera visita sube la conversión, ahorra tiempo y da un argumento que el corredor tradicional no tiene.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 02 -->
+  <section id="a2">
+    <div class="eyebrow">02 · Los cuatro socios</div>
+    <h2>Cuatro áreas, cuatro focos</h2>
+    <p class="lede">Estructura plana: cuatro direcciones sobre un solo equipo comercial. El Comité de Socios es el único órgano superior y solo ve lo estratégico.</p>
+    <div class="top-node"><b>Comité de Socios</b><span>Alison · Diego · Francis · Rodrigo — estrategia, inversión, modelo de comisiones, nuevos socios</span></div>
+    <div class="org">
+      <div class="on" style="--c:var(--accent)"><div class="r">Dirección</div><div class="n">Alison</div><div class="d">Comercial · Marketing · Estrategia</div></div>
+      <div class="on" style="--c:var(--teal)"><div class="r">Dirección</div><div class="n">Francis</div><div class="d">Finanzas · Comercial</div></div>
+      <div class="on" style="--c:var(--blue)"><div class="r">Dirección</div><div class="n">Rodrigo</div><div class="d">CRM · Tecnología · Bancos · Financiamiento</div></div>
+      <div class="on" style="--c:var(--green)"><div class="r">Dirección</div><div class="n">Diego</div><div class="d">Captación · Operaciones</div></div>
+    </div>
+    <div class="tw mt">
+      <table>
+        <thead><tr><th>Socio</th><th>Su foco</th><th>Responsabilidades principales</th><th>Se mide por</th></tr></thead>
+        <tbody>
+          <tr>
+            <td class="k">Alison</td>
+            <td>Hacer crecer el negocio.</td>
+            <td>Estrategia comercial · marketing y redes · generación de leads · marca · relaciones con inmobiliarias · nuevos negocios · dirección, capacitación y metas del equipo.</td>
+            <td>Leads y costo por lead · crecimiento de ventas · productividad por vendedor · nuevos convenios.</td>
+          </tr>
+          <tr>
+            <td class="k">Francis</td>
+            <td>Que el negocio venda y sea rentable.</td>
+            <td>Flujo de caja · presupuesto · costos · rentabilidad · comisiones y pagos · proyecciones. Y en lo comercial: negociación, cierres importantes, apoyo a vendedores.</td>
+            <td>Margen por operación · utilidad · flujo proyectado vs. real · comisiones pagadas a tiempo.</td>
+          </tr>
+          <tr>
+            <td class="k">Rodrigo</td>
+            <td>Tecnología, datos y financiamiento.</td>
+            <td>Liderar el CRM · automatización · procesos comerciales · reportería e indicadores · calidad de la información · bancos, crédito hipotecario y evaluación de clientes.</td>
+            <td>% de fichas completas · tiempo de primera respuesta · % preevaluados · tasa de aprobación · caídas por crédito.</td>
+          </tr>
+          <tr>
+            <td class="k">Diego</td>
+            <td>Buen producto para vender y operación funcionando.</td>
+            <td>Captación de usadas · relación con propietarios · mandatos · pricing inicial · ingreso al CRM · inventario, visitas, documentación y apoyo operativo.</td>
+            <td>Propiedades captadas y mandatos · inventario activo · tiempo de venta · % de fichas completas.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="card mt">
+      <h3>La dupla comercial</h3>
+      <p class="tiny mt"><strong>Alison</strong> genera y organiza la demanda: estrategia, marketing, leads y equipo. <strong>Francis</strong> convierte y rentabiliza: negociación, cierres, márgenes y números. Mismo objetivo, funciones distintas. Regla práctica: la conducción del equipo es de Alison; Francis entra a una negociación invitado, no por decisión unilateral. <span class="tbd">Por definir</span> el monto sobre el cual entra por defecto.</p>
+    </div>
+  </section>
+
+  <!-- 03 -->
+  <section id="a3">
+    <div class="eyebrow">03 · Inventario y captación</div>
+    <h2>Un solo pool de propiedades</h2>
+    <p class="lede">Una sola lista, un solo formato de ficha, un solo lugar donde vive: el CRM. Lo que no está en el CRM, no existe y no se vende.</p>
+    <div class="grid g2">
+      <div class="card">
+        <h3>Reglas del pool único</h3>
+        <ul class="l si mt">
+          <li>Toda propiedad tiene ID único de la nueva empresa.</li>
+          <li>Todo vendedor puede ofrecer cualquier propiedad.</li>
+          <li>Toda propiedad tiene responsable de captación registrado.</li>
+          <li>Nada se publica sin ficha completa, mandato y fotos.</li>
+          <li>Sin gestión registrada en 15 días, el CRM alerta.</li>
+        </ul>
+        <p class="note mt">Estados: captada → preparación → activa → negociación → reservada → vendida. Más suspendida, vencida y retirada, siempre con motivo.</p>
+      </div>
+      <div class="card">
+        <h3>Captación de usadas — Diego</h3>
+        <p class="tiny mt"><strong>Quién capta:</strong> Diego y su equipo, los vendedores (cobran comisión de captación), los socios, corredores asociados y referidores.</p>
+        <p class="tiny mt"><strong>Dónde:</strong> base de datos propia, redes y campañas, referidos, prospección directa a particulares, clientes existentes, administradores de edificios, alianzas.</p>
+        <p class="tiny mt"><strong>Flujo:</strong> contacto → calificación → visita y pricing → mandato firmado → levantamiento → carga al CRM → publicación → <strong>cruce automático contra todos los clientes en búsqueda de la empresa</strong> → seguimiento.</p>
+      </div>
+    </div>
+    <div class="card mt">
+      <h3>El indicador que ordena la captación</h3>
+      <p class="tiny mt">No es cuántas propiedades captamos, sino <strong>qué porcentaje de lo captado se vende y en cuánto tiempo</strong>. Captar mucho no sirve si no se vende: cada propiedad invendible consume fotos, publicación, visitas y credibilidad. Rechazar bien es parte del trabajo.</p>
+    </div>
+  </section>
+
+  <!-- 04 -->
+  <section id="a4">
+    <div class="eyebrow">04 · Equipo comercial</div>
+    <h2>Un solo equipo, todos venden todo</h2>
+    <p class="lede">Vendedores actuales de ambas operaciones, las 4 posibles incorporaciones de Alison y las siguientes. No hay vendedores de nuevo ni de usado: hay vendedores de la empresa, con distintos niveles.</p>
+    <div class="tw">
+      <table>
+        <thead><tr><th>Rol</th><th>Qué hace</th></tr></thead>
+        <tbody>
+          <tr><td class="k">Líder comercial — Alison</td><td>Metas, distribución y calidad de leads, pipeline semanal, 1:1 mensual, capacitación, incorporaciones y salidas (con Francis).</td></tr>
+          <tr><td class="k">Vendedor senior</td><td>Autonomía total, cartera propia + leads, capta, mentorea a los nuevos, apoya operaciones complejas.</td></tr>
+          <tr><td class="k">Vendedor</td><td>El núcleo. Atiende, muestra, negocia y cierra; vende nuevo y usado; puede captar.</td></tr>
+          <tr><td class="k">Vendedor en formación</td><td>Primeros 60–90 días, con mentor y meta reducida. Aquí entrarían las 4 posibles vendedoras.</td></tr>
+          <tr><td class="k">Captador</td><td>Consigue mandatos y cobra comisión de captación aunque no venda. Reporta a Diego. <span class="tbd">Por definir</span> si existe como rol dedicado.</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="grid g2 mt">
+      <div class="card">
+        <h3>Incorporación y capacitación</h3>
+        <ul class="l mt">
+          <li>Selección con Alison · contrato y comisiones firmados antes del primer día.</li>
+          <li>Semana 1: inducción — empresa, inventario, CRM, reglas de atribución.</li>
+          <li>Semanas 2–3: producto nuevo y usado. Semanas 3–6: visitas con mentor.</li>
+          <li>Día 90: evaluación — confirmar, extender rampa o salir.</li>
+          <li>Permanente: 30 min semanales de producto, caso real quincenal, módulo mensual.</li>
+        </ul>
+        <p class="note mt">Todos pasan por la misma inducción, incluidos los que ya venían de Avance o de Polka: justamente eso es lo que cambia.</p>
+      </div>
+      <div class="card">
+        <h3>Metas y seguimiento</h3>
+        <p class="tiny mt">Toda meta tiene tres niveles: <strong>actividad</strong> (lo que el vendedor controla), <strong>avance</strong> y <strong>resultado</strong>.</p>
+        <ul class="l mt">
+          <li>Referencias por vendedor/mes a calibrar: 8–12 visitas, 2–4 ofertas, 1–2 reservas, 1–2 ventas.</li>
+          <li>100% de los leads contactados en menos de 24 horas.</li>
+          <li>Ritmo: revisión diaria de leads · pipeline semanal · 1:1 mensual · evaluación trimestral.</li>
+          <li>El seguimiento se hace sobre el CRM, no sobre lo que cada uno recuerda.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- 05 -->
+  <section id="a5">
+    <div class="eyebrow">05 · CRM y cliente</div>
+    <h2>Un solo sistema, una sola verdad</h2>
+    <p class="lede">El CRM no es administración: es donde vive la empresa. Inventario, cartera, trazabilidad y la base sobre la que se calculan las comisiones. Lo lidera Rodrigo.</p>
+    <div class="grid g2">
+      <div class="card">
+        <h3>Ficha de propiedad — mínimos</h3>
+        <p class="tiny mt">ID · tipo nueva/usada · proyecto o dirección · precio · propietario o inmobiliaria · responsable de captación · vendedor asignado · estado · leads · visitas · ofertas · reservas · venta · fecha de ingreso · última actualización.</p>
+      </div>
+      <div class="card">
+        <h3>Ficha de cliente — mínimos</h3>
+        <p class="tiny mt">Fuente del lead · vendedor · fecha de contacto · estado · necesidad · presupuesto · tipo de propiedad buscada · situación de financiamiento · próximo paso con fecha · resultado, y motivo obligatorio si se pierde.</p>
+      </div>
+    </div>
+    <div class="rule mt2">
+      <h3>Regla fundamental del cliente</h3>
+      <p class="tiny mt"><strong>El cliente pertenece al ecosistema de la empresa, no a una persona.</strong> Llegue por Instagram, referido, web, banco, vendedor, Polka o Avance, entra al CRM y puede comprar cualquier propiedad del inventario, mostrada por cualquier vendedor. La atribución existe para pagar el aporte de cada uno, nunca para bloquear la operación. Eso sí: cada cliente tiene siempre un vendedor responsable visible, y toda reasignación queda registrada.</p>
+    </div>
+    <div class="card mt">
+      <h3>Atribución: cinco marcas por operación</h3>
+      <div class="grid g4 mt">
+        <div><span class="pill p-a">1</span><h4 class="mt">Generó el lead</h4><p class="tiny">Campaña, red, referido o cartera. Si el lead lo pagó la empresa, la marca es de la empresa.</p></div>
+        <div><span class="pill p-b">2</span><h4 class="mt">Atendió</h4><p class="tiny">Primer contacto efectivo y calificación de necesidad y presupuesto.</p></div>
+        <div><span class="pill p-t">3</span><h4 class="mt">Mostró</h4><p class="tiny">Hizo las visitas de la propiedad que se vendió.</p></div>
+        <div><span class="pill p-g">4</span><h4 class="mt">Cerró</h4><p class="tiny">Condujo negociación, oferta y firma.</p></div>
+      </div>
+      <p class="tiny mt">La quinta marca es <strong>qué propiedad se vendió</strong>, que identifica a su responsable de captación. Todas se registran <strong>mientras ocurren</strong>, no al momento de repartir: quien no registró la visita el día que la hizo, no puede reclamarla después. La disciplina de registro es la disciplina de cobrar.</p>
+    </div>
+  </section>
+
+  <!-- 06 -->
+  <section id="a6">
+    <div class="eyebrow">06 · Comisiones</div>
+    <h2>Se paga por el rol cumplido, no por el origen</h2>
+    <p class="lede">Con una sola empresa, “50/50 entre Avance y Polka” deja de tener sentido: no hay dos partes que repartir. Hay una comisión por operación que baja en cascada y un pool que se reparte entre quienes hicieron el trabajo. Los porcentajes son referencias para calibrar.</p>
+    <div class="grid g2">
+      <div>
+        <div class="wf">
+          <div><b>1 · Comisión bruta de la operación</b><span class="v">100%</span></div>
+          <div class="m"><b>2 · Costos directos</b><span class="v">− variable</span></div>
+          <div class="s"><b>3 · Comisión neta distribuible</b><span class="v">= base</span></div>
+          <div class="m"><b>4 · Pool de las personas</b><span class="v">− 40–60%</span></div>
+          <div class="m"><b>5 · Costos indirectos</b><span class="v">− variable</span></div>
+          <div class="f"><b>6 · Margen de la empresa</b><span class="v">= resultado</span></div>
+        </div>
+        <p class="note mt">Costos directos: comisión compartida con corredor externo, referido pagado, marketing específico. Indirectos: marketing general, CRM, oficina, administración.</p>
+      </div>
+      <div class="card">
+        <h3>Reparto del pool entre roles</h3>
+        <div class="tw mt" style="border:none">
+          <table style="min-width:0">
+            <tbody>
+              <tr><td class="k">Captación</td><td>consiguió el mandato</td><td class="mono">20%</td></tr>
+              <tr><td class="k">Generación del lead</td><td>trajo al cliente</td><td class="mono">15%</td></tr>
+              <tr><td class="k">Atención y muestra</td><td>trabajó al cliente</td><td class="mono">35%</td></tr>
+              <tr><td class="k">Cierre</td><td>negoció y firmó</td><td class="mono">30%</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="tiny mt">Si una persona cumple varios roles, acumula. Si el lead vino de una campaña pagada o de la marca, ese 15% <strong>queda en la empresa</strong>, que fue quien pagó por él.</p>
+        <p class="note mt"><span class="tbd">Por definir</span> los porcentajes finales y qué parte de la neta va al pool.</p>
+      </div>
+    </div>
+    <h3 class="mt2">Los cuatro escenarios</h3>
+    <p class="tiny">Mismo ejemplo: comisión neta de <strong>100 unidades</strong>, pool de personas de <strong>50%</strong> (50 unidades).</p>
+    <div class="tw mt">
+      <table>
+        <thead><tr><th>Escenario</th><th>Captación 20%</th><th>Lead 15%</th><th>Atención 35%</th><th>Cierre 30%</th><th>Personas</th><th>Empresa</th></tr></thead>
+        <tbody>
+          <tr><td class="k">A · el mismo capta y vende</td><td>V1 · 10</td><td>V1 · 7,5</td><td>V1 · 17,5</td><td>V1 · 15</td><td class="mono">V1: 50</td><td class="mono">50</td></tr>
+          <tr><td class="k">B · uno capta, otro vende</td><td>Captador · 10</td><td>Empresa · 7,5</td><td>V1 · 17,5</td><td>V1 · 15</td><td class="mono">Capt.: 10 · V1: 32,5</td><td class="mono">57,5</td></tr>
+          <tr><td class="k">C · uno genera, otro cierra</td><td>sin captación interna</td><td>V1 · 7,5</td><td>V2 · 17,5</td><td>V2 · 15</td><td class="mono">V1: 7,5 · V2: 32,5</td><td class="mono">60</td></tr>
+          <tr><td class="k">D · vende propiedad de otro</td><td>Integrante A · 10</td><td>V B · 7,5</td><td>V B · 17,5</td><td>V B · 15</td><td class="mono">A: 10 · B: 40</td><td class="mono">50</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="grid g2 mt">
+      <div class="card">
+        <h3>Qué señal entrega cada uno</h3>
+        <ul class="l mt">
+          <li><strong>A:</strong> el vendedor completo —trae producto y trae clientes— es el que más gana. Es lo que la empresa quiere incentivar.</li>
+          <li><strong>B:</strong> captar tiene valor propio y se paga aunque no participes de la venta. Se paga al vender, no al firmar el mandato.</li>
+          <li><strong>C:</strong> pasar un cliente que no puedo atender bien me sigue generando ingreso. Sin esto, el vendedor lo retiene y lo pierde.</li>
+          <li><strong>D:</strong> es el caso que justifica todo el modelo. El cálculo real no es “20% versus 100%”, sino <strong>20% de una venta probable versus 100% de una venta que puede no ocurrir</strong>.</li>
+        </ul>
+      </div>
+      <div class="warn">
+        <h3>Definiciones críticas <span class="tbd">Por definir</span></h3>
+        <ul class="l mt">
+          <li>Qué porcentaje de la comisión neta va al pool de las personas.</li>
+          <li>Si los socios cobran comisión de vendedor cuando venden o captan, además de su participación en utilidades.</li>
+          <li>Si existe sueldo base para algún rol y cómo se descuenta.</li>
+          <li>Cuándo se devenga (promesa, escritura o pago recibido) y cuándo se paga.</li>
+          <li>Cuánto dura el derecho de quien generó un lead o captó una propiedad.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- 07 -->
+  <section id="a7">
+    <div class="eyebrow">07 · KPI</div>
+    <h2>Lo que se mide cada semana</h2>
+    <p class="lede">Cuatro bloques. Los alimenta el CRM (Rodrigo) y los cierra con los números financieros Francis. Es el mismo tablero de la reunión de socios.</p>
+    <div class="tw">
+      <table>
+        <thead><tr><th>Bloque</th><th>Indicadores</th><th>Responsable</th></tr></thead>
+        <tbody>
+          <tr><td class="k">Ventas</td><td>Leads · contactos · visitas · ofertas · reservas · ventas · conversión por etapa · ticket promedio · facturación</td><td>Alison / Francis</td></tr>
+          <tr><td class="k">Captación</td><td>Propiedades captadas · mandatos firmados · inventario activo · precio promedio · tiempo promedio de venta</td><td>Diego</td></tr>
+          <tr><td class="k">Vendedores</td><td>Leads recibidos · contactos · visitas · ventas · conversión · comisión generada</td><td>Alison</td></tr>
+          <tr><td class="k">Finanzas</td><td>Ingresos · costos · comisiones · margen · utilidad · flujo de caja</td><td>Francis</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="grid g4 mt">
+      <div class="kpi"><div class="kl">El del embudo</div><div class="kv">Conversión</div><div class="kf">lead → visita → oferta → venta</div></div>
+      <div class="kpi g"><div class="kl">El de captación</div><div class="kv">Vendidas / captadas</div><div class="kf">revela si el producto es vendible</div></div>
+      <div class="kpi b"><div class="kl">El de servicio</div><div class="kv">&lt; 24 h</div><div class="kf">tiempo de primera respuesta al lead</div></div>
+      <div class="kpi t"><div class="kl">El de finanzas</div><div class="kv">Punto de equilibrio</div><div class="kf">cuántas ventas cubren la estructura <span class="tbd">Por definir</span></div></div>
+    </div>
+    <p class="note mt">Cómo leer el tablero de vendedores: pocos leads y buena conversión → darle más leads. Muchos leads y baja conversión → problema de atención. Muchas visitas y pocas ofertas → problema de calificación previa. Pocas visitas → problema de actividad, no de talento.</p>
+  </section>
+
+  <!-- 08 -->
+  <section id="a8">
+    <div class="eyebrow">08 · Decisiones y reunión</div>
+    <h2>Que no haya que preguntarle a los cuatro por todo</h2>
+    <p class="lede">Quien es responsable principal de un área decide en esa área, dentro de los límites acordados. No pedir permiso no significa no informar.</p>
+    <div class="grid g3">
+      <div class="card" style="border-top:3px solid var(--green)">
+        <span class="pill p-g">Nivel 1 · Individual</span>
+        <h3 class="mt">Decide cada responsable</h3>
+        <p class="tiny mt"><strong>Alison:</strong> campañas, contenido, distribución de leads, foco de la semana. <strong>Diego:</strong> aceptar o rechazar captaciones, precio de lista propuesto, prioridad operativa. <strong>Francis:</strong> pagos dentro del presupuesto, condiciones puntuales de una negociación. <strong>Rodrigo:</strong> configuración del CRM, automatizaciones, criterios de datos, ejecutivos bancarios.</p>
+      </div>
+      <div class="card" style="border-top:3px solid var(--amber)">
+        <span class="pill p-m">Nivel 2 · Compartida</span>
+        <h3 class="mt">Se conversa entre dos</h3>
+        <p class="tiny mt"><strong>Alison + Francis:</strong> contratar o desvincular, presupuesto de marketing, descuentos de comisión. <strong>Diego + Francis:</strong> mandatos bajo el estándar. <strong>Rodrigo + Francis:</strong> herramientas con costo recurrente. <strong>Alison + Diego:</strong> campañas de captación y zonas.</p>
+        <p class="note mt">Sin acuerdo en 48 horas, pasa al Comité en la reunión semanal.</p>
+      </div>
+      <div class="card" style="border-top:3px solid var(--red)">
+        <span class="pill p-r">Nivel 3 · Estratégica</span>
+        <h3 class="mt">Deciden los cuatro</h3>
+        <p class="tiny mt">Modelo de comisiones y participaciones · nuevos socios o inversionistas · inversiones relevantes y contrataciones de estructura · marca y posicionamiento · nuevas líneas de negocio · alianzas estratégicas · endeudamiento y reparto de utilidades · cambios de estructura.</p>
+      </div>
+    </div>
+    <div class="grid g2 mt2">
+      <div class="card">
+        <h3>Reunión semanal de socios — 60 minutos</h3>
+        <p class="tiny mt">Día y hora fijos. El tablero se prepara antes: en la reunión se interpreta, no se construye. Termina con tareas escritas, con responsable y fecha.</p>
+        <div class="tw mt" style="border:none">
+          <table style="min-width:0">
+            <tbody>
+              <tr><td class="mono">5'</td><td>1 · Resultados de ventas</td><td>Francis</td></tr>
+              <tr><td class="mono">5'</td><td>2 · Facturación</td><td>Francis</td></tr>
+              <tr><td class="mono">7'</td><td>3 · Pipeline</td><td>Alison</td></tr>
+              <tr><td class="mono">5'</td><td>4 · Leads</td><td>Rodrigo</td></tr>
+              <tr><td class="mono">5'</td><td>5 · Inventario</td><td>Diego</td></tr>
+              <tr><td class="mono">5'</td><td>6 · Captación</td><td>Diego</td></tr>
+              <tr><td class="mono">5'</td><td>7 · Vendedores</td><td>Alison</td></tr>
+              <tr><td class="mono">4'</td><td>8 · Marketing</td><td>Alison</td></tr>
+              <tr><td class="mono">4'</td><td>9 · Finanzas</td><td>Francis</td></tr>
+              <tr><td class="mono">8'</td><td>10 · Problemas</td><td>Todos</td></tr>
+              <tr><td class="mono">5'</td><td>11 · Decisiones</td><td>Todos</td></tr>
+              <tr><td class="mono">2'</td><td>12 · Tareas de la semana</td><td>Todos</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div>
+        <div class="card">
+          <h3>Otras instancias</h3>
+          <ul class="l mt">
+            <li><strong>Semanal comercial (45 min):</strong> Alison con el equipo de vendedores.</li>
+            <li><strong>Mensual de cierre (90 min):</strong> resultados del mes, rentabilidad y ajustes.</li>
+            <li><strong>Trimestral de estrategia (medio día):</strong> metas, estructura y crecimiento.</li>
+          </ul>
+        </div>
+        <div class="card mt">
+          <h3>Antes de llevar algo a los cuatro</h3>
+          <p class="tiny mt">¿Es reversible? Si se deshace sin costo, decídelo y avisa. ¿Cuánto cuesta si sale mal? Si es menos que el tiempo de los cuatro discutiéndolo, decídelo. ¿Compromete a otro socio? Entonces conversa antes.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 09 -->
+  <section id="a9">
+    <div class="eyebrow">09 · Plan de 90 días</div>
+    <h2>De dos operaciones a una empresa funcionando</h2>
+    <div class="tl">
+      <div class="ph" style="--c:var(--accent)">
+        <h3><span class="pill p-a">Días 1–15</span> Definir y ordenar</h3>
+        <p class="tiny mt">Cerrar estructura y responsabilidades · nombre y marca · consolidar inventario completo en una sola lista · consolidar y depurar bases de clientes · elegir CRM y estructura de campos · cerrar el modelo de comisiones · definir topes de decisión · documentar procesos base · primera reunión con abogado y contador · fijar la reunión semanal.</p>
+      </div>
+      <div class="ph" style="--c:var(--blue)">
+        <h3><span class="pill p-b">Días 16–30</span> Activar</h3>
+        <p class="tiny mt">Configurar el CRM y cargar inventario y clientes · reunión de lanzamiento con todo el equipo · incorporar formalmente a los vendedores actuales y a las 4 posibles vendedoras · capacitación inicial completa · activar web y redes · lanzar campañas de captación y de venta · activar la mesa de financiamiento · comunicar la integración a inmobiliarias y propietarios.</p>
+      </div>
+      <div class="ph" style="--c:var(--teal)">
+        <h3><span class="pill p-t">Días 31–60</span> Operar y medir</h3>
+        <p class="tiny mt">Operación 100% sobre el CRM, sin planillas paralelas · tablero de KPI con datos reales · primera medición de conversión por etapa y por vendedor · ajustar metas con datos de los primeros 45 días · optimizar campañas por costo por lead y por venta · ejecutar el plan de captación · revisar precios del inventario antiguo · nuevas alianzas · primer cierre financiero mensual.</p>
+      </div>
+      <div class="ph" style="--c:var(--green)">
+        <h3><span class="pill p-g">Días 61–90</span> Evaluar y escalar</h3>
+        <p class="tiny mt">¿Se está operando realmente como una sola empresa? · rentabilidad y margen real por operación y por producto · productividad de cada vendedor · conversión por fuente de lead: dónde invertir y qué cortar · qué se vendió del inventario y qué no · decisiones de contratación · ajuste del modelo de comisiones si los datos lo justifican · formalización legal · metas del trimestre siguiente.</p>
+      </div>
+    </div>
+    <div class="grid g2 mt">
+      <div class="card"><h3>Señales de que va bien</h3><p class="tiny mt">Vendedores vendiendo producto que no captaron ellos · leads respondidos en menos de 24 horas · CRM completo sin que nadie lo persiga · comisiones pagadas sin discusión.</p></div>
+      <div class="card"><h3>Señales de alerta</h3><p class="tiny mt">Planillas paralelas · “ese cliente es mío” · propiedades sin actualizar hace semanas · discusiones de comisión después del cierre · reuniones semanales que se saltan.</p></div>
+    </div>
+  </section>
+
+  <!-- 10 -->
+  <section id="a10">
+    <div class="eyebrow">10 · Legal</div>
+    <h2>Temas a resolver con abogados y contador</h2>
+    <div class="warn">
+      <p class="tiny"><strong>Listado de temas para revisión profesional.</strong> No constituye asesoría legal, tributaria ni contable. Este documento no propone una estructura legal ni ningún porcentaje de participación.</p>
+    </div>
+    <div class="card mt">
+      <ul class="l two-col">
+        <li>Constitución de la nueva empresa: tipo societario y representación.</li>
+        <li>Participación de los socios.</li>
+        <li>Aportes de cada uno y cómo se valoran.</li>
+        <li>Propiedades y operaciones preexistentes.</li>
+        <li>Contratos con inmobiliarias: cesión o nueva firma.</li>
+        <li>Mandatos de propiedades usadas y su traspaso.</li>
+        <li>Tratamiento de clientes y leads.</li>
+        <li>Propiedad de las bases de datos.</li>
+        <li>Protección de datos personales.</li>
+        <li>Contratos de vendedores y su naturaleza.</li>
+        <li>Comisiones: cómo se documentan y formalizan.</li>
+        <li>Facturación e IVA del corretaje.</li>
+        <li>Confidencialidad y no competencia.</li>
+        <li>Salida de un socio y valorización.</li>
+        <li>Resolución de conflictos y quórums.</li>
+        <li>Propiedad intelectual y marca.</li>
+        <li>Seguros y responsabilidad profesional.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- 11 -->
+  <section id="a11">
+    <div class="eyebrow">11 · Qué falta cerrar</div>
+    <h2>La agenda de la primera sesión</h2>
+    <div class="tw">
+      <table>
+        <thead><tr><th>Cuándo</th><th>Decisión</th><th>Quién decide</th></tr></thead>
+        <tbody>
+          <tr><td><span class="pill p-r">Antes de partir</span></td><td class="k">Porcentajes definitivos del modelo de comisiones</td><td>Los cuatro</td></tr>
+          <tr><td><span class="pill p-r">Antes de partir</span></td><td class="k">Participación societaria y valorización de aportes</td><td>Los cuatro + asesoría</td></tr>
+          <tr><td><span class="pill p-r">Antes de partir</span></td><td class="k">Nombre, marca y promesa al cliente</td><td>Los cuatro · propone Alison</td></tr>
+          <tr><td><span class="pill p-r">Antes de partir</span></td><td class="k">Elección del CRM</td><td>Rodrigo · costo: Francis</td></tr>
+          <tr><td><span class="pill p-m">30 días</span></td><td class="k">Asignación de vendedor por propiedad</td><td>Diego + Alison</td></tr>
+          <tr><td><span class="pill p-m">30 días</span></td><td class="k">Si los socios cobran comisión de vendedor</td><td>Los cuatro</td></tr>
+          <tr><td><span class="pill p-m">30 días</span></td><td class="k">Metas mensuales por vendedor</td><td>Alison · valida Francis</td></tr>
+          <tr><td><span class="pill p-m">30 días</span></td><td class="k">Topes de gasto y de descuento</td><td>Los cuatro · propone Francis</td></tr>
+          <tr><td><span class="pill p-m">30 días</span></td><td class="k">Captadores puros y comisión de corredores externos</td><td>Diego + Francis</td></tr>
+          <tr><td><span class="pill p-m">30 días</span></td><td class="k">Vigencia de las atribuciones</td><td>Los cuatro</td></tr>
+          <tr><td><span class="pill">90 días</span></td><td class="k">Mecanismo de decisión ante desacuerdo</td><td>Los cuatro · formaliza abogado</td></tr>
+          <tr><td><span class="pill">90 días</span></td><td class="k">Coordinador comercial si el equipo supera 8–10</td><td>Alison + Francis</td></tr>
+          <tr><td><span class="pill">90 días</span></td><td class="k">Si el financiamiento genera ingresos propios</td><td>Los cuatro · prepara Rodrigo</td></tr>
+          <tr><td><span class="pill">90 días</span></td><td class="k">Nuevas líneas de negocio</td><td>Los cuatro</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="close">
+      <p>La integración no ocurre el día que se firma la sociedad. Ocurre el día en que nadie se acuerda de quién captó la propiedad.</p>
+      <span>Alison · Diego · Francis · Rodrigo</span>
+    </div>
+    <p class="note mt2" style="text-align:center">Resumen ejecutivo · Todas las cifras de comisiones y KPI son referencias conceptuales para discusión, no valores acordados. La versión completa desarrolla cada punto en detalle.</p>
+  </section>
+</div>
+</body>
+</html>
