@@ -28,6 +28,7 @@ Todo lo editable está en el bloque `const CONFIG = { ... }` al final de `index.
 | `contacto.email` | ✅ `alison@avanceinmobiliario.cl` | Correo del footer |
 | `contacto.linkedin` / `contacto.whatsapp` | ⬜ vacío | Espacio reservado en el footer |
 | `agenda` | ✅ Lun-Vie · 10:00, 11:30, 15:00, 16:30, 18:00 | Disponibilidad |
+| `agenda.apiURL` | ⬜ vacío | Conexión con tu Google Calendar (sección 7) |
 
 Mientras un dato esté vacío, la página no inventa nada: muestra la ilustración
 por defecto o deja el espacio reservado.
@@ -158,7 +159,83 @@ Calendar, la alternativa es reemplazar el paso 1 por un embed de
 
 ---
 
-## 7. Publicar
+## 7. Conectar tu Google Calendar
+
+Sin conectar nada, el calendario de la página funciona con los horarios fijos de
+la sección anterior y tú bloqueas a mano lo que se va ocupando. Si quieres que se
+sincronice solo, hay dos caminos:
+
+| | Google Apps Script (recomendado) | Cal.com / Calendly |
+|---|---|---|
+| Costo | Gratis | Gratis / desde ~US$12 al mes |
+| Diseño | Mantiene el diseño de la página | Reemplaza el paso 1 por un recuadro con su propio estilo |
+| Lee tus horas ocupadas | Sí | Sí |
+| Crea el evento e invita al cliente | Sí | Sí |
+| Enlace de videollamada | Google Meet automático | Sí |
+| Mercado Pago | Sigue con tu link | No lo soportan (solo Stripe/PayPal) |
+| Instalación | 10 minutos, una vez | 5 minutos |
+
+Como ya tienes el pago con Mercado Pago y un diseño propio, te conviene el
+primero. El código está listo en **`apps-script/Codigo.gs`**.
+
+### Qué hace el script
+
+- Le entrega a la página tus horas **realmente libres**, leyendo tu calendario:
+  si tienes una reunión el martes a las 11:30, esa hora desaparece de la página.
+- Al completar el formulario, deja la hora **en espera** con el título
+  `⏳ POR PAGAR · Nombre`, para que nadie más la tome mientras paga.
+- Al confirmar el pago, la convierte en evento definitivo, **invita al cliente**
+  (le llega la invitación con el enlace de Meet) y le envía un correo.
+- Si nadie paga, **la hora se libera sola** a las 2 horas. Así ninguna hora queda
+  reservada sin pago, como pediste.
+- Guarda cada reserva en una planilla de Google, si le pasas el ID.
+
+### Instalación paso a paso
+
+1. Entra a [script.google.com](https://script.google.com) con la cuenta de Google
+   donde está tu calendario y crea un **Proyecto nuevo**.
+2. Borra el contenido de `Código.gs` y pega todo el archivo `apps-script/Codigo.gs`.
+3. En **Configuración del proyecto** (⚙️), pon la zona horaria
+   **(GMT-03:00) Santiago**.
+4. Revisa las constantes del principio del archivo. Los `HORARIOS` deben ser los
+   mismos que en `index.html`.
+5. Menú **Ejecutar** → elige la función `probar` → **Ejecutar**. Google te pedirá
+   autorizar el acceso a tu calendario y correo: acepta (en la pantalla de
+   advertencia, *Configuración avanzada → Ir al proyecto*).
+6. Ejecuta una vez la función `instalarDisparadores`, para que las horas sin pagar
+   se liberen solas.
+7. Botón **Implementar → Nueva implementación → Aplicación web**:
+   - *Ejecutar como*: **Yo**
+   - *Quién tiene acceso*: **Cualquier usuario**
+   - Copia la **URL de la aplicación web** (termina en `/exec`).
+8. Pega esa URL en `index.html`:
+
+```js
+agenda: {
+  apiURL: "https://script.google.com/macros/s/XXXXXXXX/exec",
+  ...
+}
+```
+
+Listo. Recarga la página: el calendario ahora muestra tus horas reales.
+
+> **Importante:** cada vez que edites el script tienes que volver a
+> *Implementar → Administrar implementaciones → editar (✏️) → Versión: Nueva*.
+> Si no, sigue corriendo la versión antigua.
+
+> Si el script se cae o no responde, la página **no se rompe**: vuelve sola a los
+> horarios fijos de `index.html`.
+
+### Alternativa: Cal.com o Calendly
+
+Si prefieres no tocar código, dime y reemplazo el paso 1 de la agenda por el
+recuadro de Cal.com. El flujo queda: eligen hora en Cal.com → pagan con tu link
+de Mercado Pago → tú confirmas. Pierdes el diseño propio del calendario, pero no
+hay nada que instalar.
+
+---
+
+## 8. Publicar
 
 **GitHub Pages:** Settings → Pages → Branch `main` → carpeta `/root`.
 
@@ -169,7 +246,7 @@ Después de publicar, recuerda actualizar en `index.html` la etiqueta
 
 ---
 
-## 8. SEO incluido
+## 9. SEO incluido
 
 - Meta title, description y keywords orientados a asesoría inmobiliaria,
   financiamiento, crédito hipotecario, subsidios e inversión en Chile.

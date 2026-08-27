@@ -993,8 +993,13 @@ const CONFIG = {
     webhookURL: ""        // ej: "https://hooks.zapier.com/hooks/catch/..."
   },
 
-  /* 6) DISPONIBILIDAD ------------------------------------------------------ */
+  /* 6) DISPONIBILIDAD ------------------------------------------------------
+     apiURL: si conectas tu Google Calendar con el script de la carpeta
+       apps-script/ (ver README, sección 6), pega aquí la URL de la aplicación
+       web. La página leerá tus horas realmente libres y creará el evento sola.
+       Si queda vacío, funciona con los horarios fijos de más abajo.          */
   agenda: {
+    apiURL: "",
     diasHabiles: [1,2,3,4,5],                          // 1=lunes … 7=domingo
     horarios: ["10:00","11:30","15:00","16:30","18:00"],
     diasVista: 60,          // hasta cuántos días hacia adelante se puede agendar
@@ -1062,10 +1067,37 @@ function limiteSuperior(){
   d.setDate(d.getDate() + CONFIG.agenda.diasVista);
   return d;
 }
+/* Disponibilidad leída desde Google Calendar (null mientras no haya respuesta) */
+let dispRemota = null;
+
+function cargarDisponibilidad(){
+  const url = CONFIG.agenda.apiURL;
+  if (!url) return;
+  const sep = url.indexOf("?") === -1 ? "?" : "&";
+  fetch(url + sep + "accion=disponibilidad")
+    .then(r => r.json())
+    .then(function(d){
+      if (!d || d.error || typeof d !== "object") return;
+      dispRemota = d;
+      renderCal();
+      renderSlots();
+    })
+    .catch(function(){ /* si falla, siguen valiendo los horarios fijos */ });
+}
+
 function horariosDe(d){
   const iso = key(d);
-  const ocupadas = (CONFIG.agenda.horasOcupadas && CONFIG.agenda.horasOcupadas[iso]) || [];
   const min = limiteInferior();
+
+  if (dispRemota){
+    const libres = dispRemota[iso] || [];
+    return CONFIG.agenda.horarios.map(h => ({
+      hora: h,
+      libre: libres.indexOf(h) !== -1 && slotDate(d, h) >= min
+    }));
+  }
+
+  const ocupadas = (CONFIG.agenda.horasOcupadas && CONFIG.agenda.horasOcupadas[iso]) || [];
   return CONFIG.agenda.horarios.map(h => ({
     hora: h,
     libre: ocupadas.indexOf(h) === -1 && slotDate(d, h) >= min
@@ -1243,6 +1275,7 @@ function enviarWebhook(evento, b){
 }
 
 function enviarEmail(evento, b){
+  if (evento === "reserva_iniciada") return;   // evita un tercer correo repetido
   const n = CONFIG.notificaciones;
   const ep = n.emailEndpoint || (n.emailAlison ? "https://formsubmit.co/ajax/" + n.emailAlison : "");
   if (!ep) return;
@@ -1274,6 +1307,27 @@ function enviarEmail(evento, b){
   } catch(e){}
 }
 
+function enviarAgenda(evento, b){
+  const url = CONFIG.agenda.apiURL;
+  if (!url) return;
+  try {
+    // text/plain evita el preflight CORS que Apps Script no responde
+    fetch(url, {
+      method: "POST",
+      keepalive: true,
+      headers: { "Content-Type": "text/plain;charset=utf-8" },
+      body: JSON.stringify(Object.assign({ evento: evento }, b))
+    }).catch(function(){});
+  } catch(e){}
+}
+
+/* Un solo punto de aviso: correo + Google Calendar + webhook opcional */
+function notificar(evento, b){
+  enviarEmail(evento, b);
+  enviarAgenda(evento, b);
+  enviarWebhook(evento, b);
+}
+
 function whatsappURL(b, pagado){
   const num = (CONFIG.notificaciones.whatsappAlison || "").replace(/\D/g, "");
   if (!num) return "";
@@ -1292,7 +1346,7 @@ function whatsappURL(b, pagado){
 
 function pagar(){
   const reserva = guardar();
-  enviarWebhook("reserva_iniciada", reserva);
+  notificar("reserva_iniciada", reserva);
 
   if (CONFIG.paymentLink){
     window.open(CONFIG.paymentLink, "_blank", "noopener");
@@ -1330,8 +1384,7 @@ function confirmar(){
   $("#ok4").textContent = b.email || "—";
   $("#btnIcs").href = icsURL(b);
 
-  enviarWebhook("pago_confirmado", b);
-  enviarEmail("pago_confirmado", b);
+  notificar("pago_confirmado", b);
   const wa = whatsappURL(b, true);
   if (wa){
     $("#btnWa").href = wa;
@@ -1476,8 +1529,7 @@ function initUI(){
     if (!datos) return;
     state.datos = datos;
     const reserva = guardar();
-    enviarWebhook("formulario_completado", reserva);
-    enviarEmail("formulario_completado", reserva);
+    notificar("formulario_completado", reserva);
     const wa = whatsappURL(reserva, false);
     if (wa){
       $("#btnWaPaso3").href = wa;
@@ -1502,6 +1554,7 @@ function initUI(){
 }
 
 aplicarConfig();
+cargarDisponibilidad();
 renderCal();
 renderSlots();
 actualizarBoton();
