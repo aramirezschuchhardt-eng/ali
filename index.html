@@ -3,10 +3,10 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-<title>Asesoría Inmobiliaria | Alison Schuchhardt</title>
+<title>Asesoría Inmobiliaria | Alison Ramírez Schuchhardt</title>
 <meta name="description" content="Agenda una asesoría inmobiliaria personalizada de 1 hora. Analizamos financiamiento, bancos, mutuarias, subsidios y oportunidades de inversión para ayudarte a tomar mejores decisiones inmobiliarias." />
 <meta name="keywords" content="asesoría inmobiliaria, asesoría para comprar una propiedad, asesoría inversión inmobiliaria, financiamiento inmobiliario Chile, asesoría crédito hipotecario, inversión inmobiliaria Chile, subsidios vivienda Chile, comprar primera propiedad, casas modulares Chile" />
-<meta name="author" content="Alison Schuchhardt" />
+<meta name="author" content="Alison Ramírez Schuchhardt" />
 <meta name="robots" content="index, follow" />
 <meta name="theme-color" content="#12151A" />
 <link rel="canonical" href="https://ejemplo.cl/" /><!-- TODO: reemplazar por el dominio final -->
@@ -14,12 +14,12 @@
 <!-- Open Graph / redes -->
 <meta property="og:type" content="website" />
 <meta property="og:locale" content="es_CL" />
-<meta property="og:site_name" content="Alison Schuchhardt · Asesoría Inmobiliaria" />
-<meta property="og:title" content="Asesoría Inmobiliaria | Alison Schuchhardt" />
+<meta property="og:site_name" content="Alison Ramírez Schuchhardt · Asesoría Inmobiliaria" />
+<meta property="og:title" content="Asesoría Inmobiliaria | Alison Ramírez Schuchhardt" />
 <meta property="og:description" content="Una hora para analizar tus posibilidades, ordenar tu estrategia y encontrar la mejor oportunidad inmobiliaria para ti." />
 <meta property="og:url" content="https://ejemplo.cl/" />
 <meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:title" content="Asesoría Inmobiliaria | Alison Schuchhardt" />
+<meta name="twitter:title" content="Asesoría Inmobiliaria | Alison Ramírez Schuchhardt" />
 <meta name="twitter:description" content="Una hora para analizar tus posibilidades, ordenar tu estrategia y encontrar la mejor oportunidad inmobiliaria para ti." />
 
 <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -135,7 +135,7 @@ p{margin:0}
 .nav.is-stuck{background:rgba(255,255,255,.9);backdrop-filter:blur(14px);border-bottom-color:var(--line)}
 .nav__in{display:flex;align-items:center;justify-content:space-between;gap:18px;height:70px}
 .brand{display:flex;flex-direction:column;line-height:1.15;text-decoration:none}
-.brand__name{font-family:var(--f-display);font-size:1.06rem;letter-spacing:-.01em}
+.brand__name{font-family:var(--f-display);font-size:clamp(.92rem,3.2vw,1.06rem);letter-spacing:-.01em;white-space:nowrap}
 .brand__role{font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted)}
 .nav__links{display:none;gap:30px;align-items:center}
 .nav__links a{font-size:.86rem;color:var(--ink-soft);text-decoration:none;position:relative;padding:4px 0}
@@ -167,7 +167,7 @@ p{margin:0}
 
 .figure{position:relative;border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow-md);background:var(--sand-deep)}
 .figure::after{content:"";position:absolute;inset:0;border:1px solid rgba(255,255,255,.35);border-radius:var(--radius);pointer-events:none}
-.figure img{width:100%;height:100%;object-fit:cover;aspect-ratio:4/5}
+.figure img{width:100%;height:100%;object-fit:cover;object-position:center 14%;aspect-ratio:4/5}
 .figure svg{display:block;width:100%;height:auto}
 .hero__figure{position:relative}
 .badge{
@@ -247,6 +247,12 @@ p{margin:0}
   border:1px solid rgba(255,255,255,.22);border-radius:100px;padding:10px 20px;
   font-size:.8rem;letter-spacing:.06em;color:#EDEAE4;
 }
+.mod__price{
+  display:flex;flex-wrap:wrap;align-items:baseline;gap:6px 12px;margin-top:30px;
+  padding-top:24px;border-top:1px solid rgba(255,255,255,.18);
+}
+.mod__price span{font-size:.74rem;letter-spacing:.16em;text-transform:uppercase;color:#B9B4AB}
+.mod__price b{font-family:var(--f-display);font-weight:400;font-size:clamp(1.7rem,4.5vw,2.4rem);color:var(--gold);line-height:1}
 .mod__visual{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
 .modbox{
   border:1px solid rgba(255,255,255,.16);border-radius:14px;padding:20px;
@@ -444,7 +450,7 @@ p{margin:0}
 <header class="nav" id="nav">
   <div class="wrap nav__in">
     <a class="brand" href="#inicio">
-      <span class="brand__name">Alison Schuchhardt</span>
+      <span class="brand__name">Alison Ramírez Schuchhardt</span>
       <span class="brand__role">Asesoría Inmobiliaria</span>
     </a>
     <nav class="nav__links" aria-label="Navegación principal">
@@ -475,7 +481,7 @@ p{margin:0}
       <div class="hero__meta">
         <span><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg> 60 minutos</span>
         <span><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg> Agenda en línea</span>
-        <span><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 3l7 3v5c0 4.4-2.9 8.4-7 9.6C7.9 19.4 5 15.4 5 11V6l7-3z"/></svg> $40.000 CLP</span>
+        <span><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 3l7 3v5c0 4.4-2.9 8.4-7 9.6C7.9 19.4 5 15.4 5 11V6l7-3z"/></svg> $39.990 CLP</span>
       </div>
     </div>
 
@@ -664,7 +670,8 @@ p{margin:0}
             <span class="pill">Crece contigo</span>
             <span class="pill">Diseña tu espacio</span>
           </div>
-          <div style="margin-top:34px">
+          <p class="mod__price"><span>Soluciones modulares desde</span><b>$10.000.000</b></p>
+          <div style="margin-top:30px">
             <!-- TODO: reemplazar href por el enlace definitivo de soluciones modulares (CONFIG.modularesLink) -->
             <a href="#agenda" class="btn btn--ghost btn--lg" id="btnModulares">Quiero conocer las soluciones modulares</a>
           </div>
@@ -680,7 +687,7 @@ p{margin:0}
               </g>
             </svg>
             <p class="modbox__k">Módulo 1</p>
-            <p class="modbox__v">Parte con lo esencial</p>
+            <p class="modbox__v">Parte con lo esencial · desde $10.000.000</p>
           </div>
           <div class="modbox"><p class="modbox__k">+</p><p class="modbox__v">Amplía cuando quieras</p></div>
           <div class="modbox"><p class="modbox__k">∞</p><p class="modbox__v">Configura tu espacio</p></div>
@@ -783,14 +790,14 @@ p{margin:0}
           <div class="order__row"><span>Fecha y hora</span><span id="recap2">—</span></div>
           <div class="order__row"><span>A nombre de</span><span id="recap3">—</span></div>
           <div class="order__row"><span>Correo</span><span id="recap4">—</span></div>
-          <div class="order__row order__total"><span>Valor</span><span class="price">$40.000 CLP</span></div>
+          <div class="order__row order__total"><span>Valor</span><span class="price">$39.990 CLP</span></div>
         </div>
 
         <p class="hint">Tu horario quedará reservado una vez confirmado el pago.</p>
 
         <div style="display:flex;flex-wrap:wrap;gap:12px;margin-top:24px">
           <!-- El href/acción se define en CONFIG.paymentLink. Sin link configurado, el botón informa al usuario. -->
-          <button type="button" class="btn btn--primary btn--lg" id="btnPagar">Pagar $40.000</button>
+          <button type="button" class="btn btn--primary btn--lg" id="btnPagar">Pagar $39.990</button>
           <a href="#" class="btn btn--ghost btn--lg" id="btnWaPaso3" target="_blank" rel="noopener" style="display:none">Enviar mis datos por WhatsApp</a>
           <button type="button" class="btn btn--ghost btn--lg" data-goto="2">Volver</button>
         </div>
@@ -835,7 +842,7 @@ p{margin:0}
     <h2>Tu futuro inmobiliario comienza con una buena decisión.</h2>
     <p class="lead">No tienes que tomar solo una decisión tan importante. En una hora podemos ordenar tus posibilidades, revisar tus alternativas y definir juntos cuál puede ser el mejor camino para ti.</p>
     <div style="margin-top:34px">
-      <a href="#agenda" class="btn btn--primary btn--lg">Agenda tu asesoría por $40.000 <span class="btn__arrow" aria-hidden="true">→</span></a>
+      <a href="#agenda" class="btn btn--primary btn--lg">Agenda tu asesoría por $39.990 <span class="btn__arrow" aria-hidden="true">→</span></a>
     </div>
   </div>
 </section>
@@ -849,12 +856,12 @@ p{margin:0}
     </div>
     <div class="faq rev rev-d1">
       <details><summary>¿Cuánto dura la asesoría?</summary><p>La asesoría tiene una duración de 60 minutos.</p></details>
-      <details><summary>¿Cuánto cuesta?</summary><p>El valor de la asesoría es de $40.000 CLP.</p></details>
+      <details><summary>¿Cuánto cuesta?</summary><p>El valor de la asesoría es de $39.990 CLP.</p></details>
       <details><summary>¿Puedo consultar por financiamiento?</summary><p>Sí. Revisaremos tus posibilidades y las alternativas que podrían ajustarse a tu situación.</p></details>
       <details><summary>¿Trabajan con bancos y mutuarias?</summary><p>Sí, analizamos alternativas de financiamiento bancario y mediante mutuarias.</p></details>
       <details><summary>¿Revisan subsidios?</summary><p>Sí, evaluamos si existen subsidios o beneficios que puedan ser relevantes para tu caso.</p></details>
       <details><summary>¿La asesoría es para comprar o invertir?</summary><p>Para ambas situaciones. La asesoría se adapta a tu objetivo inmobiliario.</p></details>
-      <details><summary>¿Puedo consultar por casas modulares?</summary><p>Sí. También podemos orientarte respecto de soluciones modulares y proyectos que puedan crecer de acuerdo con tus necesidades.</p></details>
+      <details><summary>¿Puedo consultar por casas modulares?</summary><p>Sí. También podemos orientarte respecto de soluciones modulares y proyectos que puedan crecer de acuerdo con tus necesidades. Las soluciones modulares parten desde $10.000.000.</p></details>
     </div>
   </div>
 </section>
@@ -866,7 +873,7 @@ p{margin:0}
   <div class="wrap">
     <div class="footer__top">
       <div>
-        <p class="footer__name">Alison Schuchhardt</p>
+        <p class="footer__name">Alison Ramírez Schuchhardt</p>
         <p class="footer__role">Asesoría Inmobiliaria</p>
         <p class="footer__claim">Compra. Invierte. Proyecta tu futuro.</p>
       </div>
@@ -874,8 +881,8 @@ p{margin:0}
       <div class="social" id="social"></div>
     </div>
     <div class="footer__bot">
-      <span>© <span id="year">2026</span> Alison Schuchhardt · Asesoría Inmobiliaria</span>
-      <span>Asesoría de 60 minutos · $40.000 CLP</span>
+      <span>© <span id="year">2026</span> Alison Ramírez Schuchhardt · Asesoría Inmobiliaria</span>
+      <span>Asesoría de 60 minutos · $39.990 CLP</span>
     </div>
   </div>
 </footer>
@@ -884,7 +891,7 @@ p{margin:0}
 <div class="sticky" id="sticky">
   <div class="sticky__i">
     <b>Asesoría personalizada</b>
-    <span>60 min · $40.000 CLP</span>
+    <span>60 min · $39.990 CLP</span>
   </div>
   <a href="#agenda" class="btn btn--primary">Agendar</a>
 </div>
@@ -899,14 +906,14 @@ p{margin:0}
 {
   "@context":"https://schema.org",
   "@type":"ProfessionalService",
-  "name":"Alison Schuchhardt · Asesoría Inmobiliaria",
+  "name":"Alison Ramírez Schuchhardt · Asesoría Inmobiliaria",
   "description":"Asesoría inmobiliaria personalizada de 1 hora: financiamiento, bancos y mutuarias, subsidios, capacidad de compra, estrategia inmobiliaria y proyección.",
   "areaServed":{"@type":"Country","name":"Chile"},
   "knowsAbout":["asesoría inmobiliaria","financiamiento inmobiliario","crédito hipotecario","subsidios de vivienda","inversión inmobiliaria","casas modulares"],
   "makesOffer":{
     "@type":"Offer",
     "priceCurrency":"CLP",
-    "price":"40000",
+    "price":"39990",
     "category":"Asesoría",
     "itemOffered":{
       "@type":"Service",
@@ -923,12 +930,12 @@ p{margin:0}
   "@type":"FAQPage",
   "mainEntity":[
     {"@type":"Question","name":"¿Cuánto dura la asesoría?","acceptedAnswer":{"@type":"Answer","text":"La asesoría tiene una duración de 60 minutos."}},
-    {"@type":"Question","name":"¿Cuánto cuesta?","acceptedAnswer":{"@type":"Answer","text":"El valor de la asesoría es de $40.000 CLP."}},
+    {"@type":"Question","name":"¿Cuánto cuesta?","acceptedAnswer":{"@type":"Answer","text":"El valor de la asesoría es de $39.990 CLP."}},
     {"@type":"Question","name":"¿Puedo consultar por financiamiento?","acceptedAnswer":{"@type":"Answer","text":"Sí. Revisaremos tus posibilidades y las alternativas que podrían ajustarse a tu situación."}},
     {"@type":"Question","name":"¿Trabajan con bancos y mutuarias?","acceptedAnswer":{"@type":"Answer","text":"Sí, analizamos alternativas de financiamiento bancario y mediante mutuarias."}},
     {"@type":"Question","name":"¿Revisan subsidios?","acceptedAnswer":{"@type":"Answer","text":"Sí, evaluamos si existen subsidios o beneficios que puedan ser relevantes para tu caso."}},
     {"@type":"Question","name":"¿La asesoría es para comprar o invertir?","acceptedAnswer":{"@type":"Answer","text":"Para ambas situaciones. La asesoría se adapta a tu objetivo inmobiliario."}},
-    {"@type":"Question","name":"¿Puedo consultar por casas modulares?","acceptedAnswer":{"@type":"Answer","text":"Sí. También podemos orientarte respecto de soluciones modulares y proyectos que puedan crecer de acuerdo con tus necesidades."}}
+    {"@type":"Question","name":"¿Puedo consultar por casas modulares?","acceptedAnswer":{"@type":"Answer","text":"Sí. También podemos orientarte respecto de soluciones modulares y proyectos que puedan crecer de acuerdo con tus necesidades. Las soluciones modulares parten desde $10.000.000."}}
   ]
 }
 </script>
@@ -956,27 +963,33 @@ const CONFIG = {
   /* 3) FOTOGRAFÍA ----------------------------------------------------------
      Ruta o URL de tu foto profesional. Si queda vacío se muestra la
      ilustración editorial por defecto.                                      */
-  fotoAlison: "",      // ej: "img/alison.jpg"
+  fotoAlison: "img/alison.jpg",   // sube tu foto con este nombre y aparece sola
   fotoSeccion: "",     // imagen para la sección Experiencia (opcional)
 
   /* 4) CONTACTO ------------------------------------------------------------
      Solo se enlaza lo que completes. Lo vacío queda como espacio reservado. */
   contacto: {
-    instagram: "",     // ej: "https://instagram.com/tu_usuario"
+    instagram: "https://instagram.com/ali.ramirez.sch",
     linkedin:  "",     // ej: "https://linkedin.com/in/tu-perfil"
     whatsapp:  "",     // ej: "https://wa.me/569XXXXXXXX"
-    email:     ""      // ej: "hola@tudominio.cl"
+    email:     "alison@avanceinmobiliario.cl"
   },
 
   /* 5) AVISOS A ALISON -----------------------------------------------------
      whatsappAlison: tu número en formato internacional sin signos (569XXXXXXXX).
        Al confirmar la reserva, el cliente envía a ese WhatsApp un mensaje ya
        escrito con su nombre, fecha, hora, correo y teléfono.
+     emailAlison: correo que recibe un aviso automático apenas alguien completa
+       el formulario y otro cuando confirma el pago. Se envía a través de
+       FormSubmit (sin servidor). La PRIMERA vez hay que activarlo: haz una
+       reserva de prueba y haz clic en el correo de activación que llega.
      webhookURL: opcional. Si conectas un webhook de Zapier / Make / n8n, la
        página le envía automáticamente cada reserva (para WhatsApp automático,
        correo de confirmación, invitación de calendario y registro en planilla). */
   notificaciones: {
     whatsappAlison: "56959178358",   // +56 9 5917 8358
+    emailAlison: "alison@avanceinmobiliario.cl",
+    emailEndpoint: "",    // opcional: endpoint con token de FormSubmit (ver README)
     webhookURL: ""        // ej: "https://hooks.zapier.com/hooks/catch/..."
   },
 
@@ -990,7 +1003,7 @@ const CONFIG = {
     horasOcupadas: {}       // ej: {"2026-09-02":["10:00","15:00"]}
   },
 
-  precio: 40000,
+  precio: 39990,
   duracionMin: 60
 };
 
@@ -1229,6 +1242,38 @@ function enviarWebhook(evento, b){
   } catch(e){}
 }
 
+function enviarEmail(evento, b){
+  const n = CONFIG.notificaciones;
+  const ep = n.emailEndpoint || (n.emailAlison ? "https://formsubmit.co/ajax/" + n.emailAlison : "");
+  if (!ep) return;
+
+  const pagado = evento === "pago_confirmado";
+  const asunto = (pagado ? "✅ Pago confirmado · " : "🗓️ Nueva reserva · ")
+    + (b.nombre || "Sin nombre") + " · " + (b.fechaTexto || "") + " " + (b.hora || "") + " hrs";
+
+  try {
+    fetch(ep, {
+      method: "POST",
+      keepalive: true,
+      headers: { "Content-Type": "application/json", "Accept": "application/json" },
+      body: JSON.stringify({
+        _subject: asunto,
+        _template: "table",
+        _captcha: "false",
+        Estado: pagado ? "Pago confirmado por el cliente" : "Formulario completado (pago por verificar)",
+        Nombre: b.nombre || "",
+        Telefono: b.fono || "",
+        Correo: b.email || "",
+        Fecha: b.fechaTexto || "",
+        Hora: (b.hora || "") + " hrs",
+        Duracion: CONFIG.duracionMin + " minutos",
+        Valor: money(CONFIG.precio),
+        "Quiere revisar": b.msg || "—"
+      })
+    }).catch(function(){});
+  } catch(e){}
+}
+
 function whatsappURL(b, pagado){
   const num = (CONFIG.notificaciones.whatsappAlison || "").replace(/\D/g, "");
   if (!num) return "";
@@ -1286,6 +1331,7 @@ function confirmar(){
   $("#btnIcs").href = icsURL(b);
 
   enviarWebhook("pago_confirmado", b);
+  enviarEmail("pago_confirmado", b);
   const wa = whatsappURL(b, true);
   if (wa){
     $("#btnWa").href = wa;
@@ -1307,14 +1353,14 @@ function icsURL(b){
   const fin = new Date(ini.getTime() + CONFIG.duracionMin * 60000);
   const f = d => d.getFullYear() + pad(d.getMonth()+1) + pad(d.getDate()) + "T" + pad(d.getHours()) + pad(d.getMinutes()) + "00";
   const ics = [
-    "BEGIN:VCALENDAR","VERSION:2.0","PRODID:-//Alison Schuchhardt//Asesoria//ES","CALSCALE:GREGORIAN",
+    "BEGIN:VCALENDAR","VERSION:2.0","PRODID:-//Alison Ramírez Schuchhardt//Asesoria//ES","CALSCALE:GREGORIAN",
     "BEGIN:VEVENT",
     "UID:" + Date.now() + "@asesoria",
     "DTSTAMP:" + f(new Date()),
     "DTSTART:" + f(ini),
     "DTEND:" + f(fin),
     "SUMMARY:Asesoría Inmobiliaria Personalizada",
-    "DESCRIPTION:Asesoría de 60 minutos con Alison Schuchhardt.",
+    "DESCRIPTION:Asesoría de 60 minutos con Alison Ramírez Schuchhardt.",
     "END:VEVENT","END:VCALENDAR"
   ].join("\r\n");
   return "data:text/calendar;charset=utf-8," + encodeURIComponent(ics);
@@ -1323,13 +1369,23 @@ function icsURL(b){
 /* ============================================================================
    PERSONALIZACIÓN (foto, contacto, enlaces)
    ============================================================================ */
+function ponerFoto(cajaId, url, alt){
+  if (!url) return;
+  const caja = $("#" + cajaId);
+  const respaldo = caja.innerHTML;          // ilustración por defecto
+  const img = new Image();
+  img.onload = function(){
+    caja.innerHTML = "";
+    img.alt = alt;
+    caja.appendChild(img);
+  };
+  img.onerror = function(){ caja.innerHTML = respaldo; };  // la foto aún no existe
+  img.src = url;
+}
+
 function aplicarConfig(){
-  if (CONFIG.fotoAlison){
-    $("#heroFigure").innerHTML = '<img src="' + CONFIG.fotoAlison + '" alt="Alison Schuchhardt, asesora inmobiliaria" width="640" height="800" />';
-  }
-  if (CONFIG.fotoSeccion){
-    $("#expFigure").innerHTML = '<img src="' + CONFIG.fotoSeccion + '" alt="Asesoría inmobiliaria y planificación financiera" width="560" height="640" />';
-  }
+  ponerFoto("heroFigure", CONFIG.fotoAlison, "Alison Ramírez Schuchhardt, asesora inmobiliaria");
+  ponerFoto("expFigure", CONFIG.fotoSeccion, "Asesoría inmobiliaria y planificación financiera");
   if (CONFIG.modularesLink){
     const b = $("#btnModulares");
     b.href = CONFIG.modularesLink;
@@ -1421,6 +1477,7 @@ function initUI(){
     state.datos = datos;
     const reserva = guardar();
     enviarWebhook("formulario_completado", reserva);
+    enviarEmail("formulario_completado", reserva);
     const wa = whatsappURL(reserva, false);
     if (wa){
       $("#btnWaPaso3").href = wa;
