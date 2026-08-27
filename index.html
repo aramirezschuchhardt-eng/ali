@@ -715,9 +715,13 @@ p{margin:0}
 
       <!-- PASO 1 -->
       <div class="panel is-active" id="p1" aria-live="polite">
-        <p class="panel__t">Paso 1 — Elige fecha y hora</p>
-        <p class="panel__d">Asesoría de 60 minutos. Horarios en hora de Chile continental.</p>
+        <p class="panel__t" id="p1t">Paso 1 — Elige fecha y hora</p>
+        <p class="panel__d" id="p1d">Asesoría de 60 minutos. Horarios en hora de Chile continental.</p>
 
+        <!-- Calendly: se muestra solo si defines CONFIG.calendly.url -->
+        <div id="calendlyBox" style="display:none"></div>
+
+        <div id="agendaNativa">
         <div class="calbar">
           <p class="calbar__m" id="calMonth">—</p>
           <div class="calnav">
@@ -737,6 +741,7 @@ p{margin:0}
         <div style="margin-top:30px">
           <button type="button" class="btn btn--primary btn--lg" id="toStep2" aria-disabled="true">Continuar <span class="btn__arrow" aria-hidden="true">→</span></button>
         </div>
+        </div><!-- /agendaNativa -->
       </div>
 
       <!-- PASO 2 -->
@@ -787,9 +792,9 @@ p{margin:0}
         <div class="order">
           <div class="order__row"><span>Servicio</span><span><b>Asesoría Inmobiliaria Personalizada</b></span></div>
           <div class="order__row"><span>Duración</span><span>60 minutos</span></div>
-          <div class="order__row"><span>Fecha y hora</span><span id="recap2">—</span></div>
-          <div class="order__row"><span>A nombre de</span><span id="recap3">—</span></div>
-          <div class="order__row"><span>Correo</span><span id="recap4">—</span></div>
+          <div class="order__row" data-solo-nativo><span>Fecha y hora</span><span id="recap2">—</span></div>
+          <div class="order__row" data-solo-nativo><span>A nombre de</span><span id="recap3">—</span></div>
+          <div class="order__row" data-solo-nativo><span>Correo</span><span id="recap4">—</span></div>
           <div class="order__row order__total"><span>Valor</span><span class="price">$39.990 CLP</span></div>
         </div>
 
@@ -817,17 +822,18 @@ p{margin:0}
           <h3>¡Tu asesoría está agendada! 🎉</h3>
           <p class="lead" style="margin-left:auto;margin-right:auto">Gracias por confiar en mí y reservar tu asesoría inmobiliaria. Tu hora quedó reservada correctamente.</p>
           <div class="ticket">
-            <div class="ticket__row"><span>Nombre</span><span id="ok1">—</span></div>
-            <div class="ticket__row"><span>Fecha</span><span id="ok2">—</span></div>
-            <div class="ticket__row"><span>Hora</span><span id="ok3">—</span></div>
+            <div class="ticket__row" data-solo-nativo><span>Nombre</span><span id="ok1">—</span></div>
+            <div class="ticket__row" data-solo-nativo><span>Fecha</span><span id="ok2">—</span></div>
+            <div class="ticket__row" data-solo-nativo><span>Hora</span><span id="ok3">—</span></div>
             <div class="ticket__row"><span>Duración</span><span>60 minutos</span></div>
-            <div class="ticket__row"><span>Correo electrónico</span><span id="ok4">—</span></div>
+            <div class="ticket__row" data-solo-nativo><span>Correo electrónico</span><span id="ok4">—</span></div>
+            <div class="ticket__row" data-solo-calendly style="display:none"><span>Valor</span><span>$39.990 CLP</span></div>
           </div>
           <p class="hint">Te enviaremos la confirmación y los detalles de tu asesoría al correo registrado.</p>
           <div style="display:flex;flex-wrap:wrap;gap:12px;justify-content:center;margin-top:28px">
             <a href="#" class="btn btn--primary btn--lg" id="btnWa" target="_blank" rel="noopener" style="display:none">Enviar mis datos por WhatsApp</a>
             <a href="#inicio" class="btn btn--dark btn--lg" id="btnInicio">Volver al inicio</a>
-            <a href="#" class="btn btn--ghost btn--lg" id="btnIcs" download="asesoria-inmobiliaria.ics">Agregar a mi calendario</a>
+            <a href="#" class="btn btn--ghost btn--lg" id="btnIcs" data-solo-nativo download="asesoria-inmobiliaria.ics">Agregar a mi calendario</a>
           </div>
         </div>
       </div>
@@ -993,7 +999,18 @@ const CONFIG = {
     webhookURL: ""        // ej: "https://hooks.zapier.com/hooks/catch/..."
   },
 
-  /* 6) DISPONIBILIDAD ------------------------------------------------------
+  /* 6) CALENDLY ------------------------------------------------------------
+     Si defines la URL, el paso 1 muestra tu calendario de Calendly incrustado:
+     el cliente elige día, hora y deja sus datos ahí mismo, Calendly sincroniza
+     con tu Google Calendar y envía los correos. Al terminar, la página avanza
+     sola al pago. Deja la URL vacía para volver al calendario propio.        */
+  calendly: {
+    url: "https://calendly.com/alison-avanceinmobiliario/asesoria-inmobiliaria",
+    color: "9A6B2F",          // color de los botones dentro del recuadro
+    colorTexto: "12151A"
+  },
+
+  /* 7) DISPONIBILIDAD (solo si NO usas Calendly) ----------------------------
      apiURL: si conectas tu Google Calendar con el script de la carpeta
        apps-script/ (ver README, sección 6), pega aquí la URL de la aplicación
        web. La página leerá tus horas realmente libres y creará el evento sola.
@@ -1039,9 +1056,9 @@ const STORE = "alison_reserva_pendiente";
 
 function guardar(){
   const b = {
-    fechaISO: key(state.fecha),
-    fechaTexto: fechaLarga(state.fecha),
-    hora: state.hora,
+    fechaISO: state.fecha ? key(state.fecha) : "",
+    fechaTexto: state.fecha ? fechaLarga(state.fecha) : "Agendada en Calendly",
+    hora: state.hora || "",
     duracion: CONFIG.duracionMin,
     precio: CONFIG.precio,
     creado: new Date().toISOString(),
@@ -1072,7 +1089,7 @@ let dispRemota = null;
 
 function cargarDisponibilidad(){
   const url = CONFIG.agenda.apiURL;
-  if (!url) return;
+  if (!url || usaCalendly) return;
   const sep = url.indexOf("?") === -1 ? "?" : "&";
   fetch(url + sep + "accion=disponibilidad")
     .then(r => r.json())
@@ -1477,6 +1494,65 @@ function aplicarConfig(){
 }
 
 /* ============================================================================
+   CALENDLY
+   ============================================================================ */
+const usaCalendly = !!(CONFIG.calendly && CONFIG.calendly.url);
+
+function montarCalendly(){
+  if (!usaCalendly) return;
+
+  // el calendario propio y el formulario los reemplaza Calendly
+  $("#agendaNativa").style.display = "none";
+  $("#stp2").style.display = "none";
+  $("#p1t").textContent = "Paso 1 — Elige fecha, hora y deja tus datos";
+  $("#p1d").textContent = "Asesoría de 60 minutos. Al terminar continúas al pago.";
+  $$("[data-solo-nativo]").forEach(el => { el.style.display = "none"; });
+  $$("[data-solo-calendly]").forEach(el => { el.style.display = ""; });
+  $$('[data-goto="2"]').forEach(b => b.setAttribute("data-goto", "1"));
+
+  const c = CONFIG.calendly;
+  const url = c.url
+    + (c.url.indexOf("?") === -1 ? "?" : "&")
+    + "hide_gdpr_banner=1"
+    + "&background_color=ffffff"
+    + "&primary_color=" + (c.color || "9A6B2F")
+    + "&text_color=" + (c.colorTexto || "12151A");
+
+  const box = $("#calendlyBox");
+  box.style.display = "block";
+  box.innerHTML = '<div class="calendly-inline-widget" data-url="' + url + '" data-resize="true" style="min-width:280px;height:760px"></div>';
+
+  const sc = document.createElement("script");
+  sc.src = "https://assets.calendly.com/assets/external/widget.js";
+  sc.async = true;
+  sc.onerror = function(){
+    // si Calendly no carga, se muestra el calendario propio como respaldo
+    box.style.display = "none";
+    $("#agendaNativa").style.display = "";
+    $("#stp2").style.display = "";
+    $("#p1t").textContent = "Paso 1 — Elige fecha y hora";
+  };
+  document.head.appendChild(sc);
+
+  window.addEventListener("message", manejarCalendly);
+}
+
+function manejarCalendly(e){
+  if (!e.origin || e.origin.indexOf("calendly.com") === -1) return;
+  const d = e.data;
+  if (!d || d.event !== "calendly.event_scheduled") return;
+
+  const reserva = guardar();
+  notificar("agenda_calendly", reserva);
+  aviso(
+    '<b>Tu hora quedó agendada.</b><br>' +
+    'Te llegó un correo con la fecha, la hora y el enlace de la reunión. ' +
+    'Completa el pago de ' + money(CONFIG.precio) + ' para dejarla confirmada.'
+  );
+  irA(3);
+}
+
+/* ============================================================================
    INTERACCIONES GENERALES
    ============================================================================ */
 function initUI(){
@@ -1554,6 +1630,7 @@ function initUI(){
 }
 
 aplicarConfig();
+montarCalendly();
 cargarDisponibilidad();
 renderCal();
 renderSlots();

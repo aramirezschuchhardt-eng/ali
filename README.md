@@ -27,8 +27,9 @@ Todo lo editable está en el bloque `const CONFIG = { ... }` al final de `index.
 | `contacto.instagram` | ✅ `ali.ramirez.sch` | Instagram del footer |
 | `contacto.email` | ✅ `alison@avanceinmobiliario.cl` | Correo del footer |
 | `contacto.linkedin` / `contacto.whatsapp` | ⬜ vacío | Espacio reservado en el footer |
-| `agenda` | ✅ Lun-Vie · 10:00, 11:30, 15:00, 16:30, 18:00 | Disponibilidad |
-| `agenda.apiURL` | ⬜ vacío | Conexión con tu Google Calendar (sección 7) |
+| `calendly.url` | ✅ `alison-avanceinmobiliario/asesoria-inmobiliaria` | Calendario incrustado en el paso 1 |
+| `agenda` | 🔸 respaldo | Horarios fijos si Calendly no carga |
+| `agenda.apiURL` | ⬜ vacío | Alternativa a Calendly con Google Apps Script (sección 7) |
 
 Mientras un dato esté vacío, la página no inventa nada: muestra la ilustración
 por defecto o deja el espacio reservado.
@@ -59,33 +60,27 @@ súbela como `img/alison-experiencia.jpg` y ponla en `fotoSeccion`.
 ## 3. Cómo funciona el flujo
 
 ```
-Elige día y hora  →  Completa sus datos  →  Pago en Mercado Pago  →  Confirmación
-                            │                                            │
-                            └── WhatsApp a Alison ────────────────────────┘
+Elige día, hora y datos          Pago en              Confirmación
+     en Calendly        →      Mercado Pago     →      en la página
+          │                                                  │
+          └── correo automático a ti y al cliente ───────────┘
 ```
 
-1. **Paso 1** — Calendario con días y horarios disponibles (respeta 24 h de anticipación).
-2. **Paso 2** — Nombre y apellido, teléfono/WhatsApp, correo (obligatorios) y un
-   mensaje opcional. Todo se valida antes de continuar.
-3. **Al enviar el formulario** se habilita el botón *Enviar mis datos por WhatsApp*,
-   que abre tu WhatsApp con el mensaje ya escrito (nombre, fecha, hora, correo,
-   teléfono y qué quiere revisar). Tú después chequeas el pago en Mercado Pago.
-4. **Paso 3** — Resumen de la reserva y botón **Pagar $39.990**, que abre Mercado
-   Pago en una pestaña nueva. La página queda esperando con el botón
-   *"Ya realicé el pago"*.
-5. **Confirmación** — Muestra nombre, fecha, hora, duración y correo, permite
-   descargar la invitación de calendario (.ics) y enviarte el aviso por WhatsApp.
+1. **Paso 1** — El calendario de Calendly va incrustado dentro de la página, con
+   tus colores. El cliente elige día y hora y deja sus datos ahí mismo. Calendly
+   sincroniza con tu Google Calendar, te avisa por correo y le manda la
+   invitación con el enlace de la reunión.
+2. **Paso 2** — Apenas agenda, la página avanza sola al pago y muestra el botón
+   **Pagar $39.990**, que abre tu link de Mercado Pago en una pestaña nueva.
+3. **Confirmación** — Al volver, el cliente ve la pantalla de confirmación. Tú
+   verificas el pago en Mercado Pago.
 
-**Importante:** el horario no queda reservado en firme hasta que confirmas el
-pago en Mercado Pago. La página lo advierte explícitamente al cliente.
+Si Calendly no carga (bloqueo de red, caída del servicio), la página **no se
+rompe**: muestra automáticamente el calendario propio con los horarios fijos.
 
-### Retorno automático desde Mercado Pago (opcional)
-
-Si en Mercado Pago configuras la URL de retorno como
-`https://TU-DOMINIO.cl/?pago=exito`, al volver el cliente ve la pantalla de
-confirmación automáticamente, sin apretar "Ya realicé el pago".
-
----
+> **A tener en cuenta:** con Calendly la hora queda tomada al agendar, antes de
+> pagar. Si alguien agenda y no paga, cancelas esa reunión desde Calendly. Para
+> que la hora se libere sola sin pago hay que usar la alternativa de la sección 7.
 
 ## 4. Aviso por correo — activación obligatoria (una sola vez)
 
@@ -159,79 +154,59 @@ Calendar, la alternativa es reemplazar el paso 1 por un embed de
 
 ---
 
-## 7. Conectar tu Google Calendar
+## 7. Tu calendario
 
-Sin conectar nada, el calendario de la página funciona con los horarios fijos de
-la sección anterior y tú bloqueas a mano lo que se va ocupando. Si quieres que se
-sincronice solo, hay dos caminos:
+### Calendly (lo que está activo)
 
-| | Google Apps Script (recomendado) | Cal.com / Calendly |
-|---|---|---|
-| Costo | Gratis | Gratis / desde ~US$12 al mes |
-| Diseño | Mantiene el diseño de la página | Reemplaza el paso 1 por un recuadro con su propio estilo |
-| Lee tus horas ocupadas | Sí | Sí |
-| Crea el evento e invita al cliente | Sí | Sí |
-| Enlace de videollamada | Google Meet automático | Sí |
-| Mercado Pago | Sigue con tu link | No lo soportan (solo Stripe/PayPal) |
-| Instalación | 10 minutos, una vez | 5 minutos |
+La página usa tu evento:
+`https://calendly.com/alison-avanceinmobiliario/asesoria-inmobiliaria`
 
-Como ya tienes el pago con Mercado Pago y un diseño propio, te conviene el
-primero. El código está listo en **`apps-script/Codigo.gs`**.
+Revisa que dentro de Calendly esté configurado así:
 
-### Qué hace el script
+- **Duración:** 60 minutos.
+- **Calendario conectado:** tu Google Calendar, para que tus horas ocupadas
+  desaparezcan solas de la página.
+- **Ubicación:** Google Meet o Zoom, así el enlace se crea automáticamente.
+- **Preguntas del formulario** (Invitee Questions): agrega como obligatoria
+  *Teléfono / WhatsApp* y como opcional *Cuéntame brevemente qué quieres revisar
+  en tu asesoría*. Así recibes lo mismo que pedía el formulario propio.
+- **Notificaciones:** activa el correo de confirmación al cliente y los
+  recordatorios (24 h y 1 h antes).
+- **Buffer y aviso mínimo:** deja al menos 24 horas de anticipación, igual que la
+  página.
 
-- Le entrega a la página tus horas **realmente libres**, leyendo tu calendario:
-  si tienes una reunión el martes a las 11:30, esa hora desaparece de la página.
-- Al completar el formulario, deja la hora **en espera** con el título
-  `⏳ POR PAGAR · Nombre`, para que nadie más la tome mientras paga.
-- Al confirmar el pago, la convierte en evento definitivo, **invita al cliente**
-  (le llega la invitación con el enlace de Meet) y le envía un correo.
-- Si nadie paga, **la hora se libera sola** a las 2 horas. Así ninguna hora queda
-  reservada sin pago, como pediste.
-- Guarda cada reserva en una planilla de Google, si le pasas el ID.
-
-### Instalación paso a paso
-
-1. Entra a [script.google.com](https://script.google.com) con la cuenta de Google
-   donde está tu calendario y crea un **Proyecto nuevo**.
-2. Borra el contenido de `Código.gs` y pega todo el archivo `apps-script/Codigo.gs`.
-3. En **Configuración del proyecto** (⚙️), pon la zona horaria
-   **(GMT-03:00) Santiago**.
-4. Revisa las constantes del principio del archivo. Los `HORARIOS` deben ser los
-   mismos que en `index.html`.
-5. Menú **Ejecutar** → elige la función `probar` → **Ejecutar**. Google te pedirá
-   autorizar el acceso a tu calendario y correo: acepta (en la pantalla de
-   advertencia, *Configuración avanzada → Ir al proyecto*).
-6. Ejecuta una vez la función `instalarDisparadores`, para que las horas sin pagar
-   se liberen solas.
-7. Botón **Implementar → Nueva implementación → Aplicación web**:
-   - *Ejecutar como*: **Yo**
-   - *Quién tiene acceso*: **Cualquier usuario**
-   - Copia la **URL de la aplicación web** (termina en `/exec`).
-8. Pega esa URL en `index.html`:
+Para cambiar colores, tamaño o el enlace, edita en `index.html`:
 
 ```js
-agenda: {
-  apiURL: "https://script.google.com/macros/s/XXXXXXXX/exec",
-  ...
+calendly: {
+  url: "https://calendly.com/alison-avanceinmobiliario/asesoria-inmobiliaria",
+  color: "9A6B2F",        // color de los botones dentro del recuadro
+  colorTexto: "12151A"
 }
 ```
 
-Listo. Recarga la página: el calendario ahora muestra tus horas reales.
+**WhatsApp automático:** Calendly te avisa por correo. Si además lo quieres por
+WhatsApp, conecta Calendly con Zapier (disparador *Invitee Created*) y enchufa
+la acción de WhatsApp hacia +56 9 5917 8358.
 
-> **Importante:** cada vez que edites el script tienes que volver a
-> *Implementar → Administrar implementaciones → editar (✏️) → Versión: Nueva*.
-> Si no, sigue corriendo la versión antigua.
+### Alternativa: Google Apps Script (sin Calendly)
 
-> Si el script se cae o no responde, la página **no se rompe**: vuelve sola a los
-> horarios fijos de `index.html`.
+Si más adelante quieres soltar Calendly, en `apps-script/Codigo.gs` está listo un
+script gratuito que hace lo mismo dentro de tu propia página y además **libera
+sola la hora si no se paga en 2 horas**.
 
-### Alternativa: Cal.com o Calendly
+Para usarlo: deja `calendly.url` vacío, sigue las instrucciones del encabezado del
+script y pega la URL de la aplicación web en `agenda.apiURL`.
 
-Si prefieres no tocar código, dime y reemplazo el paso 1 de la agenda por el
-recuadro de Cal.com. El flujo queda: eligen hora en Cal.com → pagan con tu link
-de Mercado Pago → tú confirmas. Pierdes el diseño propio del calendario, pero no
-hay nada que instalar.
+Resumen de las diferencias:
+
+| | Calendly (activo) | Apps Script |
+|---|---|---|
+| Instalación | Ya está | 10 minutos, una vez |
+| Costo | Plan gratuito de Calendly | Gratis |
+| Diseño | Recuadro de Calendly | Calendario propio de la página |
+| Recordatorios automáticos | Sí | No |
+| Libera la hora si no pagan | No (cancelas tú) | Sí, a las 2 horas |
 
 ---
 
