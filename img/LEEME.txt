@@ -1,0 +1,15 @@
+Guarda aquí tu foto profesional con el nombre exacto:
+
+    alison.jpg
+
+Recomendación: foto vertical (proporción 4:5 o 2:3), mínimo 1000 x 1250 px.
+El encuadre de la página muestra desde la cabeza hacia abajo, así que una foto
+de cuerpo entero también funciona bien.
+
+Mientras el archivo no exista, la página muestra la ilustración editorial por
+defecto: nunca se ve rota ni con un espacio vacío.
+
+Si además quieres una foto en la sección "Experiencia", guárdala como
+alison-experiencia.jpg y en index.html cambia:
+
+    fotoSeccion: "img/alison-experiencia.jpg",
