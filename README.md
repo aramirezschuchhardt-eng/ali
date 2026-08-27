@@ -212,12 +212,34 @@ Resumen de las diferencias:
 
 ## 8. Publicar
 
-**GitHub Pages:** Settings → Pages → Branch `main` → carpeta `/root`.
+### GitHub Pages (gratis, 4 clics)
 
-**Netlify / Vercel:** arrastra la carpeta o conecta el repositorio; no hay build.
+1. Abre <https://github.com/aramirezschuchhardt-eng/ali/settings/pages>
+2. En *Source* elige **Deploy from a branch**.
+3. En *Branch* selecciona `claude/alison-real-estate-landing-m0z0xi` y carpeta
+   **`/ (root)`**.
+4. **Save**. En 1–2 minutos la página queda en:
 
-Después de publicar, recuerda actualizar en `index.html` la etiqueta
-`<link rel="canonical">` y las `og:url` con tu dominio real.
+```
+https://aramirezschuchhardt-eng.github.io/ali/
+```
+
+Esa URL ya está puesta en el `canonical` y en las etiquetas para compartir.
+
+### Dominio propio
+
+Si después compras un dominio (por ejemplo `asesoria.avanceinmobiliario.cl`):
+
+1. En tu proveedor de dominio, crea un registro `CNAME` que apunte a
+   `aramirezschuchhardt-eng.github.io`.
+2. En Settings → Pages → *Custom domain*, escribe tu dominio y activa
+   **Enforce HTTPS**.
+3. En `index.html`, cambia el `canonical` y el `og:url` por el dominio nuevo.
+
+### Otras opciones
+
+**Netlify o Vercel:** conecta el repositorio o arrastra la carpeta; no hay que
+compilar nada.
 
 ---
 
