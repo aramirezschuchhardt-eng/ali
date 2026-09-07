@@ -23,6 +23,7 @@ Píxel: **DATOS DE AVANCE INMOBILIARIO** · ID `8571984936242054`
 - Destino: sitio web (la landing)
 - Plataformas: Facebook, Instagram y Messenger (**Audience Network excluida**, como planificamos)
 - Atribución: 7 días clic / 1 día visualización
+- Exclusión activa: `CL_Compradores_9990_180d`
 
 **Enlaces directos:**
 - Campaña: https://www.facebook.com/adsmanager/manage/campaigns/edit?act=379252265976319&selected_campaign_ids=120248711086490142
@@ -30,27 +31,24 @@ Píxel: **DATOS DE AVANCE INMOBILIARIO** · ID `8571984936242054`
 
 ---
 
-## ⛔ Bloqueado: públicos personalizados
+## ✅ Públicos creados (6)
 
-Los 5 públicos de retargeting **no se pudieron crear** porque la cuenta no tiene aceptados los Términos de Públicos Personalizados.
+| Público | ID | Regla | Retención |
+|---|---|---|---|
+| `CL_LP_Visitantes_180d` | `120248711449930142` | Todos los visitantes de la landing | 180 d |
+| `CL_LP_SinLead_30d` | `120248711450450142` | Visitaron pero no dejaron datos | 30 d |
+| `CL_Checkout_Abandonado_14d` | `120248711451410142` | `InitiateCheckout` sin `Purchase` | 14 d |
+| `CL_Leads_180d` | `120248711451690142` | Evento `Lead` | 180 d |
+| `CL_Compradores_9990_180d` | `120248711451890142` | Evento `Purchase` | 180 d |
+| `CL_FB_Engagement_365d` | `120248711460930142` | Interactuaron con la página Avance Inmobiliario | 365 d |
 
-**Solución (1 clic, 30 segundos):**
-👉 https://www.facebook.com/customaudiences/app/tos/?act=379252265976319
+**`CL_Compradores_9990_180d` ya quedó excluido del ad set de prospección**, tal como manda el plan.
 
-Avísame cuando lo aceptes y los creo de inmediato:
+> Los 5 públicos de píxel se llenan **solo cuando el píxel dispare** (ver alerta más abajo). `CL_FB_Engagement_365d` es el único que ya tiene gente real dentro: se llena con el histórico de la página.
 
-| Público | Regla | Retención |
-|---|---|---|
-| `CL_LP_Visitantes_180d` | Todos los visitantes de la landing | 180 d |
-| `CL_LP_SinLead_30d` | Visitaron pero no dejaron datos | 30 d |
-| `CL_Checkout_Abandonado_14d` | `InitiateCheckout` sin `Purchase` | 14 d |
-| `CL_Leads_180d` | Evento `Lead` | 180 d |
-| `CL_Compradores_9990_180d` | Evento `Purchase` | 180 d |
-
-> Nota: Meta permite máximo **180 días** de retención en públicos de sitio web (por eso compradores queda en 180 y no 365).
+> Meta permite máximo **180 días** de retención en públicos de sitio web (por eso compradores queda en 180 y no 365).
 
 ---
-
 ## ⚠️ Alerta importante: el píxel nunca ha registrado eventos
 
 El píxel `DATOS DE AVANCE INMOBILIARIO` existe desde octubre de 2024 pero aparece **sin ningún evento registrado** (`last_fired_time` vacío).
