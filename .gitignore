@@ -1,0 +1,7 @@
+# Los videos pesan mucho para git: se guardan fuera (Drive, disco, etc.)
+*.mp4
+*.mov
+*.mkv
+*.avi
+*.webm
+*.m4v
