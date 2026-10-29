@@ -1,0 +1,954 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Inversión en Preventa Inmobiliaria</title>
+  <style>
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --navy: #0d2b6e;
+      --blue: #1a4bc4;
+      --blue-dark: #163da8;
+      --muted: #5a7abf;
+      --soft: #a8bde8;
+      --border: #c5d3ee;
+      --line: #dce6f5;
+      --bg: #f0f4f8;
+      --panel: #f0f4fb;
+      --text: #2c3e70;
+      --green: #1e8a5a;
+      --green-bg: #e8f6ef;
+      --red: #c0392b;
+    }
+
+    body {
+      font-family: 'Segoe UI', Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.5;
+    }
+
+    /* Hero */
+    .hero {
+      background: linear-gradient(135deg, #0d2b6e 0%, #1a4bc4 100%);
+      color: #fff;
+      padding: 64px 24px 96px;
+      text-align: center;
+    }
+
+    .hero .tag {
+      display: inline-block;
+      background: rgba(255, 255, 255, 0.14);
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      border-radius: 999px;
+      padding: 5px 14px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.6px;
+      text-transform: uppercase;
+      margin-bottom: 18px;
+    }
+
+    .hero h1 {
+      font-size: clamp(1.8rem, 4.5vw, 2.8rem);
+      font-weight: 800;
+      line-height: 1.15;
+      max-width: 760px;
+      margin: 0 auto;
+    }
+
+    .hero p {
+      color: var(--soft);
+      font-size: 1.05rem;
+      max-width: 620px;
+      margin: 16px auto 0;
+    }
+
+    .container {
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* Steps */
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 16px;
+      margin-top: -56px;
+    }
+
+    .step {
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 4px 24px rgba(10, 30, 80, 0.12);
+      padding: 22px;
+    }
+
+    .step .num {
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      background: var(--panel);
+      color: var(--blue);
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 12px;
+    }
+
+    .step h3 {
+      color: var(--navy);
+      font-size: 1rem;
+      margin-bottom: 6px;
+    }
+
+    .step p {
+      font-size: 0.9rem;
+    }
+
+    section {
+      margin-top: 56px;
+    }
+
+    .section-title {
+      color: var(--navy);
+      font-size: 1.5rem;
+      font-weight: 800;
+      margin-bottom: 6px;
+    }
+
+    .section-sub {
+      color: var(--muted);
+      margin-bottom: 24px;
+    }
+
+    /* Simulator */
+    .sim {
+      display: grid;
+      grid-template-columns: 380px 1fr;
+      gap: 24px;
+      align-items: start;
+    }
+
+    @media (max-width: 860px) {
+      .sim { grid-template-columns: 1fr; }
+    }
+
+    .card {
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 4px 24px rgba(10, 30, 80, 0.12);
+      overflow: hidden;
+    }
+
+    .card-header {
+      background: var(--navy);
+      padding: 20px 24px;
+    }
+
+    .card-header h2 {
+      color: #fff;
+      font-size: 1.1rem;
+      font-weight: 700;
+    }
+
+    .card-header p {
+      color: var(--soft);
+      font-size: 0.82rem;
+      margin-top: 2px;
+    }
+
+    .card-body {
+      padding: 24px;
+    }
+
+    .form-group {
+      margin-bottom: 18px;
+    }
+
+    label {
+      display: block;
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: var(--navy);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 7px;
+    }
+
+    .input-wrapper {
+      position: relative;
+      display: flex;
+      align-items: center;
+    }
+
+    .input-prefix,
+    .input-suffix {
+      position: absolute;
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--muted);
+      pointer-events: none;
+    }
+
+    .input-prefix { left: 13px; }
+    .input-suffix { right: 13px; }
+
+    input[type="number"],
+    select {
+      width: 100%;
+      padding: 10px 14px;
+      border: 1.8px solid var(--border);
+      border-radius: 8px;
+      font-size: 1rem;
+      color: #1a1a2e;
+      background: #f7f9fd;
+      font-family: inherit;
+      transition: border-color 0.2s, box-shadow 0.2s;
+      -moz-appearance: textfield;
+    }
+
+    input[type="number"]::-webkit-inner-spin-button,
+    input[type="number"]::-webkit-outer-spin-button {
+      -webkit-appearance: none;
+    }
+
+    input[type="number"]:focus,
+    select:focus {
+      outline: none;
+      border-color: var(--blue);
+      box-shadow: 0 0 0 3px rgba(26, 75, 196, 0.15);
+      background: #fff;
+    }
+
+    .has-prefix input { padding-left: 30px; }
+    .has-suffix input { padding-right: 34px; }
+
+    .row-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    .hint {
+      font-size: 0.78rem;
+      color: var(--muted);
+      margin-top: 5px;
+    }
+
+    .divider {
+      border: none;
+      border-top: 1.5px solid #e8edf6;
+      margin: 6px 0 20px;
+    }
+
+    .error-msg {
+      font-size: 0.85rem;
+      color: var(--red);
+      background: #fdf0ee;
+      border: 1px solid #f5c6c0;
+      border-radius: 6px;
+      padding: 9px 13px;
+      display: none;
+    }
+
+    .error-msg.visible { display: block; }
+
+    /* KPIs */
+    .kpis {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+
+    .kpi {
+      background: var(--panel);
+      border: 1.8px solid var(--border);
+      border-radius: 10px;
+      padding: 14px 16px;
+    }
+
+    .kpi .k-label {
+      font-size: 0.72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.6px;
+      color: var(--muted);
+    }
+
+    .kpi .k-value {
+      font-size: 1.35rem;
+      font-weight: 800;
+      color: var(--navy);
+      font-variant-numeric: tabular-nums;
+      margin-top: 2px;
+    }
+
+    .kpi.good {
+      background: var(--green-bg);
+      border-color: #b6e2cc;
+    }
+
+    .kpi.good .k-value { color: var(--green); }
+    .kpi.bad .k-value { color: var(--red); }
+
+    .results h3 {
+      font-size: 0.78rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.6px;
+      color: var(--muted);
+      margin: 8px 0 10px;
+    }
+
+    .result-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      padding: 8px 0;
+      border-bottom: 1px solid var(--line);
+      font-size: 0.93rem;
+    }
+
+    .result-row .value {
+      font-weight: 600;
+      color: var(--navy);
+      font-variant-numeric: tabular-nums;
+      white-space: nowrap;
+    }
+
+    .result-row.total {
+      border-top: 2px solid var(--blue);
+      border-bottom: none;
+      margin-top: 6px;
+      padding-top: 12px;
+    }
+
+    .result-row.total .label { font-weight: 700; color: var(--navy); }
+    .result-row.total .value { font-size: 1.1rem; font-weight: 800; color: var(--blue); }
+
+    .chart-wrap {
+      margin-top: 22px;
+    }
+
+    .legend {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      font-size: 0.8rem;
+      margin-bottom: 6px;
+    }
+
+    .legend span::before {
+      content: '';
+      display: inline-block;
+      width: 12px;
+      height: 12px;
+      border-radius: 3px;
+      margin-right: 6px;
+      vertical-align: -1px;
+      background: var(--c);
+    }
+
+    svg { width: 100%; height: auto; display: block; }
+
+    .table-wrap {
+      overflow-x: auto;
+      margin-top: 22px;
+      max-height: 320px;
+      overflow-y: auto;
+      border: 1.5px solid var(--line);
+      border-radius: 8px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.85rem;
+      font-variant-numeric: tabular-nums;
+    }
+
+    th, td {
+      padding: 8px 12px;
+      text-align: right;
+      border-bottom: 1px solid var(--line);
+      white-space: nowrap;
+    }
+
+    th:first-child, td:first-child { text-align: left; }
+
+    th {
+      position: sticky;
+      top: 0;
+      background: var(--panel);
+      color: var(--navy);
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    td.neg { color: var(--red); }
+    td.pos { color: var(--green); font-weight: 700; }
+
+    /* Benefits & FAQ */
+    .benefits {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 16px;
+    }
+
+    .benefit {
+      background: #fff;
+      border-radius: 12px;
+      padding: 20px;
+      border-left: 4px solid var(--blue);
+      box-shadow: 0 2px 12px rgba(10, 30, 80, 0.08);
+    }
+
+    .benefit.risk { border-left-color: #d98b1f; }
+
+    .benefit h3 {
+      color: var(--navy);
+      font-size: 1rem;
+      margin-bottom: 6px;
+    }
+
+    .benefit p, .benefit li { font-size: 0.9rem; }
+    .benefit ul { padding-left: 18px; }
+
+    details {
+      background: #fff;
+      border-radius: 10px;
+      padding: 16px 20px;
+      margin-bottom: 10px;
+      box-shadow: 0 2px 12px rgba(10, 30, 80, 0.06);
+    }
+
+    summary {
+      cursor: pointer;
+      font-weight: 700;
+      color: var(--navy);
+    }
+
+    details p {
+      margin-top: 10px;
+      font-size: 0.92rem;
+    }
+
+    /* Contact */
+    .cta {
+      background: var(--navy);
+      color: #fff;
+      border-radius: 14px;
+      padding: 36px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 28px;
+      align-items: center;
+    }
+
+    @media (max-width: 760px) {
+      .cta { grid-template-columns: 1fr; padding: 24px; }
+    }
+
+    .cta h2 { font-size: 1.5rem; }
+    .cta p { color: var(--soft); margin-top: 8px; }
+
+    .cta form {
+      display: grid;
+      gap: 10px;
+    }
+
+    .cta input[type="text"],
+    .cta input[type="email"],
+    .cta input[type="tel"] {
+      width: 100%;
+      padding: 11px 14px;
+      border-radius: 8px;
+      border: 1.5px solid rgba(255, 255, 255, 0.25);
+      background: rgba(255, 255, 255, 0.08);
+      color: #fff;
+      font-size: 0.95rem;
+      font-family: inherit;
+    }
+
+    .cta input::placeholder { color: var(--soft); }
+
+    .cta input:focus {
+      outline: none;
+      border-color: #fff;
+    }
+
+    .btn {
+      padding: 12px;
+      background: var(--blue);
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      font-size: 1rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .btn:hover { background: var(--blue-dark); }
+    .cta .btn { background: #fff; color: var(--navy); }
+    .cta .btn:hover { background: #e6edfb; }
+
+    .form-ok {
+      display: none;
+      background: rgba(255, 255, 255, 0.12);
+      border-radius: 8px;
+      padding: 10px 14px;
+      font-size: 0.9rem;
+    }
+
+    .form-ok.visible { display: block; }
+
+    footer {
+      text-align: center;
+      font-size: 0.78rem;
+      color: var(--muted);
+      padding: 40px 24px;
+      max-width: 760px;
+      margin: 0 auto;
+    }
+  </style>
+</head>
+<body>
+
+  <header class="hero">
+    <span class="tag">Preventa · Venta en verde</span>
+    <h1>Invierte en el avance de obra y gana con la plusvalía</h1>
+    <p>Compra a precio de preventa, paga en mensualidades mientras se construye y obtén tu ganancia al momento de la entrega.</p>
+  </header>
+
+  <main class="container">
+
+    <div class="steps">
+      <div class="step">
+        <div class="num">1</div>
+        <h3>Aparta y da tu enganche</h3>
+        <p>Asegura tu unidad al precio más bajo del proyecto, antes de que inicie o avance la obra.</p>
+      </div>
+      <div class="step">
+        <div class="num">2</div>
+        <h3>Paga durante la obra</h3>
+        <p>Cubre mensualidades sin intereses mientras el desarrollo avanza y el inmueble gana valor.</p>
+      </div>
+      <div class="step">
+        <div class="num">3</div>
+        <h3>Recibe la plusvalía</h3>
+        <p>Al terminar, vende (o cede tus derechos), renta o habita un inmueble que ya vale más.</p>
+      </div>
+    </div>
+
+    <section id="simulador">
+      <h2 class="section-title">Simulador de inversión</h2>
+      <p class="section-sub">Ajusta los valores y observa tu ganancia estimada, rendimiento y flujo de pagos.</p>
+
+      <div class="sim">
+        <div class="card">
+          <div class="card-header">
+            <h2>Datos de la inversión</h2>
+            <p>Montos en pesos mexicanos (MXN)</p>
+          </div>
+          <div class="card-body">
+            <div class="form-group">
+              <label for="precio">Precio de preventa</label>
+              <div class="input-wrapper has-prefix">
+                <span class="input-prefix">$</span>
+                <input type="number" id="precio" value="3500000" min="0" step="10000" />
+              </div>
+            </div>
+
+            <div class="row-2">
+              <div class="form-group">
+                <label for="enganche">Enganche</label>
+                <div class="input-wrapper has-suffix">
+                  <input type="number" id="enganche" value="20" min="0" max="100" step="1" />
+                  <span class="input-suffix">%</span>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="mensual">Pagos en obra</label>
+                <div class="input-wrapper has-suffix">
+                  <input type="number" id="mensual" value="30" min="0" max="100" step="1" />
+                  <span class="input-suffix">%</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="row-2">
+              <div class="form-group">
+                <label for="meses">Meses de obra</label>
+                <div class="input-wrapper">
+                  <input type="number" id="meses" value="24" min="1" max="120" step="1" />
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="plusvalia">Plusvalía anual</label>
+                <div class="input-wrapper has-suffix">
+                  <input type="number" id="plusvalia" value="12" min="-50" max="100" step="0.5" />
+                  <span class="input-suffix">%</span>
+                </div>
+              </div>
+            </div>
+
+            <hr class="divider" />
+
+            <div class="form-group">
+              <label for="estrategia">Estrategia de salida</label>
+              <select id="estrategia">
+                <option value="cesion">Ceder derechos antes de escriturar</option>
+                <option value="escriturar">Liquidar, escriturar y vender</option>
+              </select>
+              <p class="hint" id="estrategiaHint"></p>
+            </div>
+
+            <div class="row-2">
+              <div class="form-group">
+                <label for="comision">Comisión venta</label>
+                <div class="input-wrapper has-suffix">
+                  <input type="number" id="comision" value="4" min="0" max="100" step="0.5" />
+                  <span class="input-suffix">%</span>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="gastos">Gastos / cesión</label>
+                <div class="input-wrapper has-suffix">
+                  <input type="number" id="gastos" value="2" min="0" max="100" step="0.5" />
+                  <span class="input-suffix">%</span>
+                </div>
+              </div>
+            </div>
+            <p class="hint">La comisión se calcula sobre el precio de venta; los gastos (cesión de derechos o escrituración) sobre el precio de preventa.</p>
+
+            <div class="error-msg" id="errorMsg" style="margin-top: 14px;"></div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <h2>Resultado estimado</h2>
+            <p id="resumenTexto">—</p>
+          </div>
+          <div class="card-body results">
+            <div class="kpis">
+              <div class="kpi"><div class="k-label">Capital invertido</div><div class="k-value" id="kCapital">—</div></div>
+              <div class="kpi" id="kpiGanancia"><div class="k-label">Ganancia neta</div><div class="k-value" id="kGanancia">—</div></div>
+              <div class="kpi" id="kpiRoi"><div class="k-label">ROI sobre capital</div><div class="k-value" id="kRoi">—</div></div>
+              <div class="kpi" id="kpiTir"><div class="k-label">Rendimiento anual (TIR)</div><div class="k-value" id="kTir">—</div></div>
+            </div>
+
+            <h3>Desglose</h3>
+            <div class="result-row"><span class="label">Enganche</span><span class="value" id="rEnganche"></span></div>
+            <div class="result-row"><span class="label" id="rMensualLabel">Mensualidades</span><span class="value" id="rMensual"></span></div>
+            <div class="result-row"><span class="label">Saldo contra entrega</span><span class="value" id="rSaldo"></span></div>
+            <div class="result-row"><span class="label">Valor estimado a la entrega</span><span class="value" id="rValor"></span></div>
+            <div class="result-row"><span class="label">Plusvalía bruta</span><span class="value" id="rPlusvalia"></span></div>
+            <div class="result-row"><span class="label">Comisión + gastos</span><span class="value" id="rCostos"></span></div>
+            <div class="result-row total"><span class="label">Recibes al vender</span><span class="value" id="rRecibes"></span></div>
+
+            <div class="chart-wrap">
+              <h3>Capital aportado vs. valor del inmueble</h3>
+              <div class="legend">
+                <span style="--c: #1a4bc4;">Capital aportado (acumulado)</span>
+                <span style="--c: #1e8a5a;">Valor estimado del inmueble</span>
+              </div>
+              <svg id="chart" viewBox="0 0 640 260" role="img" aria-label="Gráfica de capital aportado contra valor del inmueble"></svg>
+            </div>
+
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr><th>Mes</th><th>Concepto</th><th>Flujo</th><th>Aportado acumulado</th><th>Valor inmueble</th></tr>
+                </thead>
+                <tbody id="tabla"></tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2 class="section-title">¿Por qué invertir en preventa?</h2>
+      <p class="section-sub">Ventajas y riesgos que debes conocer antes de decidir.</p>
+      <div class="benefits">
+        <div class="benefit">
+          <h3>Precio de entrada más bajo</h3>
+          <p>Las primeras etapas suelen ofrecerse entre 15% y 30% por debajo del precio final de lista.</p>
+        </div>
+        <div class="benefit">
+          <h3>Apalancamiento natural</h3>
+          <p>Con solo una parte del precio controlas un inmueble completo y la plusvalía se calcula sobre su valor total.</p>
+        </div>
+        <div class="benefit">
+          <h3>Pagos sin intereses</h3>
+          <p>Las mensualidades durante la obra normalmente no generan intereses, a diferencia de un crédito.</p>
+        </div>
+        <div class="benefit risk">
+          <h3>Riesgos a considerar</h3>
+          <ul>
+            <li>Retrasos en la entrega de la obra.</li>
+            <li>Plusvalía menor a la esperada.</li>
+            <li>Solvencia y trayectoria del desarrollador.</li>
+            <li>Permisos, licencias y régimen de propiedad.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2 class="section-title">Preguntas frecuentes</h2>
+      <p class="section-sub">Lo esencial sobre la inversión en avance de obra.</p>
+      <details>
+        <summary>¿Qué es la cesión de derechos?</summary>
+        <p>Es la venta de tu contrato de compraventa a un tercero antes de escriturar. El nuevo comprador te paga lo que aportaste más la plusvalía, y él cubre el saldo pendiente. Muchos desarrolladores cobran una cuota por autorizarla.</p>
+      </details>
+      <details>
+        <summary>¿Cómo se calcula el rendimiento anual (TIR)?</summary>
+        <p>La TIR considera cuándo realizas cada pago y cuándo recibes el dinero. Por eso es más precisa que el ROI simple: un peso aportado en el último mes trabaja menos tiempo que el enganche del mes cero.</p>
+      </details>
+      <details>
+        <summary>¿Qué pasa si la obra se retrasa?</summary>
+        <p>Tu capital queda inmovilizado más tiempo y el rendimiento anual baja. Prueba en el simulador aumentando los meses de obra sin cambiar la plusvalía total para ver el efecto. Revisa también las penalizaciones por retraso en tu contrato.</p>
+      </details>
+      <details>
+        <summary>¿Debo considerar impuestos?</summary>
+        <p>Sí. La venta de un inmueble puede causar ISR sobre la ganancia, y la escrituración implica ISAI, honorarios notariales y derechos de registro. Consulta a un contador o notario para tu caso específico.</p>
+      </details>
+    </section>
+
+    <section>
+      <div class="cta">
+        <div>
+          <h2>¿Quieres conocer los proyectos disponibles?</h2>
+          <p>Déjanos tus datos y un asesor te enviará los desarrollos en preventa con mejor potencial de plusvalía.</p>
+        </div>
+        <form id="contacto" onsubmit="enviarContacto(event)">
+          <input type="text" id="nombre" placeholder="Nombre completo" required />
+          <input type="email" id="correo" placeholder="Correo electrónico" required />
+          <input type="tel" id="telefono" placeholder="Teléfono / WhatsApp" />
+          <button type="submit" class="btn">Quiero información</button>
+          <div class="form-ok" id="formOk">¡Gracias! Te contactaremos muy pronto.</div>
+        </form>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    Las cifras de este simulador son estimaciones ilustrativas y no constituyen una garantía de rendimiento ni asesoría financiera. La plusvalía real depende del mercado, la ubicación y el desarrollador.
+  </footer>
+
+  <script>
+    const ids = ['precio', 'enganche', 'mensual', 'meses', 'plusvalia', 'estrategia', 'comision', 'gastos'];
+
+    function formatMXN(amount) {
+      return amount.toLocaleString('es-MX', {
+        style: 'currency',
+        currency: 'MXN',
+        maximumFractionDigits: 0
+      });
+    }
+
+    function formatPct(value) {
+      return (value * 100).toLocaleString('es-MX', { maximumFractionDigits: 1 }) + '%';
+    }
+
+    function compactMXN(amount) {
+      if (Math.abs(amount) >= 1e6) return '$' + (amount / 1e6).toLocaleString('es-MX', { maximumFractionDigits: 1 }) + 'M';
+      if (Math.abs(amount) >= 1e3) return '$' + Math.round(amount / 1e3) + 'k';
+      return '$' + Math.round(amount);
+    }
+
+    function showError(msg) {
+      const el = document.getElementById('errorMsg');
+      el.textContent = msg;
+      el.classList.add('visible');
+    }
+
+    function clearError() {
+      document.getElementById('errorMsg').classList.remove('visible');
+    }
+
+    // TIR mensual por bisección sobre el valor presente neto
+    function tirMensual(flujos) {
+      const vpn = r => flujos.reduce((acc, f, t) => acc + f / Math.pow(1 + r, t), 0);
+      let lo = -0.99, hi = 1;
+      if (vpn(lo) * vpn(hi) > 0) return null;
+      for (let i = 0; i < 200; i++) {
+        const mid = (lo + hi) / 2;
+        if (vpn(lo) * vpn(mid) <= 0) hi = mid; else lo = mid;
+      }
+      return (lo + hi) / 2;
+    }
+
+    function setKpiState(id, value) {
+      const el = document.getElementById(id);
+      el.classList.toggle('good', value > 0);
+      el.classList.toggle('bad', value < 0);
+    }
+
+    function calcular() {
+      clearError();
+
+      const v = {};
+      for (const id of ids) {
+        const raw = document.getElementById(id).value.trim();
+        if (raw === '') {
+          showError('Por favor, completa todos los campos.');
+          return;
+        }
+        v[id] = id === 'estrategia' ? raw : parseFloat(raw);
+      }
+
+      if (v.precio <= 0) return showError('El precio de preventa debe ser mayor a cero.');
+      if (v.enganche < 0 || v.mensual < 0) return showError('Los porcentajes de pago no pueden ser negativos.');
+      if (v.enganche + v.mensual > 100) return showError('El enganche más los pagos en obra no pueden superar el 100%.');
+      if (!Number.isInteger(v.meses) || v.meses < 1) return showError('Los meses de obra deben ser un número entero mayor a cero.');
+      if (v.comision < 0 || v.gastos < 0) return showError('La comisión y los gastos no pueden ser negativos.');
+
+      const P = v.precio;
+      const N = v.meses;
+      const enganche = P * v.enganche / 100;
+      const totalMensual = P * v.mensual / 100;
+      const mensualidad = totalMensual / N;
+      const saldo = P - enganche - totalMensual;
+      const valorFinal = P * Math.pow(1 + v.plusvalia / 100, N / 12);
+      const comision = valorFinal * v.comision / 100;
+      const gastos = P * v.gastos / 100;
+      const cesion = v.estrategia === 'cesion';
+
+      // En cesión el comprador cubre el saldo; al escriturar lo paga el inversionista
+      const capital = cesion ? enganche + totalMensual : P + gastos;
+      const recibes = cesion ? valorFinal - saldo - comision - gastos : valorFinal - comision;
+      const ganancia = valorFinal - P - comision - gastos;
+      const roi = ganancia / capital;
+
+      const flujos = new Array(N + 1).fill(0);
+      flujos[0] -= enganche;
+      for (let t = 1; t <= N; t++) flujos[t] -= mensualidad;
+      if (cesion) {
+        flujos[N] += recibes;
+      } else {
+        flujos[N] += -saldo - gastos + recibes;
+      }
+      const tm = tirMensual(flujos);
+      const tirAnual = tm === null ? null : Math.pow(1 + tm, 12) - 1;
+
+      document.getElementById('estrategiaHint').textContent = cesion
+        ? 'Vendes tu contrato antes de escriturar; el nuevo comprador liquida el saldo.'
+        : 'Pagas el saldo contra entrega, escrituras y vendes el inmueble terminado.';
+
+      document.getElementById('resumenTexto').textContent =
+        `${N} meses de obra · plusvalía ${v.plusvalia}% anual · ${cesion ? 'cesión de derechos' : 'escriturar y vender'}`;
+
+      document.getElementById('kCapital').textContent = formatMXN(capital);
+      document.getElementById('kGanancia').textContent = formatMXN(ganancia);
+      document.getElementById('kRoi').textContent = formatPct(roi);
+      document.getElementById('kTir').textContent = tirAnual === null ? 'N/D' : formatPct(tirAnual);
+      setKpiState('kpiGanancia', ganancia);
+      setKpiState('kpiRoi', roi);
+      setKpiState('kpiTir', tirAnual ?? 0);
+
+      document.getElementById('rEnganche').textContent = formatMXN(enganche);
+      document.getElementById('rMensualLabel').textContent = `Mensualidades (${N} × ${formatMXN(mensualidad)})`;
+      document.getElementById('rMensual').textContent = formatMXN(totalMensual);
+      document.getElementById('rSaldo').textContent = formatMXN(saldo);
+      document.getElementById('rValor').textContent = formatMXN(valorFinal);
+      document.getElementById('rPlusvalia').textContent = formatMXN(valorFinal - P);
+      document.getElementById('rCostos').textContent = '−' + formatMXN(comision + gastos);
+      document.getElementById('rRecibes').textContent = formatMXN(recibes);
+
+      // Serie mensual de aportado acumulado y valor del inmueble
+      const serie = [];
+      let acumulado = 0;
+      for (let t = 0; t <= N; t++) {
+        acumulado += t === 0 ? enganche : mensualidad;
+        if (t === N && !cesion) acumulado += saldo + gastos;
+        serie.push({ t, acumulado, valor: P * Math.pow(1 + v.plusvalia / 100, t / 12) });
+      }
+
+      renderTabla(serie, { N, enganche, mensualidad, saldo, gastos, recibes, cesion });
+      renderChart(serie);
+    }
+
+    function renderTabla(serie, d) {
+      const filas = [];
+      for (const s of serie) {
+        let concepto, flujo;
+        if (s.t === 0) {
+          concepto = 'Enganche';
+          flujo = -d.enganche;
+        } else {
+          concepto = 'Mensualidad';
+          flujo = -d.mensualidad;
+        }
+        filas.push(`<tr><td>${s.t}</td><td style="text-align:left">${concepto}</td><td class="neg">${formatMXN(flujo)}</td><td>${formatMXN(s.t === d.N && !d.cesion ? s.acumulado - d.saldo - d.gastos : s.acumulado)}</td><td>${formatMXN(s.valor)}</td></tr>`);
+      }
+      const ultimo = serie[serie.length - 1];
+      if (!d.cesion) {
+        filas.push(`<tr><td>${d.N}</td><td style="text-align:left">Saldo + escrituración</td><td class="neg">${formatMXN(-(d.saldo + d.gastos))}</td><td>${formatMXN(ultimo.acumulado)}</td><td>${formatMXN(ultimo.valor)}</td></tr>`);
+      }
+      filas.push(`<tr><td>${d.N}</td><td style="text-align:left">${d.cesion ? 'Cesión de derechos' : 'Venta del inmueble'}</td><td class="pos">${formatMXN(d.recibes)}</td><td>—</td><td>${formatMXN(ultimo.valor)}</td></tr>`);
+      document.getElementById('tabla').innerHTML = filas.join('');
+    }
+
+    function renderChart(serie) {
+      const W = 640, H = 260, padL = 56, padR = 12, padT = 12, padB = 30;
+      const maxY = Math.max(...serie.map(s => Math.max(s.acumulado, s.valor))) * 1.05;
+      const N = serie.length - 1;
+      const x = t => padL + (t / N) * (W - padL - padR);
+      const y = val => padT + (1 - val / maxY) * (H - padT - padB);
+
+      let out = '';
+      for (let i = 0; i <= 4; i++) {
+        const val = (maxY / 4) * i;
+        out += `<line x1="${padL}" x2="${W - padR}" y1="${y(val)}" y2="${y(val)}" stroke="#e8edf6" />`;
+        out += `<text x="${padL - 8}" y="${y(val) + 4}" text-anchor="end" font-size="11" fill="#5a7abf">${compactMXN(val)}</text>`;
+      }
+
+      const barW = Math.max(2, (W - padL - padR) / (N + 1) * 0.6);
+      for (const s of serie) {
+        out += `<rect x="${x(s.t) - barW / 2}" y="${y(s.acumulado)}" width="${barW}" height="${y(0) - y(s.acumulado)}" fill="#1a4bc4" opacity="0.85" rx="1.5"><title>Mes ${s.t}: ${formatMXN(s.acumulado)} aportado</title></rect>`;
+      }
+
+      const pts = serie.map(s => `${x(s.t)},${y(s.valor)}`).join(' ');
+      out += `<polyline points="${pts}" fill="none" stroke="#1e8a5a" stroke-width="2.5" stroke-linejoin="round" />`;
+      const last = serie[N];
+      out += `<circle cx="${x(N)}" cy="${y(last.valor)}" r="4" fill="#1e8a5a" />`;
+
+      const step = Math.max(1, Math.ceil(N / 8));
+      for (let t = 0; t <= N; t += step) {
+        out += `<text x="${x(t)}" y="${H - 10}" text-anchor="middle" font-size="11" fill="#5a7abf">${t}</text>`;
+      }
+      out += `<text x="${padL - 8}" y="${H - 10}" text-anchor="end" font-size="11" fill="#5a7abf">Mes</text>`;
+
+      document.getElementById('chart').innerHTML = out;
+    }
+
+    function enviarContacto(e) {
+      e.preventDefault();
+      document.getElementById('formOk').classList.add('visible');
+      e.target.reset();
+    }
+
+    ids.forEach(id => document.getElementById(id).addEventListener('input', calcular));
+    calcular();
+  </script>
+
+</body>
+</html>
