@@ -1,12 +1,13 @@
 ---
 import type { CollectionEntry } from 'astro:content';
 import ArchVisual from './ArchVisual.astro';
+import { blogSlot } from '@/data/images';
 interface Props { post: CollectionEntry<'blog'>; index?: number; }
 const { post, index = 0 } = Astro.props;
 ---
 <article class="post-card reveal">
   <a href={`/blog/${post.id}`} class="post-link">
-    <div class="post-media"><ArchVisual variant="card" seed={index + 3} label="" /></div>
+    <div class="post-media"><ArchVisual variant="card" slot={blogSlot(post.data.category)} seed={index + 3} label="" /></div>
     <div class="post-body">
       <span class="eyebrow">{post.data.category}</span>
       <h3>{post.data.title}</h3>

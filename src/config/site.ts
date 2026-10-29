@@ -141,7 +141,7 @@ export const footerNav: { title: string; items: NavItem[] }[] = [
       { label: 'Oportunidades', href: '/oportunidades' },
       { label: 'Centro de contenidos', href: '/blog' },
       { label: 'Preguntas frecuentes', href: '/preguntas-frecuentes' },
-      { label: 'Nosotros y equipo', href: '/nosotros' },
+      { label: 'Nosotros', href: '/nosotros' },
     ]),
   },
   {

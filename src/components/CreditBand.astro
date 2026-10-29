@@ -1,6 +1,7 @@
 ---
 import { site } from '@/config/site';
 import { creditService } from '@/data/content';
+import ArchVisual from './ArchVisual.astro';
 interface Props { id?: string; }
 const { id = 'credito' } = Astro.props;
 const bookingHref = site.bookingUrl ?? '/contacto#diagnostico';
@@ -13,6 +14,7 @@ const bookingHref = site.bookingUrl ?? '/contacto#diagnostico';
       <p class="lead">{creditService.lead}</p>
       <div class="btn-row"><a class="btn btn-primary" href={bookingHref} data-cta="credito-asesoria">Quiero evaluar mi crédito</a></div>
       <p class="small note">{creditService.note}</p>
+      <div class="credit-media"><ArchVisual variant="card" slot="credito" seed={5} label="" /></div>
     </div>
     <ul class="credit-points">
       {creditService.points.map((p) => (
@@ -31,4 +33,5 @@ const bookingHref = site.bookingUrl ?? '/contacto#diagnostico';
   .credit-points h3 { margin-bottom: var(--space-2); }
   .credit-points p { margin: 0; font-size: var(--fs-sm); }
   .note { margin-top: var(--space-5); opacity: 0.85; }
+  .credit-media { margin-top: var(--space-6); aspect-ratio: 16 / 9; border-radius: var(--radius); overflow: hidden; }
 </style>

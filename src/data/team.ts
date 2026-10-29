@@ -11,9 +11,5 @@ export interface TeamMember {
   approach?: string;
 }
 
-export const team: TeamMember[] = [
-  {
-    name: 'Alison Ramírez Schuchhardt',
-    role: 'Fundadora',
-  },
-];
+/** Vacío: la sección de equipo se oculta en el sitio hasta agregar integrantes. */
+export const team: TeamMember[] = [];

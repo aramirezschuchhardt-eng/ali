@@ -19,8 +19,7 @@ El sitio no inventa datos. Todo lo siguiente está preparado en el código pero 
 - [ ] Revisión legal de `/privacidad` y `/terminos` (plazo de conservación, encargados del tratamiento).
 
 ## Equipo (`src/data/team.ts`)
-- [ ] Fotografía profesional de Alison Ramírez Schuchhardt (hoy se muestran sus iniciales). Por decisión de la empresa, el perfil muestra solo nombre y cargo.
-- [ ] Agregar a los demás integrantes reales.
+- [ ] Por decisión de la empresa no se muestra equipo. La sección reaparece sola al agregar integrantes en `src/data/team.ts`.
 
 ## Oportunidades (`src/data/projects.ts`)
 - [ ] Reemplazar los 6 proyectos **de demostración** por proyectos reales, con imagen autorizada y cada dato marcado como `confirmed` / `estimate` / `assumption`, con fuente y fecha. Las páginas de demostración están en `noindex`.

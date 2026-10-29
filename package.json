@@ -8,6 +8,7 @@
     "build": "astro build",
     "preview": "astro preview",
     "check": "astro check",
+    "export:html": "astro build && node scripts/export-static.mjs",
     "test": "node --test --experimental-strip-types tests/*.test.ts"
   },
   "dependencies": {

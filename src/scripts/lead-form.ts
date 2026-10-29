@@ -59,6 +59,10 @@ export function initLeadForm(form: HTMLFormElement): void {
       return;
     }
 
+    if (location.protocol === 'file:') {
+      setStatus('info', 'Esta es una versión de vista previa sin servidor: el formulario no envía datos.');
+      return;
+    }
     submit.disabled = true;
     submit.setAttribute('aria-busy', 'true');
     label.textContent = 'Enviando…';

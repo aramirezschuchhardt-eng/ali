@@ -1,11 +1,16 @@
 ---
 /**
- * Composición arquitectónica abstracta (SVG) usada mientras no se disponga de
- * fotografía arquitectónica propia o licenciada. Para usar una fotografía, pasar
- * `image` (ruta en /public) con su texto alternativo.
+ * Imagen referencial. Muestra la fotografía del espacio `slot` (src/data/images.ts)
+ * o la pasada en `image`; si no existe, una composición arquitectónica en SVG.
  */
-interface Props { image?: { src: string; alt: string }; variant?: 'hero' | 'card'; seed?: number; label?: string; }
-const { image, variant = 'hero', seed = 0, label } = Astro.props;
+import { existsSync } from 'node:fs';
+import { join } from 'node:path';
+import { imageSlots, type ImageSlotName } from '@/data/images';
+interface Props { image?: { src: string; alt: string }; slot?: ImageSlotName; variant?: 'hero' | 'card'; seed?: number; label?: string; }
+const { slot, variant = 'hero', seed = 0, label } = Astro.props;
+// Una imagen referencial en /public/images/<slot>.* tiene prioridad sobre la ilustración.
+const slotFile = slot ? ['jpg', 'webp', 'png'].map((ext) => `/images/${slot}.${ext}`).find((f) => existsSync(join(process.cwd(), 'public', f))) : undefined;
+const image = Astro.props.image ?? (slot && slotFile ? { src: slotFile, alt: imageSlots[slot].alt } : undefined);
 const cols = 7;
 const rows = variant === 'hero' ? 11 : 6;
 const lit = new Set<number>();
