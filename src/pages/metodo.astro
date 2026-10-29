@@ -1,0 +1,36 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import PageHero from '@/components/PageHero.astro';
+import MethodTimeline from '@/components/MethodTimeline.astro';
+import SectionHeading from '@/components/SectionHeading.astro';
+import CtaBand from '@/components/CtaBand.astro';
+import { brandPillars } from '@/data/content';
+---
+<BaseLayout
+  title="Método de inversión inmobiliaria en 5 etapas"
+  description="Diagnóstico, estrategia, análisis, estructuración y acompañamiento: el método de Avance Inmobiliario para invertir en propiedades con mayor claridad."
+  breadcrumbs={[{ name: 'Método de inversión', href: '/metodo' }]}
+>
+  <PageHero eyebrow="Método de inversión" title="Un método para invertir con mayor claridad." lead="Cinco etapas para pasar de una idea general a una decisión informada. Cada etapa tiene un propósito y un resultado concreto para ti." crumbs={[{ name: 'Método de inversión', href: '/metodo' }]} />
+  <section class="section">
+    <div class="container container-narrow">
+      <MethodTimeline detailed />
+    </div>
+  </section>
+  <section class="section section-alt">
+    <div class="container">
+      <SectionHeading eyebrow="Principios" title="Lo que guía cada recomendación." />
+      <div class="grid grid-4 bp">
+        {brandPillars.map((p) => <div class="card reveal"><h3>{p.title}</h3><p class="muted">{p.text}</p></div>)}
+      </div>
+    </div>
+  </section>
+  <section class="section">
+    <div class="container container-narrow center">
+      <h2 class="reveal">No todas las propiedades son la inversión correcta para ti.</h2>
+      <p class="lead reveal">Por eso el método comienza por entenderte y no por un catálogo. Si después del análisis una alternativa no tiene sentido para tu perfil, te lo diremos.</p>
+      <div class="btn-row" style="justify-content:center"><a class="btn btn-secondary" href="/simulador">Probar el simulador</a><a class="btn btn-primary" href="/contacto#diagnostico">Comenzar con un diagnóstico</a></div>
+    </div>
+  </section>
+  <CtaBand />
+</BaseLayout>

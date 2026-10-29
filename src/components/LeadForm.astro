@@ -1,0 +1,121 @@
+---
+import { site, whatsappHref } from '@/config/site';
+import { capitalOptions, contactOptions, horizonOptions, objectiveOptions, propertiesOptions } from '@/lib/lead';
+interface Props { id?: string; compact?: boolean; }
+const { id = 'diagnostico', compact = false } = Astro.props;
+const wa = whatsappHref();
+---
+<section class="lead-form-wrap" id={id} aria-labelledby={`${id}-title`}>
+  <form class="lead-form" novalidate data-lead-form>
+    <header>
+      <h2 id={`${id}-title`}>Cuéntanos qué quieres lograr con tu inversión.</h2>
+      <p class="muted">Te tomará menos de dos minutos. Con esta información preparamos una primera conversación útil para ti.</p>
+    </header>
+
+    <div class="form-grid">
+      <div class="field">
+        <label for={`${id}-name`}>Nombre</label>
+        <input id={`${id}-name`} name="name" type="text" autocomplete="name" required maxlength="120" aria-describedby={`${id}-name-err`} />
+        <span class="field-error" id={`${id}-name-err`} data-error="name"></span>
+      </div>
+      <div class="field">
+        <label for={`${id}-email`}>Correo electrónico</label>
+        <input id={`${id}-email`} name="email" type="email" autocomplete="email" required maxlength="200" aria-describedby={`${id}-email-err`} />
+        <span class="field-error" id={`${id}-email-err`} data-error="email"></span>
+      </div>
+      <div class="field">
+        <label for={`${id}-phone`}>Teléfono</label>
+        <input id={`${id}-phone`} name="phone" type="tel" autocomplete="tel" inputmode="tel" placeholder="+56 9 1234 5678" required aria-describedby={`${id}-phone-err`} />
+        <span class="field-error" id={`${id}-phone-err`} data-error="phone"></span>
+      </div>
+      <div class="field">
+        <label for={`${id}-objective`}>Objetivo principal <span class="opt">(opcional)</span></label>
+        <select id={`${id}-objective`} name="objective"><option value="">Selecciona una opción</option>{objectiveOptions.map((o) => <option value={o.value}>{o.label}</option>)}</select>
+      </div>
+      {!compact && (
+        <>
+          <div class="field">
+            <label for={`${id}-props`}>¿Ya tienes propiedades de inversión? <span class="opt">(opcional)</span></label>
+            <select id={`${id}-props`} name="hasProperties"><option value="">Selecciona una opción</option>{propertiesOptions.map((o) => <option value={o.value}>{o.label}</option>)}</select>
+          </div>
+          <div class="field">
+            <label for={`${id}-capital`}>Capital aproximado para el pie <span class="opt">(opcional)</span></label>
+            <select id={`${id}-capital`} name="capitalRange"><option value="">Selecciona una opción</option>{capitalOptions.map((o) => <option value={o.value}>{o.label}</option>)}</select>
+          </div>
+          <div class="field">
+            <label for={`${id}-horizon`}>¿Cuándo te gustaría invertir? <span class="opt">(opcional)</span></label>
+            <select id={`${id}-horizon`} name="horizon"><option value="">Selecciona una opción</option>{horizonOptions.map((o) => <option value={o.value}>{o.label}</option>)}</select>
+          </div>
+        </>
+      )}
+      <fieldset class="field full">
+        <legend>Preferencia de contacto <span class="opt">(opcional)</span></legend>
+        <div class="chips">
+          {contactOptions.map((o) => (
+            <label class="chip"><input type="radio" name="contactPreference" value={o.value} /><span>{o.label}</span></label>
+          ))}
+        </div>
+      </fieldset>
+      {!compact && (
+        <div class="field full">
+          <label for={`${id}-msg`}>¿Algo más que quieras contarnos? <span class="opt">(opcional)</span></label>
+          <textarea id={`${id}-msg`} name="message" rows="3" maxlength="1500"></textarea>
+          <span class="hint">No incluyas contraseñas, datos bancarios ni información sensible.</span>
+        </div>
+      )}
+      <div class="full consents">
+        <label class="check">
+          <input type="checkbox" name="consent" required aria-describedby={`${id}-consent-err`} />
+          <span>Autorizo a {site.name} a tratar mis datos para responder a esta solicitud, según la <a href="/privacidad" target="_blank">Política de privacidad</a>.</span>
+        </label>
+        <span class="field-error" id={`${id}-consent-err`} data-error="consent"></span>
+        <label class="check">
+          <input type="checkbox" name="marketingConsent" />
+          <span>Quiero recibir contenidos y novedades por correo. <span class="opt">(opcional, puedes darte de baja cuando quieras)</span></span>
+        </label>
+      </div>
+      <input type="text" name="company_website" tabindex="-1" autocomplete="off" class="hp" aria-hidden="true" />
+    </div>
+
+    <div class="form-status notice" role="status" aria-live="polite" hidden data-status></div>
+    <button class="btn btn-primary submit" type="submit" data-submit>
+      <span data-label>Enviar y solicitar asesoría</span>
+    </button>
+  </form>
+
+  <div class="lead-success card" hidden data-success tabindex="-1">
+    <span class="eyebrow">Solicitud recibida</span>
+    <h2>Gracias, <span data-success-name></span>.</h2>
+    <p>Recibimos tu información. Un integrante del equipo te contactará para coordinar una primera conversación. <strong>Tu reunión aún no está agendada.</strong></p>
+    <div class="btn-row">
+      {site.bookingUrl && <a class="btn btn-primary" href={site.bookingUrl} target="_blank" rel="noopener" data-cta="agendar-post-lead">Elegir día y hora ahora</a>}
+      {wa && <a class="btn btn-secondary" href={wa} target="_blank" rel="noopener" data-cta="whatsapp-post-lead">Escríbenos por WhatsApp</a>}
+      <a class="btn btn-ghost" href="/simulador">Mientras tanto, prueba el simulador →</a>
+    </div>
+  </div>
+</section>
+
+<script>
+  import { initLeadForm } from '@/scripts/lead-form';
+  document.querySelectorAll<HTMLFormElement>('[data-lead-form]').forEach(initLeadForm);
+</script>
+
+<style>
+  .lead-form, .lead-success { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: clamp(1.25rem, 3vw, 2.5rem); box-shadow: var(--shadow); }
+  .lead-form h2, .lead-success h2 { font-size: var(--fs-xl); }
+  .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-4) var(--space-5); margin-block: var(--space-5); }
+  .full { grid-column: 1 / -1; }
+  @media (max-width: 640px) { .form-grid { grid-template-columns: 1fr; } }
+  .chips { display: flex; flex-wrap: wrap; gap: var(--space-2); }
+  .chip input { position: absolute; opacity: 0; width: 1px; height: 1px; }
+  .chip span { display: inline-flex; align-items: center; min-height: 44px; padding: 0 1rem; border: 1.5px solid var(--border-strong); border-radius: 999px; cursor: pointer; font-size: var(--fs-sm); }
+  .chip input:checked + span { background: var(--brand-orange-soft); border-color: var(--brand-orange); font-weight: 600; }
+  .chip input:focus-visible + span { outline: 3px solid var(--brand-orange); outline-offset: 2px; }
+  .consents { display: grid; gap: var(--space-2); }
+  .check { display: flex; gap: var(--space-3); align-items: flex-start; font-size: var(--fs-sm); cursor: pointer; }
+  .check input { width: 20px; height: 20px; margin-top: 2px; flex: none; accent-color: var(--brand-orange-deep); }
+  .hp { position: absolute; left: -9999px; width: 1px; height: 1px; opacity: 0; }
+  .submit { width: 100%; margin-top: var(--space-4); }
+  .submit[aria-busy='true'] { opacity: 0.7; cursor: progress; }
+  .form-status { margin-top: var(--space-4); }
+</style>

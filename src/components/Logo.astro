@@ -1,0 +1,39 @@
+---
+/**
+ * Logo oficial de Avance Inmobiliario (archivo entregado por la empresa).
+ * Se usa tal cual, sin redibujar ni recolorear. Si el archivo aún no está en
+ * /public, se muestra el nombre en texto plano como marcador accesible.
+ */
+import { existsSync } from 'node:fs';
+import { join } from 'node:path';
+import { site } from '@/config/site';
+interface Props { variant?: 'light' | 'dark'; size?: 'md' | 'lg'; }
+const { variant = 'light', size = 'md' } = Astro.props;
+const exists = (p: string | null) => !!p && existsSync(join(process.cwd(), 'public', p));
+const darkSrc = exists(site.brand.logoOnDark) ? site.brand.logoOnDark : null;
+const src = variant === 'dark' && darkSrc ? darkSrc : exists(site.brand.logo) ? site.brand.logo : null;
+const plate = variant === 'dark' && !darkSrc && !site.brand.logoTransparent;
+---
+<a href="/" class:list={['logo', `logo-${variant}`, `logo-${size}`, plate && 'logo-plate']} aria-label={`${site.name} — inicio`}>
+  {src ? (
+    <img src={src} alt={site.name} width={site.brand.logoWidth} height={site.brand.logoHeight} />
+  ) : (
+    <span class="logo-text" data-pending="logo-oficial" title="Logo oficial pendiente de incorporar">{site.name}</span>
+  )}
+</a>
+<style>
+  .logo { display: inline-flex; align-items: center; text-decoration: none; min-height: 44px; }
+  .logo img { height: 44px; width: auto; }
+  .logo-lg img { height: 64px; }
+  /* Placa clara con área de protección cuando el archivo tiene fondo blanco. */
+  .logo-plate { background: #fff; padding: 10px 16px; border-radius: 10px; }
+  .logo-text {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 1.15rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--brand-orange-deep);
+  }
+  .logo-dark .logo-text { color: var(--brand-orange); }
+</style>

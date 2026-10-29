@@ -1,0 +1,37 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import PageHero from '@/components/PageHero.astro';
+import ProjectExplorer from '@/components/ProjectExplorer.astro';
+import CtaBand from '@/components/CtaBand.astro';
+import { projects } from '@/data/projects';
+const hasDemo = projects.some((p) => p.demo);
+---
+<BaseLayout
+  title="Oportunidades de inversión inmobiliaria"
+  description="Departamentos para invertir en Chile evaluados con una mirada de inversión: filtra por comuna, precio en UF, tipología, estado, entrega y objetivo, y compara hasta tres proyectos."
+  breadcrumbs={[{ name: 'Oportunidades', href: '/oportunidades' }]}
+  noindex={hasDemo}
+>
+  <PageHero eyebrow="Oportunidades" title="Oportunidades seleccionadas con una mirada de inversión." lead="No se trata de mostrarte más propiedades. Se trata de ayudarte a evaluar las oportunidades que tienen sentido para ti." crumbs={[{ name: 'Oportunidades', href: '/oportunidades' }]} />
+  <section class="section">
+    <div class="container">
+      {hasDemo && (
+        <div class="notice notice-warning intro-note">
+          <p><strong>Catálogo de demostración.</strong> Estos proyectos son ejemplos ficticios para mostrar cómo funcionan los filtros, las fichas y el comparador. No corresponden a proyectos, precios ni disponibilidad reales. Los proyectos verificados se publicarán con fuente y fecha de cada dato.</p>
+        </div>
+      )}
+      <div class="legend small">
+        <span>Cómo leer los datos:</span>
+        <span class="tag tag-confirmed">Dato confirmado</span> verificado con la inmobiliaria ·
+        <span class="tag tag-estimate">Estimación</span> con fuente identificable ·
+        <span class="tag tag-assumption">Supuesto</span> de trabajo para el análisis
+      </div>
+      <ProjectExplorer />
+    </div>
+  </section>
+  <CtaBand title="¿No sabes por dónde empezar?" text="Antes de elegir un proyecto, definamos qué buscas y qué puedes sostener. Después evaluamos las alternativas juntos." />
+</BaseLayout>
+<style>
+  .intro-note { margin-bottom: var(--space-5); }
+  .legend { display: flex; flex-wrap: wrap; gap: var(--space-2); align-items: center; margin-bottom: var(--space-5); color: var(--text-muted); }
+</style>

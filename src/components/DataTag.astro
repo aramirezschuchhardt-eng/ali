@@ -1,0 +1,8 @@
+---
+import { statusLabels, type DataStatus } from '@/data/projects';
+interface Props { status: DataStatus; source?: string; asOf?: string; }
+const { status, source, asOf } = Astro.props;
+const cls = { confirmed: 'tag-confirmed', estimate: 'tag-estimate', assumption: 'tag-assumption' }[status];
+const title = [source, asOf && `Verificado: ${asOf}`].filter(Boolean).join(' · ') || undefined;
+---
+<span class:list={['tag', cls]} title={title}>{statusLabels[status]}</span>

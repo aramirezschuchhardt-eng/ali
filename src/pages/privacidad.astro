@@ -1,0 +1,61 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import PageHero from '@/components/PageHero.astro';
+import Pending from '@/components/Pending.astro';
+import { site } from '@/config/site';
+const { legal, contact } = site;
+const responsable = legal.razonSocial ?? '[Razón social pendiente]';
+const rut = legal.rut ?? '[RUT pendiente]';
+const domicilio = legal.domicilio ?? '[Domicilio pendiente]';
+const canal = contact.email ?? '[Correo de contacto para privacidad pendiente]';
+const updated = new Date(legal.privacyUpdated).toLocaleDateString('es-CL', { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'UTC' });
+---
+<BaseLayout title="Política de privacidad" description={`Cómo ${site.name} trata los datos personales que entregas en este sitio y cómo ejercer tus derechos.`} breadcrumbs={[{ name: 'Política de privacidad', href: '/privacidad' }]}>
+  <PageHero title="Política de privacidad" lead={`Última actualización: ${updated}.`} crumbs={[{ name: 'Política de privacidad', href: '/privacidad' }]} />
+  <section class="section">
+    <div class="container container-narrow prose">
+      <Pending title="Revisión legal requerida">
+        <p>Texto base preparado conforme a la Ley N° 19.628 sobre Protección de la Vida Privada y a las modificaciones de la Ley N° 21.719 (vigentes desde el 1 de diciembre de 2026). Debe ser revisado por un abogado y completado con los datos del responsable antes de publicar.</p>
+      </Pending>
+
+      <h2>1. Responsable del tratamiento</h2>
+      <p>{responsable}, RUT {rut}, con domicilio en {domicilio} (“{site.name}”), es responsable del tratamiento de los datos personales recogidos en este sitio. Para cualquier consulta sobre privacidad puedes escribir a {canal}.</p>
+
+      <h2>2. Qué datos tratamos</h2>
+      <ul>
+        <li><strong>Datos que nos entregas en los formularios:</strong> nombre, correo electrónico, teléfono y, si decides responder, tu objetivo de inversión, si tienes propiedades, un rango aproximado de capital para el pie, tu horizonte de inversión, tu preferencia de contacto y el mensaje que escribas.</li>
+        <li><strong>Datos de navegación y atribución:</strong> página de entrada, sitio de procedencia y parámetros de campaña (por ejemplo, UTM), para saber cómo llegaste a nosotros.</li>
+      </ul>
+      <p>No solicitamos contraseñas, claves ni datos bancarios, ni datos sensibles. Te pedimos no incluirlos en los campos de texto libre. Los cálculos del simulador se realizan en tu navegador y no se envían a nuestros servidores.</p>
+
+      <h2>3. Para qué los usamos y con qué base</h2>
+      <table>
+        <thead><tr><th>Finalidad</th><th>Base de licitud</th></tr></thead>
+        <tbody>
+          <tr><td>Responder tu solicitud, contactarte y coordinar una reunión de asesoría.</td><td>Tu consentimiento y las medidas precontractuales que solicitas.</td></tr>
+          <tr><td>Enviarte contenidos y novedades por correo.</td><td>Tu consentimiento específico (casilla opcional). Puedes retirarlo en cualquier momento.</td></tr>
+          <tr><td>Medir el desempeño del sitio y de nuestras campañas.</td><td>Interés legítimo o consentimiento, según la herramienta utilizada.</td></tr>
+        </tbody>
+      </table>
+
+      <h2>4. Con quién compartimos tus datos</h2>
+      <p>Con proveedores que nos prestan servicios tecnológicos (alojamiento, gestión de clientes/CRM, correo, agenda y analítica), que actúan por cuenta nuestra y bajo obligaciones de confidencialidad y seguridad. No vendemos tus datos. Solo los compartiremos con una inmobiliaria o entidad financiera si tú lo solicitas o autorizas para avanzar en una operación concreta.</p>
+      <Pending title="Encargados del tratamiento"><p>Listar los proveedores efectivamente utilizados (CRM, agenda, correo, analítica) y si implican transferencia internacional de datos.</p></Pending>
+
+      <h2>5. Cuánto tiempo los conservamos</h2>
+      <p>Mientras sea necesario para la finalidad para la que fueron recogidos y, luego, por los plazos que exija la ley. Si no avanzamos en una asesoría, conservaremos tus datos de contacto por un máximo de [plazo pendiente] y después los eliminaremos o anonimizaremos.</p>
+
+      <h2>6. Tus derechos</h2>
+      <p>Puedes ejercer tus derechos de <strong>acceso, rectificación, supresión, oposición, portabilidad y bloqueo</strong>, y retirar tu consentimiento en cualquier momento, escribiendo a {canal}. Responderemos dentro de los plazos legales. Si consideras que no hemos atendido tu solicitud, puedes recurrir a la Agencia de Protección de Datos Personales.</p>
+
+      <h2>7. Seguridad</h2>
+      <p>Aplicamos medidas técnicas y organizativas razonables para proteger tus datos: conexión cifrada (HTTPS), credenciales de integración almacenadas solo en el servidor y acceso restringido a la información.</p>
+
+      <h2>8. Cookies y tecnologías similares</h2>
+      <p>Este sitio usa almacenamiento de sesión del navegador para recordar los proyectos que eliges comparar y los parámetros de campaña de tu visita. Si se incorporan herramientas de analítica o publicidad de terceros, se informará y, cuando corresponda, se solicitará tu consentimiento.</p>
+
+      <h2>9. Cambios a esta política</h2>
+      <p>Podemos actualizar esta política. Publicaremos la versión vigente en esta página con su fecha de actualización.</p>
+    </div>
+  </section>
+</BaseLayout>

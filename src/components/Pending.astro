@@ -1,0 +1,24 @@
+---
+/** Aviso visible de contenido que debe aportar la empresa. Se oculta con site.showPendingNotes = false. */
+import { site } from '@/config/site';
+interface Props { title?: string; }
+const { title = 'Contenido pendiente' } = Astro.props;
+---
+{site.showPendingNotes && (
+  <aside class="pending" role="note">
+    <strong>{title}</strong>
+    <div><slot /></div>
+  </aside>
+)}
+<style>
+  .pending {
+    border: 1.5px dashed var(--border-strong);
+    background: repeating-linear-gradient(135deg, transparent 0 10px, rgba(0,0,0,0.018) 10px 20px), var(--surface);
+    border-radius: var(--radius);
+    padding: var(--space-4) var(--space-5);
+    font-size: var(--fs-sm);
+    color: var(--text-muted);
+  }
+  .pending strong { display: block; color: var(--text); margin-bottom: var(--space-1); font-size: var(--fs-xs); letter-spacing: 0.08em; text-transform: uppercase; }
+  .pending :global(p:last-child) { margin-bottom: 0; }
+</style>

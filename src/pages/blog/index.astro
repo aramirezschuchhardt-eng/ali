@@ -1,0 +1,37 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import PageHero from '@/components/PageHero.astro';
+import PostCard from '@/components/PostCard.astro';
+import CtaBand from '@/components/CtaBand.astro';
+const posts = (await getCollection('blog', (p) => !p.data.draft)).sort((a, b) => b.data.publishedAt.getTime() - a.data.publishedAt.getTime() || a.data.title.localeCompare(b.data.title));
+const categories = [...new Set(posts.map((p) => p.data.category))];
+---
+<BaseLayout title="Centro de contenidos: aprende a invertir en propiedades" description="Guías sobre inversión inmobiliaria en Chile: crédito hipotecario, rentabilidad bruta y neta, flujo de caja, riesgos de cada etapa y cómo construir una cartera." breadcrumbs={[{ name: 'Centro de contenidos', href: '/blog' }]}>
+  <PageHero eyebrow="Centro de contenidos" title="Invierte mejor cuando entiendes mejor." lead="Guías claras y sin letra chica para tomar decisiones con criterio. Información general, no publicidad disfrazada." crumbs={[{ name: 'Centro de contenidos', href: '/blog' }]} />
+  <section class="section">
+    <div class="container">
+      <div class="cats" role="group" aria-label="Filtrar por categoría">
+        <button class="chip-btn" aria-pressed="true" data-cat="">Todos</button>
+        {categories.map((c) => <button class="chip-btn" aria-pressed="false" data-cat={c}>{c}</button>)}
+      </div>
+      <div class="grid grid-3">
+        {posts.map((p, i) => <div data-post-cat={p.data.category}><PostCard post={p} index={i} /></div>)}
+      </div>
+    </div>
+  </section>
+  <CtaBand title="¿Quieres aplicar esto a tu caso?" text="Conversemos sobre tus objetivos y revisemos tus números con calma." />
+</BaseLayout>
+<script>
+  const btns = document.querySelectorAll<HTMLButtonElement>('[data-cat]');
+  btns.forEach((b) => b.addEventListener('click', () => {
+    btns.forEach((x) => x.setAttribute('aria-pressed', String(x === b)));
+    document.querySelectorAll<HTMLElement>('[data-post-cat]').forEach((el) => { el.hidden = !!b.dataset.cat && el.dataset.postCat !== b.dataset.cat; });
+  }));
+</script>
+<style>
+  .cats { display: flex; flex-wrap: wrap; gap: var(--space-2); margin-bottom: var(--space-6); }
+  .chip-btn { min-height: 44px; padding: 0 1rem; border-radius: 999px; border: 1.5px solid var(--border-strong); background: var(--surface); font: 500 var(--fs-sm) var(--font-body); cursor: pointer; color: var(--text); }
+  .chip-btn[aria-pressed='true'] { background: var(--ink); color: #fff; border-color: var(--ink); }
+  [data-post-cat][hidden] { display: none; }
+</style>

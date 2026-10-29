@@ -1,0 +1,67 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import PageHero from '@/components/PageHero.astro';
+import { formatDelivery, goalLabels, minPriceUf, projects, stageLabels } from '@/data/projects';
+import { formatClp, formatUf } from '@/lib/format';
+
+// Datos ya formateados para que el script del cliente solo arme la tabla.
+const rows = projects.map((p) => ({
+  slug: p.slug,
+  name: p.name,
+  demo: p.demo,
+  cells: {
+    'Ubicación': `${p.comuna}, ${p.region}`,
+    'Estado': stageLabels[p.stage],
+    'Entrega estimada': formatDelivery(p.deliveryEstimate?.value),
+    'Precio desde': minPriceUf(p) ? formatUf(minPriceUf(p)!) : 'Por confirmar',
+    'Tipologías': p.units.map((u) => `${u.typology}${u.areaM2 ? ` (${u.areaM2} m²)` : ''}`).join(', '),
+    'Arriendo estimado': p.rentEstimateClp ? `${formatClp(p.rentEstimateClp.value.min)} – ${formatClp(p.rentEstimateClp.value.max)}` : 'Sin estimación',
+    'Objetivos': p.goals.map((g) => goalLabels[g]).join(', '),
+    'Perfil': p.investorProfile,
+    'Riesgos principales': p.risks.slice(0, 3).join(' · '),
+  },
+}));
+---
+<BaseLayout title="Comparar proyectos" description="Compara hasta tres oportunidades inmobiliarias lado a lado." noindex breadcrumbs={[{ name: 'Oportunidades', href: '/oportunidades' }, { name: 'Comparar', href: '/oportunidades/comparar' }]}>
+  <PageHero eyebrow="Comparador" title="Compara oportunidades lado a lado." lead="Mismos criterios para todas las alternativas: así es más fácil ver qué cambia de una a otra." crumbs={[{ name: 'Oportunidades', href: '/oportunidades' }, { name: 'Comparar', href: '/oportunidades/comparar' }]} />
+  <section class="section">
+    <div class="container">
+      <div data-compare-root></div>
+      <noscript><p class="notice notice-info">El comparador necesita JavaScript activado.</p></noscript>
+      <div class="btn-row actions"><a class="btn btn-secondary" href="/oportunidades">Volver a oportunidades</a><a class="btn btn-primary" href="/contacto#diagnostico" data-cta="comparar-asesor">Analizar estas alternativas con un asesor</a></div>
+    </div>
+  </section>
+  <script type="application/json" id="compare-data" set:html={JSON.stringify(rows)} />
+</BaseLayout>
+
+<script>
+  import { readCompare } from '@/scripts/explorer';
+  type Row = { slug: string; name: string; demo: boolean; cells: Record<string, string> };
+  const rows: Row[] = JSON.parse(document.getElementById('compare-data')!.textContent!);
+  const root = document.querySelector<HTMLElement>('[data-compare-root]')!;
+  const fromUrl = new URLSearchParams(location.search).get('p')?.split(',').filter(Boolean) ?? [];
+  const wanted = (fromUrl.length ? fromUrl : readCompare()).slice(0, 3);
+  const chosen = wanted.map((s) => rows.find((r) => r.slug === s)).filter((r): r is Row => !!r);
+  const esc = (s: string) => s.replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c]!);
+  if (chosen.length < 2) {
+    root.innerHTML = '<p class="notice notice-info">Selecciona entre 2 y 3 proyectos en <a href="/oportunidades">Oportunidades</a> usando la casilla «Comparar».</p>';
+  } else {
+    const keys = Object.keys(chosen[0].cells);
+    root.innerHTML = `
+      ${chosen.some((c) => c.demo) ? '<p class="notice notice-warning" style="margin-bottom:1.5rem"><strong>Datos de demostración.</strong> Los proyectos comparados son ficticios.</p>' : ''}
+      <div class="cmp-wrap"><table class="cmp">
+        <caption class="sr-only">Comparación de ${chosen.length} proyectos</caption>
+        <thead><tr><th scope="col">Criterio</th>${chosen.map((c) => `<th scope="col"><a href="/oportunidades/${c.slug}">${esc(c.name)}</a></th>`).join('')}</tr></thead>
+        <tbody>${keys.map((k) => `<tr><th scope="row">${esc(k)}</th>${chosen.map((c) => `<td>${esc(c.cells[k])}</td>`).join('')}</tr>`).join('')}</tbody>
+      </table></div>`;
+  }
+</script>
+<style is:global>
+  .cmp-wrap { overflow-x: auto; border: 1px solid var(--border); border-radius: var(--radius); background: var(--surface); }
+  .cmp { width: 100%; min-width: 640px; border-collapse: collapse; font-size: var(--fs-sm); }
+  .cmp th, .cmp td { padding: var(--space-3) var(--space-4); border-bottom: 1px solid var(--border); text-align: left; vertical-align: top; }
+  .cmp thead th { background: var(--ink); color: #fff; font-family: var(--font-display); font-weight: 500; font-size: var(--fs-md); }
+  .cmp thead a { color: #fff; }
+  .cmp tbody th { background: var(--bg-alt); width: 180px; }
+</style>
+<style>.actions { margin-top: var(--space-6); }</style>

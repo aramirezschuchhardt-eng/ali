@@ -1,0 +1,37 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import PageHero from '@/components/PageHero.astro';
+import SectionHeading from '@/components/SectionHeading.astro';
+import TeamGrid from '@/components/TeamGrid.astro';
+import CtaBand from '@/components/CtaBand.astro';
+import { brandPillars } from '@/data/content';
+import { site } from '@/config/site';
+---
+<BaseLayout title="Nosotros y equipo asesor" description={`Conoce a ${site.name}: un equipo que asesora a inversionistas inmobiliarios con estrategia, análisis, transparencia y acompañamiento.`} breadcrumbs={[{ name: 'Nosotros', href: '/nosotros' }]}>
+  <PageHero eyebrow="Nosotros" title="Invertir con estrategia, no por impulso." lead={`En ${site.name} creemos que la propiedad es el instrumento y la estrategia es el verdadero valor. Por eso empezamos por entender a cada inversionista.`} crumbs={[{ name: 'Nosotros', href: '/nosotros' }]} />
+  <section class="section">
+    <div class="container grid grid-2 intro">
+      <div class="reveal">
+        <h2>Por qué existimos</h2>
+        <p>Muchas personas compran su primera propiedad de inversión a partir de una oferta, no de un plan. Nuestro trabajo es invertir ese orden: primero entender tus objetivos, tu capacidad financiera y tu horizonte; después evaluar qué oportunidades tienen sentido.</p>
+        <p>Queremos que cada cliente tome una decisión que entienda, con los supuestos y los riesgos a la vista.</p>
+      </div>
+      <div class="grid pillars reveal">
+        {brandPillars.map((p) => <div class="pl"><h3>{p.title}</h3><p class="muted small">{p.text}</p></div>)}
+      </div>
+    </div>
+  </section>
+  <section class="section section-alt">
+    <div class="container">
+      <SectionHeading eyebrow="Equipo asesor" title="Personas que te acompañan a decidir mejor." />
+      <TeamGrid detailed />
+    </div>
+  </section>
+  <CtaBand />
+</BaseLayout>
+<style>
+  .intro { gap: var(--space-7); align-items: start; }
+  .pillars { grid-template-columns: 1fr 1fr; gap: var(--space-4); }
+  .pl { border-left: 3px solid var(--brand-orange); padding-left: var(--space-4); }
+  .pl h3 { margin-bottom: var(--space-1); }
+</style>

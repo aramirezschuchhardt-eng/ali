@@ -1,0 +1,18 @@
+---
+/**
+ * Acciones de contacto reales. Solo muestra WhatsApp o agenda en línea si
+ * están configurados en src/config/site.ts; nunca enlaces ficticios.
+ */
+import { site, whatsappHref } from '@/config/site';
+interface Props { primaryLabel?: string; secondaryLabel?: string; showSecondary?: boolean; }
+const { primaryLabel = 'Agenda una asesoría estratégica', secondaryLabel = 'Habla con nuestro equipo', showSecondary = true } = Astro.props;
+const wa = whatsappHref();
+const bookingHref = site.bookingUrl ?? '/contacto#diagnostico';
+const secondaryHref = wa ?? '/contacto#diagnostico';
+---
+<div class="btn-row">
+  <a class="btn btn-primary" href={bookingHref} data-cta="agendar" {...(site.bookingUrl ? { target: '_blank', rel: 'noopener' } : {})}>{primaryLabel}</a>
+  {showSecondary && (
+    <a class="btn btn-secondary" href={secondaryHref} data-cta={wa ? 'whatsapp' : 'contacto'} {...(wa ? { target: '_blank', rel: 'noopener' } : {})}>{secondaryLabel}</a>
+  )}
+</div>

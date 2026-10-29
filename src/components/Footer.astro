@@ -1,0 +1,60 @@
+---
+import { footerNav, site, whatsappHref } from '@/config/site';
+import Logo from './Logo.astro';
+const wa = whatsappHref();
+const year = new Date().getFullYear();
+const { contact, legal, social } = site;
+---
+<footer class="site-footer on-dark">
+  <div class="container footer-grid">
+    <div class="footer-brand">
+      <Logo variant="dark" />
+      <p>{site.name} asesora a personas que quieren invertir en propiedades con una estrategia clara, personalizada y financieramente coherente.</p>
+      <p class="footer-claim">Primero la estrategia. Después, la propiedad.</p>
+    </div>
+    {footerNav.map((group) => (
+      <nav aria-label={group.title}>
+        <h2 class="footer-title">{group.title}</h2>
+        <ul>{group.items.map((i) => <li><a href={i.href}>{i.label}</a></li>)}</ul>
+      </nav>
+    ))}
+    <div>
+      <h2 class="footer-title">Canales oficiales</h2>
+      <ul>
+        {contact.email && <li><a href={`mailto:${contact.email}`}>{contact.email}</a></li>}
+        {contact.phone && <li><a href={`tel:${contact.phone.replace(/\s/g, '')}`}>{contact.phone}</a></li>}
+        {wa && <li><a href={wa} target="_blank" rel="noopener">WhatsApp</a></li>}
+        {social.map((s) => <li><a href={s.url} target="_blank" rel="noopener me">{s.label}</a></li>)}
+        {contact.address && <li>{contact.address}</li>}
+      </ul>
+      {!contact.email && !contact.phone && !wa && social.length === 0 && site.showPendingNotes && (
+        <p class="pending-inline">Correo, teléfono, WhatsApp y redes oficiales: pendientes de confirmar.</p>
+      )}
+    </div>
+  </div>
+  <div class="container footer-legal">
+    <p>
+      © {year} {legal.razonSocial ?? site.name}.
+      {legal.rut && <> RUT {legal.rut}.</>}
+      {legal.domicilio && <> {legal.domicilio}.</>}
+    </p>
+    <p>
+      La información de este sitio es de carácter general y no constituye una recomendación financiera personalizada, una oferta de crédito ni una garantía de rentabilidad.
+    </p>
+  </div>
+</footer>
+<style>
+  .site-footer { background: var(--surface-dark); color: var(--text-on-dark-muted); padding-block: var(--space-8) var(--space-6); font-size: var(--fs-sm); }
+  .footer-grid { display: grid; grid-template-columns: 1.6fr repeat(4, 1fr); gap: var(--space-6); }
+  .footer-brand p { margin-top: var(--space-4); max-width: 36ch; }
+  .footer-claim { font-family: var(--font-display); font-size: var(--fs-lg); color: #fff; }
+  .footer-title { font: 600 var(--fs-xs) / 1.4 var(--font-body); letter-spacing: 0.12em; text-transform: uppercase; color: #fff; margin-bottom: var(--space-4); }
+  ul { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--space-2); }
+  a { color: var(--text-on-dark-muted); text-decoration: none; }
+  a:hover { color: #fff; text-decoration: underline; }
+  .pending-inline { font-style: italic; opacity: 0.8; }
+  .footer-legal { margin-top: var(--space-7); padding-top: var(--space-5); border-top: 1px solid rgba(255,255,255,0.12); font-size: var(--fs-xs); display: grid; gap: var(--space-2); }
+  .footer-legal p { margin: 0; }
+  @media (max-width: 960px) { .footer-grid { grid-template-columns: 1fr 1fr; } .footer-brand { grid-column: 1 / -1; } }
+  @media (max-width: 480px) { .footer-grid { grid-template-columns: 1fr; } }
+</style>

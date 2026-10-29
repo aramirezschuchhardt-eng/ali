@@ -1,0 +1,67 @@
+---
+import { goalLabels, projects, stageLabels } from '@/data/projects';
+import ProjectCard from './ProjectCard.astro';
+interface Props { limit?: number; showFilters?: boolean; }
+const { limit, showFilters = true } = Astro.props;
+const list = limit ? projects.slice(0, limit) : projects;
+const comunas = [...new Set(projects.map((p) => p.comuna))].sort();
+const typologies = [...new Set(projects.flatMap((p) => p.units.map((u) => u.typology)))].sort();
+const years = [...new Set(projects.map((p) => p.deliveryEstimate?.value.slice(0, 4)).filter(Boolean))].sort() as string[];
+const priceSteps = [2500, 3000, 4000, 5000, 7000];
+---
+<div class="explorer" data-explorer>
+  {showFilters && (
+    <form class="filters" data-filters aria-label="Filtrar oportunidades">
+      <div class="field"><label for="f-comuna">Comuna</label>
+        <select id="f-comuna" name="comuna"><option value="">Todas</option>{comunas.map((c) => <option>{c}</option>)}</select></div>
+      <div class="field"><label for="f-price">Precio desde (UF)</label>
+        <select id="f-price" name="price"><option value="">Cualquiera</option>{priceSteps.map((s) => <option value={s}>Hasta UF {s.toLocaleString('es-CL')}</option>)}</select></div>
+      <div class="field"><label for="f-typ">Tipología</label>
+        <select id="f-typ" name="typology"><option value="">Todas</option>{typologies.map((t) => <option>{t}</option>)}</select></div>
+      <div class="field"><label for="f-stage">Estado</label>
+        <select id="f-stage" name="stage"><option value="">Todos</option>{Object.entries(stageLabels).map(([v, l]) => <option value={v}>{l}</option>)}</select></div>
+      <div class="field"><label for="f-year">Entrega estimada</label>
+        <select id="f-year" name="year"><option value="">Cualquiera</option>{years.map((y) => <option value={y}>{y}</option>)}</select></div>
+      <div class="field"><label for="f-goal">Objetivo</label>
+        <select id="f-goal" name="goal"><option value="">Todos</option>{Object.entries(goalLabels).map(([v, l]) => <option value={v}>{l}</option>)}</select></div>
+      <div class="filters-foot">
+        <p class="small muted" aria-live="polite" data-count>{list.length} oportunidades</p>
+        <button class="btn btn-ghost btn-sm" type="reset">Limpiar filtros</button>
+      </div>
+    </form>
+  )}
+  <div class="grid grid-3 projects-grid">
+    {list.map((p, i) => <ProjectCard project={p} index={i} />)}
+  </div>
+  <p class="empty notice notice-info" hidden data-empty>No hay oportunidades con esos filtros. Prueba ampliando la búsqueda o <a href="/contacto#diagnostico">cuéntanos qué buscas</a>.</p>
+
+  <div class="compare-tray" hidden data-tray role="region" aria-label="Comparador de proyectos">
+    <div class="container tray-inner">
+      <p><strong data-tray-count>0</strong> de 3 seleccionados <span class="small muted" data-tray-msg></span></p>
+      <div class="btn-row">
+        <button class="btn btn-ghost btn-sm" type="button" data-tray-clear>Quitar</button>
+        <a class="btn btn-primary btn-sm" href="/oportunidades/comparar" data-tray-go aria-disabled="true">Comparar proyectos</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  import { initExplorer } from '@/scripts/explorer';
+  document.querySelectorAll<HTMLElement>('[data-explorer]').forEach(initExplorer);
+</script>
+
+<style>
+  .filters { display: grid; grid-template-columns: repeat(6, 1fr); gap: var(--space-4); background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: var(--space-5); margin-bottom: var(--space-6); }
+  .filters-foot { grid-column: 1 / -1; display: flex; justify-content: space-between; align-items: center; }
+  .filters-foot p { margin: 0; }
+  @media (max-width: 1080px) { .filters { grid-template-columns: repeat(3, 1fr); } }
+  @media (max-width: 600px) { .filters { grid-template-columns: 1fr 1fr; padding: var(--space-4); } }
+  .empty { margin-top: var(--space-5); }
+  .compare-tray { position: fixed; left: 0; right: 0; bottom: 0; z-index: 95; background: var(--ink); color: #fff; padding-block: var(--space-3); box-shadow: var(--shadow-lg); }
+  .compare-tray p { margin: 0; }
+  .compare-tray .muted { color: var(--text-on-dark-muted); }
+  .tray-inner { display: flex; justify-content: space-between; align-items: center; gap: var(--space-3); flex-wrap: wrap; }
+  .compare-tray .btn-ghost { color: #fff; }
+  @media (max-width: 720px) { .compare-tray { bottom: 72px; } }
+</style>

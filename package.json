@@ -1,0 +1,22 @@
+{
+  "name": "avance-inmobiliario-web",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "check": "astro check",
+    "test": "node --test --experimental-strip-types tests/*.test.ts"
+  },
+  "dependencies": {
+    "@astrojs/node": "9.5.5",
+    "@astrojs/sitemap": "3.7.4",
+    "astro": "5.18.1"
+  },
+  "devDependencies": {
+    "@astrojs/check": "0.9.4",
+    "typescript": "5.6.3"
+  }
+}

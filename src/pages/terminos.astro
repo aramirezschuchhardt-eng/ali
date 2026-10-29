@@ -1,0 +1,31 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import PageHero from '@/components/PageHero.astro';
+import Pending from '@/components/Pending.astro';
+import { site } from '@/config/site';
+const responsable = site.legal.razonSocial ?? site.name;
+---
+<BaseLayout title="Términos y condiciones de uso" description={`Condiciones de uso del sitio web de ${site.name}, alcance de la información y del simulador.`} breadcrumbs={[{ name: 'Términos y condiciones', href: '/terminos' }]}>
+  <PageHero title="Términos y condiciones de uso" crumbs={[{ name: 'Términos y condiciones', href: '/terminos' }]} />
+  <section class="section">
+    <div class="container container-narrow prose">
+      <Pending title="Revisión legal requerida"><p>Texto base. Debe ser revisado por un abogado y completado con los datos legales de la empresa antes de publicar.</p></Pending>
+      <h2>1. Alcance</h2>
+      <p>Estos términos regulan el uso del sitio web de {responsable}. Al navegar en él aceptas estas condiciones.</p>
+      <h2>2. Carácter de la información</h2>
+      <p>Los contenidos del sitio, incluidos artículos, preguntas frecuentes y fichas de proyectos, son de carácter general e informativo. No constituyen una recomendación financiera, legal o tributaria personalizada, ni una oferta de venta o de crédito. Toda decisión de inversión debe tomarse tras un análisis de tu situación particular.</p>
+      <h2>3. Proyectos y datos comerciales</h2>
+      <p>Las características, precios, condiciones y disponibilidad de los proyectos son informados por terceros (inmobiliarias) y pueden cambiar sin aviso. Cada dato se identifica como confirmado, estimación o supuesto. Los datos marcados como “demostración” son ficticios. Antes de cualquier compromiso, verifica las condiciones vigentes directamente en los documentos oficiales del proyecto.</p>
+      <h2>4. Simulador de inversión</h2>
+      <p>Los resultados del simulador son estimaciones basadas en los datos ingresados y no constituyen una oferta de crédito ni una garantía de rentabilidad. Los resultados reales dependen de las condiciones de financiamiento, los costos, el arriendo efectivo y la evolución del mercado. El valor de la UF se obtiene de una fuente pública y puede editarse.</p>
+      <h2>5. Riesgos</h2>
+      <p>Toda inversión inmobiliaria conlleva riesgos, entre otros: vacancia, morosidad, cambios en tasas de interés, atrasos en la entrega, costos imprevistos, baja liquidez y variaciones del mercado. La plusvalía no está garantizada.</p>
+      <h2>6. Propiedad intelectual</h2>
+      <p>La marca, el logo y los contenidos de este sitio pertenecen a {responsable} o a sus respectivos titulares, y no pueden usarse sin autorización.</p>
+      <h2>7. Datos personales</h2>
+      <p>El tratamiento de tus datos se rige por nuestra <a href="/privacidad">Política de privacidad</a>.</p>
+      <h2>8. Legislación aplicable</h2>
+      <p>Estos términos se rigen por las leyes de la República de Chile.</p>
+    </div>
+  </section>
+</BaseLayout>

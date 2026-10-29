@@ -1,0 +1,42 @@
+---
+import { cases } from '@/data/cases';
+import Pending from './Pending.astro';
+interface Props { limit?: number; }
+const { limit } = Astro.props;
+const list = (limit ? cases.slice(0, limit) : cases).filter((c) => c.authorizedByClient);
+const fields = ['Situación inicial', 'Objetivo del inversionista', 'Variables analizadas', 'Alternativas evaluadas', 'Decisión tomada', 'Resultados documentados y período'];
+---
+{list.length ? (
+  <div class="grid grid-2">
+    {list.map((c) => (
+      <article class="card case reveal">
+        <span class="eyebrow">{c.profile}</span>
+        <h3>{c.title}</h3>
+        <dl>
+          <dt>Situación inicial</dt><dd>{c.initialSituation}</dd>
+          <dt>Objetivo</dt><dd>{c.objective}</dd>
+          <dt>Variables analizadas</dt><dd>{c.variables.join(', ')}</dd>
+          <dt>Alternativas evaluadas</dt><dd>{c.alternatives.join(', ')}</dd>
+          <dt>Decisión</dt><dd>{c.decision}</dd>
+          {c.results && (<><dt>Resultados ({c.results.period})</dt><dd>{c.results.text} <span class="small muted">Fuente: {c.results.source}</span></dd></>)}
+        </dl>
+      </article>
+    ))}
+  </div>
+) : (
+  <div class="case-template reveal">
+    <p class="muted">Pronto compartiremos casos reales, con autorización de cada cliente. Cada caso seguirá esta estructura, para que veas cómo se toma una decisión y no solo su resultado:</p>
+    <ol class="steps">{fields.map((f, i) => <li><span>{String(i + 1).padStart(2, '0')}</span>{f}</li>)}</ol>
+    <Pending title="Casos de estudio">
+      <p>No se publican casos, testimonios ni resultados sin autorización y documentación. Cargar casos reales en <code>src/data/cases.ts</code> con <code>authorizedByClient: true</code>.</p>
+    </Pending>
+  </div>
+)}
+<style>
+  dl { display: grid; gap: var(--space-1); margin: 0; font-size: var(--fs-sm); }
+  dt { font-weight: 600; margin-top: var(--space-2); }
+  dd { margin: 0; color: var(--text-muted); }
+  .steps { list-style: none; padding: 0; margin: 0 0 var(--space-5); display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 180px), 1fr)); gap: var(--space-3); }
+  .steps li { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: var(--space-4); font-weight: 600; font-size: var(--fs-sm); }
+  .steps span { display: block; font-family: var(--font-display); color: var(--brand-orange); font-size: 1.3rem; }
+</style>

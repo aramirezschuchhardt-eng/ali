@@ -1,0 +1,128 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import PageHero from '@/components/PageHero.astro';
+import ArchVisual from '@/components/ArchVisual.astro';
+import DataTag from '@/components/DataTag.astro';
+import LeadForm from '@/components/LeadForm.astro';
+import { formatDelivery, goalLabels, minPriceUf, projects, stageLabels, type Project } from '@/data/projects';
+import { formatClp, formatUf } from '@/lib/format';
+
+export function getStaticPaths() {
+  return projects.map((p) => ({ params: { slug: p.slug }, props: { project: p } }));
+}
+const { project: p } = Astro.props as { project: Project };
+const price = minPriceUf(p);
+const crumbs = [{ name: 'Oportunidades', href: '/oportunidades' }, { name: p.name, href: `/oportunidades/${p.slug}` }];
+const simHref = `/simulador?precio=${price ?? ''}${p.rentEstimateClp ? `&arriendo=${Math.round((p.rentEstimateClp.value.min + p.rentEstimateClp.value.max) / 2)}` : ''}`;
+---
+<BaseLayout
+  title={`${p.name}, ${p.comuna}`}
+  description={`${p.name} en ${p.comuna}: características, ubicación, precio, costos, variables y riesgos a revisar antes de invertir.`}
+  breadcrumbs={crumbs}
+  noindex={p.demo}
+>
+  <PageHero eyebrow={`${p.comuna} · ${stageLabels[p.stage]}`} title={p.name} lead={p.summary} crumbs={crumbs}>
+    {p.demo && <p class="notice notice-warning"><strong>Ficha de demostración.</strong> Todos los datos de esta página son ficticios y solo ilustran el formato de análisis.</p>}
+  </PageHero>
+
+  <section class="section">
+    <div class="container detail">
+      <div class="main">
+        <div class="media"><ArchVisual image={p.image} variant="card" seed={p.slug.length} label="Imagen del proyecto pendiente de autorización" /></div>
+        {p.image?.credit && <p class="small muted">Imagen: {p.image.credit}</p>}
+
+        <h2>Características principales</h2>
+        <div class="table-wrap">
+          <table class="units">
+            <thead><tr><th>Tipología</th><th>Dormitorios / baños</th><th>Superficie</th><th>Precio desde</th></tr></thead>
+            <tbody>
+              {p.units.map((u) => (
+                <tr>
+                  <td>{u.typology}</td>
+                  <td>{u.bedrooms === 0 ? 'Studio' : `${u.bedrooms}D`} / {u.bathrooms}B</td>
+                  <td>{u.areaM2 ? `${u.areaM2} m² aprox.` : '—'}</td>
+                  <td>{u.priceFromUf ? <>{formatUf(u.priceFromUf.value)} <DataTag status={u.priceFromUf.status} source={u.priceFromUf.source} asOf={u.priceFromUf.asOf} /></> : 'Por confirmar'}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+        <ul>{p.highlights.map((h) => <li>{h}</li>)}</ul>
+
+        <h2>Ubicación y conectividad</h2>
+        <p>{p.comuna}, {p.region}{p.address && ` · ${p.address}`}</p>
+        <ul>{p.connectivity.map((c) => <li>{c}</li>)}</ul>
+
+        <h2>Precio y condiciones comerciales</h2>
+        {p.commercialConditions?.length ? (
+          <ul class="tagged">{p.commercialConditions.map((c) => <li>{c.value} <DataTag status={c.status} source={c.source} asOf={c.asOf} /></li>)}</ul>
+        ) : <p class="muted">Sin condiciones comerciales verificadas.</p>}
+
+        <h2>Alternativas de financiamiento</h2>
+        <p>{p.financing ?? 'Se informarán cuando existan datos suficientes.'}</p>
+
+        <h2>Estimación de arriendo</h2>
+        {p.rentEstimateClp ? (
+          <p>{formatClp(p.rentEstimateClp.value.min)} – {formatClp(p.rentEstimateClp.value.max)} mensuales <DataTag status={p.rentEstimateClp.status} source={p.rentEstimateClp.source} asOf={p.rentEstimateClp.asOf} /></p>
+        ) : <p class="muted">Sin una fuente confiable aún. No se informa una estimación.</p>}
+
+        <h2>Costos relevantes</h2>
+        <dl class="costs">{p.costs.map((c) => <><dt>{c.label}</dt><dd>{c.detail}</dd></>)}</dl>
+
+        <h2>Variables que pueden afectar la inversión</h2>
+        <ul>{p.variables.map((v) => <li>{v}</li>)}</ul>
+
+        <h2>Perfil de inversionista</h2>
+        <p>{p.investorProfile}</p>
+        <p class="small muted">Objetivos asociados: {p.goals.map((g) => goalLabels[g]).join(', ')}.</p>
+
+        <h2>Riesgos que debes revisar antes de decidir</h2>
+        <ul class="risks">{p.risks.map((r) => <li>{r}</li>)}</ul>
+      </div>
+
+      <aside class="side">
+        <div class="card sticky">
+          <span class="eyebrow">Resumen</span>
+          <dl class="summary">
+            <div><dt>Precio desde</dt><dd>{price ? formatUf(price) : 'Por confirmar'}</dd></div>
+            <div><dt>Estado</dt><dd>{stageLabels[p.stage]}</dd></div>
+            <div><dt>Entrega estimada</dt><dd>{formatDelivery(p.deliveryEstimate?.value)}</dd></div>
+            <div><dt>Tipologías</dt><dd>{p.units.map((u) => u.typology).join(', ')}</dd></div>
+          </dl>
+          <a class="btn btn-primary full" href="#evaluar" data-cta="ficha-evaluar">Evaluar esta oportunidad</a>
+          <a class="btn btn-secondary full" href={simHref} data-cta="ficha-simular">Simular con estos datos</a>
+          <p class="small muted">Las cifras deben confirmarse antes de cualquier decisión. Esta ficha no es una oferta.</p>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <section class="section section-alt" id="evaluar">
+    <div class="container container-narrow">
+      <p class="lead center">¿Te interesa evaluar si este tipo de proyecto tiene sentido para ti? Cuéntanos tu objetivo y lo revisamos juntos.</p>
+      <LeadForm id="evaluar-form" compact />
+    </div>
+  </section>
+</BaseLayout>
+<style>
+  .detail { display: grid; grid-template-columns: 1fr 340px; gap: var(--space-7); align-items: start; }
+  @media (max-width: 960px) { .detail { grid-template-columns: 1fr; } .side { order: -1; } }
+  .main, .side { min-width: 0; }
+  .main h2 { font-size: var(--fs-xl); margin-top: var(--space-7); }
+  .main ul { padding-left: 1.2em; }
+  .media { aspect-ratio: 16 / 9; border-radius: var(--radius); overflow: hidden; }
+  .table-wrap { overflow-x: auto; }
+  .units { width: 100%; border-collapse: collapse; font-size: var(--fs-sm); margin-bottom: var(--space-4); }
+  .units th, .units td { padding: var(--space-3); border-bottom: 1px solid var(--border); text-align: left; }
+  .units th { background: var(--bg-alt); }
+  .tagged li { margin-bottom: var(--space-2); }
+  .costs dt { font-weight: 600; margin-top: var(--space-3); }
+  .costs dd { margin: 0; color: var(--text-muted); }
+  .risks li::marker { color: var(--error); }
+  .sticky { position: sticky; top: calc(var(--header-h) + 16px); display: grid; gap: var(--space-3); }
+  .summary { margin: 0 0 var(--space-3); display: grid; gap: var(--space-2); font-size: var(--fs-sm); }
+  .summary div { display: flex; justify-content: space-between; gap: var(--space-3); border-bottom: 1px dashed var(--border); padding-bottom: var(--space-2); }
+  .summary dt { color: var(--text-muted); }
+  .summary dd { margin: 0; font-weight: 600; text-align: right; }
+  .full { width: 100%; }
+</style>

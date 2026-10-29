@@ -1,0 +1,17 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import PageHero from '@/components/PageHero.astro';
+import FaqAccordion from '@/components/FaqAccordion.astro';
+import CtaBand from '@/components/CtaBand.astro';
+import { faq } from '@/data/faq';
+---
+<BaseLayout
+  title="Preguntas frecuentes sobre inversión inmobiliaria"
+  description="¿Cuánto necesito para invertir? ¿Cómo se calcula la rentabilidad? ¿Qué costos hay además del pie? Respuestas claras sobre invertir en propiedades en Chile."
+  breadcrumbs={[{ name: 'Preguntas frecuentes', href: '/preguntas-frecuentes' }]}
+  jsonLd={{ '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) }}
+>
+  <PageHero eyebrow="Preguntas frecuentes" title="Respuestas claras antes de empezar." lead="Información general para orientarte. No reemplaza un análisis de tu situación ni constituye una recomendación financiera personalizada." crumbs={[{ name: 'Preguntas frecuentes', href: '/preguntas-frecuentes' }]} />
+  <section class="section"><div class="container container-narrow"><FaqAccordion items={faq} /></div></section>
+  <CtaBand title="¿Tienes una pregunta sobre tu caso?" text="Conversemos. Revisamos tu punto de partida y resolvemos tus dudas con números concretos." />
+</BaseLayout>

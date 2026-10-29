@@ -1,0 +1,175 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import ArchVisual from '@/components/ArchVisual.astro';
+import SectionHeading from '@/components/SectionHeading.astro';
+import MethodTimeline from '@/components/MethodTimeline.astro';
+import ObjectiveCards from '@/components/ObjectiveCards.astro';
+import ProjectExplorer from '@/components/ProjectExplorer.astro';
+import FaqAccordion from '@/components/FaqAccordion.astro';
+import PostCard from '@/components/PostCard.astro';
+import CtaBand from '@/components/CtaBand.astro';
+import TeamGrid from '@/components/TeamGrid.astro';
+import CaseList from '@/components/CaseList.astro';
+import { site } from '@/config/site';
+import { pillars } from '@/data/content';
+import { faq } from '@/data/faq';
+import { projects } from '@/data/projects';
+
+const posts = (await getCollection('blog', (p) => !p.data.draft)).slice(0, 3);
+const bookingHref = site.bookingUrl ?? '/contacto#diagnostico';
+const hasDemo = projects.some((p) => p.demo);
+---
+<BaseLayout
+  title="Asesoría de inversión inmobiliaria en Chile | Avance Inmobiliario"
+  description="Construye una estrategia de inversión inmobiliaria alineada con tus objetivos y tu capacidad financiera. Diagnóstico, análisis de oportunidades y acompañamiento."
+>
+  <!-- 1. Hero -->
+  <section class="hero">
+    <div class="container hero-grid">
+      <div class="hero-copy">
+        <span class="eyebrow">Asesoría estratégica de inversión inmobiliaria</span>
+        <h1>Tu patrimonio merece algo más que una propiedad.</h1>
+        <p class="lead">En {site.name} te ayudamos a construir una estrategia de inversión alineada con tus objetivos, tu capacidad financiera y tu visión de futuro.</p>
+        <div class="btn-row">
+          <a class="btn btn-primary" href={bookingHref} data-cta="hero-agendar">Agenda una asesoría estratégica</a>
+          <a class="btn btn-secondary" href="/metodo" data-cta="hero-metodo">Descubre nuestro método</a>
+        </div>
+        <p class="hero-note small muted">Para quienes invierten por primera vez, quienes ya tienen propiedades y quienes buscan diversificar su patrimonio.</p>
+      </div>
+      <div class="hero-visual" aria-hidden="false">
+        <ArchVisual variant="hero" seed={7} label="Ilustración de un edificio contemporáneo" />
+        <div class="hero-card">
+          <span class="eyebrow">Nuestro enfoque</span>
+          <p>Primero entendemos tus objetivos. Después evaluamos las oportunidades.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2. El problema -->
+  <section class="section" aria-labelledby="problema">
+    <div class="container">
+      <div class="problem-head">
+        <h2 id="problema" class="reveal">Comprar una propiedad no es lo mismo que hacer una buena inversión.</h2>
+        <p class="lead reveal">Una propiedad puede parecer atractiva y aun así no ser la decisión adecuada para tu situación. Antes de invertir, necesitas comprender tus objetivos, tu capacidad financiera, las condiciones del financiamiento y el papel que esa propiedad podría desempeñar en tu patrimonio.</p>
+      </div>
+      <ol class="grid grid-3 problem-steps">
+        <li class="card reveal"><span class="num">01</span><h3>Entendemos tu situación</h3><p class="muted">Analizamos tus objetivos, capacidad de ahorro, compromisos financieros y expectativas.</p></li>
+        <li class="card reveal"><span class="num">02</span><h3>Diseñamos tu estrategia</h3><p class="muted">Evaluamos qué tipo de inversión podría tener sentido para tu perfil y horizonte de tiempo.</p></li>
+        <li class="card reveal"><span class="num">03</span><h3>Evaluamos las oportunidades</h3><p class="muted">Comparamos alternativas y escenarios antes de tomar una decisión.</p></li>
+      </ol>
+      <p class="claim reveal">Primero la estrategia. Después, la propiedad.</p>
+    </div>
+  </section>
+
+  <!-- 3. Metodología -->
+  <section class="section section-alt" aria-labelledby="metodologia">
+    <div class="container">
+      <SectionHeading eyebrow="Método Avance" title="Un método para invertir con mayor claridad." id="metodologia" lead="Cinco etapas para pasar de una idea general a una decisión informada." />
+      <MethodTimeline />
+      <a class="btn btn-secondary" href="/metodo">Conoce el método en detalle</a>
+    </div>
+  </section>
+
+  <!-- 4. Según tu objetivo -->
+  <section class="section" aria-labelledby="objetivos">
+    <div class="container">
+      <SectionHeading eyebrow="Asesoría según tu objetivo" title="Tu estrategia depende de dónde quieres llegar." id="objetivos" />
+      <ObjectiveCards />
+    </div>
+  </section>
+
+  <!-- 5. Oportunidades -->
+  <section class="section section-alt" aria-labelledby="oportunidades">
+    <div class="container">
+      <SectionHeading eyebrow="Oportunidades" title="Oportunidades seleccionadas con una mirada de inversión." id="oportunidades" lead="No se trata de mostrarte más propiedades. Se trata de ayudarte a evaluar las oportunidades que tienen sentido para ti." />
+      {hasDemo && (
+        <p class="notice notice-warning demo-note"><strong>Datos de demostración.</strong> Los proyectos que se muestran son ejemplos ficticios para ilustrar el catálogo. No corresponden a proyectos, precios ni disponibilidad reales.</p>
+      )}
+      <ProjectExplorer limit={3} showFilters={false} />
+      <div class="btn-row more"><a class="btn btn-secondary" href="/oportunidades">Ver y filtrar todas las oportunidades</a></div>
+    </div>
+  </section>
+
+  <!-- 6. Por qué Avance -->
+  <section class="section section-dark" aria-labelledby="por-que">
+    <div class="container">
+      <SectionHeading eyebrow={`Por qué ${site.name}`} title="Una asesoría que comienza por tus intereses." id="por-que" />
+      <div class="grid grid-4 pillars">
+        {pillars.map((p, i) => (
+          <div class="pillar reveal"><span class="pillar-n">0{i + 1}</span><h3>{p.title}</h3><p>{p.text}</p></div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- 7. Casos -->
+  <section class="section" aria-labelledby="casos">
+    <div class="container">
+      <SectionHeading eyebrow="Casos y experiencias" title="Estrategias construidas en torno a objetivos reales." id="casos" />
+      <CaseList limit={2} />
+    </div>
+  </section>
+
+  <!-- 8. Equipo -->
+  <section class="section section-alt" aria-labelledby="equipo">
+    <div class="container">
+      <SectionHeading eyebrow="Equipo asesor" title="Personas que te acompañan a decidir mejor." id="equipo" />
+      <TeamGrid />
+    </div>
+  </section>
+
+  <!-- 9. Contenido educativo -->
+  <section class="section" aria-labelledby="aprende">
+    <div class="container">
+      <SectionHeading eyebrow="Centro de contenidos" title="Invierte mejor cuando entiendes mejor." id="aprende" lead="Guías claras para tomar decisiones con criterio, sin letra chica." />
+      <div class="grid grid-3">{posts.map((p, i) => <PostCard post={p} index={i} />)}</div>
+      <div class="btn-row more"><a class="btn btn-secondary" href="/blog">Ver todos los artículos</a></div>
+    </div>
+  </section>
+
+  <!-- 10. FAQ -->
+  <section class="section section-alt" aria-labelledby="faq">
+    <div class="container faq-grid">
+      <div>
+        <SectionHeading eyebrow="Preguntas frecuentes" title="Respuestas claras antes de empezar." id="faq" />
+        <p class="muted small">Las respuestas son de carácter general y no reemplazan un análisis de tu caso.</p>
+        <a class="btn btn-ghost" href="/preguntas-frecuentes">Ver todas las preguntas →</a>
+      </div>
+      <FaqAccordion items={faq.slice(0, 6)} />
+    </div>
+  </section>
+
+  <!-- 11. CTA final -->
+  <CtaBand />
+</BaseLayout>
+
+<style>
+  .hero { padding-block: clamp(2.5rem, 6vw, 5.5rem) var(--space-8); overflow: hidden; }
+  .hero-grid { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: clamp(2rem, 5vw, 5rem); align-items: center; }
+  .hero h1 { margin-bottom: var(--space-5); }
+  .hero .lead { margin-bottom: var(--space-6); }
+  .hero-note { margin-top: var(--space-5); max-width: 48ch; }
+  .hero-visual { position: relative; aspect-ratio: 4 / 5; border-radius: var(--radius-lg); overflow: hidden; box-shadow: var(--shadow-lg); }
+  .hero-card { position: absolute; left: var(--space-4); right: var(--space-4); bottom: var(--space-4); background: rgba(255,255,255,0.94); backdrop-filter: blur(8px); border-radius: var(--radius); padding: var(--space-4) var(--space-5); }
+  .hero-card p { margin: 0; font-family: var(--font-display); font-size: var(--fs-lg); color: var(--ink); line-height: 1.3; }
+  .hero-card .eyebrow { margin-bottom: var(--space-1); }
+  @media (max-width: 900px) {
+    .hero-grid { grid-template-columns: 1fr; }
+    .hero-visual { aspect-ratio: 16 / 11; }
+  }
+  .problem-head { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-7); margin-bottom: var(--space-7); align-items: end; }
+  @media (max-width: 900px) { .problem-head { grid-template-columns: 1fr; gap: var(--space-4); } }
+  .problem-steps { list-style: none; padding: 0; margin: 0; }
+  .num { font-family: var(--font-display); color: var(--brand-orange); font-size: 2rem; display: block; margin-bottom: var(--space-3); line-height: 1; }
+  .claim { margin: var(--space-7) 0 0; font-family: var(--font-display); font-size: var(--fs-xl); color: var(--ink); text-align: center; }
+  .claim::before { content: ''; display: block; width: 48px; height: 3px; background: var(--brand-orange); margin: 0 auto var(--space-4); }
+  .more { margin-top: var(--space-6); justify-content: center; }
+  .demo-note { margin-bottom: var(--space-5); }
+  .pillar { border-top: 2px solid var(--brand-orange); padding-top: var(--space-5); }
+  .pillar-n { font-family: var(--font-display); color: var(--brand-orange); font-size: var(--fs-sm); letter-spacing: 0.1em; }
+  .pillar h3 { margin-top: var(--space-3); }
+  .faq-grid { display: grid; grid-template-columns: 0.8fr 1.2fr; gap: var(--space-7); }
+  @media (max-width: 900px) { .faq-grid { grid-template-columns: 1fr; gap: var(--space-4); } }
+</style>

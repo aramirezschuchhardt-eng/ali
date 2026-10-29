@@ -1,0 +1,58 @@
+---
+import { getCollection, render, type CollectionEntry } from 'astro:content';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import PageHero from '@/components/PageHero.astro';
+import PostCard from '@/components/PostCard.astro';
+import { site } from '@/config/site';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('blog', (p) => !p.data.draft);
+  return posts.map((post) => ({ params: { slug: post.id }, props: { post, posts } }));
+}
+const { post, posts } = Astro.props as { post: CollectionEntry<'blog'>; posts: CollectionEntry<'blog'>[] };
+const { Content } = await render(post);
+const related = posts.filter((p) => p.id !== post.id).sort((a, b) => Number(b.data.category === post.data.category) - Number(a.data.category === post.data.category)).slice(0, 3);
+const crumbs = [{ name: 'Centro de contenidos', href: '/blog' }, { name: post.data.title, href: `/blog/${post.id}` }];
+const date = post.data.publishedAt.toLocaleDateString('es-CL', { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'UTC' });
+---
+<BaseLayout
+  title={post.data.title}
+  description={post.data.description}
+  type="article"
+  breadcrumbs={crumbs}
+  jsonLd={{
+    '@context': 'https://schema.org',
+    '@type': 'BlogPosting',
+    headline: post.data.title,
+    description: post.data.description,
+    datePublished: post.data.publishedAt.toISOString(),
+    dateModified: (post.data.updatedAt ?? post.data.publishedAt).toISOString(),
+    author: { '@type': 'Organization', name: post.data.author },
+    publisher: { '@type': 'Organization', name: site.name },
+    inLanguage: 'es-CL',
+    mainEntityOfPage: new URL(`/blog/${post.id}`, Astro.site).href,
+  }}
+>
+  <PageHero eyebrow={post.data.category} title={post.data.title} lead={post.data.description} crumbs={crumbs}>
+    <p class="small muted">{post.data.author} · {date} · {post.data.readingMinutes} min de lectura</p>
+  </PageHero>
+  <article class="section">
+    <div class="container container-narrow prose"><Content /></div>
+  </article>
+  <section class="section section-alt">
+    <div class="container">
+      <div class="aside card">
+        <div><h2>¿Quieres revisar tus números?</h2><p class="muted">Prueba el simulador o conversa con un asesor sobre tu caso.</p></div>
+        <div class="btn-row"><a class="btn btn-secondary" href="/simulador">Ir al simulador</a><a class="btn btn-primary" href="/contacto#diagnostico" data-cta="blog-asesoria">Agenda una asesoría</a></div>
+      </div>
+      <h2 class="rel">Sigue leyendo</h2>
+      <div class="grid grid-3">{related.map((p, i) => <PostCard post={p} index={i + 1} />)}</div>
+    </div>
+  </section>
+</BaseLayout>
+<style>
+  .aside { display: flex; justify-content: space-between; align-items: center; gap: var(--space-5); flex-wrap: wrap; margin-bottom: var(--space-8); }
+  .aside h2 { font-size: var(--fs-xl); margin-bottom: var(--space-2); }
+  .aside p { margin: 0; }
+  .rel { font-size: var(--fs-xl); }
+</style>

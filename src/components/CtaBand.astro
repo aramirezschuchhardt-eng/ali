@@ -1,0 +1,34 @@
+---
+import { site } from '@/config/site';
+import ContactActions from './ContactActions.astro';
+interface Props { title?: string; text?: string; primaryLabel?: string; secondaryLabel?: string; }
+const {
+  title = 'Tu próxima decisión inmobiliaria merece una estrategia.',
+  text = 'Conversemos sobre tus objetivos, revisemos tu punto de partida y definamos qué alternativas vale la pena evaluar.',
+  primaryLabel = 'Agenda tu asesoría estratégica',
+  secondaryLabel = 'Habla con nuestro equipo',
+} = Astro.props;
+---
+<section class="section-lg section-dark cta-band" aria-labelledby="cta-final">
+  <div class="container cta-inner reveal">
+    <h2 id="cta-final">{title}</h2>
+    <p class="lead">{text}</p>
+    <ContactActions primaryLabel={primaryLabel} secondaryLabel={secondaryLabel} />
+    {site.commercial.firstMeetingTerms && <p class="small terms">{site.commercial.firstMeetingTerms}</p>}
+  </div>
+</section>
+<style>
+  .cta-band { position: relative; overflow: hidden; }
+  .cta-band::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(60% 80% at 100% 0%, rgba(242, 107, 44, 0.30), transparent 60%),
+      linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px) 0 0 / 64px 100%;
+    pointer-events: none;
+  }
+  .cta-inner { position: relative; max-width: 820px; }
+  .cta-inner h2 { font-size: var(--fs-2xl); }
+  .terms { margin-top: var(--space-4); }
+</style>

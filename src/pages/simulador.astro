@@ -1,0 +1,226 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import PageHero from '@/components/PageHero.astro';
+import { site } from '@/config/site';
+
+const bookingHref = site.bookingUrl ?? '/contacto#diagnostico';
+
+type Field = { id: string; label: string; unit: string; value: number | ''; step: string; min?: string; max?: string; hint?: string; optional?: boolean };
+const groups: { title: string; fields: Field[] }[] = [
+  {
+    title: 'Propiedad y crédito',
+    fields: [
+      { id: 'priceUf', label: 'Precio de la propiedad', unit: 'UF', value: 3000, step: '10', min: '0' },
+      { id: 'downPct', label: 'Pie', unit: '%', value: 20, step: '1', min: '0', max: '100' },
+      { id: 'financingPct', label: 'Financiamiento', unit: '%', value: 80, step: '1', min: '0', max: '100', hint: 'Pie + financiamiento = 100%.' },
+      { id: 'annualRatePct', label: 'Tasa de interés anual', unit: '%', value: 4.5, step: '0.05', min: '0', max: '30', hint: 'Usa la tasa que te ofrezca tu banco.' },
+      { id: 'termYears', label: 'Plazo del crédito', unit: 'años', value: 25, step: '1', min: '1', max: '40' },
+    ],
+  },
+  {
+    title: 'Arriendo y gastos mensuales',
+    fields: [
+      { id: 'monthlyRentClp', label: 'Arriendo mensual estimado', unit: '$', value: 420000, step: '5000', min: '0' },
+      { id: 'vacancyPct', label: 'Vacancia estimada', unit: '% del año', value: 8, step: '0.5', min: '0', max: '100', hint: '8% ≈ un mes sin arriendo al año.' },
+      { id: 'adminPct', label: 'Administración', unit: '% del arriendo', value: 0, step: '0.5', min: '0', max: '100', hint: '0 si administras tú.' },
+      { id: 'monthlyOpexClp', label: 'Gastos operacionales', unit: '$/mes', value: 25000, step: '1000', min: '0', hint: 'Mantención, contribuciones prorrateadas, gastos comunes en vacancia.' },
+      { id: 'monthlyInsuranceClp', label: 'Seguros del crédito', unit: '$/mes', value: 0, step: '1000', min: '0', hint: 'Desgravamen e incendio/sismo, si los conoces.', optional: true },
+    ],
+  },
+  {
+    title: 'Costos iniciales',
+    fields: [
+      { id: 'acquisitionCostsClp', label: 'Gastos de adquisición', unit: '$', value: '', step: '10000', min: '0', hint: 'Notaría, CBR, tasación, estudio de títulos. Déjalo vacío si no lo conoces.', optional: true },
+      { id: 'otherInitialCostsClp', label: 'Otros costos iniciales', unit: '$', value: '', step: '10000', min: '0', hint: 'Amoblado, habilitación, corretaje.', optional: true },
+    ],
+  },
+];
+---
+<BaseLayout
+  title="Simulador de inversión inmobiliaria: dividendo, flujo y rentabilidad"
+  description="Calcula el pie, el dividendo aproximado, el flujo de caja mensual y la rentabilidad bruta y neta de un departamento para arrendar. Compara escenarios conservador, base y optimista."
+  breadcrumbs={[{ name: 'Simulador de inversión', href: '/simulador' }]}
+  jsonLd={{
+    '@context': 'https://schema.org',
+    '@type': 'WebApplication',
+    name: 'Simulador de inversión inmobiliaria',
+    applicationCategory: 'FinanceApplication',
+    operatingSystem: 'Web',
+    inLanguage: 'es-CL',
+    offers: { '@type': 'Offer', price: 0, priceCurrency: 'CLP' },
+  }}
+>
+  <PageHero eyebrow="Simulador de inversión" title="Entiende los números antes de invertir." lead="Ingresa los datos de una propiedad y mira cómo cambian el dividendo, el flujo de caja y la rentabilidad. Los valores iniciales son solo un ejemplo: reemplázalos por los tuyos." crumbs={[{ name: 'Simulador de inversión', href: '/simulador' }]} />
+
+  <section class="section">
+    <div class="container sim" data-sim>
+      <form class="sim-inputs" data-sim-form novalidate aria-label="Datos de la simulación">
+        <fieldset class="card uf-box">
+          <legend>Valor de la UF</legend>
+          <div class="input-unit">
+            <label class="sr-only" for="ufValue">Valor de la UF en pesos</label>
+            <span class="pre">$</span>
+            <input id="ufValue" name="ufValue" type="number" step="0.01" min="0" inputmode="decimal" placeholder="Ej.: 39.500,00" />
+          </div>
+          <p class="small muted" data-uf-status>Consultando valor oficial del día…</p>
+        </fieldset>
+
+        {groups.map((g) => (
+          <fieldset class="card">
+            <legend>{g.title}</legend>
+            <div class="fields">
+              {g.fields.map((f) => (
+                <div class="field">
+                  <label for={f.id}>{f.label} {f.optional && <span class="opt">(opcional)</span>}</label>
+                  <div class="input-unit">
+                    {f.unit === '$' || f.unit === '$/mes' ? <span class="pre">$</span> : null}
+                    <input id={f.id} name={f.id} type="number" inputmode="decimal" step={f.step} min={f.min} max={f.max} value={f.value} aria-describedby={`${f.id}-err${f.hint ? ` ${f.id}-hint` : ''}`} />
+                    {f.unit !== '$' && <span class="post">{f.unit.replace('$/', '/')}</span>}
+                  </div>
+                  {f.hint && <span class="hint" id={`${f.id}-hint`}>{f.hint}</span>}
+                  <span class="field-error" id={`${f.id}-err`} data-error={f.id}></span>
+                </div>
+              ))}
+            </div>
+          </fieldset>
+        ))}
+        <button type="reset" class="btn btn-ghost btn-sm">Restablecer valores de ejemplo</button>
+      </form>
+
+      <div class="sim-results" aria-live="polite">
+        <div class="card results">
+          <span class="eyebrow">Resultados estimados · escenario base</span>
+          <div class="hl">
+            <div>
+              <span class="k">Flujo de caja mensual</span>
+              <strong class="v big" data-out="monthlyCashFlowClp">—</strong>
+              <span class="small muted" data-out="cashFlowNote"></span>
+            </div>
+            <div>
+              <span class="k">Dividendo aproximado</span>
+              <strong class="v big" data-out="monthlyPayment">—</strong>
+              <span class="small muted" data-out="monthlyPaymentUf"></span>
+            </div>
+          </div>
+          <dl class="res">
+            <div><dt>Monto del pie</dt><dd data-out="downPayment">—</dd></div>
+            <div><dt>Capital financiado</dt><dd data-out="loan">—</dd></div>
+            <div><dt>Arriendo ajustado por vacancia</dt><dd data-out="effectiveRentClp">—</dd></div>
+            <div><dt>Gastos mensuales</dt><dd data-out="monthlyExpensesClp">—</dd></div>
+            <div><dt>Capital inicial aproximado</dt><dd data-out="initialCapitalClp">—</dd></div>
+            <div><dt>Rentabilidad bruta anual <span class="tip" title="Arriendo anual sin descuentos / precio de la propiedad.">?</span></dt><dd data-out="grossYieldPct">—</dd></div>
+            <div><dt>Rentabilidad neta estimada <span class="tip" title="(Arriendo efectivo − gastos operacionales − administración) anual / (precio + gastos de adquisición + otros costos iniciales). No considera el crédito.">?</span></dt><dd data-out="netYieldPct">—</dd></div>
+            <div><dt>Retorno sobre capital aportado <span class="tip" title="Flujo de caja anual / capital inicial aportado (pie + gastos de adquisición + otros costos iniciales). Incluye el efecto del crédito; no incluye amortización ni plusvalía.">?</span></dt><dd data-out="cashOnCashPct">—</dd></div>
+            <div><dt>Capital amortizado en el año 1</dt><dd data-out="firstYearPrincipal">—</dd></div>
+            <div><dt>Intereses totales del crédito</dt><dd data-out="totalInterest">—</dd></div>
+          </dl>
+          <p class="small muted" data-out="netNote" hidden></p>
+          <div class="notice notice-error" hidden data-sim-errors></div>
+        </div>
+        <a class="btn btn-primary full" href={bookingHref} data-cta="simulador-asesor">Quiero analizar mi escenario con un asesor</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-alt" aria-labelledby="escenarios">
+    <div class="container">
+      <h2 id="escenarios">Compara escenarios</h2>
+      <p class="lead">Ajusta los supuestos que más incertidumbre tienen. El escenario base toma los valores que ingresaste arriba.</p>
+      <div class="scen-wrap">
+        <table class="scen" data-scenarios>
+          <thead>
+            <tr><th scope="col">Supuesto / resultado</th><th scope="col">Conservador</th><th scope="col">Base</th><th scope="col">Optimista</th></tr>
+          </thead>
+          <tbody>
+            <tr><th scope="row">Arriendo mensual ($)</th>
+              <td><input aria-label="Arriendo escenario conservador" type="number" step="5000" min="0" data-scen="conservador" data-key="monthlyRentClp" /></td>
+              <td data-base="monthlyRentClp">—</td>
+              <td><input aria-label="Arriendo escenario optimista" type="number" step="5000" min="0" data-scen="optimista" data-key="monthlyRentClp" /></td></tr>
+            <tr><th scope="row">Vacancia (%)</th>
+              <td><input aria-label="Vacancia escenario conservador" type="number" step="0.5" min="0" max="100" data-scen="conservador" data-key="vacancyPct" /></td>
+              <td data-base="vacancyPct">—</td>
+              <td><input aria-label="Vacancia escenario optimista" type="number" step="0.5" min="0" max="100" data-scen="optimista" data-key="vacancyPct" /></td></tr>
+            <tr><th scope="row">Tasa anual (%)</th>
+              <td><input aria-label="Tasa escenario conservador" type="number" step="0.05" min="0" max="30" data-scen="conservador" data-key="annualRatePct" /></td>
+              <td data-base="annualRatePct">—</td>
+              <td><input aria-label="Tasa escenario optimista" type="number" step="0.05" min="0" max="30" data-scen="optimista" data-key="annualRatePct" /></td></tr>
+            <tr class="out"><th scope="row">Dividendo</th><td data-sout="conservador:monthlyPaymentClp"></td><td data-sout="base:monthlyPaymentClp"></td><td data-sout="optimista:monthlyPaymentClp"></td></tr>
+            <tr class="out"><th scope="row">Flujo de caja mensual</th><td data-sout="conservador:monthlyCashFlowClp"></td><td data-sout="base:monthlyCashFlowClp"></td><td data-sout="optimista:monthlyCashFlowClp"></td></tr>
+            <tr class="out"><th scope="row">Rentabilidad neta</th><td data-sout="conservador:netYieldPct"></td><td data-sout="base:netYieldPct"></td><td data-sout="optimista:netYieldPct"></td></tr>
+            <tr class="out"><th scope="row">Retorno sobre capital</th><td data-sout="conservador:cashOnCashPct"></td><td data-sout="base:cashOnCashPct"></td><td data-sout="optimista:cashOnCashPct"></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="small muted">Por defecto, el escenario conservador usa un arriendo 10% menor, el doble de vacancia y una tasa 1 punto mayor; el optimista, un arriendo 5% mayor, la mitad de vacancia y una tasa 0,5 puntos menor. Puedes editar cada valor.</p>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="supuestos">
+    <div class="container container-narrow prose">
+      <h2 id="supuestos">Cómo calculamos</h2>
+      <ul>
+        <li><strong>Pie</strong> = precio × % de pie. <strong>Capital financiado</strong> = precio × % de financiamiento (en UF).</li>
+        <li><strong>Dividendo</strong>: cuota constante (sistema francés) con tasa mensual = tasa anual / 12 y plazo en meses. Es una aproximación: no incluye seguros (los puedes ingresar aparte) y el banco puede usar otra convención de cálculo.</li>
+        <li>Los valores en UF se convierten a pesos con el <strong>valor de la UF</strong> indicado. En pesos, el dividendo sube con la inflación porque la UF se reajusta.</li>
+        <li><strong>Arriendo ajustado</strong> = arriendo × (1 − vacancia). <strong>Administración</strong> = % sobre el arriendo ajustado.</li>
+        <li><strong>Gastos mensuales</strong> = gastos operacionales + administración + seguros.</li>
+        <li><strong>Flujo de caja</strong> = arriendo ajustado − gastos mensuales − dividendo.</li>
+        <li><strong>Capital inicial</strong> = pie + gastos de adquisición + otros costos iniciales.</li>
+        <li><strong>Rentabilidad bruta</strong> y <strong>neta</strong> miden el activo como si se comprara al contado. El <strong>retorno sobre capital aportado</strong> sí considera el crédito: el financiamiento puede aumentarlo o reducirlo, y aumenta el riesgo, porque el dividendo se paga aunque la propiedad esté vacía.</li>
+        <li>No se incluye <strong>plusvalía</strong>: no es un resultado asegurado. Tampoco impuestos, reajustes de arriendo ni variaciones de gastos en el tiempo.</li>
+      </ul>
+      <div class="notice notice-warning disclaimer">
+        <p>Los resultados son estimaciones basadas en los datos ingresados y no constituyen una oferta de crédito ni una garantía de rentabilidad. Los resultados reales dependen de las condiciones de financiamiento, los costos, el arriendo efectivo y la evolución del mercado.</p>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<script>
+  import { initSimulator } from '@/scripts/simulator';
+  const root = document.querySelector<HTMLElement>('[data-sim]');
+  if (root) initSimulator(root, document.querySelector<HTMLTableElement>('[data-scenarios]')!);
+</script>
+
+<style>
+  .sim { display: grid; grid-template-columns: 1.15fr 0.85fr; gap: var(--space-6); align-items: start; }
+  @media (max-width: 960px) { .sim { grid-template-columns: 1fr; } }
+  .sim-inputs, .sim-results { min-width: 0; }
+  .sim-inputs { display: grid; gap: var(--space-4); }
+  .sim-inputs fieldset.card { padding: var(--space-5); }
+  legend { font-family: var(--font-display); font-size: var(--fs-lg); color: var(--ink); padding: 0; margin-bottom: var(--space-3); float: left; width: 100%; }
+  .fields { clear: both; display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-4); }
+  @media (max-width: 560px) { .fields { grid-template-columns: 1fr; } }
+  .input-unit { display: flex; align-items: center; border: 1.5px solid var(--border-strong); border-radius: var(--radius-sm); background: var(--surface); }
+  .input-unit:focus-within { border-color: var(--brand-orange-deep); box-shadow: 0 0 0 3px var(--brand-orange-soft); }
+  .input-unit input { border: 0; box-shadow: none !important; min-width: 0; }
+  .input-unit:has([aria-invalid='true']) { border-color: var(--error); }
+  .pre, .post { padding-inline: 0.7rem; color: var(--text-muted); font-size: var(--fs-sm); white-space: nowrap; }
+  .pre { padding-right: 0; }
+  .uf-box p { clear: both; margin: var(--space-2) 0 0; }
+  .sim-results { position: sticky; top: calc(var(--header-h) + 16px); display: grid; gap: var(--space-4); }
+  @media (max-width: 960px) { .sim-results { position: static; } }
+  .results { border-top: 4px solid var(--brand-orange); }
+  .hl { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-4); margin-block: var(--space-3) var(--space-5); }
+  .hl > div { display: grid; gap: var(--space-1); }
+  .k { font-size: var(--fs-sm); color: var(--text-muted); }
+  .big { font-family: var(--font-display); font-weight: 500; font-size: clamp(1.5rem, 1.1rem + 1.4vw, 2.1rem); color: var(--ink); line-height: 1.1; }
+  .big.neg { color: var(--error); }
+  .big.pos { color: var(--success); }
+  .res { margin: 0; display: grid; font-size: var(--fs-sm); }
+  .res div { display: flex; justify-content: space-between; gap: var(--space-3); padding-block: var(--space-2); border-bottom: 1px solid var(--border); }
+  .res dt { color: var(--text-muted); }
+  .res dd { margin: 0; font-weight: 600; text-align: right; font-variant-numeric: tabular-nums; }
+  .tip { display: inline-grid; place-items: center; width: 18px; height: 18px; border-radius: 50%; background: var(--bg-alt); font-size: 11px; cursor: help; }
+  .full { width: 100%; }
+  .scen-wrap { overflow-x: auto; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); margin-block: var(--space-5) var(--space-3); }
+  .scen { width: 100%; min-width: 620px; border-collapse: collapse; font-size: var(--fs-sm); }
+  .scen th, .scen td { padding: var(--space-3) var(--space-4); border-bottom: 1px solid var(--border); text-align: right; font-variant-numeric: tabular-nums; }
+  .scen th[scope='row'] { text-align: left; font-weight: 600; }
+  .scen thead th { background: var(--ink); color: #fff; font-weight: 600; }
+  .scen thead th:nth-child(3) { background: var(--brand-orange); color: var(--ink); }
+  .scen input { min-height: 40px; text-align: right; max-width: 150px; margin-left: auto; display: block; }
+  .scen .out td { font-weight: 700; }
+  .scen .out:first-of-type th, .scen tr.out:nth-child(4) th, .scen tr.out:nth-child(4) td { border-top: 2px solid var(--border-strong); }
+  .disclaimer { margin-top: var(--space-6); }
+</style>

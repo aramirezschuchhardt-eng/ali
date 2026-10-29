@@ -1,0 +1,12 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import PageHero from '@/components/PageHero.astro';
+import CaseList from '@/components/CaseList.astro';
+import CtaBand from '@/components/CtaBand.astro';
+import { cases } from '@/data/cases';
+---
+<BaseLayout title="Casos y experiencias de inversión" description="Casos de inversión inmobiliaria explicados paso a paso: situación inicial, objetivo, variables analizadas, alternativas y decisión." breadcrumbs={[{ name: 'Casos y experiencias', href: '/casos' }]} noindex={cases.length === 0}>
+  <PageHero eyebrow="Casos y experiencias" title="Estrategias construidas en torno a objetivos reales." lead="Mostramos cómo se toma cada decisión, no solo su resultado. Solo publicamos casos reales, autorizados por cada cliente y con resultados documentados." crumbs={[{ name: 'Casos y experiencias', href: '/casos' }]} />
+  <section class="section"><div class="container"><CaseList /></div></section>
+  <CtaBand title="Tu caso también merece un análisis propio." />
+</BaseLayout>

@@ -1,0 +1,48 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import PageHero from '@/components/PageHero.astro';
+import LeadForm from '@/components/LeadForm.astro';
+import Pending from '@/components/Pending.astro';
+import { site, whatsappHref } from '@/config/site';
+const wa = whatsappHref();
+const steps = ['Completas el formulario con tu objetivo y tus datos de contacto.', 'Revisamos tu información y te contactamos por el medio que prefieras.', 'Coordinamos una primera conversación para entender tu punto de partida.', 'Si tiene sentido avanzar, te proponemos los pasos siguientes.'];
+---
+<BaseLayout title="Contacto y agenda de asesorías" description={`Agenda una asesoría estratégica de inversión inmobiliaria con ${site.name}. Cuéntanos tu objetivo y te contactamos.`} breadcrumbs={[{ name: 'Contacto', href: '/contacto' }]}>
+  <PageHero eyebrow="Contacto" title="Avanza hacia tu próximo objetivo patrimonial con estrategia." lead="Cuéntanos qué quieres lograr. Primero entendemos tus objetivos; después evaluamos las oportunidades." crumbs={[{ name: 'Contacto', href: '/contacto' }]} />
+  <section class="section">
+    <div class="container contact">
+      <LeadForm />
+      <aside class="side">
+        {site.bookingUrl && (
+          <div class="card"><h3>Agenda directamente</h3><p class="muted small">Elige el día y la hora en nuestro calendario. La reunión queda confirmada cuando recibes la confirmación del calendario.</p><a class="btn btn-primary" href={site.bookingUrl} target="_blank" rel="noopener" data-cta="contacto-agenda">Ver horarios disponibles</a></div>
+        )}
+        {wa && (
+          <div class="card"><h3>WhatsApp</h3><p class="muted small">Escríbenos por nuestro canal oficial.</p><a class="btn btn-secondary" href={wa} target="_blank" rel="noopener" data-cta="contacto-whatsapp">Abrir WhatsApp</a></div>
+        )}
+        {(site.contact.email || site.contact.phone) && (
+          <div class="card"><h3>Otros canales</h3>
+            {site.contact.email && <p><a href={`mailto:${site.contact.email}`}>{site.contact.email}</a></p>}
+            {site.contact.phone && <p><a href={`tel:${site.contact.phone.replace(/\s/g, '')}`}>{site.contact.phone}</a></p>}
+          </div>
+        )}
+        {!site.bookingUrl && !wa && (
+          <Pending title="Canales de contacto">
+            <p>Configurar en <code>src/config/site.ts</code>: URL de la herramienta de agenda real (<code>bookingUrl</code>), WhatsApp oficial, correo y teléfono. Mientras tanto, el formulario es el canal de contacto.</p>
+          </Pending>
+        )}
+        <div class="card">
+          <h3>Qué pasa después</h3>
+          <ol class="steps">{steps.map((s) => <li>{s}</li>)}</ol>
+        </div>
+      </aside>
+    </div>
+  </section>
+</BaseLayout>
+<style>
+  .contact > * { min-width: 0; }
+  .contact { display: grid; grid-template-columns: 1.4fr 0.8fr; gap: var(--space-6); align-items: start; }
+  @media (max-width: 960px) { .contact { grid-template-columns: 1fr; } }
+  .side { display: grid; gap: var(--space-4); }
+  .steps { padding-left: 1.2em; margin: 0; font-size: var(--fs-sm); display: grid; gap: var(--space-2); }
+  .steps li::marker { color: var(--brand-orange-deep); font-weight: 700; }
+</style>

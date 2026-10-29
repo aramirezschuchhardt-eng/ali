@@ -1,0 +1,94 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import PageHero from '@/components/PageHero.astro';
+import SectionHeading from '@/components/SectionHeading.astro';
+import CtaBand from '@/components/CtaBand.astro';
+import Pending from '@/components/Pending.astro';
+import { site } from '@/config/site';
+const bookingHref = site.bookingUrl ?? '/contacto#diagnostico';
+
+const components = [
+  { t: 'Diagnóstico de objetivos', d: 'Qué quieres lograr, en cuánto tiempo y qué papel tendrá la inversión en tu patrimonio.', o: 'Objetivos priorizados y horizonte definido.' },
+  { t: 'Revisión de capacidad financiera', d: 'Ingresos, ahorro, compromisos actuales y un rango razonable de pie y dividendo.', o: 'Un rango de inversión sostenible para ti.' },
+  { t: 'Definición de criterios de inversión', d: 'Ubicación, tipología, etapa del proyecto, nivel de financiamiento y riesgos aceptables.', o: 'Criterios explícitos para filtrar oportunidades.' },
+  { t: 'Análisis comparativo de oportunidades', d: 'Comparamos alternativas con los mismos supuestos y distinguimos datos confirmados de estimaciones.', o: 'Una comparación clara de opciones.' },
+  { t: 'Evaluación de escenarios financieros', d: 'Dividendo estimado, flujo de caja y capital inicial en escenarios conservador, base y optimista.', o: 'Escenarios que puedes revisar con calma.' },
+  { t: 'Acompañamiento en las etapas acordadas', d: 'Reserva, promesa, coordinación del crédito, escritura, entrega y, si se acuerda, puesta en arriendo.', o: 'Orientación en cada paso acordado.' },
+];
+const firstMeeting = ['Tus objetivos y tu horizonte de inversión', 'Tu punto de partida: ahorro, ingresos y propiedades actuales', 'Qué tipo de inversión podría tener sentido para tu perfil', 'Cómo funciona el proceso y qué etapas incluiría', 'Tus dudas sobre crédito, costos y riesgos'];
+const toBring = ['Una idea aproximada de tus ingresos mensuales y tu capacidad de ahorro', 'El capital que podrías destinar al pie y a los gastos de compra', 'Tus deudas o créditos vigentes (montos aproximados)', 'Si ya tienes propiedades: valor estimado, deuda y arriendo actual'];
+const included = ['Diagnóstico de tu situación y objetivos', 'Definición de criterios de inversión', 'Análisis comparativo de alternativas', 'Escenarios financieros con supuestos explícitos', 'Orientación durante las etapas acordadas'];
+const notIncluded = ['Aprobación o garantía de un crédito hipotecario (la decide cada entidad financiera)', 'Garantía de rentabilidad, arriendo o plusvalía', 'Asesoría legal o tributaria formal (podemos sugerir que consultes a un especialista)', 'Decisiones por ti: la decisión final siempre es tuya'];
+---
+<BaseLayout
+  title="Asesoría estratégica de inversión inmobiliaria"
+  description="Cómo funciona la asesoría de Avance Inmobiliario: diagnóstico, capacidad financiera, criterios de inversión, análisis de oportunidades, escenarios y acompañamiento."
+  breadcrumbs={[{ name: 'Nuestra asesoría', href: '/asesoria' }]}
+>
+  <PageHero eyebrow="Nuestra asesoría" title="No necesitas empezar por una propiedad. Necesitas empezar por una estrategia." lead="La propiedad es el instrumento de inversión. La estrategia es lo que le da sentido. Así trabajamos contigo." crumbs={[{ name: 'Nuestra asesoría', href: '/asesoria' }]}>
+    <div class="btn-row"><a class="btn btn-primary" href={bookingHref} data-cta="asesoria-hero">Quiero diseñar mi estrategia</a></div>
+  </PageHero>
+
+  <section class="section">
+    <div class="container">
+      <SectionHeading eyebrow="Qué incluye" title="Qué analizamos y qué obtienes en cada etapa." />
+      <div class="grid grid-3">
+        {components.map((c, i) => (
+          <article class="card reveal comp">
+            <span class="n">{String(i + 1).padStart(2, '0')}</span>
+            <h3>{c.t}</h3>
+            <p class="muted">{c.d}</p>
+            <p class="out"><strong>Obtienes:</strong> {c.o}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="container grid grid-2 two">
+      <div class="reveal">
+        <SectionHeading eyebrow="Primera reunión" title="Qué podemos revisar en una primera conversación." />
+        <ul class="check-list">{firstMeeting.map((i) => <li>{i}</li>)}</ul>
+        {site.commercial.firstMeetingTerms ? <p class="small">{site.commercial.firstMeetingTerms}</p> : (
+          <Pending title="Condiciones de la primera reunión"><p>Indicar si la primera reunión tiene costo o es gratuita, su duración y modalidad, una vez confirmadas (<code>commercial.firstMeetingTerms</code>).</p></Pending>
+        )}
+      </div>
+      <div class="card reveal">
+        <h3>Qué información conviene tener a mano</h3>
+        <p class="muted small">No necesitas documentos para la primera conversación. Con cifras aproximadas basta. Nunca te pediremos contraseñas ni claves bancarias.</p>
+        <ul class="check-list">{toBring.map((i) => <li>{i}</li>)}</ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <SectionHeading eyebrow="Transparencia" title="Lo que incluye la asesoría y lo que no." />
+      <div class="grid grid-2">
+        <div class="card reveal"><h3>Incluye</h3><ul class="check-list">{included.map((i) => <li>{i}</li>)}</ul></div>
+        <div class="card reveal"><h3>No incluye</h3><ul class="x-list">{notIncluded.map((i) => <li>{i}</li>)}</ul></div>
+      </div>
+      <div class="fee reveal">
+        <h3>Cómo se remunera la asesoría</h3>
+        {site.commercial.feeModel ? <p>{site.commercial.feeModel}</p> : (
+          <Pending title="Modelo de remuneración"><p>Describir con claridad cómo se remunera la asesoría (honorarios del cliente, comisión de la inmobiliaria u otro) y posibles conflictos de interés (<code>commercial.feeModel</code>).</p></Pending>
+        )}
+      </div>
+      <div class="btn-row center-row"><a class="btn btn-primary" href={bookingHref} data-cta="asesoria-cta">Quiero diseñar mi estrategia</a></div>
+    </div>
+  </section>
+
+  <CtaBand />
+</BaseLayout>
+<style>
+  .comp .n { font-family: var(--font-display); color: var(--brand-orange); font-size: 1.6rem; display: block; margin-bottom: var(--space-3); }
+  .out { font-size: var(--fs-sm); background: var(--brand-orange-soft); padding: var(--space-3); border-radius: var(--radius-sm); }
+  .two { align-items: start; gap: var(--space-7); }
+  .check-list, .x-list { list-style: none; padding: 0; margin: 0 0 var(--space-5); display: grid; gap: var(--space-3); }
+  .check-list li, .x-list li { position: relative; padding-left: 1.8rem; }
+  .check-list li::before { content: '✓'; position: absolute; left: 0; color: var(--success); font-weight: 700; }
+  .x-list li::before { content: '—'; position: absolute; left: 0; color: var(--text-muted); }
+  .fee { margin-top: var(--space-6); max-width: 760px; }
+  .center-row { margin-top: var(--space-6); }
+</style>

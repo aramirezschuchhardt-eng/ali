@@ -1,0 +1,62 @@
+---
+/**
+ * Composición arquitectónica abstracta (SVG) usada mientras no se disponga de
+ * fotografía arquitectónica propia o licenciada. Para usar una fotografía, pasar
+ * `image` (ruta en /public) con su texto alternativo.
+ */
+interface Props { image?: { src: string; alt: string }; variant?: 'hero' | 'card'; seed?: number; label?: string; }
+const { image, variant = 'hero', seed = 0, label } = Astro.props;
+const cols = 7;
+const rows = variant === 'hero' ? 11 : 6;
+const lit = new Set<number>();
+let x = (seed * 9301 + 49297) % 233280;
+for (let i = 0; i < Math.round(cols * rows * 0.22); i++) { x = (x * 9301 + 49297) % 233280; lit.add(x % (cols * rows)); }
+---
+{image ? (
+  <img class:list={['arch', `arch-${variant}`]} src={image.src} alt={image.alt} loading={variant === 'hero' ? 'eager' : 'lazy'} decoding="async" />
+) : (
+  <div class:list={['arch', `arch-${variant}`]} role="img" aria-label={label ?? 'Ilustración arquitectónica abstracta'}>
+    <svg viewBox="0 0 400 520" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+      <defs>
+        <linearGradient id={`sky${seed}`} x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stop-color="#fbe2d2" />
+          <stop offset="0.6" stop-color="#f6efe8" />
+          <stop offset="1" stop-color="#efe7df" />
+        </linearGradient>
+        <linearGradient id={`face${seed}`} x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0" stop-color="#2c2622" />
+          <stop offset="1" stop-color="#1f1b18" />
+        </linearGradient>
+        <linearGradient id={`side${seed}`} x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0" stop-color="#4a413b" />
+          <stop offset="1" stop-color="#352e29" />
+        </linearGradient>
+      </defs>
+      <rect width="400" height="520" fill={`url(#sky${seed})`} />
+      <circle cx="320" cy="96" r="54" fill="#f26b2c" opacity="0.18" />
+      <polygon points="250,150 330,120 330,520 250,520" fill={`url(#side${seed})`} />
+      <rect x="70" y="150" width="180" height="370" fill={`url(#face${seed})`} />
+      {Array.from({ length: rows }).map((_, r) =>
+        Array.from({ length: cols }).map((_, c) => (
+          <rect
+            x={82 + c * 23.5}
+            y={166 + r * (variant === 'hero' ? 31 : 56)}
+            width="15"
+            height={variant === 'hero' ? 20 : 38}
+            rx="1.5"
+            fill={lit.has(r * cols + c) ? '#f6a26f' : '#3b332e'}
+            opacity={lit.has(r * cols + c) ? 0.95 : 1}
+          />
+        ))
+      )}
+      <rect x="62" y="140" width="196" height="10" fill="#f26b2c" />
+      <path d="M0 520 L0 430 L40 430 L40 380 L62 380 L62 520 Z" fill="#d9cfc5" />
+      <path d="M330 520 L330 300 L372 300 L372 250 L400 250 L400 520 Z" fill="#d9cfc5" />
+      <rect y="505" width="400" height="15" fill="#cfc4b9" />
+    </svg>
+  </div>
+)}
+<style>
+  .arch { width: 100%; height: 100%; object-fit: cover; display: block; background: var(--bg-alt); }
+  .arch svg { width: 100%; height: 100%; display: block; }
+</style>
