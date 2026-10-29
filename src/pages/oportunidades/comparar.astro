@@ -1,8 +1,12 @@
 ---
+import { site } from '@/config/site';
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import PageHero from '@/components/PageHero.astro';
 import { formatDelivery, goalLabels, minPriceUf, projects, stageLabels } from '@/data/projects';
 import { formatClp, formatUf } from '@/lib/format';
+
+// Catálogo apagado: se redirige a la asesoría (ver site.features.projects).
+if (!site.features.projects) return Astro.redirect('/asesoria');
 
 // Datos ya formateados para que el script del cliente solo arme la tabla.
 const rows = projects.map((p) => ({

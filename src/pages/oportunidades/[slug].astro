@@ -6,8 +6,10 @@ import DataTag from '@/components/DataTag.astro';
 import LeadForm from '@/components/LeadForm.astro';
 import { formatDelivery, goalLabels, minPriceUf, projects, stageLabels, type Project } from '@/data/projects';
 import { formatClp, formatUf } from '@/lib/format';
+import { site } from '@/config/site';
 
 export function getStaticPaths() {
+  if (!site.features.projects) return [];
   return projects.map((p) => ({ params: { slug: p.slug }, props: { project: p } }));
 }
 const { project: p } = Astro.props as { project: Project };

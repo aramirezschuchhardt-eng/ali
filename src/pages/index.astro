@@ -5,7 +5,6 @@ import ArchVisual from '@/components/ArchVisual.astro';
 import SectionHeading from '@/components/SectionHeading.astro';
 import MethodTimeline from '@/components/MethodTimeline.astro';
 import ObjectiveCards from '@/components/ObjectiveCards.astro';
-import ProjectExplorer from '@/components/ProjectExplorer.astro';
 import FaqAccordion from '@/components/FaqAccordion.astro';
 import PostCard from '@/components/PostCard.astro';
 import CtaBand from '@/components/CtaBand.astro';
@@ -14,15 +13,14 @@ import CaseList from '@/components/CaseList.astro';
 import { site } from '@/config/site';
 import { pillars } from '@/data/content';
 import { faq } from '@/data/faq';
-import { projects } from '@/data/projects';
+import { strategyQuestions } from '@/data/content';
 
 const posts = (await getCollection('blog', (p) => !p.data.draft)).slice(0, 3);
 const bookingHref = site.bookingUrl ?? '/contacto#diagnostico';
-const hasDemo = projects.some((p) => p.demo);
 ---
 <BaseLayout
   title="Asesoría de inversión inmobiliaria en Chile | Avance Inmobiliario"
-  description="Construye una estrategia de inversión inmobiliaria alineada con tus objetivos y tu capacidad financiera. Diagnóstico, análisis de oportunidades y acompañamiento."
+  description="Construye una estrategia de inversión inmobiliaria alineada con tus objetivos y tu capacidad financiera. Diagnóstico, escenarios financieros y acompañamiento."
 >
   <!-- 1. Hero -->
   <section class="hero">
@@ -80,15 +78,42 @@ const hasDemo = projects.some((p) => p.demo);
     </div>
   </section>
 
-  <!-- 5. Oportunidades -->
-  <section class="section section-alt" aria-labelledby="oportunidades">
+  <!-- 5. Qué define tu estrategia -->
+  <section class="section section-alt" aria-labelledby="estrategia">
     <div class="container">
-      <SectionHeading eyebrow="Oportunidades" title="Oportunidades seleccionadas con una mirada de inversión." id="oportunidades" lead="No se trata de mostrarte más propiedades. Se trata de ayudarte a evaluar las oportunidades que tienen sentido para ti." />
-      {hasDemo && (
-        <p class="notice notice-warning demo-note"><strong>Datos de demostración.</strong> Los proyectos que se muestran son ejemplos ficticios para ilustrar el catálogo. No corresponden a proyectos, precios ni disponibilidad reales.</p>
-      )}
-      <ProjectExplorer limit={3} showFilters={false} />
-      <div class="btn-row more"><a class="btn btn-secondary" href="/oportunidades">Ver y filtrar todas las oportunidades</a></div>
+      <SectionHeading eyebrow="Tu estrategia" title="Las preguntas que una estrategia responde antes de comprar." id="estrategia" lead="Una buena inversión empieza con respuestas claras. Estas son las que trabajamos contigo, en este orden." />
+      <ol class="questions">
+        {strategyQuestions.map((q, i) => (
+          <li class="question reveal">
+            <span class="q-n" aria-hidden="true">{String(i + 1).padStart(2, '0')}</span>
+            <div>
+              <h3>{q.q}</h3>
+              <p class="muted">{q.a}</p>
+            </div>
+          </li>
+        ))}
+      </ol>
+      <p class="claim reveal">Invierte con una visión más amplia.</p>
+    </div>
+  </section>
+
+  <!-- 5b. Simulador -->
+  <section class="section" aria-labelledby="numeros">
+    <div class="container sim-teaser reveal">
+      <div>
+        <span class="eyebrow">Simulador de inversión</span>
+        <h2 id="numeros">Entiende los números antes de invertir.</h2>
+        <p class="lead">Calcula el pie, el dividendo aproximado, el flujo de caja mensual y la rentabilidad de un escenario. Compara supuestos conservadores, base y optimistas.</p>
+        <div class="btn-row">
+          <a class="btn btn-primary" href="/simulador" data-cta="home-simulador">Probar el simulador</a>
+          <a class="btn btn-secondary" href={bookingHref} data-cta="home-simulador-asesor">Analizar mi escenario con un asesor</a>
+        </div>
+      </div>
+      <dl class="sim-concepts">
+        <div><dt>Flujo de caja</dt><dd>Lo que entra y sale cada mes, con vacancia, gastos y dividendo.</dd></div>
+        <div><dt>Rentabilidad bruta y neta</dt><dd>Cuánto rinde la propiedad antes y después de costos.</dd></div>
+        <div><dt>Retorno sobre tu capital</dt><dd>El efecto real del crédito sobre lo que aportas.</dd></div>
+      </dl>
     </div>
   </section>
 
@@ -166,7 +191,19 @@ const hasDemo = projects.some((p) => p.demo);
   .claim { margin: var(--space-7) 0 0; font-family: var(--font-display); font-size: var(--fs-xl); color: var(--ink); text-align: center; }
   .claim::before { content: ''; display: block; width: 48px; height: 3px; background: var(--brand-orange); margin: 0 auto var(--space-4); }
   .more { margin-top: var(--space-6); justify-content: center; }
-  .demo-note { margin-bottom: var(--space-5); }
+  .questions { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 var(--space-7); }
+  @media (max-width: 860px) { .questions { grid-template-columns: 1fr; } }
+  .question { display: grid; grid-template-columns: 56px 1fr; gap: var(--space-4); padding-block: var(--space-5); border-top: 1px solid var(--border-strong); }
+  .q-n { font-family: var(--font-display); font-size: 1.6rem; color: var(--brand-orange); line-height: 1.2; }
+  .question h3 { font-family: var(--font-display); font-weight: 500; font-size: var(--fs-xl); line-height: 1.2; margin-bottom: var(--space-2); }
+  .question p { margin: 0; }
+  .sim-teaser { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: var(--space-7); align-items: center; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: clamp(1.5rem, 4vw, 3.5rem); box-shadow: var(--shadow); }
+  @media (max-width: 900px) { .sim-teaser { grid-template-columns: 1fr; } }
+  .sim-teaser > * { min-width: 0; }
+  .sim-concepts { margin: 0; display: grid; gap: var(--space-4); }
+  .sim-concepts div { border-left: 3px solid var(--brand-orange); padding-left: var(--space-4); }
+  .sim-concepts dt { font-weight: 600; }
+  .sim-concepts dd { margin: 0; color: var(--text-muted); font-size: var(--fs-sm); }
   .pillar { border-top: 2px solid var(--brand-orange); padding-top: var(--space-5); }
   .pillar-n { font-family: var(--font-display); color: var(--brand-orange); font-size: var(--fs-sm); letter-spacing: 0.1em; }
   .pillar h3 { margin-top: var(--space-3); }

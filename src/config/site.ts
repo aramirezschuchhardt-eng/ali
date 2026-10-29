@@ -52,6 +52,14 @@ export interface SiteConfig {
     /** Texto confirmado sobre la forma de remuneración de la asesoría. */
     feeModel: string | null;
   };
+  features: {
+    /**
+     * Catálogo de proyectos (/oportunidades, fichas y comparador). Apagado: el sitio
+     * se centra en la estrategia y no muestra proyectos. El código queda listo para
+     * activarlo cuando se quiera publicar oportunidades reales.
+     */
+    projects: boolean;
+  };
   /** Muestra en pantalla los avisos de contenido pendiente. Desactivar antes de publicar. */
   showPendingNotes: boolean;
 }
@@ -60,7 +68,7 @@ export const site: SiteConfig = {
   name: 'Avance Inmobiliario',
   tagline: 'No se trata solo de comprar una propiedad, sino de invertir con estrategia.',
   description:
-    'Asesoría de inversión inmobiliaria en Chile: diagnóstico, estrategia, análisis de oportunidades y acompañamiento para construir patrimonio con criterio.',
+    'Asesoría de inversión inmobiliaria en Chile: diagnóstico, estrategia patrimonial, escenarios financieros y acompañamiento para construir patrimonio con criterio.',
   locale: 'es-CL',
   brand: {
     logo: '/brand/logo-avance.png',
@@ -89,6 +97,9 @@ export const site: SiteConfig = {
     firstMeetingTerms: null,
     feeModel: null,
   },
+  features: {
+    projects: false,
+  },
   showPendingNotes: true,
 };
 
@@ -102,14 +113,17 @@ export interface NavItem {
   href: string;
 }
 
-export const mainNav: NavItem[] = [
+const projectsOn = (items: NavItem[]) =>
+  items.filter((i) => site.features.projects || !i.href.startsWith('/oportunidades'));
+
+export const mainNav: NavItem[] = projectsOn([
   { label: 'Asesoría', href: '/asesoria' },
   { label: 'Método', href: '/metodo' },
   { label: 'Oportunidades', href: '/oportunidades' },
   { label: 'Simulador', href: '/simulador' },
   { label: 'Aprende', href: '/blog' },
   { label: 'Nosotros', href: '/nosotros' },
-];
+]);
 
 export const footerNav: { title: string; items: NavItem[] }[] = [
   {
@@ -123,12 +137,12 @@ export const footerNav: { title: string; items: NavItem[] }[] = [
   },
   {
     title: 'Explora',
-    items: [
+    items: projectsOn([
       { label: 'Oportunidades', href: '/oportunidades' },
       { label: 'Centro de contenidos', href: '/blog' },
       { label: 'Preguntas frecuentes', href: '/preguntas-frecuentes' },
       { label: 'Nosotros y equipo', href: '/nosotros' },
-    ],
+    ]),
   },
   {
     title: 'Contacto',

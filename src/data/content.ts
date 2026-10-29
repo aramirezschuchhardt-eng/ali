@@ -79,3 +79,13 @@ export const brandPillars = [
   { title: 'Transparencia', text: 'Costos, supuestos, riesgos y limitaciones a la vista.' },
   { title: 'Acompañamiento', text: 'Orientación en las etapas acordadas.' },
 ];
+
+/** Preguntas que ordena la estrategia (sección "Tu estrategia" del inicio). */
+export const strategyQuestions = [
+  { q: '¿Qué quieres lograr con tu inversión?', a: 'Ingresos mensuales, patrimonio a largo plazo, jubilación o diversificación. El objetivo define todos los criterios que vienen después.' },
+  { q: '¿Cuánto puedes invertir sin comprometer tu estabilidad?', a: 'Revisamos ahorro, ingresos y compromisos para definir un pie y un dividendo que puedas sostener, con una reserva para imprevistos.' },
+  { q: '¿Cuál es tu horizonte de tiempo?', a: 'No es lo mismo invertir a 5 años que a 20. El horizonte cambia el tipo de propiedad, la etapa del proyecto y la estructura del crédito.' },
+  { q: '¿Cuánto riesgo estás dispuesto a asumir?', a: 'Vacancia, tasas, plazos de entrega, liquidez. Los identificamos y dimensionamos para que decidas sabiendo qué aceptas.' },
+  { q: '¿Cómo conviene financiarla?', a: 'Porcentaje de financiamiento, plazo y efecto del crédito en tu flujo mensual, en escenarios conservador, base y optimista.' },
+  { q: '¿Cuál es el siguiente paso, y el que viene después?', a: 'Una hoja de ruta: cuándo comprar, en qué orden y cómo preparar la siguiente inversión sin perder capacidad de crédito.' },
+];
