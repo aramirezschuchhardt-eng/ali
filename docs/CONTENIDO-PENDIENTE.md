@@ -3,8 +3,8 @@
 El sitio no inventa datos. Todo lo siguiente está preparado en el código pero requiere información real de Avance Inmobiliario. Mientras `showPendingNotes` sea `true` (en `src/config/site.ts`), los vacíos se muestran en pantalla como avisos punteados.
 
 ## Marca
-- [ ] **Archivo del logo oficial** en `public/brand/logo-avance.png` (recortado, idealmente transparente). Ver `public/brand/README.md`.
-- [ ] **HEX oficial del naranja.** Se usó `#F26B2C`, muestreado del logo entregado. Confirmar con el manual y ajustar en `src/styles/tokens.css`. Luego `brand.paletteIsOfficial = true`.
+- [x] **Logo oficial** incorporado en `public/brand/logo-avance.png` (recortado del archivo entregado, fondo blanco convertido en transparencia, sin redibujar). Si existe un SVG o una versión para fondos oscuros en el manual, reemplazarlo.
+- [ ] **HEX oficial del naranja.** Se usó `#F16528`, muestreado del logo entregado. Confirmar con el manual y ajustar en `src/styles/tokens.css`. Luego `brand.paletteIsOfficial = true`.
 - [ ] **Tipografías corporativas**, si existen. Hoy: Oswald + Jost (Google Fonts) por similitud con el logo.
 - [ ] **Fotografía arquitectónica** propia o licenciada (hero, blog, proyectos). Hoy se usa una ilustración SVG abstracta (`ArchVisual`).
 - [ ] Favicon con el isotipo oficial.

@@ -48,10 +48,10 @@ src/
 
 ## Identidad visual
 
-- El color principal es el naranja del logo oficial entregado (`#F26B2C`, muestreado del archivo; falta confirmar el HEX con el manual).
+- El color principal es el naranja del logo oficial entregado (`#F16528`, muestreado del archivo; falta confirmar el HEX con el manual).
 - El naranja con texto blanco no cumple contraste AA. Por eso los botones llevan texto oscuro sobre el naranja, y los textos naranjas usan una variante más profunda (`#B84A16`).
 - Los neutros (tinta `#1F1B18`, piedra) son colores de apoyo, no colores corporativos.
-- El logo se carga desde `public/brand/` sin modificarlo. Si falta el archivo, se muestra el nombre en texto.
+- El logo oficial está en `public/brand/logo-avance.png`: recortado del archivo entregado, con el fondo blanco convertido en transparente y sin redibujar. Si falta el archivo, se muestra el nombre en texto.
 
 ## Simulador: supuestos
 

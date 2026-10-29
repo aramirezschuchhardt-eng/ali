@@ -73,9 +73,9 @@ export const site: SiteConfig = {
   brand: {
     logo: '/brand/logo-avance.png',
     logoOnDark: null,
-    logoTransparent: false,
-    logoWidth: 845,
-    logoHeight: 355,
+    logoTransparent: true,
+    logoWidth: 860,
+    logoHeight: 366,
     paletteIsOfficial: false,
   },
   contact: {

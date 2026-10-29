@@ -2,19 +2,19 @@
  * SISTEMA DE DISEÑO — TOKENS
  *
  * Color de marca: naranja tomado del logo oficial de Avance Inmobiliario
- * entregado por la empresa (#F26B2C, muestreado del archivo PNG). ⚠ Confirmar el
+ * entregado por la empresa (#F16528, muestreado del archivo del logo). ⚠ Confirmar el
  * HEX exacto con el manual de marca y, si difiere, cambiarlo solo aquí.
  * El logo es monocromo (naranja sobre blanco): los neutros (tinta, piedra) son
  * colores de apoyo del sistema, no colores corporativos.
  *
  * Accesibilidad: el naranja de marca no alcanza contraste AA con texto blanco
- * (3,0:1), por eso los botones usan texto tinta sobre naranja (5,6:1) y los
+ * (3,2:1), por eso los botones usan texto tinta sobre naranja (5,4:1) y los
  * textos/enlaces naranjas usan la variante profunda (#B84A16, 4,9:1).
  */
 
 :root {
   /* --- Marca --- */
-  --brand-orange: #f26b2c;          /* color corporativo principal (logo) */
+  --brand-orange: #f16528;          /* color corporativo principal (logo) */
   --brand-orange-hover: #e35f22;
   --brand-orange-deep: #b84a16;     /* naranja apto para texto sobre fondos claros */
   --brand-orange-soft: #fdece2;
