@@ -30,6 +30,10 @@ Al comienzo, la mayor parte del dividendo corresponde a intereses; con el tiempo
 
 Ingresos demostrables, estabilidad laboral, comportamiento de pago, nivel de endeudamiento y la relación entre el dividendo y tus ingresos. Cada entidad tiene sus propios criterios, y las condiciones finales las define siempre la institución financiera.
 
+## Beneficios estatales
+
+Para vivienda nueva existen programas que pueden mejorar las condiciones del crédito, como la garantía **FOGAES**, que permite financiar con un pie menor, y la **tasa subsidiada**, que reduce la tasa de interés. Cada programa tiene requisitos, cupos y plazos de vigencia propios, y se aplican a través de la entidad financiera al tramitar el crédito. Conviene revisar si calificas antes de elegir el banco.
+
 ## Al comprar en blanco o en verde
 
 El crédito se cursa cerca de la entrega, no al reservar. La tasa vigente en ese momento puede ser distinta a la de hoy: conviene evaluar el proyecto con más de un escenario de tasa.

@@ -10,6 +10,7 @@ import PostCard from '@/components/PostCard.astro';
 import CtaBand from '@/components/CtaBand.astro';
 import TeamGrid from '@/components/TeamGrid.astro';
 import CaseList from '@/components/CaseList.astro';
+import CreditBand from '@/components/CreditBand.astro';
 import { site } from '@/config/site';
 import { pillars } from '@/data/content';
 import { faq } from '@/data/faq';
@@ -20,7 +21,7 @@ const bookingHref = site.bookingUrl ?? '/contacto#diagnostico';
 ---
 <BaseLayout
   title="Asesoría de inversión inmobiliaria en Chile | Avance Inmobiliario"
-  description="Construye una estrategia de inversión inmobiliaria alineada con tus objetivos y tu capacidad financiera. Diagnóstico, escenarios financieros y acompañamiento."
+  description="Construye una estrategia de inversión inmobiliaria alineada con tus objetivos y tu capacidad financiera. Diagnóstico, escenarios financieros, gestión del crédito hipotecario y acompañamiento."
 >
   <!-- 1. Hero -->
   <section class="hero">
@@ -96,6 +97,9 @@ const bookingHref = site.bookingUrl ?? '/contacto#diagnostico';
       <p class="claim reveal">Invierte con una visión más amplia.</p>
     </div>
   </section>
+
+  <!-- 5a. Crédito hipotecario -->
+  <CreditBand />
 
   <!-- 5b. Simulador -->
   <section class="section" aria-labelledby="numeros">

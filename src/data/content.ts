@@ -25,15 +25,15 @@ export const methodStages = [
   {
     n: '04',
     title: 'Estructuración',
-    text: 'Analizar alternativas de financiamiento, pie, dividendos estimados y escenarios financieros.',
-    detail: ['Porcentaje de financiamiento y plazo', 'Dividendo estimado y seguros', 'Escenarios conservador, base y optimista'],
-    output: 'Escenarios financieros que puedes revisar y discutir.',
+    text: 'Analizar alternativas de financiamiento, pie, dividendos estimados y escenarios financieros, y gestionar tu crédito hipotecario buscando la mejor opción.',
+    detail: ['Porcentaje de financiamiento y plazo', 'Comparación de ofertas: tasa, CAE, seguros y beneficios', 'Revisión de FOGAES y tasa subsidiada, si cumples los requisitos', 'Escenarios conservador, base y optimista'],
+    output: 'El financiamiento más conveniente que podamos conseguir para tu perfil.',
   },
   {
     n: '05',
     title: 'Acompañamiento',
     text: 'Orientar al cliente durante las etapas contratadas, desde la selección hasta la compra y, cuando corresponda, la puesta en arriendo.',
-    detail: ['Reserva y promesa', 'Coordinación del crédito', 'Escritura y entrega', 'Puesta en arriendo, si se acuerda'],
+    detail: ['Reserva y promesa', 'Gestión del crédito hipotecario hasta su aprobación', 'Escritura y entrega', 'Puesta en arriendo, si se acuerda'],
     output: 'Orientación en las etapas acordadas, sin perder de vista la estrategia.',
   },
 ];
@@ -89,3 +89,16 @@ export const strategyQuestions = [
   { q: '¿Cómo conviene financiarla?', a: 'Porcentaje de financiamiento, plazo y efecto del crédito en tu flujo mensual, en escenarios conservador, base y optimista.' },
   { q: '¿Cuál es el siguiente paso, y el que viene después?', a: 'Una hoja de ruta: cuándo comprar, en qué orden y cómo preparar la siguiente inversión sin perder capacidad de crédito.' },
 ];
+
+/** Gestión del crédito hipotecario (inicio y asesoría). */
+export const creditService = {
+  title: 'Gestionamos tu crédito hipotecario.',
+  lead: 'Buscamos la mejor opción de financiamiento para ti: comparamos alternativas entre entidades financieras para conseguir la mejor tasa y las mejores condiciones, y te acompañamos hasta la firma.',
+  points: [
+    { title: 'La mejor tasa', text: 'Cotizamos y comparamos ofertas de distintas entidades para buscar la tasa más conveniente para tu perfil.' },
+    { title: 'Mejores beneficios', text: 'Comparamos más que la tasa: CAE, seguros, plazo, porcentaje de financiamiento y condiciones de cada oferta.' },
+    { title: 'FOGAES y tasa subsidiada', text: 'Revisamos si puedes acceder a beneficios estatales vigentes, como la garantía FOGAES o la tasa subsidiada para vivienda nueva, y gestionamos su aplicación cuando cumples los requisitos.' },
+    { title: 'Acompañamiento en el trámite', text: 'Te orientamos con los antecedentes, la evaluación, la tasación y los pasos hasta la escritura.' },
+  ],
+  note: 'La aprobación del crédito, la tasa final y el acceso a beneficios estatales dependen de cada entidad financiera, de tu evaluación y de los requisitos vigentes de cada programa.',
+};

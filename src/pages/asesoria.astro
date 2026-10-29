@@ -4,6 +4,7 @@ import PageHero from '@/components/PageHero.astro';
 import SectionHeading from '@/components/SectionHeading.astro';
 import CtaBand from '@/components/CtaBand.astro';
 import Pending from '@/components/Pending.astro';
+import CreditBand from '@/components/CreditBand.astro';
 import { site } from '@/config/site';
 const bookingHref = site.bookingUrl ?? '/contacto#diagnostico';
 
@@ -13,16 +14,17 @@ const components = [
   { t: 'Definición de criterios de inversión', d: 'Ubicación, tipología, etapa del proyecto, nivel de financiamiento y riesgos aceptables.', o: 'Criterios explícitos para decidir qué alternativas evaluar.' },
   { t: 'Análisis comparativo de alternativas', d: 'Comparamos alternativas con los mismos supuestos y distinguimos datos confirmados de estimaciones.', o: 'Una comparación clara de opciones.' },
   { t: 'Evaluación de escenarios financieros', d: 'Dividendo estimado, flujo de caja y capital inicial en escenarios conservador, base y optimista.', o: 'Escenarios que puedes revisar con calma.' },
+  { t: 'Gestión del crédito hipotecario', d: 'Comparamos ofertas de distintas entidades buscando la mejor tasa y los mejores beneficios, y revisamos si puedes acceder a FOGAES o a la tasa subsidiada.', o: 'La mejor opción de financiamiento que podamos conseguir para ti.' },
   { t: 'Acompañamiento en las etapas acordadas', d: 'Reserva, promesa, coordinación del crédito, escritura, entrega y, si se acuerda, puesta en arriendo.', o: 'Orientación en cada paso acordado.' },
 ];
 const firstMeeting = ['Tus objetivos y tu horizonte de inversión', 'Tu punto de partida: ahorro, ingresos y propiedades actuales', 'Qué tipo de inversión podría tener sentido para tu perfil', 'Cómo funciona el proceso y qué etapas incluiría', 'Tus dudas sobre crédito, costos y riesgos'];
 const toBring = ['Una idea aproximada de tus ingresos mensuales y tu capacidad de ahorro', 'El capital que podrías destinar al pie y a los gastos de compra', 'Tus deudas o créditos vigentes (montos aproximados)', 'Si ya tienes propiedades: valor estimado, deuda y arriendo actual'];
-const included = ['Diagnóstico de tu situación y objetivos', 'Definición de criterios de inversión', 'Análisis comparativo de alternativas', 'Escenarios financieros con supuestos explícitos', 'Orientación durante las etapas acordadas'];
-const notIncluded = ['Aprobación o garantía de un crédito hipotecario (la decide cada entidad financiera)', 'Garantía de rentabilidad, arriendo o plusvalía', 'Asesoría legal o tributaria formal (podemos sugerir que consultes a un especialista)', 'Decisiones por ti: la decisión final siempre es tuya'];
+const included = ['Diagnóstico de tu situación y objetivos', 'Definición de criterios de inversión', 'Análisis comparativo de alternativas', 'Escenarios financieros con supuestos explícitos', 'Gestión del crédito hipotecario: mejor tasa, beneficios, FOGAES y tasa subsidiada cuando corresponda', 'Orientación durante las etapas acordadas'];
+const notIncluded = ['La aprobación del crédito ni el acceso garantizado a beneficios estatales (los deciden la entidad financiera y los requisitos de cada programa)', 'Garantía de rentabilidad, arriendo o plusvalía', 'Asesoría legal o tributaria formal (podemos sugerir que consultes a un especialista)', 'Decisiones por ti: la decisión final siempre es tuya'];
 ---
 <BaseLayout
   title="Asesoría estratégica de inversión inmobiliaria"
-  description="Cómo funciona la asesoría de Avance Inmobiliario: diagnóstico, capacidad financiera, criterios de inversión, análisis de alternativas, escenarios financieros y acompañamiento."
+  description="Cómo funciona la asesoría de Avance Inmobiliario: diagnóstico, capacidad financiera, criterios de inversión, escenarios financieros, gestión del crédito hipotecario y acompañamiento."
   breadcrumbs={[{ name: 'Nuestra asesoría', href: '/asesoria' }]}
 >
   <PageHero eyebrow="Nuestra asesoría" title="No necesitas empezar por una propiedad. Necesitas empezar por una estrategia." lead="La propiedad es el instrumento de inversión. La estrategia es lo que le da sentido. Así trabajamos contigo." crumbs={[{ name: 'Nuestra asesoría', href: '/asesoria' }]}>
@@ -44,6 +46,8 @@ const notIncluded = ['Aprobación o garantía de un crédito hipotecario (la dec
       </div>
     </div>
   </section>
+
+  <CreditBand id="credito-asesoria" />
 
   <section class="section section-alt">
     <div class="container grid grid-2 two">

@@ -17,6 +17,10 @@ export const faq: FaqItem[] = [
     a: 'Los bancos evalúan principalmente tus ingresos demostrables, tu estabilidad laboral, tu comportamiento de pago y la relación entre tus deudas y tus ingresos. Cada entidad aplica sus propias políticas. Podemos ayudarte a ordenar tu información y estimar un rango razonable, pero la aprobación y sus condiciones las define siempre la institución financiera.',
   },
   {
+    q: '¿Me ayudan a conseguir el crédito hipotecario?',
+    a: 'Sí. Gestionamos tu crédito hipotecario buscando la mejor opción para ti: comparamos ofertas de distintas entidades financieras para conseguir la mejor tasa y los mejores beneficios, y revisamos si puedes acceder a beneficios estatales vigentes, como la garantía FOGAES o la tasa subsidiada para vivienda nueva. La aprobación, la tasa final y el acceso a cada beneficio dependen de la entidad financiera, de tu evaluación y de los requisitos vigentes de cada programa.',
+  },
+  {
     q: '¿Es posible comprar una segunda propiedad?',
     a: 'Sí, siempre que tu capacidad de pago y de endeudamiento lo permitan. Al evaluar una segunda propiedad se considera el dividendo de la primera, su flujo de caja real y cómo cambia tu exposición total a deuda. Es una decisión que conviene planificar: el orden y el momento de cada compra importan.',
   },

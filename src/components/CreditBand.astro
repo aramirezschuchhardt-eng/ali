@@ -1,0 +1,34 @@
+---
+import { site } from '@/config/site';
+import { creditService } from '@/data/content';
+interface Props { id?: string; }
+const { id = 'credito' } = Astro.props;
+const bookingHref = site.bookingUrl ?? '/contacto#diagnostico';
+---
+<section class="section section-dark credit" aria-labelledby={id}>
+  <div class="container credit-grid">
+    <div class="reveal">
+      <span class="eyebrow">Crédito hipotecario</span>
+      <h2 id={id}>{creditService.title}</h2>
+      <p class="lead">{creditService.lead}</p>
+      <div class="btn-row"><a class="btn btn-primary" href={bookingHref} data-cta="credito-asesoria">Quiero evaluar mi crédito</a></div>
+      <p class="small note">{creditService.note}</p>
+    </div>
+    <ul class="credit-points">
+      {creditService.points.map((p) => (
+        <li class="reveal"><h3>{p.title}</h3><p>{p.text}</p></li>
+      ))}
+    </ul>
+  </div>
+</section>
+<style>
+  .credit-grid { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-7); align-items: start; }
+  @media (max-width: 900px) { .credit-grid { grid-template-columns: 1fr; gap: var(--space-6); } }
+  .credit-grid > * { min-width: 0; }
+  .credit-points { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-5); }
+  @media (max-width: 560px) { .credit-points { grid-template-columns: 1fr; } }
+  .credit-points li { border-top: 2px solid var(--brand-orange); padding-top: var(--space-4); }
+  .credit-points h3 { margin-bottom: var(--space-2); }
+  .credit-points p { margin: 0; font-size: var(--fs-sm); }
+  .note { margin-top: var(--space-5); opacity: 0.85; }
+</style>

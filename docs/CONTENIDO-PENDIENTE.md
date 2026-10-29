@@ -19,7 +19,7 @@ El sitio no inventa datos. Todo lo siguiente está preparado en el código pero 
 - [ ] Revisión legal de `/privacidad` y `/terminos` (plazo de conservación, encargados del tratamiento).
 
 ## Equipo (`src/data/team.ts`)
-- [ ] Validar la biografía de Alison Ramírez Schuchhardt (tomada de un documento interno) y agregar fotografía profesional.
+- [ ] Fotografía profesional de Alison Ramírez Schuchhardt (hoy se muestran sus iniciales). Por decisión de la empresa, el perfil muestra solo nombre y cargo.
 - [ ] Agregar a los demás integrantes reales.
 
 ## Oportunidades (`src/data/projects.ts`)
