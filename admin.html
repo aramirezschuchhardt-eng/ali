@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="es-CL">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Panel de administración | Avance Inmobiliario</title>
+  <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/styles.css">
+  <style>
+    body { background: var(--soft); }
+    .adm-top { background: var(--navy); color: #fff; }
+    .adm-top .container { display: flex; align-items: center; justify-content: space-between; gap: 16px; height: 70px; }
+    .adm-top img { height: 38px; }
+    .adm-top nav { display: flex; gap: 8px; flex-wrap: wrap; }
+    .tab { background: transparent; border: 1px solid rgba(255,255,255,.25); color: #fff; padding: 8px 14px; border-radius: 999px; cursor: pointer; font: 600 .82rem var(--font-b); }
+    .tab.is-active { background: var(--gold); color: var(--navy); border-color: var(--gold); }
+    .adm { padding: 32px 0 80px; }
+    .panel { background: #fff; border-radius: var(--radius); box-shadow: var(--shadow); padding: 24px; margin-bottom: 24px; }
+    .panel h2 { font-size: 1.3rem; }
+    .panel h3 { font-size: 1rem; margin-top: 8px; }
+    .toolbar { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; margin-bottom: 16px; }
+    table { width: 100%; border-collapse: collapse; font-size: .88rem; }
+    th, td { text-align: left; padding: 10px 8px; border-bottom: 1px solid var(--line); vertical-align: middle; }
+    th { font-size: .72rem; text-transform: uppercase; letter-spacing: .06em; color: var(--muted); }
+    td img { width: 64px; height: 44px; object-fit: cover; border-radius: 6px; background: var(--line); }
+    .tbl-wrap { overflow-x: auto; }
+    .grid-form { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+    .grid-form .full { grid-column: 1 / -1; }
+    .chk { display: flex; gap: 14px; flex-wrap: wrap; font-size: .88rem; }
+    .chk label { display: flex; gap: 6px; align-items: center; }
+    .chk input { width: auto; }
+    .pill { font-size: .7rem; padding: 3px 8px; border-radius: 999px; background: var(--soft); }
+    .pill.on { background: #DCF5EA; color: var(--ok); }
+    .pill.off { background: #FBE3E1; color: var(--bad); }
+    .mini { padding: 6px 10px; font-size: .7rem; }
+    .note { font-size: .85rem; color: var(--muted); background: #FBF5E6; border-radius: 10px; padding: 12px 14px; }
+    .hidden { display: none !important; }
+    #login { max-width: 380px; margin: 12vh auto; }
+    .toast { position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); background: var(--navy); color: #fff; padding: 12px 20px; border-radius: 10px; font-size: .9rem; opacity: 0; transition: opacity .3s; pointer-events: none; z-index: 99; }
+    .toast.show { opacity: 1; }
+    @media (max-width: 760px) { .grid-form { grid-template-columns: 1fr; } .adm-top .container { height: auto; padding: 12px 0; flex-direction: column; } }
+  </style>
+</head>
+<body>
+  <div id="login" class="panel">
+    <h2>Panel Avance Inmobiliario</h2>
+    <p class="lead">Ingresa la clave del equipo.</p>
+    <form id="login-form" class="field">
+      <input type="password" id="pwd" placeholder="Clave" autocomplete="current-password">
+      <button class="btn btn--gold btn--block" style="margin-top:12px">Ingresar</button>
+      <p class="form-msg err" id="login-msg"></p>
+    </form>
+  </div>
+
+  <div id="app" class="hidden">
+    <header class="adm-top">
+      <div class="container">
+        <img src="assets/img/logo.svg" alt="Avance Inmobiliario">
+        <nav>
+          <button class="tab is-active" data-tab="proyectos">Proyectos</button>
+          <button class="tab" data-tab="beneficios">Beneficios</button>
+          <button class="tab" data-tab="perfiles">Perfiles</button>
+          <button class="tab" data-tab="leads">Leads</button>
+          <button class="tab" data-tab="publicar">Publicar</button>
+        </nav>
+      </div>
+    </header>
+
+    <main class="adm container">
+      <!-- PROYECTOS -->
+      <section data-pane="proyectos">
+        <div class="panel">
+          <div class="toolbar">
+            <h2 style="margin:0;flex:1">Proyectos</h2>
+            <button class="btn btn--gold btn--sm" id="new-project">+ Nuevo proyecto</button>
+          </div>
+          <div class="tbl-wrap"><table>
+            <thead><tr><th></th><th>Proyecto</th><th>Comuna</th><th>Desde UF</th><th>Bono pie</th><th>Dcto.</th><th>Arriendo</th><th>Entrega</th><th>Estado</th><th></th></tr></thead>
+            <tbody id="proj-rows"></tbody>
+          </table></div>
+        </div>
+
+        <form class="panel hidden" id="proj-form">
+          <h2 id="proj-form-title">Editar proyecto</h2>
+          <div class="grid-form">
+            <div class="field"><label>Nombre</label><input name="nombre" required></div>
+            <div class="field"><label>Inmobiliaria</label><input name="inmobiliaria"></div>
+            <div class="field"><label>Comuna</label><input name="comuna" required></div>
+            <div class="field full"><label>Ubicación / referencia</label><input name="direccion"></div>
+            <div class="field"><label>Precio desde (UF)</label><input name="precioDesde" type="number" step="1" required></div>
+            <div class="field"><label>Bono pie (%)</label><input name="bonoPie" type="number" step="0.5" min="0"></div>
+            <div class="field"><label>Descuento (%)</label><input name="descuento" type="number" step="0.5" min="0"></div>
+            <div class="field"><label>Arriendo estimado ($)</label><input name="arriendoEstimado" type="number" step="5000"></div>
+            <div class="field"><label>Entrega (ej: Inmediata, 2027)</label><input name="entrega"></div>
+            <div class="field"><label>Dormitorios (ej: 1,2)</label><input name="dormitorios" placeholder="1,2"></div>
+            <div class="field full"><label>Tipologías y superficies</label><input name="tipologias"></div>
+            <div class="field full"><label>Promoción vigente</label><input name="promocion"></div>
+            <div class="field full"><label>URL de imagen (subir la foto a assets/img/ y escribir assets/img/nombre.jpg)</label><input name="imagen"></div>
+            <div class="field full"><label>Descripción</label><textarea name="descripcion" rows="3"></textarea></div>
+            <div class="field full"><label>Beneficios aplicables</label><div class="chk" id="proj-benefits"></div></div>
+            <div class="field full chk">
+              <label><input type="checkbox" name="destacado"> Destacado</label>
+              <label><input type="checkbox" name="activo"> Publicado</label>
+            </div>
+          </div>
+          <div class="toolbar" style="margin-top:18px">
+            <button class="btn btn--gold btn--sm" type="submit">Guardar</button>
+            <button class="btn btn--line btn--sm" type="button" id="proj-cancel">Cancelar</button>
+          </div>
+        </form>
+      </section>
+
+      <!-- BENEFICIOS -->
+      <section data-pane="beneficios" class="hidden">
+        <div class="panel">
+          <h2>Beneficios vigentes</h2>
+          <p class="note">Recuerda: nunca prometer tasas, subsidios, devoluciones de IVA ni rentabilidades. Mantén siempre actualizados los requisitos y condiciones.</p>
+          <div id="ben-list"></div>
+        </div>
+      </section>
+
+      <!-- PERFILES -->
+      <section data-pane="perfiles" class="hidden">
+        <div class="panel">
+          <h2>Perfiles de inversionista</h2>
+          <div id="perf-list"></div>
+        </div>
+      </section>
+
+      <!-- LEADS -->
+      <section data-pane="leads" class="hidden">
+        <div class="panel">
+          <div class="toolbar">
+            <h2 style="margin:0;flex:1">Leads recibidos en este navegador</h2>
+            <button class="btn btn--gold btn--sm" id="leads-csv">Descargar CSV</button>
+            <button class="btn btn--line btn--sm" id="leads-clear">Borrar</button>
+          </div>
+          <p class="note">Los leads se envían automáticamente al CRM configurado en <code>assets/js/config.js</code> (<code>crmWebhook</code>). Esta lista es sólo un respaldo local de los formularios enviados desde este dispositivo.</p>
+          <div class="tbl-wrap"><table>
+            <thead><tr><th>Fecha</th><th>Nombre</th><th>Teléfono</th><th>Correo</th><th>Renta</th><th>Pie</th><th>Objetivo</th><th>Proyecto</th></tr></thead>
+            <tbody id="lead-rows"></tbody>
+          </table></div>
+        </div>
+      </section>
+
+      <!-- PUBLICAR -->
+      <section data-pane="publicar" class="hidden">
+        <div class="panel">
+          <h2>Publicar cambios</h2>
+          <ol>
+            <li><strong>Vista previa:</strong> revisa tus cambios en el sitio (sólo los ves tú).</li>
+            <li><strong>Descargar data.js:</strong> genera el archivo con el contenido actualizado.</li>
+            <li><strong>Subir:</strong> reemplaza <code>assets/js/data.js</code> en el hosting (o súbelo a GitHub, que publica automáticamente).</li>
+          </ol>
+          <div class="field" style="max-width:260px"><label>Fecha de actualización</label><input type="date" id="upd-date"></div>
+          <div class="toolbar" style="margin-top:16px">
+            <a class="btn btn--line btn--sm" href="index.html" target="_blank" id="preview">Ver vista previa</a>
+            <button class="btn btn--gold btn--sm" id="dl-js">Descargar data.js</button>
+            <button class="btn btn--line btn--sm" id="dl-json">Exportar respaldo JSON</button>
+            <label class="btn btn--line btn--sm">Importar JSON<input type="file" id="imp-json" accept="application/json" class="hidden"></label>
+            <button class="btn btn--line btn--sm" id="discard">Descartar cambios locales</button>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+  <div class="toast" id="toast"></div>
+
+  <script src="assets/js/config.js"></script>
+  <script src="assets/js/data.js"></script>
+  <script src="assets/js/admin.js"></script>
+</body>
+</html>
