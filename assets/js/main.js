@@ -11,7 +11,7 @@
     if (preview) {
       DATA = JSON.parse(preview);
       const bar = document.createElement("div");
-      bar.style.cssText = "position:fixed;left:0;right:0;bottom:0;z-index:80;background:#C9A24B;color:#0B1F3A;padding:8px 16px;font:600 13px Inter,sans-serif;text-align:center";
+      bar.style.cssText = "position:fixed;left:0;right:0;bottom:0;z-index:80;background:#F16528;color:#1F1B18;padding:8px 16px;font:600 13px Inter,sans-serif;text-align:center";
       bar.innerHTML = 'Vista previa local de cambios del panel. Publica descargando <code>data.js</code>. <a href="admin.html" style="color:inherit">Volver al panel</a>';
       document.body.appendChild(bar);
     }

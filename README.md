@@ -15,14 +15,14 @@ Sitio estático (HTML + CSS + JavaScript, sin dependencias ni build): carga ráp
 | `admin.html` | Panel del equipo: proyectos, precios, promociones, beneficios, perfiles, leads |
 | `assets/js/config.js` | **WhatsApp, CRM, agenda**, datos de contacto, valor UF, clave del panel |
 | `assets/js/data.js` | Contenido administrable (proyectos, beneficios, perfiles). Lo genera el panel |
-| `assets/css/styles.css` | Diseño. Colores corporativos en `:root` (`--navy`, `--gold`) |
-| `assets/img/logo.svg` | **Logo provisorio** – reemplazar por el oficial |
+| `assets/css/styles.css` | Diseño. Colores en `:root`: `--gold` = naranja de marca #F16528, `--navy` = neutro oscuro |
+| `assets/img/logo-avance.png` | Logo oficial (naranja, fondo transparente) |
 | `robots.txt`, `sitemap.xml` | SEO (ajustar dominio) |
 
 ## Antes de publicar (pendientes)
 
-1. **Logo oficial**: reemplazar `assets/img/logo.svg` (y `favicon.svg`) por el logo de Avance Inmobiliario. Se usa sobre fondo azul oscuro: idealmente versión en negativo/blanco.
-2. **Colores exactos**: en `assets/css/styles.css`, cambiar `--navy`, `--navy-2`, `--navy-3`, `--gold`, `--gold-2` por los códigos HEX del manual de marca.
+1. **Logo**: ya integrado (`assets/img/logo-avance.png`). Si existe versión vectorial (SVG) o en blanco, reemplazarla con el mismo nombre para mayor nitidez.
+2. **Color exacto**: el naranja #F16528 fue muestreado del archivo del logo. Confirmar el HEX con el manual de marca y, si difiere, cambiar `--gold` / `--gold-2` en `assets/css/styles.css`.
 3. **Proyectos reales**: los 8 proyectos incluidos son **ejemplos referenciales** (nombres, precios y arriendos ficticios). Reemplazarlos desde el panel.
 4. **Fotos**: las imágenes son de Unsplash (uso libre). Para proyectos reales, subir las fotos a `assets/img/` y usar la ruta en el panel.
 5. **Configuración** en `assets/js/config.js`: número de WhatsApp, webhook del CRM, link de agenda, correo, redes, valor UF y clave del panel.
