@@ -20,6 +20,8 @@ for js in ["config", "data", "main"]:
 rest = re.sub(r'https?://\S+', "", h)
 assert 'src="assets/' not in rest and 'href="assets/' not in rest, "quedan rutas locales"
 open(os.path.join(R, "dist/avance-inmobiliario.html"), "w", encoding="utf-8").write(h)
+os.makedirs(os.path.join(R, "dist/html"), exist_ok=True)
+open(os.path.join(R, "dist/html/index.html"), "w", encoding="utf-8").write(h)  # listo para subir tal cual
 
 files = ["index.html", "admin.html", "robots.txt", "sitemap.xml"]
 for d, _, fs in os.walk(os.path.join(R, "assets")):

@@ -26,7 +26,7 @@ Sitio estático (HTML + CSS + JavaScript, sin dependencias ni build): carga ráp
 3. **Proyectos reales**: los 8 proyectos incluidos son **ejemplos referenciales** (nombres, precios y arriendos ficticios). Reemplazarlos desde el panel.
 4. **Fotos**: las imágenes son de Unsplash (uso libre). Para proyectos reales, subir las fotos a `assets/img/` y usar la ruta en el panel.
 5. **Configuración** en `assets/js/config.js`: número de WhatsApp, webhook del CRM, link de agenda, correo, redes, valor UF y clave del panel.
-6. **Dominio**: reemplazar `www.avanceinmobiliario.cl` en `index.html`, `robots.txt` y `sitemap.xml` si corresponde.
+6. **Dominio**: reemplazar `avanceinmobiliario.cl` en `index.html`, `robots.txt` y `sitemap.xml` si corresponde.
 7. **Legal**: revisar los textos de descargo y la política de datos personales con su asesor legal.
 
 ## Integraciones
