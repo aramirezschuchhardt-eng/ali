@@ -15,7 +15,7 @@ window.AVANCE_CONFIG = {
 
   // Enlace de agenda comercial (Calendly, HubSpot Meetings, Google Calendar Booking, etc.)
   // Si se deja vacío, el botón "Agendar reunión" abre WhatsApp pidiendo agendar.
-  agendaUrl: "",
+  agendaUrl: "https://calendly.com/ventas-avanceinmobiliario/30min",
 
   // Datos de contacto visibles
   email: "ventas@avanceinmobiliario.cl",
