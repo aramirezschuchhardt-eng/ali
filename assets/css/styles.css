@@ -303,3 +303,38 @@ input[type="range"] { padding: 0; border: 0; accent-color: var(--gold); height: 
 .criteria span { color: var(--muted); font-size: .9rem; }
 @media (max-width: 860px) { .criteria ul { grid-template-columns: 1fr 1fr; } }
 @media (max-width: 600px) { .criteria ul { grid-template-columns: 1fr; } .criteria .btn { width: 100%; white-space: normal; text-align: center; } }
+
+/* ---------- Énfasis "HOY" ---------- */
+.hl { color: var(--gold); }
+.hoy-pill { display: inline-flex; align-items: center; gap: 10px; flex-wrap: wrap; margin-top: 8px; padding: 10px 18px; border-radius: 999px; background: rgba(241,101,40,.14); border: 1px solid rgba(241,101,40,.55); color: #fff; text-decoration: none; font-size: .9rem; transition: background .2s; }
+.hoy-pill:hover { background: rgba(241,101,40,.28); }
+.hoy-pill strong { color: var(--gold-2); text-transform: uppercase; letter-spacing: .04em; }
+.hoy-dot { width: 10px; height: 10px; border-radius: 50%; background: var(--gold); box-shadow: 0 0 0 0 rgba(241,101,40,.7); animation: dot 1.8s infinite; flex: none; }
+@keyframes dot { 0% { box-shadow: 0 0 0 0 rgba(241,101,40,.7); } 70% { box-shadow: 0 0 0 10px rgba(241,101,40,0); } 100% { box-shadow: 0 0 0 0 rgba(241,101,40,0); } }
+.hero__cta { margin-top: 28px; }
+
+.hoy-bar { background: linear-gradient(90deg, var(--gold), var(--gold-2)); color: var(--navy); }
+.hoy-bar__inner { display: flex; align-items: center; gap: 24px; padding: 22px 0; flex-wrap: wrap; }
+.hoy-bar__title { font-family: var(--font-h); font-weight: 800; font-size: 1.15rem; text-transform: uppercase; margin: 0; }
+.hoy-bar__title span { background: var(--navy); color: #fff; padding: 2px 10px; border-radius: 6px; }
+.hoy-bar ul { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 8px 22px; flex: 1; font-weight: 600; font-size: .95rem; }
+.hoy-bar li::before { content: "✓ "; font-weight: 800; }
+
+.benefit--hoy { padding-top: 40px; }
+.hoy-badge { position: absolute; top: 16px; right: 16px; font-size: .66rem; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; color: #fff; background: var(--navy); padding: 4px 10px; border-radius: 999px; display: inline-flex; align-items: center; gap: 6px; }
+.hoy-badge::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: var(--gold); }
+.porque-hoy { font-size: .88rem !important; color: var(--ink) !important; background: #FDECE2; border-radius: 10px; padding: 10px 12px; }
+.porque-hoy strong { color: #B84A16; }
+
+.wait { margin-top: 32px; display: flex; align-items: center; justify-content: space-between; gap: 28px; flex-wrap: wrap; background: var(--navy); color: #fff; border-radius: var(--radius); padding: clamp(22px, 4vw, 34px); }
+.wait h3 { font-size: 1.3rem; }
+.wait ul { margin: 0; padding-left: 18px; color: rgba(255,255,255,.82); }
+.wait li { margin-bottom: 4px; }
+.wait__cta { display: flex; flex-direction: column; align-items: center; gap: 8px; }
+.wait__cta small { color: rgba(255,255,255,.7); }
+@media (max-width: 600px) {
+  .hoy-bar__inner { flex-direction: column; align-items: stretch; text-align: left; }
+  .hoy-bar ul { flex-direction: column; }
+  .hoy-bar .btn, .wait__cta, .wait__cta .btn { width: 100%; }
+  .hoy-pill { font-size: .82rem; border-radius: 16px; }
+}

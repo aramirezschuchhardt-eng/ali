@@ -325,6 +325,41 @@ input[type="range"] { padding: 0; border: 0; accent-color: var(--gold); height: 
 @media (max-width: 860px) { .criteria ul { grid-template-columns: 1fr 1fr; } }
 @media (max-width: 600px) { .criteria ul { grid-template-columns: 1fr; } .criteria .btn { width: 100%; white-space: normal; text-align: center; } }
 
+/* ---------- Énfasis "HOY" ---------- */
+.hl { color: var(--gold); }
+.hoy-pill { display: inline-flex; align-items: center; gap: 10px; flex-wrap: wrap; margin-top: 8px; padding: 10px 18px; border-radius: 999px; background: rgba(241,101,40,.14); border: 1px solid rgba(241,101,40,.55); color: #fff; text-decoration: none; font-size: .9rem; transition: background .2s; }
+.hoy-pill:hover { background: rgba(241,101,40,.28); }
+.hoy-pill strong { color: var(--gold-2); text-transform: uppercase; letter-spacing: .04em; }
+.hoy-dot { width: 10px; height: 10px; border-radius: 50%; background: var(--gold); box-shadow: 0 0 0 0 rgba(241,101,40,.7); animation: dot 1.8s infinite; flex: none; }
+@keyframes dot { 0% { box-shadow: 0 0 0 0 rgba(241,101,40,.7); } 70% { box-shadow: 0 0 0 10px rgba(241,101,40,0); } 100% { box-shadow: 0 0 0 0 rgba(241,101,40,0); } }
+.hero__cta { margin-top: 28px; }
+
+.hoy-bar { background: linear-gradient(90deg, var(--gold), var(--gold-2)); color: var(--navy); }
+.hoy-bar__inner { display: flex; align-items: center; gap: 24px; padding: 22px 0; flex-wrap: wrap; }
+.hoy-bar__title { font-family: var(--font-h); font-weight: 800; font-size: 1.15rem; text-transform: uppercase; margin: 0; }
+.hoy-bar__title span { background: var(--navy); color: #fff; padding: 2px 10px; border-radius: 6px; }
+.hoy-bar ul { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 8px 22px; flex: 1; font-weight: 600; font-size: .95rem; }
+.hoy-bar li::before { content: "✓ "; font-weight: 800; }
+
+.benefit--hoy { padding-top: 40px; }
+.hoy-badge { position: absolute; top: 16px; right: 16px; font-size: .66rem; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; color: #fff; background: var(--navy); padding: 4px 10px; border-radius: 999px; display: inline-flex; align-items: center; gap: 6px; }
+.hoy-badge::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: var(--gold); }
+.porque-hoy { font-size: .88rem !important; color: var(--ink) !important; background: #FDECE2; border-radius: 10px; padding: 10px 12px; }
+.porque-hoy strong { color: #B84A16; }
+
+.wait { margin-top: 32px; display: flex; align-items: center; justify-content: space-between; gap: 28px; flex-wrap: wrap; background: var(--navy); color: #fff; border-radius: var(--radius); padding: clamp(22px, 4vw, 34px); }
+.wait h3 { font-size: 1.3rem; }
+.wait ul { margin: 0; padding-left: 18px; color: rgba(255,255,255,.82); }
+.wait li { margin-bottom: 4px; }
+.wait__cta { display: flex; flex-direction: column; align-items: center; gap: 8px; }
+.wait__cta small { color: rgba(255,255,255,.7); }
+@media (max-width: 600px) {
+  .hoy-bar__inner { flex-direction: column; align-items: stretch; text-align: left; }
+  .hoy-bar ul { flex-direction: column; }
+  .hoy-bar .btn, .wait__cta, .wait__cta .btn { width: 100%; }
+  .hoy-pill { font-size: .82rem; border-radius: 16px; }
+}
+
 </style>
   <script type="application/ld+json">
   {
@@ -375,6 +410,7 @@ input[type="range"] { padding: 0; border: 0; accent-color: var(--gold); height: 
         <p class="eyebrow">Especialistas en inversión inmobiliaria</p>
         <h1 id="hero-title">Transformamos oportunidades inmobiliarias en <span>estrategias de inversión.</span></h1>
         <p class="hero__sub">Conseguimos la mejor tasa para ti. <strong>Nos encargamos de todo.</strong></p>
+        <a href="#beneficios" class="hoy-pill"><span class="hoy-dot" aria-hidden="true"></span><strong>Beneficios vigentes HOY:</strong> tasa subsidiada · FOGAES · bono pie · IVA <span aria-hidden="true">→</span></a>
         <div class="hero__cta">
           <a href="#oportunidades" class="btn btn--gold btn--lg" data-objetivo="Quiero invertir">Quiero invertir</a>
           <a href="#contacto" class="btn btn--ghost btn--lg" data-objetivo="Diseñar mi estrategia">Diseña mi estrategia</a>
@@ -388,15 +424,43 @@ input[type="range"] { padding: 0; border: 0; accent-color: var(--gold); height: 
       <p class="hero__note">*La asesoría no tiene costo para el cliente. Las condiciones de crédito dependen de cada institución financiera.</p>
     </section>
 
+    <!-- ============ FRANJA HOY ============ -->
+    <section class="hoy-bar" aria-label="Beneficios para comprar hoy">
+      <div class="container hoy-bar__inner">
+        <p class="hoy-bar__title">Compra <span>HOY</span> y aprovecha:</p>
+        <ul>
+          <li>Tasa hipotecaria subsidiada</li>
+          <li>Garantía estatal FOGAES</li>
+          <li>Bono pie y descuentos</li>
+          <li>Evaluación de devolución de IVA</li>
+        </ul>
+        <a href="#contacto" class="btn btn--navy" data-objetivo="Quiero invertir">¿Califico hoy?</a>
+      </div>
+    </section>
+
     <!-- ============ BENEFICIOS ============ -->
     <section class="section" id="beneficios" aria-labelledby="ben-title">
       <div class="container">
         <header class="section__head">
           <p class="eyebrow eyebrow--dark">Beneficios para aprovechar hoy</p>
-          <h2 id="ben-title">Oportunidades que evaluamos para tu inversión</h2>
-          <p class="lead">Revisamos qué beneficios vigentes aplican a tu caso. Cada uno tiene requisitos y condiciones que te explicamos con transparencia.</p>
+          <h2 id="ben-title">¿Por qué comprar <span class="hl">HOY</span>?</h2>
+          <p class="lead">Hoy coinciden beneficios de financiamiento, garantías estatales e incentivos de las inmobiliarias que no siempre están disponibles. Muchos tienen cupos, stock o plazos limitados. Revisamos cuáles aplican a tu caso y te explicamos sus requisitos con transparencia.</p>
         </header>
         <div class="benefits" id="benefits-grid"></div>
+        <div class="wait reveal">
+          <div>
+            <h3>Esperar también tiene un costo</h3>
+            <ul>
+              <li>Los cupos de programas estatales se pueden agotar.</li>
+              <li>Los bonos pie y descuentos se retiran cuando se venden las unidades.</li>
+              <li>Las tasas y los precios pueden cambiar.</li>
+            </ul>
+          </div>
+          <div class="wait__cta">
+            <a href="#contacto" class="btn btn--gold btn--lg" data-objetivo="Quiero invertir">Evalúa hoy si calificas</a>
+            <small>Sin costo y sin compromiso</small>
+          </div>
+        </div>
         <p class="disclaimer">Ningún beneficio está garantizado. Su aplicación depende de requisitos legales, tributarios y comerciales vigentes, cupos disponibles y la evaluación de cada institución.</p>
       </div>
     </section>
@@ -817,7 +881,8 @@ window.AVANCE_DATA = {
       "resumen": "Buscamos y comparamos las mejores condiciones de financiamiento disponibles para tu perfil.",
       "detalle": "Cotizamos con distintos bancos y mutuarias, y revisamos si tu compra califica para programas de subsidio a la tasa vigentes.",
       "requisitos": "Sujeto a evaluación crediticia de cada institución, al tipo y valor de la vivienda y a los cupos y condiciones vigentes del programa.",
-      "activo": true
+      "activo": true,
+      "porqueHoy": "Los programas de subsidio a la tasa operan con cupos y plazos definidos. Postular a tiempo puede bajar tu dividendo durante años."
     },
     {
       "id": "fogaes",
@@ -826,7 +891,8 @@ window.AVANCE_DATA = {
       "resumen": "Evaluamos alternativas de garantía estatal que pueden facilitar el acceso al crédito con menor pie.",
       "detalle": "Analizamos si tu operación puede acogerse al Fondo de Garantías Especiales y qué bancos lo están operando.",
       "requisitos": "Aplica según requisitos del programa, tope de valor de la vivienda, disponibilidad de cupos y aprobación de la entidad financiera.",
-      "activo": true
+      "activo": true,
+      "porqueHoy": "La garantía estatal está disponible mientras existan cupos en los bancos que la operan. Hoy puede permitirte comprar con menos pie."
     },
     {
       "id": "bonopie",
@@ -835,7 +901,8 @@ window.AVANCE_DATA = {
       "resumen": "Te mostramos proyectos con bono pie, descuentos y facilidades para pagar el pie en cuotas.",
       "detalle": "Seleccionamos inmobiliarias que ofrecen bono pie, descuentos por pronta entrega y pie en cuotas sin interés.",
       "requisitos": "Bonos y descuentos son definidos por cada inmobiliaria, tienen stock limitado y pueden cambiar sin previo aviso.",
-      "activo": true
+      "activo": true,
+      "porqueHoy": "Los bonos y descuentos tienen stock limitado y las inmobiliarias los retiran cuando venden sus unidades."
     },
     {
       "id": "iva",
@@ -844,7 +911,8 @@ window.AVANCE_DATA = {
       "resumen": "Evaluamos oportunidades de recuperación de IVA cuando corresponda legal y tributariamente.",
       "detalle": "Revisamos tu situación con asesoría tributaria para determinar si existe una alternativa legal de recuperación de IVA.",
       "requisitos": "Depende de la normativa tributaria vigente y de tu situación particular. Requiere evaluación de un profesional tributario. No es aplicable a todos los casos.",
-      "activo": true
+      "activo": true,
+      "porqueHoy": "La normativa tributaria cambia. Conviene evaluar tu caso con las reglas vigentes hoy."
     }
   ],
   "perfiles": [
@@ -956,12 +1024,14 @@ window.AVANCE_DATA = {
   /* ---------- Beneficios y perfiles ---------- */
   function renderBenefits() {
     $("#benefits-grid").innerHTML = (DATA.beneficios || []).filter((b) => b.activo !== false).map((b) => `
-      <article class="benefit reveal">
+      <article class="benefit benefit--hoy reveal">
+        <span class="hoy-badge">Vigente hoy</span>
         <div class="benefit__icon">${ICONS[b.icono] || ICONS.home}</div>
         <h3>${esc(b.titulo)}</h3>
         <p>${esc(b.resumen)}</p>
+        ${b.porqueHoy ? `<p class="porque-hoy"><strong>¿Por qué hoy?</strong> ${esc(b.porqueHoy)}</p>` : ""}
         <details><summary>Requisitos y condiciones</summary><p>${esc(b.detalle)}</p><p><strong>Condiciones:</strong> ${esc(b.requisitos)}</p></details>
-        <a href="#contacto" class="btn btn--navy btn--sm" data-objetivo="Evaluación: ${esc(b.titulo)}">Solicitar evaluación</a>
+        <a href="#contacto" class="btn btn--navy btn--sm" data-objetivo="Evaluación: ${esc(b.titulo)}">¿Califico hoy?</a>
       </article>`).join("");
   }
 

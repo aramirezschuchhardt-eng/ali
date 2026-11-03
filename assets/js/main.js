@@ -80,12 +80,14 @@
   /* ---------- Beneficios y perfiles ---------- */
   function renderBenefits() {
     $("#benefits-grid").innerHTML = (DATA.beneficios || []).filter((b) => b.activo !== false).map((b) => `
-      <article class="benefit reveal">
+      <article class="benefit benefit--hoy reveal">
+        <span class="hoy-badge">Vigente hoy</span>
         <div class="benefit__icon">${ICONS[b.icono] || ICONS.home}</div>
         <h3>${esc(b.titulo)}</h3>
         <p>${esc(b.resumen)}</p>
+        ${b.porqueHoy ? `<p class="porque-hoy"><strong>¿Por qué hoy?</strong> ${esc(b.porqueHoy)}</p>` : ""}
         <details><summary>Requisitos y condiciones</summary><p>${esc(b.detalle)}</p><p><strong>Condiciones:</strong> ${esc(b.requisitos)}</p></details>
-        <a href="#contacto" class="btn btn--navy btn--sm" data-objetivo="Evaluación: ${esc(b.titulo)}">Solicitar evaluación</a>
+        <a href="#contacto" class="btn btn--navy btn--sm" data-objetivo="Evaluación: ${esc(b.titulo)}">¿Califico hoy?</a>
       </article>`).join("");
   }
 

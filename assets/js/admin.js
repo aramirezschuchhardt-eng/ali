@@ -125,6 +125,7 @@
           <div class="field chk" style="align-self:end"><label><input type="checkbox" data-k="activo" ${b.activo !== false ? "checked" : ""}> Visible</label></div>
           <div class="field full"><label>Resumen (tarjeta)</label><textarea data-k="resumen" rows="2">${esc(b.resumen)}</textarea></div>
           <div class="field full"><label>Detalle</label><textarea data-k="detalle" rows="2">${esc(b.detalle)}</textarea></div>
+          <div class="field full"><label>¿Por qué hoy? (urgencia, sin prometer resultados)</label><textarea data-k="porqueHoy" rows="2">${esc(b.porqueHoy)}</textarea></div>
           <div class="field full"><label>Requisitos y condiciones vigentes</label><textarea data-k="requisitos" rows="2">${esc(b.requisitos)}</textarea></div>
         </div>
       </div>`).join("");
