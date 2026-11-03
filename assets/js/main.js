@@ -345,11 +345,12 @@
     $("#filters").addEventListener("change", renderProjects);
     $("#filters").addEventListener("reset", () => setTimeout(renderProjects));
     document.addEventListener("click", (e) => {
-      const t = e.target.closest("[data-detail],[data-simular],[data-objetivo],[data-proyecto],[data-close]");
+      const t = e.target.closest("[data-detail],[data-simular],[data-objetivo],[data-proyecto],[data-interes],[data-close]");
       if (!t) return;
       if (t.dataset.detail) { openProject(t.dataset.detail); return; }
       if (t.dataset.simular) { loadProjectInSim(t.dataset.simular); return; }
       if (t.dataset.objetivo || t.dataset.proyecto) preset(t.dataset.objetivo, t.dataset.proyecto);
+      if (t.dataset.interes) { $("#l-objetivo").value = "Quiero invertir"; $("#l-comentario").value = `Me interesan oportunidades: ${t.dataset.interes}.`; }
       if (t.hasAttribute("data-close")) closeModal();
     });
     $("#sim-lead").addEventListener("click", () => {
@@ -373,8 +374,12 @@
   setupHeroSlider();
   renderBenefits();
   renderProfiles();
-  fillFilterOptions();
-  renderProjects();
+  if (proyectos().length) {
+    // El catálogo sólo aparece cuando hay proyectos publicados desde el panel
+    $("#proyectos").hidden = false;
+    fillFilterOptions();
+    renderProjects();
+  }
   setupSimulator();
   setupForm();
   setupEvents();
