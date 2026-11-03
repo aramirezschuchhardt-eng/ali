@@ -51,7 +51,8 @@
     const em = $("#ft-email"); em.textContent = CFG.email || ""; em.href = "mailto:" + (CFG.email || "");
     const tl = $("#ft-tel"); tl.textContent = CFG.telefono || ""; tl.href = "tel:" + String(CFG.telefono || "").replace(/\s/g, "");
     $("#ft-dir").textContent = CFG.direccion || "";
-    $("#ft-ig").href = CFG.instagram || "#"; $("#ft-in").href = CFG.linkedin || "#";
+    $("#ft-social").innerHTML = [["Instagram", CFG.instagram], ["Facebook", CFG.facebook], ["LinkedIn", CFG.linkedin]]
+      .filter(([, url]) => url).map(([n, url]) => `<a href="${esc(url)}" target="_blank" rel="noopener">${n}</a>`).join(" · ");
     $("#year").textContent = new Date().getFullYear();
     $("#updated").textContent = DATA.actualizado ? new Date(DATA.actualizado + "T12:00:00").toLocaleDateString("es-CL", { day: "numeric", month: "long", year: "numeric" }) : "";
   }

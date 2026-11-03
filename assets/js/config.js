@@ -21,8 +21,10 @@ window.AVANCE_CONFIG = {
   email: "ventas@avanceinmobiliario.cl",
   telefono: "+56 9 3038 6399",
   direccion: "Cerro El Plomo 5630, piso 9, Las Condes, Santiago",
-  instagram: "https://instagram.com/",
-  linkedin: "https://linkedin.com/",
+  // Redes sociales (dejar vacío "" para ocultar una red)
+  instagram: "https://www.instagram.com/avanceinmobiliario.cl/",
+  facebook: "https://www.facebook.com/avanceinmobiliario.cl",
+  linkedin: "",
 
   // Valor UF referencial usado para conversiones a pesos (actualizar periódicamente)
   valorUF: 40000,
