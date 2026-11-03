@@ -43,10 +43,11 @@
 
   /* ---------- WhatsApp / contacto ---------- */
   const waLink = (msg) => `https://wa.me/${encodeURIComponent(CFG.whatsapp || "")}?text=${encodeURIComponent(msg || CFG.whatsappMensaje || "")}`;
+  const agendaLink = () => CFG.agendaUrl || waLink("Hola Avance Inmobiliario, quiero agendar una reunión con un asesor.");
   function setupContactLinks() {
     $("#wa-float").href = waLink();
     $("#wa-cta").href = waLink();
-    $("#agenda-cta").href = CFG.agendaUrl || "#contacto";
+    $("#agenda-cta").href = agendaLink();
     const em = $("#ft-email"); em.textContent = CFG.email || ""; em.href = "mailto:" + (CFG.email || "");
     const tl = $("#ft-tel"); tl.textContent = CFG.telefono || ""; tl.href = "tel:" + String(CFG.telefono || "").replace(/\s/g, "");
     $("#ft-dir").textContent = CFG.direccion || "";
@@ -328,11 +329,11 @@
       btn.disabled = false; btn.textContent = "Quiero mi asesoría gratuita";
       if (sent) {
         msg.className = "form-msg ok";
-        msg.innerHTML = `¡Gracias, ${esc(lead.nombre.split(" ")[0])}! Un asesor te contactará pronto. ¿Quieres adelantar? <a href="${CFG.agendaUrl}" target="_blank" rel="noopener">Agenda una reunión</a> o <a href="${waLink(waText)}" target="_blank" rel="noopener">escríbenos por WhatsApp</a>.`;
+        msg.innerHTML = `¡Gracias, ${esc(lead.nombre.split(" ")[0])}! Un asesor te contactará pronto. ¿Quieres adelantar? <a href="${agendaLink()}" target="_blank" rel="noopener">Agenda una reunión</a> o <a href="${waLink(waText)}" target="_blank" rel="noopener">escríbenos por WhatsApp</a>.`;
         form.reset();
       } else {
         msg.className = "form-msg ok";
-        msg.innerHTML = `¡Gracias! Para completar tu solicitud, <a href="${waLink(waText)}" target="_blank" rel="noopener">envíanos tus datos por WhatsApp</a> o <a href="${CFG.agendaUrl}" target="_blank" rel="noopener">agenda una reunión</a>.`;
+        msg.innerHTML = `¡Gracias! Para completar tu solicitud, <a href="${waLink(waText)}" target="_blank" rel="noopener">envíanos tus datos por WhatsApp</a> o <a href="${agendaLink()}" target="_blank" rel="noopener">agenda una reunión</a>.`;
         window.open(waLink(waText), "_blank", "noopener");
       }
     });

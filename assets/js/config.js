@@ -5,7 +5,7 @@
  */
 window.AVANCE_CONFIG = {
   // Número de WhatsApp en formato internacional, sin "+" ni espacios (ej: 56912345678)
-  whatsapp: "56900000000",
+  whatsapp: "56930386399",
   whatsappMensaje: "Hola Avance Inmobiliario, quiero asesoría para invertir.",
 
   // Endpoint del CRM / automatización para recibir los leads del formulario (POST JSON).
@@ -14,12 +14,13 @@ window.AVANCE_CONFIG = {
   crmWebhook: "",
 
   // Enlace de agenda comercial (Calendly, HubSpot Meetings, Google Calendar Booking, etc.)
-  agendaUrl: "https://calendly.com/",
+  // Si se deja vacío, el botón "Agendar reunión" abre WhatsApp pidiendo agendar.
+  agendaUrl: "",
 
   // Datos de contacto visibles
-  email: "contacto@avanceinmobiliario.cl",
-  telefono: "+56 9 0000 0000",
-  direccion: "Santiago, Chile",
+  email: "ventas@avanceinmobiliario.cl",
+  telefono: "+56 9 3038 6399",
+  direccion: "Cerro El Plomo 5630, piso 9, Las Condes, Santiago",
   instagram: "https://instagram.com/",
   linkedin: "https://linkedin.com/",
 
